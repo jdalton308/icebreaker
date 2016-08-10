@@ -1,0 +1,10 @@
+
+### Installed dependecies ###
+
+/bower_components/*
+/node_modules/*
+
+
+### OS-Generated ###
+
+.DS_Store
