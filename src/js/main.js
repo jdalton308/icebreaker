@@ -260,7 +260,6 @@ $(function(){
 
       // Open/close filter panel
       $openFilter.click(function(){
-        console.log('click');
         if (panelOpen) {
           // console.log('closing panel...');
           closePanel();
@@ -281,6 +280,7 @@ $(function(){
       $sortTrigger.click(function(){
         // close panel
         closePanel();
+        panelOpen = false;
 
         // Trigger sort
         sort();
@@ -396,14 +396,14 @@ $(function(){
     //---------------
     function sort() {
 
-      console.log('Sorting for the filters:');
-      console.log(filters);
+      // console.log('Sorting for the filters:');
+      // console.log(filters);
 
       // Loop through all scalees and see if 'data-tag' attributes match all filters
       var $scalees = $('.scalee-cont img');
       $scalees.each(function(){
         var $this = $(this);
-        $this.removeClass('hide'); // reset each sort
+        $this.removeClass('hide show'); // reset each sort
 
         // Compare each filter to data-tags;
         var elTags = $this.attr('data-tags');
@@ -414,9 +414,13 @@ $(function(){
             $this.addClass('hide');
           }
         });
-      });
 
-      // Show/hide scalee based on matches
+        // If no 'hide' class, add 'show' class, for animation
+        if ( !$this.hasClass('hide') ) {
+          $this.addClass('show');
+        }
+
+      });
 
 
       // Todo: Create "nobody found" message
