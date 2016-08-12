@@ -29,6 +29,37 @@ main {
 	}
 }
 
+// Dot nav
+//----------------
+.dots-nav {
+	position: fixed;
+	z-index: 8;
+	top: 50%;
+	right: 30px;
+	@include transform( translateY(-50%) );
+
+	.dot {
+		display: block;
+		width: 10px;
+		height: 10px;
+		border: 2px solid $sketchup-red;
+		margin-bottom: 15px;
+		@include transition();
+
+		&.current {
+			background-color: $sketchup-red;
+		}
+	}
+
+	@media (min-width: $mobile) {
+		.dot {
+			&:hover {
+				border-color: $black;
+			}
+		}
+	}
+}
+
 // slide 1: Scalee Sorter
 //--------------------------
 .slide1 {
@@ -36,15 +67,20 @@ main {
 	padding-top: 15vh;
 
 	.title-cont {
+		position: relative;
+		top: 0; // declared for transition states
+		opacity: 1;
 		width: 100%;
 		max-width: 1170px;
 		margin: 0 auto 15vh;
 		padding: 0 20px;
 		text-align: center;
+		@include transition();
 	}
 	.scalee-cont {
+		position: absolute;
+		bottom: 60px;
 		width: 100%;
-		height: 50%;
 		text-align: center;
 		white-space: nowrap;
 		overflow-x: auto;
@@ -52,16 +88,39 @@ main {
 		img {
 			display: inline-block;
 			height: 40vh;
+			@include transition();
 		}
 	}
 	.control-panel {
 		position: absolute;
-		bottom: 0;
+		bottom: -100px;
 		left: 0;
 		width: 100%;
 		max-height: 50px;
 		background-color: $sketchup-gray;
 		@include transition;
+
+		#open-filter {
+			@include centerX();
+			top: -30px;
+
+			height: 30px;
+			width: 70px;
+			border-radius: 40px 40px 0 0;
+			background-color: $sketchup-gray;
+			color: $white;
+
+			.up-text {
+				position: absolute;
+				top: 5px;
+			}
+			.down-text {
+				display: none;
+				position: absolute;
+				bottom: 5px;
+				@include transform( rotate(180deg) );
+			}
+		}
 
 		.selectors {
 			width: 100%;
@@ -78,12 +137,29 @@ main {
 				flex: 1 0 auto;
 
 				button {
-					width: 45%;
+					width: 100%;
 				}
 			}
 		}
 	}
 
+	// Show bottom filter bar, hide text, make scalees larger
+	&.active2 {
+		.title-cont {
+			top: -150px;
+			opacity: 0;
+		}
+		.control-panel {
+			bottom: 0;
+		}
+		.scalee-cont {
+			img {
+				height: 55vh;
+			}
+		}
+	}
+
+	// 'control-panel' open
 	&.edit-mode {
 		.control-panel {
 			max-height: 300px;

@@ -94,33 +94,85 @@ main {
   .slide.active {
     top: 0; }
 
+.dots-nav {
+  position: fixed;
+  z-index: 8;
+  top: 50%;
+  right: 30px;
+  -ms-transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
+  transform: translateY(-50%); }
+  .dots-nav .dot {
+    display: block;
+    width: 10px;
+    height: 10px;
+    border: 2px solid #e72b2d;
+    margin-bottom: 15px;
+    -webkit-transition: all 0.5s;
+    transition: all 0.5s; }
+    .dots-nav .dot.current {
+      background-color: #e72b2d; }
+  @media (min-width: 768px) {
+    .dots-nav .dot:hover {
+      border-color: #000; } }
+
 .slide1 {
   position: relative;
   padding-top: 15vh; }
   .slide1 .title-cont {
+    position: relative;
+    top: 0;
+    opacity: 1;
     width: 100%;
     max-width: 1170px;
     margin: 0 auto 15vh;
     padding: 0 20px;
-    text-align: center; }
+    text-align: center;
+    -webkit-transition: all 0.5s;
+    transition: all 0.5s; }
   .slide1 .scalee-cont {
+    position: absolute;
+    bottom: 60px;
     width: 100%;
-    height: 50%;
     text-align: center;
     white-space: nowrap;
     overflow-x: auto; }
     .slide1 .scalee-cont img {
       display: inline-block;
-      height: 40vh; }
+      height: 40vh;
+      -webkit-transition: all 0.5s;
+      transition: all 0.5s; }
   .slide1 .control-panel {
     position: absolute;
-    bottom: 0;
+    bottom: -100px;
     left: 0;
     width: 100%;
     max-height: 50px;
     background-color: #363545;
     -webkit-transition: all 0.5s;
     transition: all 0.5s; }
+    .slide1 .control-panel #open-filter {
+      position: absolute;
+      right: 50%;
+      -ms-transform: translateX(50%);
+      -webkit-transform: translateX(50%);
+      transform: translateX(50%);
+      top: -30px;
+      height: 30px;
+      width: 70px;
+      border-radius: 40px 40px 0 0;
+      background-color: #363545;
+      color: #ffffff; }
+      .slide1 .control-panel #open-filter .up-text {
+        position: absolute;
+        top: 5px; }
+      .slide1 .control-panel #open-filter .down-text {
+        display: none;
+        position: absolute;
+        bottom: 5px;
+        -ms-transform: rotate(180deg);
+        -webkit-transform: rotate(180deg);
+        transform: rotate(180deg); }
     .slide1 .control-panel .selectors {
       width: 100%;
       display: flex; }
@@ -133,7 +185,14 @@ main {
       .slide1 .control-panel .selectors .button-cont {
         flex: 1 0 auto; }
         .slide1 .control-panel .selectors .button-cont button {
-          width: 45%; }
+          width: 100%; }
+  .slide1.active2 .title-cont {
+    top: -150px;
+    opacity: 0; }
+  .slide1.active2 .control-panel {
+    bottom: 0; }
+  .slide1.active2 .scalee-cont img {
+    height: 55vh; }
   .slide1.edit-mode .control-panel {
     max-height: 300px;
     height: 30vh; }
