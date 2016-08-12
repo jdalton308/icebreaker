@@ -431,6 +431,7 @@ $(function(){
     function init() {
       eventsOn();
       closePanel();
+      sort();
     }
 
     return {

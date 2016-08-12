@@ -120,7 +120,7 @@ main {
 		height: 40vh;
 		text-align: center;
 		white-space: nowrap;
-		overflow-x: auto;
+		overflow: visible;
 		@include transition();
 
 		img {
@@ -267,6 +267,24 @@ main {
 		.scalee-cont {
 			bottom: 20vh;
 			height: 55vh;
+
+			img {
+				cursor: pointer;
+			}
+
+			@media (min-width: $mobile) {
+				&:hover {
+					img {
+						@include filter( blur(3px) grayscale(70%) );
+					}
+				}
+				img {
+					&:hover {
+						@include filter( blur(0) grayscale(0%) );
+						@include transform( scale(1.1) );
+					}
+				}
+			}
 		}
 	}
 

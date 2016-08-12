@@ -72,6 +72,12 @@ $curve3: cubic-bezier(.21,.05,.07,.99);
   @include transform( translateY(-50%) );
 }
 
+// Filters
+@mixin filter($props) {
+  -webkit-filter: $props;
+  filter: $props;
+}
+
 // Animations
 @mixin keyframes($animationName) {
   @-webkit-keyframes #{$animationName} {

@@ -191,7 +191,7 @@ main {
     height: 40vh;
     text-align: center;
     white-space: nowrap;
-    overflow-x: auto;
+    overflow: visible;
     -webkit-transition: all 0.5s;
     transition: all 0.5s; }
     .slide1 .scalee-cont img {
@@ -314,6 +314,18 @@ main {
   .slide1.active2 .scalee-cont {
     bottom: 20vh;
     height: 55vh; }
+    .slide1.active2 .scalee-cont img {
+      cursor: pointer; }
+    @media (min-width: 768px) {
+      .slide1.active2 .scalee-cont:hover img {
+        -webkit-filter: blur(3px) grayscale(70%);
+        filter: blur(3px) grayscale(70%); }
+      .slide1.active2 .scalee-cont img:hover {
+        -webkit-filter: blur(0) grayscale(0%);
+        filter: blur(0) grayscale(0%);
+        -ms-transform: scale(1.1);
+        -webkit-transform: scale(1.1);
+        transform: scale(1.1); } }
   .slide1.edit-mode .selectors .selector .wheel-selector {
     overflow-y: auto;
     width: 100%; }
