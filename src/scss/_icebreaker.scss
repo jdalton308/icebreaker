@@ -1,0 +1,98 @@
+
+main {
+	position: relative;
+	width: 100vw;
+	height: 100vh;
+	overflow: hidden;
+}
+.slide {
+	position: absolute;
+	top: 100%;
+	left: 0;
+	height: 100vh;
+	width: 100%;
+	border-bottom: 1px solid $sketchup-gray;
+	position: absolute;
+	@include transition();
+
+	&.slide1,
+	&.slide3 {
+		background-color: $sketchup-ltgray;
+	}
+	&.slide2 {
+		background-color: $sketchup-red;
+	}
+
+	// Showing state
+	&.active {
+		top: 0;
+	}
+}
+
+// slide 1: Scalee Sorter
+//--------------------------
+.slide1 {
+	position: relative;
+	padding-top: 15vh;
+
+	.title-cont {
+		width: 100%;
+		max-width: 1170px;
+		margin: 0 auto 15vh;
+		padding: 0 20px;
+		text-align: center;
+	}
+	.scalee-cont {
+		width: 100%;
+		height: 50%;
+		text-align: center;
+		white-space: nowrap;
+		overflow-x: auto;
+
+		img {
+			display: inline-block;
+			height: 40vh;
+		}
+	}
+	.control-panel {
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		width: 100%;
+		max-height: 50px;
+		background-color: $sketchup-gray;
+		@include transition;
+
+		.selectors {
+			width: 100%;
+			display: flex;
+
+			.selector {
+				flex: 1 0 auto;
+				padding: 15px 10px;
+				color: $white;
+				text-align: center;
+				font-size: $h5-font-size;
+			}
+			.button-cont {
+				flex: 1 0 auto;
+
+				button {
+					width: 45%;
+				}
+			}
+		}
+	}
+
+	&.edit-mode {
+		.control-panel {
+			max-height: 300px;
+			height: 30vh;
+		}
+		.selectors {
+			.selector {
+
+			}
+		}
+	}
+}

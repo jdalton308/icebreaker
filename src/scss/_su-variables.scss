@@ -1,0 +1,82 @@
+// SU Colors
+$dark-gray:         #818181;
+$error-yellow:      #fff6bf;
+$light-gray:        #f3f3f7;
+$silver:            #babcbf;
+
+
+$trimble-red:       #a51d25;
+$trimble-blue-dark: #002D5B;
+$trimble-blue:      #00437B;
+$trimble-blue-mid:  #005F9E;
+$trimble-blue-light:#009AD9;
+$trimble-yellow:    #ffbe00;
+$trimble-green:     #4d6f33;
+
+$trimble-ltgray: 	$light-gray;
+$gray-0:		 	#EAEAEF;
+$gray-1:			#E2E2E7;
+$gray-2:			#D0D0D7;
+$gray-3:			#BFBFC6;
+$gray-4:			#AEAEB6;
+$gray-5:			#9D9DA6;
+$gray-6:			#8C8B96;
+$gray-7:			#7B7A86;
+$gray-8:			#6A6976;
+$gray-9:			#595868;
+$gray-10:			#474655;
+$trimble-gray:      #363545;
+$white:             #ffffff;
+$black:			    #000;
+
+$sketchup-gray:     $trimble-gray;
+$sketchup-medgray:  $gray-1;
+$sketchup-ltgray:   $light-gray;
+$sketchup-red:      #e72b2d;
+
+// Font weights
+$regular: 300;
+$semi-bold: 400;
+$bold: 600;
+$xtr-bold: 800;
+
+ // SU-Font sizes
+$base-font-size:   10px; // The font size set on the root html element.
+$base-line-height: 1.428571429 ; // This line-height determines the basic unit of vertical rhythm.
+$base-font-weight: $regular;
+
+$h1-font-size: 3.6rem;
+$h2-font-size: 3.0rem;
+$h3-font-size: 2.4rem;
+$h4-font-size: 1.8rem;
+$h5-font-size: 1.4rem;
+$h6-font-size: 1.2rem;
+
+// SU-Fonts 
+$open-sans:       'Open Sans', 'Helvetica Neue', Arial, Helvetica, sans-serif;
+// Lato will be replacing Open Sans as our default in the future.  
+$lato:			  'Lato', 'Helvetica Neue', Arial, Helvetica, sans-serif;
+$courier:         "Courier New", "DejaVu Sans Mono", monospace, sans-serif;
+
+$base-font-family: $open-sans; // The font family set on the html element.
+$font-body:        $open-sans;
+$font-monospace:   $courier;
+$font-monospace-font-size: 85%;
+$font-monospace-line-height: $base-line-height;
+
+// Setup for the Outline versions of the button to get them to be the same visual size as the other buttons. 
+$btn-border:               0px 0px 0px 4px inset !important; 
+$btn-bg-none:		       transparent !default;
+// for image background with polylines
+$bkg-poly-jpg: 	   url(../images/texture_poly-blend.jpg);
+$bkg-poly-svg: 	   url(../images/bkg/bkg-lowpoly-fill.svg), url(../images/bkg/bkg-lowpoly-lines.svg);
+
+$gradient-smoke:        linear-gradient( $sketchup-gray, $white);
+$gradient-blue:        linear-gradient( $trimble-blue, $sketchup-gray);
+
+$base-padding-size: 15px;
+$padding-xs: $base-padding-size;
+$padding-sm: ceil(($base-padding-size * 2)) !default;
+$padding-md: ceil(($base-padding-size * 6)) !default;
+$padding-lg: ceil(($base-padding-size * 12)) !default;
+$padding-xl: ceil(($base-padding-size * 20)) !default;

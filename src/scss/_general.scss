@@ -11,28 +11,28 @@ body {
 }
 html {
 	font-size: $base-font-size;
-	font-family: $sansFamily;
-	color: $text-color;
-}
-h1,
-h2,
-h3,
-h4 {
-	line-height: 1.3em;
-	font-weight: 700;
-	margin: 0;
+	font-family: $base-font-family;
+	color: $sketchup-gray;
 }
 h1 {
-	font-size: 3rem;
+	font-size: $h1-font-size;
+	font-weight: 300;
+	line-height: 1.2em;
 }
 h2 {
-	font-size: 2.3rem;
+	font-size: $h2-font-size;
+	font-weight: 300;
+	line-height: 1.2em;
 }
 h3 {
-	font-size: 1.8rem;
+	font-size: $h3-font-size;
+	font-weight: 600;
+	line-height: 1.3em;
 }
 h4 {
-	font-size: 1.3rem;
+	font-size: $h4-font-size;
+	font-weight: 300;
+	line-height: 1.3em;
 }
 
 a {
@@ -43,4 +43,30 @@ a {
 	&:visited {
 		color: $text-color;
 	}
+}
+p {
+	font-size: 1.6rem;
+	line-height: 2.4rem;
+	font-weight: 300;
+}
+
+button {
+	border: 2px solid $sketchup-gray;
+	box-shadow: none;
+	padding: 10px 15px;
+	background-color: $white;
+	color: $sketchup-gray;
+	cursor: pointer;
+	font-size: 1.2rem;
+	text-align: center;
+
+	&:focus {
+		outline: none;
+	}
+}
+
+.container {
+	max-width: 1170px;
+	margin: 0 auto;
+	padding: 0 20px;
 }
