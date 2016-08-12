@@ -5,6 +5,9 @@ main {
 	height: 100vh;
 	overflow: hidden;
 }
+.center-me {
+	@include centerMe();
+}
 .slide {
 	position: absolute;
 	top: 100%;
@@ -64,6 +67,7 @@ main {
 //--------------------------
 .slide1 {
 	position: relative;
+	z-index: 0;
 	padding-top: 15vh;
 
 	.title-cont {
@@ -93,32 +97,31 @@ main {
 	}
 	.control-panel {
 		position: absolute;
+		z-index: 3;
 		bottom: -100px;
 		left: 0;
 		width: 100%;
-		max-height: 50px;
+		// max-height: 50px;
 		background-color: $sketchup-gray;
 		@include transition;
 
 		#open-filter {
 			@include centerX();
-			top: -30px;
+			z-index: -1;
+			top: -23px;
+			@include transform( translateX(50%) rotate(45deg) );
 
-			height: 30px;
-			width: 70px;
-			border-radius: 40px 40px 0 0;
+			height: 50px;
+			width: 50px;
 			background-color: $sketchup-gray;
 			color: $white;
+			text-align: center;
 
 			.up-text {
 				position: absolute;
-				top: 5px;
-			}
-			.down-text {
-				display: none;
-				position: absolute;
-				bottom: 5px;
-				@include transform( rotate(180deg) );
+				top: 7px;
+				left: 8px;
+				@include transform( rotate(-45deg) );
 			}
 		}
 
@@ -127,17 +130,43 @@ main {
 			display: flex;
 
 			.selector {
+				position: relative;
+				overflow: hidden;
 				flex: 1 0 auto;
-				padding: 15px 10px;
-				color: $white;
 				text-align: center;
-				font-size: $h5-font-size;
-			}
-			.button-cont {
-				flex: 1 0 auto;
 
-				button {
+				.selector-title {
+					// position: absolute;
+					// top: 0;
 					width: 100%;
+					margin: 0;
+					padding: 7px;
+					font-size: 1.3rem;
+					line-height: 1em;
+					color: $white;
+					background-color: $sketchup-gray;
+					border-right: 1px solid $sketchup-ltgray;
+					border-left: 1px solid $sketchup-ltgray;
+				}
+				.wheel-selector {
+					height: auto;
+					background-color: $white;
+					color: $sketchup-gray;
+					overflow: hidden;
+					border-left: 1px solid $sketchup-gray;
+					border-right: 1px solid $sketchup-gray;
+
+					.item {
+						width: 100%;
+						padding: 15px 10px;
+						text-align: center;
+						font-size: 1.5rem;
+						border-bottom: 1px solid $sketchup-ltgray;
+
+						&.selected {
+							background-color: $sketchup-red;
+						}
+					}
 				}
 			}
 		}
@@ -162,12 +191,13 @@ main {
 	// 'control-panel' open
 	&.edit-mode {
 		.control-panel {
-			max-height: 300px;
-			height: 30vh;
+			
 		}
 		.selectors {
 			.selector {
-
+				.wheel-selector {
+					overflow-y: auto;
+				}
 			}
 		}
 	}
