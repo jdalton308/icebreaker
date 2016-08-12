@@ -66,10 +66,13 @@ header {
   z-index: 10;
   top: 0;
   left: 0;
-  height: 56px;
   width: 100%;
+  padding: 10px;
   background-color: #363545;
   box-shadow: 1px 1px 6px #363545; }
+  header img {
+    display: inline-block;
+    height: 36px; }
 
 main {
   position: relative;
@@ -141,25 +144,31 @@ main {
     transition: all 0.5s; }
   .slide1 .scalee-cont {
     position: absolute;
-    bottom: 60px;
+    bottom: 10vh;
     width: 100%;
     text-align: center;
     white-space: nowrap;
-    overflow-x: auto; }
+    overflow-x: auto;
+    -webkit-transition: all 0.5s;
+    transition: all 0.5s; }
     .slide1 .scalee-cont img {
       display: inline-block;
       height: 40vh;
       -webkit-transition: all 0.5s;
       transition: all 0.5s; }
+      .slide1 .scalee-cont img.hide {
+        display: none; }
   .slide1 .control-panel {
     position: absolute;
     z-index: 3;
-    bottom: -100px;
+    bottom: -150px;
     left: 0;
     width: 100%;
+    padding-bottom: 5px;
     background-color: #363545;
     -webkit-transition: all 0.5s;
-    transition: all 0.5s; }
+    transition: all 0.5s;
+    box-shadow: 0 0 15px -2px #363545; }
     .slide1 .control-panel #open-filter {
       position: absolute;
       right: 50%;
@@ -175,14 +184,25 @@ main {
       width: 50px;
       background-color: #363545;
       color: #ffffff;
-      text-align: center; }
+      text-align: center;
+      border-radius: 5%;
+      box-shadow: 0 0 15px -2px #363545; }
       .slide1 .control-panel #open-filter .up-text {
+        display: inline-block;
         position: absolute;
         top: 7px;
         left: 8px;
-        -ms-transform: rotate(-45deg);
-        -webkit-transform: rotate(-45deg);
-        transform: rotate(-45deg); }
+        width: 0;
+        height: 0;
+        border-top: 13px solid #f3f3f7;
+        border-left: 13px solid #f3f3f7;
+        border-bottom: 10px solid transparent;
+        border-right: 10px solid transparent;
+        -webkit-transition: all 0.5s;
+        transition: all 0.5s; }
+      .slide1 .control-panel #open-filter:hover .up-text {
+        border-top-color: #e72b2d;
+        border-left-color: #e72b2d; }
     .slide1 .control-panel .selectors {
       width: 100%;
       display: flex; }
@@ -198,30 +218,58 @@ main {
           font-size: 1.3rem;
           line-height: 1em;
           color: #ffffff;
-          background-color: #363545;
-          border-right: 1px solid #f3f3f7;
-          border-left: 1px solid #f3f3f7; }
+          background-color: #363545; }
         .slide1 .control-panel .selectors .selector .wheel-selector {
+          position: relative;
           height: auto;
-          background-color: #ffffff;
+          background-color: #e72b2d;
           color: #363545;
           overflow: hidden;
           border-left: 1px solid #363545;
-          border-right: 1px solid #363545; }
+          border-right: 1px solid #363545;
+          -webkit-transition: all 0.5s;
+          transition: all 0.5s; }
           .slide1 .control-panel .selectors .selector .wheel-selector .item {
             width: 100%;
             padding: 15px 10px;
             text-align: center;
             font-size: 1.5rem;
+            background-color: #ffffff;
             border-bottom: 1px solid #f3f3f7; }
             .slide1 .control-panel .selectors .selector .wheel-selector .item.selected {
               background-color: #e72b2d; }
+      .slide1 .control-panel .selectors .button-cont {
+        padding: 10px 10px 5px 20px; }
+      .slide1 .control-panel .selectors button#sort-me {
+        position: absolute;
+        top: 50%;
+        -ms-transform: translateY(-50%);
+        -webkit-transform: translateY(-50%);
+        transform: translateY(-50%);
+        top: 54%;
+        display: inline-block;
+        padding: 12px 15px;
+        font-size: 1.5rem;
+        font-weight: 700;
+        background-color: #363545;
+        color: #f3f3f7;
+        border: 2px solid #f3f3f7;
+        -webkit-transition: all 0.5s;
+        transition: all 0.5s; }
+        .slide1 .control-panel .selectors button#sort-me:hover {
+          background-color: #f3f3f7;
+          color: #363545; }
   .slide1.active2 .title-cont {
     top: -150px;
     opacity: 0; }
   .slide1.active2 .control-panel {
     bottom: 0; }
-  .slide1.active2 .scalee-cont img {
-    height: 55vh; }
+  .slide1.active2 .scalee-cont {
+    bottom: 20vh; }
+    .slide1.active2 .scalee-cont img {
+      height: 55vh; }
   .slide1.edit-mode .selectors .selector .wheel-selector {
-    overflow-y: auto; }
+    overflow-y: auto;
+    width: 100%; }
+    .slide1.edit-mode .selectors .selector .wheel-selector .item {
+      cursor: pointer; }

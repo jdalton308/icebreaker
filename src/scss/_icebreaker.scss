@@ -83,27 +83,34 @@ main {
 	}
 	.scalee-cont {
 		position: absolute;
-		bottom: 60px;
+		bottom: 10vh;
 		width: 100%;
 		text-align: center;
 		white-space: nowrap;
 		overflow-x: auto;
+		@include transition();
 
 		img {
 			display: inline-block;
 			height: 40vh;
 			@include transition();
+
+			&.hide {
+				display: none;
+			}
 		}
 	}
 	.control-panel {
 		position: absolute;
 		z-index: 3;
-		bottom: -100px;
+		bottom: -150px;
 		left: 0;
 		width: 100%;
+		padding-bottom: 5px;
 		// max-height: 50px;
 		background-color: $sketchup-gray;
 		@include transition;
+		box-shadow: 0 0 15px -2px $sketchup-gray;
 
 		#open-filter {
 			@include centerX();
@@ -116,12 +123,29 @@ main {
 			background-color: $sketchup-gray;
 			color: $white;
 			text-align: center;
+			border-radius: 5%;
+			box-shadow: 0 0 15px -2px $sketchup-gray;
 
 			.up-text {
+				// Arrow
+				display: inline-block;
 				position: absolute;
 				top: 7px;
 				left: 8px;
-				@include transform( rotate(-45deg) );
+				width: 0;
+				height: 0;
+				border-top: 13px solid $sketchup-ltgray;
+				border-left: 13px solid $sketchup-ltgray;
+				border-bottom: 10px solid transparent;
+				border-right: 10px solid transparent;
+				@include transition();
+			}
+
+			&:hover {
+				.up-text {
+					border-top-color: $sketchup-red;
+					border-left-color: $sketchup-red;
+				}
 			}
 		}
 
@@ -145,28 +169,51 @@ main {
 					line-height: 1em;
 					color: $white;
 					background-color: $sketchup-gray;
-					border-right: 1px solid $sketchup-ltgray;
-					border-left: 1px solid $sketchup-ltgray;
+					// border-right: 1px solid $sketchup-ltgray;
+					// border-left: 1px solid $sketchup-ltgray;
 				}
 				.wheel-selector {
+					position: relative;
 					height: auto;
-					background-color: $white;
+					background-color: $sketchup-red;
 					color: $sketchup-gray;
 					overflow: hidden;
 					border-left: 1px solid $sketchup-gray;
 					border-right: 1px solid $sketchup-gray;
+					@include transition();
 
 					.item {
 						width: 100%;
 						padding: 15px 10px;
 						text-align: center;
 						font-size: 1.5rem;
+						background-color: $white;
 						border-bottom: 1px solid $sketchup-ltgray;
 
 						&.selected {
 							background-color: $sketchup-red;
 						}
 					}
+				}
+			} // end .selector
+			.button-cont {
+				padding: 10px 10px 5px 20px;
+			}
+			button#sort-me {
+				@include centerY();
+				top: 54%;
+				display: inline-block;
+				padding: 12px 15px;
+				font-size: 1.5rem;
+				font-weight: 700;
+				background-color: $sketchup-gray;
+				color: $sketchup-ltgray;
+				border: 2px solid $sketchup-ltgray;
+				@include transition();
+
+				&:hover {
+					background-color: $sketchup-ltgray;
+					color: $sketchup-gray;
 				}
 			}
 		}
@@ -182,6 +229,8 @@ main {
 			bottom: 0;
 		}
 		.scalee-cont {
+			bottom: 20vh;
+
 			img {
 				height: 55vh;
 			}
@@ -191,12 +240,29 @@ main {
 	// 'control-panel' open
 	&.edit-mode {
 		.control-panel {
-			
+			#open-filter {
+				// .up-text {
+				// 	border-top: 13px solid transparent;
+				// 	border-left: 13px solid transparent;
+				// 	border-bottom: 10px solid $sketchup-ltgray;
+				// 	border-right: 10px solid $sketchup-ltgray;
+				// }
+
+				// &:hover {
+				// 	border-bottom-color: $sketchup-red;
+				// 	border-right-color: $sketchup-red;
+				// }
+			}
 		}
 		.selectors {
 			.selector {
 				.wheel-selector {
 					overflow-y: auto;
+					width: 100%;
+
+					.item {
+						cursor: pointer;
+					}
 				}
 			}
 		}

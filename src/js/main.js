@@ -160,6 +160,9 @@ $(function(){
         if (currentSlide == 1) { // change state on first slide
           var $target = $slides.eq(0);
           var removedClass = 'active2';
+
+          // Close the sorting panel
+          scaleeSorter.closePanel();
         } else {
           var $target = $slides.eq(currentSlide-1);
           var removedClass = 'active';
@@ -242,19 +245,8 @@ $(function(){
     var $filterItems = $wheelSelectors.children('.item');
     var $sortTrigger = $('#sort-me');
 
-    var wheelHeight = $wheelSelectors.height();
+    var itemHeight = $filterItems.outerHeight();
 
-    console.log('Wheel height: '+ wheelHeight);
-
-    var $items = $('.item');
-    var itemHeight = $items.innerHeight();
-
-    console.log('Item height: '+ itemHeight);
-
-    var $selectorTitle = $('.selector-title');
-    var titleHeight = $selectorTitle.innerHeight();
-
-    console.log('Title height: '+ titleHeight);
 
     // State Variables
     //-----------------
@@ -270,10 +262,10 @@ $(function(){
       $openFilter.click(function(){
         console.log('click');
         if (panelOpen) {
-          console.log('closing panel...');
+          // console.log('closing panel...');
           closePanel();
         } else {
-          console.log('opening panel...');
+          // console.log('opening panel...');
           openPanel();
         }
 
@@ -282,7 +274,7 @@ $(function(){
 
       // Select filters
       $filterItems.click(function(){
-        $(this).addClass('selected').siblings().removeClass('selected');
+        $(this).toggleClass('selected').siblings().removeClass('selected');
       });
 
       // Sort trigger
@@ -291,6 +283,7 @@ $(function(){
         closePanel();
 
         // Trigger sort
+        sort();
       });
     }
 
@@ -319,7 +312,7 @@ $(function(){
     //   initWheels();
     // }
 
-    // Open Bar
+    // Open Filter Bar
     //------------
     function openPanel() {
       $slide1.addClass('edit-mode');
@@ -333,10 +326,9 @@ $(function(){
       openFilters();
     }
 
-    // Collapse bar
+    // Collapse Filter Bar
     //---------------
     function closePanel() {
-      $slide1.removeClass('edit-mode');
 
       // Get and position selected items
       function getAndSlideSelection() {
@@ -357,37 +349,78 @@ $(function(){
           filters.push(filterValue);
         });
 
+        // Wait for animation, then remove scroll ability
+        window.setTimeout(function(){
+          $slide1.removeClass('edit-mode');
+        }, 500);
+
       }
 
 
       // Move selected items to top
       function slideUpSelection($item) {
         // Get scrollTop() of selection
-        var scrollPos = $item.position().top;
+        // var scrollPos = $item.position().top;
 
-        console.log('selected position: ');
-        console.log($item.position());
+        // Try getting index, multiplying height, then scrolling to that
+        var itemIndex = $item.index();
 
-        console.log('Scrolling to '+ scrollPos);
+        // console.log('---------');
+        // console.log('Scrolling to number '+ itemIndex);
 
-        // Scroll wheel-selector to that point
-        // $item.parents('.wheel-selector').animate({
-        //   scrollTop: scrollPos
-        // }, 300);
+        var scrollAmt = itemIndex * (itemHeight + 3); // Not sure why need to add the extra 3 px
 
-        $item.parents('.wheel-selector').scrollTop(scrollPos);
+        // console.log('Scroll Amt: '+ scrollAmt);
+        // console.log('top Pos: '+ scrollPos);
+
+        // $item.parents('.wheel-selector').scrollTop(scrollAmt);
+        $item.parents('.wheel-selector').animate({
+          scrollTop: scrollAmt
+        }, 300);
       }
 
 
       // Change height of 'wheel-selector' to only show one item
       function collapseFilters() {
         $wheelSelectors.css('height', itemHeight+'px');
+        // console.log('=== Collapsed ====');
       }
 
-      getAndSlideSelection();
       collapseFilters();
-    }
+      getAndSlideSelection();
 
+    } // end closePanel();
+
+
+    // Sort Scalees
+    //---------------
+    function sort() {
+
+      console.log('Sorting for the filters:');
+      console.log(filters);
+
+      // Loop through all scalees and see if 'data-tag' attributes match all filters
+      var $scalees = $('.scalee-cont img');
+      $scalees.each(function(){
+        var $this = $(this);
+        $this.removeClass('hide'); // reset each sort
+
+        // Compare each filter to data-tags;
+        var elTags = $this.attr('data-tags');
+        filters.forEach(function(filter, i){
+          if (elTags.indexOf(filter) == -1) {
+            // el does not have tag
+            // if has all the tags, will never get here
+            $this.addClass('hide');
+          }
+        });
+      });
+
+      // Show/hide scalee based on matches
+
+
+      // Todo: Create "nobody found" message
+    }
 
     // Initialize sorter
     //------------------
@@ -397,7 +430,8 @@ $(function(){
     }
 
     return {
-      init: init
+      init: init,
+      closePanel: closePanel
     };
   })();
 
