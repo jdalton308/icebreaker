@@ -244,6 +244,9 @@ $(function(){
     var $wheelSelectors = $('.wheel-selector');
     var $filterItems = $wheelSelectors.children('.item');
     var $sortTrigger = $('#sort-me');
+    var $scalees = $('.scalee-cont img');
+    var $infoSlide = $('.info-slide');
+    var $infoClose = $infoSlide.find('.close-btn');
 
     var itemHeight = $filterItems.outerHeight();
 
@@ -252,13 +255,14 @@ $(function(){
     //-----------------
     var filters = [];
     var panelOpen = $slide1.hasClass('edit-mode');
+    var $scaleeInFocus;
 
 
     // Bind events
     //------------
     function eventsOn() {
 
-      // Open/close filter panel
+      // Open/close filter panel -----
       $openFilter.click(function(){
         if (panelOpen) {
           // console.log('closing panel...');
@@ -271,12 +275,14 @@ $(function(){
         panelOpen = !panelOpen;
       });
 
-      // Select filters
+
+      // Select filters -----
       $filterItems.click(function(){
         $(this).toggleClass('selected').siblings().removeClass('selected');
       });
 
-      // Sort trigger
+
+      // Sort button -----
       $sortTrigger.click(function(){
         // close panel
         closePanel();
@@ -284,6 +290,28 @@ $(function(){
 
         // Trigger sort
         sort();
+      });
+
+
+      // Focus on scalee -----
+      $scalees.click(function(){
+        console.log('click');
+        $scaleeInFocus = $(this);
+
+        // TODO: Populate bubble with correct information
+
+        // Move scalee to correct position
+        $scaleeInFocus.addClass('focus');
+
+        // Slide-in the bubble with the correct information
+        $infoSlide.addClass('show');
+      });
+
+      // Hide scalee focus ------
+      $infoClose.click(function(){
+        // Reverse above actions
+        $scaleeInFocus.removeClass('focus');
+        $infoSlide.removeClass('show');
       });
     }
 
@@ -400,7 +428,6 @@ $(function(){
       // console.log(filters);
 
       // Loop through all scalees and see if 'data-tag' attributes match all filters
-      var $scalees = $('.scalee-cont img');
       $scalees.each(function(){
         var $this = $(this);
         $this.removeClass('hide show'); // reset each sort
