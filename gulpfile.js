@@ -13,10 +13,10 @@ var streamify = require('gulp-streamify');
 var styleFiles = [
         './src/scss/main.scss'
     ];
-var jsFiles = [
-		'node_modules/jquery/dist/jquery.min.js',
-		'./src/js/**/*.js'
-	];
+// var jsFiles = [
+// 		'node_modules/jquery/dist/jquery.min.js',
+// 		'./src/js/**/*.js'
+// 	];
 var htmlFiles = [
 		'./src/html/**/*.html'
 ]
@@ -37,7 +37,7 @@ gulp.task('styles', function() {
 // 		.on('error', gutil.log);
 // });
 gulp.task('scripts', function(){
-	browserify('./src/js/app.js').bundle()
+	browserify('./src/js/main.js').bundle()
 		.pipe(source('app.js'))
 		// .pipe(streamify(uglify()))
 		.pipe(gulp.dest('./build/js/'))
