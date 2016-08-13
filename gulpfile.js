@@ -6,6 +6,9 @@ var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
 var htmlMin = require('gulp-htmlmin');
 var server = require('gulp-server-livereload');
+var browserify = require('browserify');
+var source = require('vinyl-source-stream');
+var streamify = require('gulp-streamify');
 
 var styleFiles = [
         './src/scss/main.scss'
@@ -26,10 +29,17 @@ gulp.task('styles', function() {
         .pipe(gulp.dest('./build/css/'));
 });
 
+// gulp.task('scripts', function(){
+// 	gulp.src(jsFiles)
+// 		.pipe(concat('app.js'))
+// 		.pipe(uglify())
+// 		.pipe(gulp.dest('./build/js/'))
+// 		.on('error', gutil.log);
+// });
 gulp.task('scripts', function(){
-	gulp.src(jsFiles)
-		.pipe(concat('app.js'))
-		.pipe(uglify())
+	browserify('./src/js/app.js').bundle()
+		.pipe(source('app.js'))
+		// .pipe(streamify(uglify()))
 		.pipe(gulp.dest('./build/js/'))
 		.on('error', gutil.log);
 });

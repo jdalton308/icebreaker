@@ -26,6 +26,10 @@
     "jquery": "^1.10.2"
   },
   "dependencies": {
-    "gulp-concat": "^2.6.0"
+    "browserify": "^13.1.0",
+    "gulp-concat": "^2.6.0",
+    "gulp-streamify": "^1.0.2",
+    "streamify": "^0.2.6",
+    "vinyl-source-stream": "^1.1.0"
   }
 }
