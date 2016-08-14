@@ -220,12 +220,16 @@ main {
     text-align: center;
     -webkit-transition: all 0.5s;
     transition: all 0.5s; }
+    .slide1 .leader-cont .leaderboard-title {
+      width: 100%;
+      text-align: center; }
     .slide1 .leader-cont .position-box {
       display: inline-block;
       vertical-align: top;
       width: 15%;
       max-width: 200px;
       height: 100%;
+      padding: 20px 30px;
       margin-right: 50px;
       background-color: #E2E2E7; }
       .slide1 .leader-cont .position-box:last-child {
@@ -237,8 +241,13 @@ main {
       .slide1 .leader-cont .position-box.third {
         background-color: #e72b2d; }
       .slide1 .leader-cont .position-box img {
-        height: 100%;
-        width: auto; }
+        max-height: 100%;
+        width: auto;
+        max-width: 100%;
+        -webkit-transition: all 0.3s;
+        transition: all 0.3s; }
+        .slide1 .leader-cont .position-box img.hide {
+          opacity: 0; }
   .slide1 .info-slide {
     position: absolute;
     z-index: 7;

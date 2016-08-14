@@ -150,8 +150,9 @@ function prevSlide() {
       var $target = $slides.eq(0);
       var removedClass = 'active2';
 
-      // Close the sorting panel
+      // Close the sorting panel, and leaderboard panel
       ScaleeSorter.closePanel();
+      ScaleeSorter.closeLeaders();
     } else {
       var $target = $slides.eq(currentSlide-1);
       var removedClass = 'active';
@@ -182,6 +183,12 @@ function nextSlide() {
 
     // Add 'active'
     $target.addClass(addedClass);
+
+    if (currentSlide == 1) {
+      // Close leaderboard and sorting panel
+      ScaleeSorter.closePanel();
+      ScaleeSorter.closeLeaders();
+    }
 
     // Remember state
     currentSlide++;

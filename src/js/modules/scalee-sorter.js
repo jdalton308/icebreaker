@@ -28,6 +28,7 @@ var $infoClose = $infoSlide.find('.close-btn');
 
 var $leaderTrigger = $('#leaders');
 var $leaderCont = $('.leader-cont');
+var $leaderTitle = $leaderCont.find('.leaderboard-title h1');
 var $leaderBoxes = $leaderCont.children('.position-box');
 var $leaderboardControls = $('.container.leaderboard');
 
@@ -241,6 +242,12 @@ function showLeaderboard() {
   }, 500);
 
 }
+function hideLeaderboard() {
+  // Undo everything above
+  $slide1.removeClass('leader-mode');
+  $leaderboardControls.removeClass('show');
+}
+
 function initLeaderboard() {
   var $buttonTemplate = $('<button class="leader"></button>');
 
@@ -252,34 +259,54 @@ function initLeaderboard() {
     // Insert new btn
     $leaderboardControls.append( $newBtn );
 
-    // Bind click event to show leaderboard
-    $newBtn.click(function(){
+    // Closure for eventId
+    function bindClick() {
       var eventId = event;
-      console.log('Switching leaderboard to '+ eventId);
-      switchLeaderboard( eventId );
-    });
-  }
+
+      // Bind click event to show leaderboard
+      $newBtn.click(function(){
+        // console.log('Switching leaderboard to '+ eventId);
+        switchLeaderboard( eventId );
+      });
+    };
+
+    bindClick();
+  } // end for loop
 }
 
 function switchLeaderboard(eventName) {
-  console.log('Switching leaderboard');
   // Switch src attribute to those of the top 5 poeple's scalee
-  var eventObj = LeaderData[eventName];
 
+  var eventObj = LeaderData[eventName];
   var leaders = eventObj.leaders;
 
   // Loop through data, get img src attribute, then apply to 'leader-boxes'
   for (var position in leaders) {
     var personId = leaders[position];
-    var personImgSrc = getScaleeSrc(personId);
-    var $positionBox = $leaderBoxes.eq( position-1 );
-    $positionBox.children('img').attr('src', personImgSrc);
-  }
+
+    // Closure for setTimeout
+    function animateChange() {
+      var personImgSrc = getScaleeSrc(personId);
+      var $targetImg = $leaderBoxes.eq( position-1 ).children('img');
+      
+      // Hide, then wait for transition, then switch img and show
+      $targetImg.addClass('hide');
+
+      window.setTimeout(function(){
+        $targetImg.attr('src', personImgSrc).removeClass('hide');
+      }, 300);
+    }
+
+    animateChange();
+  } // end for loop
 
   function getScaleeSrc(scaleeId) {
     var $scalee = $scalees.filter('#'+scaleeId);
     return $scalee.attr('src');
   }
+
+  // Finally, switch title
+  $leaderTitle.text(eventObj.name);
 }
 
 
@@ -297,5 +324,6 @@ function init() {
 module.exports = {
   init: init,
   closePanel: closePanel,
-  sort: sort
+  sort: sort,
+  closeLeaders: hideLeaderboard
 };
