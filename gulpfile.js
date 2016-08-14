@@ -29,13 +29,6 @@ gulp.task('styles', function() {
         .pipe(gulp.dest('./build/css/'));
 });
 
-// gulp.task('scripts', function(){
-// 	gulp.src(jsFiles)
-// 		.pipe(concat('app.js'))
-// 		.pipe(uglify())
-// 		.pipe(gulp.dest('./build/js/'))
-// 		.on('error', gutil.log);
-// });
 gulp.task('scripts', function(){
 	browserify('./src/js/main.js').bundle()
 		.pipe(source('app.js'))

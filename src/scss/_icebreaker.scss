@@ -136,6 +136,45 @@ main {
 			}
 		}
 	}
+
+	.leader-cont {
+		@include centerX();
+		bottom: -100vh;
+		height: 60vh;
+		width: 100%;
+		text-align: center;
+		@include transition();
+
+		.position-box {
+			display: inline-block;
+			vertical-align: top;
+			width: 15%;
+			max-width: 200px;
+			height: 100%;
+			margin-right: 50px;
+			background-color: $sketchup-medgray;
+
+			&:last-child {
+				margin-right: 0;
+			}
+
+			&.first {
+				background-color: $error-yellow;
+			}
+			&.second {
+				background-color: $silver;
+			}
+			&.third {
+				background-color: $sketchup-red;
+			}
+
+			img {
+				height: 100%;
+				width: auto;
+			}
+		}
+	}
+
 	.info-slide {
 		position: absolute;
 		z-index: 7;
@@ -168,6 +207,32 @@ main {
 			vertical-align: top;
 			width: 50%;
 			text-align: left;
+		}
+	}
+	.leaderboard-control-panel {
+		position: absolute;
+		z-index: 4;
+		bottom: -150px;
+		left: 0;
+		width: 100%;
+		padding-bottom: 5px;
+		background-color: $sketchup-ltgray;
+		@include transition;
+		box-shadow: 0 0 15px -2px $sketchup-gray;
+
+		.leaderboard {
+			text-align: center;
+			@include transition();
+
+			.leader-title {
+				width: 100%;
+				text-align: center;
+				color: $sketchup-gray;
+			}
+
+			&.show {
+				top: 0;
+			}
 		}
 	}
 	.control-panel {
@@ -220,6 +285,7 @@ main {
 		}
 
 		.selectors {
+			position: relative;
 			width: 100%;
 			display: flex;
 
@@ -267,27 +333,38 @@ main {
 				}
 			} // end .selector
 			.button-cont {
-				padding: 10px 10px 5px 20px;
-			}
-			button#sort-me {
-				@include centerY();
-				top: 54%;
-				display: inline-block;
-				padding: 12px 15px;
-				font-size: 1.5rem;
-				font-weight: 700;
-				background-color: $sketchup-gray;
-				color: $sketchup-ltgray;
-				border: 2px solid $sketchup-ltgray;
-				@include transition();
+				padding: 20px 10px 0 20px;
 
-				&:hover {
-					background-color: $sketchup-ltgray;
-					color: $sketchup-gray;
+				button {
+					display: block;
+					padding: 12px 15px;
+					font-size: 1.5rem;
+					// font-weight: 700;
+					background-color: $sketchup-gray;
+					color: $sketchup-ltgray;
+					border: 1px solid $sketchup-ltgray;
+					@include transition();
+
+					&:hover {
+						background-color: $sketchup-ltgray;
+						color: $sketchup-gray;
+					}
+					&#sort-me {
+						margin-bottom: 0;
+					}
+					&#leaders {
+						// Cocked to drop in
+						padding-top: 0;
+						padding-bottom: 0;
+						border-color: transparent;
+						max-height: 0;
+						overflow: hidden;
+					}
 				}
 			}
+
 		}
-	}
+	} // end .control-panel
 
 	// Show bottom filter bar, hide text, make scalees larger
 	&.active2 {
@@ -347,18 +424,23 @@ main {
 	// 'control-panel' open
 	&.edit-mode {
 		.control-panel {
-			#open-filter {
-				// .up-text {
-				// 	border-top: 13px solid transparent;
-				// 	border-left: 13px solid transparent;
-				// 	border-bottom: 10px solid $sketchup-ltgray;
-				// 	border-right: 10px solid $sketchup-ltgray;
-				// }
 
-				// &:hover {
-				// 	border-bottom-color: $sketchup-red;
-				// 	border-right-color: $sketchup-red;
-				// }
+			.selectors {
+				.button-cont {
+					padding-top: 20px;
+
+					button {
+						&#sort-me {
+							margin-bottom: 15px;
+						}
+						&#leaders {
+							padding-top: 12px;
+							padding-bottom: 12px;
+							border-color: $sketchup-ltgray;
+							max-height: 40px;
+						}
+					}
+				}
 			}
 		}
 		.selectors {
@@ -373,5 +455,27 @@ main {
 				}
 			}
 		}
+	}
+
+	// Leaderboard mode
+	&.leader-mode {
+		.leaderboard-control-panel {
+			bottom: 0;
+		}
+		.control-panel {
+			bottom: -150px;
+			background-color: $sketchup-medgray;
+
+			#open-filter {
+				top: 5px;
+			}
+		}
+		.scalee-cont {
+			bottom: 100vh;
+		}
+		.leader-cont {
+			bottom: 20vh;
+		}
+
 	}
 }

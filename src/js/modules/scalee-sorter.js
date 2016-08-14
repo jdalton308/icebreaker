@@ -1,6 +1,8 @@
 'use strict';
 
 var $ = require('jquery');
+var LeaderData = require('./leaderboard.js');
+
 
 // ------------------------
 // Scalee Sorter
@@ -11,15 +13,23 @@ var $ = require('jquery');
 var $window = $(window);
 var $page = $('body');
 var $header = $('header');
-
 var $slide1 = $('.slide1');
+
 var $openFilter = $('#open-filter');
-var $wheelSelectors = $('.wheel-selector');
+var $filterControls = $('.container.selectors');
+var $wheelSelectors = $filterControls.find('.wheel-selector');
 var $filterItems = $wheelSelectors.children('.item');
+
 var $sortTrigger = $('#sort-me');
-var $scalees = $('.scalee-cont img');
+var $scaleeCont = $('.scalee-cont');
+var $scalees = $scaleeCont.find('img');
 var $infoSlide = $('.info-slide');
 var $infoClose = $infoSlide.find('.close-btn');
+
+var $leaderTrigger = $('#leaders');
+var $leaderCont = $('.leader-cont');
+var $leaderBoxes = $leaderCont.children('.position-box');
+var $leaderboardControls = $('.container.leaderboard');
 
 var itemHeight = $filterItems.outerHeight();
 
@@ -91,32 +101,13 @@ function eventsOn() {
     $scaleeInFocus.removeClass('focus');
     $infoSlide.removeClass('show');
   });
+
+
+  // Switch to Leaderboard-mode
+  $leaderTrigger.click(function(){
+    showLeaderboard();
+  });
 }
-
-// function wheelSelector() {
-
-//   function centerList($wheelSelector) {
-//     var itemCount = $wheelSelector.children('.item').length;
-//     var listHeight = itemHeight * listHeight;
-//     var hiddenArea = listHeight - wheelHeight;
-
-//     console.log('List height: '+ listHeight);
-
-//     if (hiddenArea > 0) {
-//       var topPos = hiddenArea/2;
-//       $wheelSelector.style('top', topPos);
-//     }
-//   }
-
-//   function initWheels() {
-//     $wheelSelectors.each(function(){
-//       var $this = $(this);
-//       centerList($this);
-//     });
-//   }
-
-//   initWheels();
-// }
 
 
 // Open Filter Bar
@@ -233,19 +224,74 @@ function sort() {
   // Todo: Create "nobody found" message
 }
 
+
+// Enter 'Leaderboard Mode'
+//--------------------------
+function showLeaderboard() {
+
+  // Change colors
+  $slide1.addClass('leader-mode');
+  // - Hide scalees
+  // - Show boxes for first five places
+  // - Hide sorting selectors
+
+  // Wait 0.5s, then show new buttons
+  window.setTimeout(function(){
+    $leaderboardControls.addClass('show');
+  }, 500);
+
+}
+function initLeaderboard() {
+  var $buttonTemplate = $('<button class="leader"></button>');
+
+  // Create buttons for leaderboard switching
+  for (var event in LeaderData) {
+    var eventObj = LeaderData[event];
+    var $newBtn = $buttonTemplate.clone().text( eventObj.name ).attr('data-leader-id', event);
+
+    // Insert new btn
+    $leaderboardControls.append( $newBtn );
+
+    // Bind click event to show leaderboard
+    $newBtn.click(function(){
+      var eventId = event;
+      console.log('Switching leaderboard to '+ eventId);
+      switchLeaderboard( eventId );
+    });
+  }
+}
+
+function switchLeaderboard(eventName) {
+  console.log('Switching leaderboard');
+  // Switch src attribute to those of the top 5 poeple's scalee
+  var eventObj = LeaderData[eventName];
+
+  var leaders = eventObj.leaders;
+
+  // Loop through data, get img src attribute, then apply to 'leader-boxes'
+  for (var position in leaders) {
+    var personId = leaders[position];
+    var personImgSrc = getScaleeSrc(personId);
+    var $positionBox = $leaderBoxes.eq( position-1 );
+    $positionBox.children('img').attr('src', personImgSrc);
+  }
+
+  function getScaleeSrc(scaleeId) {
+    var $scalee = $scalees.filter('#'+scaleeId);
+    return $scalee.attr('src');
+  }
+}
+
+
 // Initialize sorter
 //------------------
 function init() {
   eventsOn();
   closePanel();
   sort();
+  initLeaderboard();
 }
 
-//   return {
-//     init: init,
-//     closePanel: closePanel
-//   };
-// })();
 
 
 module.exports = {
