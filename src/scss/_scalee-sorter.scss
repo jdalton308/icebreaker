@@ -70,11 +70,131 @@
 			margin-right: 75px;
 		}
 		.content-cont {
+			position: relative;
 			display: inline-block;
 			vertical-align: top;
 			width: 50%;
 			text-align: left;
+
+			button.truths {
+				margin-top: 20px;
+			}
+
+			.swap-cont {
+				position: relative;
+			}
+
+			.description-cont {
+				position: relative;
+			}
+			.game-cont {
+				position: absolute;
+				top: 100vh;
+				min-height: 100%;
+				background-color: $sketchup-ltgray;
+				@include transition(1s);
+
+				.game-title-cont {
+					margin-bottom: 20px;
+
+					h3 {
+						display: inline-block;
+						margin-bottom: 10px;
+					}
+					.close-game-btn {
+						display: inline-block;
+						float: right;
+						color: $sketchup-ltgray;
+						background-color: $sketchup-gray;
+						border: none;
+
+						&:hover {
+							background-color: darken($sketchup-gray, 20%);
+						}
+					}
+					p {
+						margin: 0;
+					}
+				}
+					
+				.fact-cont {
+
+				}
+				.fact-item {
+					margin-bottom: 10px;
+					padding: 10px 5px;
+					cursor: pointer;
+					border: 2px solid transparent;
+					@include transition();
+
+					&:hover {
+						background-color: $white;
+					}
+
+					h4 {
+						margin: 0 0 8px;
+						padding: 0 0 6px;
+						border-bottom: 1px solid $sketchup-red;
+					}
+					.answer {
+						display: inline-block;
+						opacity: 0;
+						font-weight: 700;
+					}
+					p {
+						margin: 0;
+					}
+
+					&.truth {
+						.answer {
+							color: $trimble-green;
+						}
+					}
+					&.lie {
+						.answer {
+							color: $sketchup-red;
+						}
+					}
+				}
+			}
+
+			// Playing two-truths game...
+			&.question-mode {
+				.description-cont {
+					bottom: 150%;
+				}
+				.game-cont {
+					top: 0;
+
+					// Show answers
+					&.reveal {
+						.fact-item {
+							// background-color: $white;
+
+							&:hover {
+								background-color: transparent;
+							}
+
+							&.truth {
+								// border-color: $trimble-green;
+
+								h4 {
+									border-bottom-color: $trimble-green;
+								}
+							}
+							&.lie {
+								border-color: $sketchup-red;
+							}
+
+							.answer {
+								opacity: 1;
+							}
+						}
+					}
+				}
+			}
 		}
+
 	}
 	.control-panel {
 		position: absolute;

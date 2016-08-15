@@ -11013,11 +11013,13 @@ return jQuery;
 var ScrollNav = require('./modules/scroll-nav.js');
 var ScaleeSorter = require('./modules/scalee-sorter.js');
 var JobPostings = require('./modules/job-postings.js');
+var TwoTruths = require('./modules/two-truths.js');
 
 ScrollNav();
 ScaleeSorter.init();
 JobPostings();
-},{"./modules/job-postings.js":3,"./modules/scalee-sorter.js":5,"./modules/scroll-nav.js":6}],3:[function(require,module,exports){
+TwoTruths();
+},{"./modules/job-postings.js":3,"./modules/scalee-sorter.js":5,"./modules/scroll-nav.js":6,"./modules/two-truths.js":7}],3:[function(require,module,exports){
 
 var $ = require('jquery');
 
@@ -11559,7 +11561,7 @@ function allowScrolling() {
   // - if at top, move to previous slide
 
   var $lastSlide = $slides.filter('.slide3');
-  var lastScrollPos = 0;
+  var lastScrollPos = null;
 
   function watchScrollHandler(ev) {
     var topPos = $lastSlide.scrollTop();    
@@ -11722,4 +11724,85 @@ function init() {
 
 
 module.exports = init;
+},{"./scalee-sorter.js":5,"jquery":1}],7:[function(require,module,exports){
+'use strict';
+
+var $ = require('jquery');
+var ScaleeSorter = require('./scalee-sorter.js');
+
+
+// ------------------------
+// Scroll-Triggered Nav
+// ------------------------
+
+// Fake Data
+//-------------
+var questionData = {
+	"person1": {
+		"truths": [
+			"I have flown acrobatic maneuvers in a small aircraft.",
+			"My uncle Vincent created the font Comic Sans by tracing my handwriting from a Christmas card."
+		],
+		"lie": "I ranked first in an Air Training Corps rifle competition. The same week, I topped the world leaderboard for an online F.P.S."
+	},
+	"person2": {
+		"truths": [
+			"I won a medal in the summer X-Games.",
+			"For my 18th birthday, my grandpa bought me a trip to see every continent."
+		],
+		"lie": "My first car was a 2007 Ferrari."
+	}
+}
+
+
+// Elements
+//------------
+var $infoSlide = $('.info-slide');
+var $contentCont = $infoSlide.find('.content-cont');
+var $gameTrigger = $infoSlide.find('.truths');
+var $gameCont = $contentCont.find('.game-cont');
+var $facts = $gameCont.find('.fact-item');
+var $closeBtn = $gameCont.find('.close-game-btn');
+
+function bindEvents() {
+
+	// Start game
+	$gameTrigger.click(startGame);
+
+	// Reveal answers
+	$facts.click(function(){
+		$gameCont.addClass('reveal');
+	});
+
+	// Back to bio
+	$closeBtn.click(endGame);
+}
+
+function startGame() {
+	// Show game-cont, hide description
+	$contentCont.addClass('question-mode');
+}
+
+function setQuestions() {
+	// For prototype, pick person at random...
+	// Create three elements, bind click event, and insert in random order
+}
+function endGame() {
+	console.log('ending game');
+	$contentCont.removeClass('question-mode');
+
+	window.setTimeout(function(){
+		$gameCont.removeClass('reveal');
+	}, 1000);
+}
+
+function initGame() {
+	// Bind events
+	bindEvents();
+
+	// Populate and mix-up the questions
+
+}
+
+module.exports = initGame;
 },{"./scalee-sorter.js":5,"jquery":1}]},{},[2]);

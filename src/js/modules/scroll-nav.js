@@ -146,7 +146,7 @@ function allowScrolling() {
   // - if at top, move to previous slide
 
   var $lastSlide = $slides.filter('.slide3');
-  var lastScrollPos = 0;
+  var lastScrollPos = null;
 
   function watchScrollHandler(ev) {
     var topPos = $lastSlide.scrollTop();    

@@ -14,6 +14,13 @@ html {
 	font-family: $base-font-family;
 	color: $sketchup-gray;
 }
+h1,
+h2,
+h3,
+h4,
+h5 {
+	margin-top: 0;
+}
 
 h1 {
 	font-size: $h1-font-size;
@@ -35,6 +42,11 @@ h4 {
 	font-weight: 300;
 	line-height: 1.3em;
 }
+h5 {
+	font-size: $h5-font-size;
+	font-weight: 800;
+	line-height: 1.8em;	
+}
 
 a {
 	font-size: 1.6rem;
@@ -50,19 +62,21 @@ p {
 	font-size: 1.6rem;
 	line-height: 2.4rem;
 	font-weight: 300;
+	margin: 0 0 11px;
 }
 
 button,
 .button {
 	border: 2px solid $sketchup-gray;
 	box-shadow: none;
-	padding: 6px 20px;
+	padding: 6px 20px 4px;
 	background-color: transparent;
 	color: $sketchup-gray;
 	cursor: pointer;
 	font-size: 1.6rem;
 	line-height: 1.42em;
 	text-align: center;
+	@include transition();
 
 	&:focus {
 		outline: none;

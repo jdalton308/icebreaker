@@ -4,6 +4,8 @@
 	overflow-y: auto;
 
 	.container {
+		min-height: 101%; // Need to make scrollable on desktop for js
+
 		.title-cont {
 			margin-bottom: 70px;
 			text-align: center;
