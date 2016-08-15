@@ -1,0 +1,103 @@
+
+
+// Leaderboard pieces
+//--------------------------
+.slide1 {
+	.leader-cont {
+		@include centerX();
+		bottom: -100vh;
+		height: 60vh;
+		width: 100%;
+		text-align: center;
+		@include transition();
+
+		.leaderboard-title {
+			width: 100%;
+			text-align: center;
+		}
+
+		.position-box {
+			display: inline-block;
+			vertical-align: top;
+			width: 15%;
+			max-width: 200px;
+			height: 100%;
+			padding: 20px 30px;
+			margin-right: 50px;
+			background-color: $sketchup-medgray;
+
+			&:last-child {
+				margin-right: 0;
+			}
+
+			&.first {
+				background-color: $error-yellow;
+			}
+			&.second {
+				background-color: $silver;
+			}
+			&.third {
+				background-color: $sketchup-red;
+			}
+
+			img {
+				max-height: 100%;
+				width: auto;
+				max-width: 100%;
+				@include transition(0.3s);
+
+				&.hide {
+					opacity: 0;
+				}
+			}
+		}
+	}
+	.leaderboard-control-panel {
+		position: absolute;
+		z-index: 4;
+		bottom: -150px;
+		left: 0;
+		width: 100%;
+		padding-bottom: 5px;
+		background-color: $sketchup-ltgray;
+		@include transition;
+		box-shadow: 0 0 15px -2px $sketchup-gray;
+
+		.leaderboard {
+			text-align: center;
+			@include transition();
+
+			.leader-title {
+				width: 100%;
+				text-align: center;
+				color: $sketchup-gray;
+			}
+
+			&.show {
+				top: 0;
+			}
+		}
+	}
+
+	// Enter Leaderboard mode
+	&.leader-mode {
+		.leaderboard-control-panel {
+			bottom: 0;
+		}
+		.control-panel {
+			bottom: -150px;
+			background-color: $sketchup-medgray;
+
+			#open-filter {
+				top: 5px;
+			}
+		}
+		.scalee-cont {
+			bottom: 100vh;
+		}
+		.leader-cont {
+			bottom: 20vh;
+		}
+
+	}
+}

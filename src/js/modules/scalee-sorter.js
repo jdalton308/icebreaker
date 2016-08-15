@@ -104,7 +104,7 @@ function eventsOn() {
   });
 
 
-  // Switch to Leaderboard-mode
+  // Switch to Leaderboard-mode -----
   $leaderTrigger.click(function(){
     showLeaderboard();
   });

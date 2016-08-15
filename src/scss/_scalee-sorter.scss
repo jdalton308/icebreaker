@@ -1,108 +1,4 @@
 
-// Keyframes
-//--------------
-// Hide scalee: Fade out, then collapse
-@include keyframes(hideScalee) {
-	0% {
-		opacity: 1;
-	}
-	50% {
-		opacity: 0;
-		height: 100%;
-	}
-	100% {
-		opacity: 0;
-		height: 0%;
-	}
-}
-@include keyframes(showScalee) {
-	0% {
-		opacity: 0;
-		height: 0%;
-	}
-	50% {
-		opacity: 0;
-		height: 100%;
-	}
-	100% {
-		opacity: 1;
-		height: 100%;
-	}
-}
-
-// @include keyframes(fadeIn) {
-// 	0% {
-// 		opacity: 0;
-// 	}
-// 	100% {
-// 		opacity: 1;
-// 	}
-// }
-
-
-main {
-	position: relative;
-	width: 100vw;
-	height: 100vh;
-	overflow: hidden;
-}
-.center-me {
-	@include centerMe();
-}
-.slide {
-	position: absolute;
-	top: 100%;
-	left: 0;
-	height: 100vh;
-	width: 100%;
-	border-bottom: 1px solid $sketchup-gray;
-	position: absolute;
-	@include transition();
-
-	&.slide1,
-	&.slide3 {
-		background-color: $sketchup-ltgray;
-	}
-	&.slide2 {
-		background-color: $sketchup-red;
-	}
-
-	// Showing state
-	&.active {
-		top: 0;
-	}
-}
-
-// Dot nav
-//----------------
-.dots-nav {
-	position: fixed;
-	z-index: 8;
-	top: 50%;
-	right: 30px;
-	@include transform( translateY(-50%) );
-
-	.dot {
-		display: block;
-		width: 10px;
-		height: 10px;
-		border: 2px solid $sketchup-red;
-		margin-bottom: 15px;
-		@include transition();
-
-		&.current {
-			background-color: $sketchup-red;
-		}
-	}
-
-	@media (min-width: $mobile) {
-		.dot {
-			&:hover {
-				border-color: $black;
-			}
-		}
-	}
-}
 
 // slide 1: Scalee Sorter
 //--------------------------
@@ -146,56 +42,6 @@ main {
 		}
 	}
 
-	.leader-cont {
-		@include centerX();
-		bottom: -100vh;
-		height: 60vh;
-		width: 100%;
-		text-align: center;
-		@include transition();
-
-		.leaderboard-title {
-			width: 100%;
-			text-align: center;
-		}
-
-		.position-box {
-			display: inline-block;
-			vertical-align: top;
-			width: 15%;
-			max-width: 200px;
-			height: 100%;
-			padding: 20px 30px;
-			margin-right: 50px;
-			background-color: $sketchup-medgray;
-
-			&:last-child {
-				margin-right: 0;
-			}
-
-			&.first {
-				background-color: $error-yellow;
-			}
-			&.second {
-				background-color: $silver;
-			}
-			&.third {
-				background-color: $sketchup-red;
-			}
-
-			img {
-				max-height: 100%;
-				width: auto;
-				max-width: 100%;
-				@include transition(0.3s);
-
-				&.hide {
-					opacity: 0;
-				}
-			}
-		}
-	}
-
 	.info-slide {
 		position: absolute;
 		z-index: 7;
@@ -228,32 +74,6 @@ main {
 			vertical-align: top;
 			width: 50%;
 			text-align: left;
-		}
-	}
-	.leaderboard-control-panel {
-		position: absolute;
-		z-index: 4;
-		bottom: -150px;
-		left: 0;
-		width: 100%;
-		padding-bottom: 5px;
-		background-color: $sketchup-ltgray;
-		@include transition;
-		box-shadow: 0 0 15px -2px $sketchup-gray;
-
-		.leaderboard {
-			text-align: center;
-			@include transition();
-
-			.leader-title {
-				width: 100%;
-				text-align: center;
-				color: $sketchup-gray;
-			}
-
-			&.show {
-				top: 0;
-			}
 		}
 	}
 	.control-panel {
@@ -478,25 +298,4 @@ main {
 		}
 	}
 
-	// Leaderboard mode
-	&.leader-mode {
-		.leaderboard-control-panel {
-			bottom: 0;
-		}
-		.control-panel {
-			bottom: -150px;
-			background-color: $sketchup-medgray;
-
-			#open-filter {
-				top: 5px;
-			}
-		}
-		.scalee-cont {
-			bottom: 100vh;
-		}
-		.leader-cont {
-			bottom: 20vh;
-		}
-
-	}
 }

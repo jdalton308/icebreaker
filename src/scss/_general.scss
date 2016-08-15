@@ -14,6 +14,7 @@ html {
 	font-family: $base-font-family;
 	color: $sketchup-gray;
 }
+
 h1 {
 	font-size: $h1-font-size;
 	font-weight: 300;
@@ -64,9 +65,97 @@ button {
 		outline: none;
 	}
 }
-
 .container {
+	width: 100%;
 	max-width: 1170px;
 	margin: 0 auto;
 	padding: 0 20px;
+}
+main {
+	position: relative;
+	width: 100vw;
+	height: 100vh;
+	overflow: hidden;
+}
+.center-me {
+	@include centerMe();
+}
+.slide {
+	position: absolute;
+	top: 100%;
+	left: 0;
+	height: 100vh;
+	width: 100%;
+	background-color: $sketchup-ltgray;
+	border-bottom: 1px solid $sketchup-gray;
+	@include transition();
+
+	// Showing state
+	&.active {
+		top: 0;
+	}
+}
+
+// Dot nav
+//----------------
+.dots-nav {
+	position: fixed;
+	z-index: 8;
+	top: 50%;
+	right: 30px;
+	@include transform( translateY(-50%) );
+
+	.dot {
+		display: block;
+		width: 10px;
+		height: 10px;
+		border: 2px solid $sketchup-red;
+		margin-bottom: 15px;
+		cursor: pointer;
+		@include transition();
+
+		&.current {
+			background-color: $sketchup-red;
+		}
+	}
+
+	@media (min-width: $mobile) {
+		.dot {
+			&:hover {
+				border-color: $black;
+			}
+		}
+	}
+}
+
+
+// Keyframes
+//--------------
+// Hide scalee: Fade out, then collapse
+@include keyframes(hideScalee) {
+	0% {
+		opacity: 1;
+	}
+	50% {
+		opacity: 0;
+		height: 100%;
+	}
+	100% {
+		opacity: 0;
+		height: 0%;
+	}
+}
+@include keyframes(showScalee) {
+	0% {
+		opacity: 0;
+		height: 0%;
+	}
+	50% {
+		opacity: 0;
+		height: 100%;
+	}
+	100% {
+		opacity: 1;
+		height: 100%;
+	}
 }

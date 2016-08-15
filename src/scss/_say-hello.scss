@@ -1,0 +1,50 @@
+
+.slide2 {
+	text-align: center;
+	background-color: $sketchup-gray;
+	background-image: url('/img/texture_poly-blend-darkgray.jpg');
+	background-attachment: fixed;
+	color: $white;
+	
+	.center-me {
+		width: 100%;
+	}
+	.button-cont {
+		display: inline-block;
+		width: 100%;
+	}
+	a.nav-box {
+		display: inline-block;
+		width: 100%;
+		max-width: 300px;
+		padding: 20px 30px;
+		border: 1px solid $white;
+		background-color: transparent;
+		color: $white;
+
+		&:hover {
+			color: $sketchup-gray;
+			background-color: $white;
+		}
+
+		img {
+			display: inline-block;
+			height: 150px;
+			width: auto;
+			margin-bottom: 15px;
+		}
+		h3 {
+			margin: 0;
+		}
+	}
+
+	@media (min-width: $mobile) {
+		a.nav-box {
+			margin-right: 50px;
+
+			&:last-child {
+				margin-right: 0;
+			}
+		}
+	}
+}
