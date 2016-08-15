@@ -11012,10 +11012,28 @@ return jQuery;
 
 var ScrollNav = require('./modules/scroll-nav.js');
 var ScaleeSorter = require('./modules/scalee-sorter.js');
+var JobPostings = require('./modules/job-postings.js');
 
 ScrollNav();
 ScaleeSorter.init();
-},{"./modules/scalee-sorter.js":4,"./modules/scroll-nav.js":5}],3:[function(require,module,exports){
+JobPostings();
+},{"./modules/job-postings.js":3,"./modules/scalee-sorter.js":5,"./modules/scroll-nav.js":6}],3:[function(require,module,exports){
+
+var $ = require('jquery');
+
+function init() {
+	// Just make accordions work. Most is css
+	var $postings = $('.job-posting');
+	var $titleBars = $postings.children('.title-bar');
+
+	$titleBars.click(function(){
+		var $this = $(this);
+		$this.parents('.job-posting').toggleClass('open');
+	});
+}
+
+module.exports = init;
+},{"jquery":1}],4:[function(require,module,exports){
 
 var leaders = {
 	"discgolf": {
@@ -11062,7 +11080,7 @@ var leaders = {
 
 
 module.exports = leaders;
-},{}],4:[function(require,module,exports){
+},{}],5:[function(require,module,exports){
 'use strict';
 
 var $ = require('jquery');
@@ -11392,7 +11410,7 @@ module.exports = {
   sort: sort,
   closeLeaders: hideLeaderboard
 };
-},{"./leaderboard.js":3,"jquery":1}],5:[function(require,module,exports){
+},{"./leaderboard.js":4,"jquery":1}],6:[function(require,module,exports){
 'use strict';
 
 var $ = require('jquery');
@@ -11704,4 +11722,4 @@ function init() {
 
 
 module.exports = init;
-},{"./scalee-sorter.js":4,"jquery":1}]},{},[2]);
+},{"./scalee-sorter.js":5,"jquery":1}]},{},[2]);

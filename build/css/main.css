@@ -32,6 +32,7 @@ h4 {
   line-height: 1.3em; }
 
 a {
+  font-size: 1.6rem;
   color: #FFF;
   text-decoration: none;
   -webkit-transition: all 0.5s;
@@ -44,17 +45,28 @@ p {
   line-height: 2.4rem;
   font-weight: 300; }
 
-button {
+button,
+.button {
   border: 2px solid #363545;
   box-shadow: none;
-  padding: 10px 15px;
-  background-color: #ffffff;
+  padding: 6px 20px;
+  background-color: transparent;
   color: #363545;
   cursor: pointer;
-  font-size: 1.2rem;
+  font-size: 1.6rem;
+  line-height: 1.42em;
   text-align: center; }
-  button:focus {
+  button:focus,
+  .button:focus {
     outline: none; }
+  button.red,
+  .button.red {
+    border: none;
+    background-color: #e72b2d;
+    color: #ffffff; }
+    button.red:hover,
+    .button.red:hover {
+      background-color: #c81719; }
 
 .container {
   width: 100%;
@@ -490,8 +502,75 @@ header {
         margin-right: 0; } }
 
 .slide3 {
-  padding-top: 100px;
+  padding: 100px 0;
   overflow-y: auto; }
-  .slide3 .container h1 {
-    margin-bottom: 30px;
+  .slide3 .container .title-cont {
+    margin-bottom: 70px;
     text-align: center; }
+  .slide3 .container .job-posting {
+    margin-bottom: 50px; }
+    .slide3 .container .job-posting .title-bar {
+      cursor: pointer;
+      border-bottom: 1px solid transparent;
+      -webkit-transition: all 0.4s;
+      transition: all 0.4s; }
+      .slide3 .container .job-posting .title-bar:hover {
+        border-bottom-color: #e72b2d; }
+      .slide3 .container .job-posting .title-bar h3 {
+        display: inline-block;
+        width: calc(100% - 45px);
+        margin: 0;
+        padding: 5px 10px; }
+      .slide3 .container .job-posting .title-bar .open-btn {
+        position: relative;
+        display: inline-block;
+        vertical-align: top;
+        width: 41px;
+        height: 41px;
+        -webkit-transition: all 0.8s;
+        transition: all 0.8s; }
+        .slide3 .container .job-posting .title-bar .open-btn:before, .slide3 .container .job-posting .title-bar .open-btn:after {
+          content: '';
+          display: inline-block;
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          -ms-transform: translate(-50%, -50%);
+          -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+          background-color: #363545; }
+        .slide3 .container .job-posting .title-bar .open-btn:before {
+          width: 60%;
+          height: 2px; }
+        .slide3 .container .job-posting .title-bar .open-btn:after {
+          width: 2px;
+          height: 60%; }
+    .slide3 .container .job-posting .posting-content {
+      max-height: 0;
+      padding: 0 20px;
+      overflow: hidden;
+      -webkit-transition: all 1s;
+      transition: all 1s; }
+      .slide3 .container .job-posting .posting-content .button-row {
+        text-align: center; }
+      .slide3 .container .job-posting .posting-content a.button {
+        display: inline-block;
+        margin: 30px 0 0; }
+    .slide3 .container .job-posting.open {
+      background-color: #ffffff; }
+      .slide3 .container .job-posting.open .title-bar {
+        border-bottom-color: #e72b2d; }
+        .slide3 .container .job-posting.open .title-bar:hover {
+          background-color: #E2E2E7; }
+          .slide3 .container .job-posting.open .title-bar:hover .open-btn {
+            -ms-transform: rotate(225deg);
+            -webkit-transform: rotate(225deg);
+            transform: rotate(225deg); }
+        .slide3 .container .job-posting.open .title-bar .open-btn {
+          -ms-transform: rotate(315deg);
+          -webkit-transform: rotate(315deg);
+          transform: rotate(315deg); }
+      .slide3 .container .job-posting.open .posting-content {
+        max-height: 1000px;
+        padding-top: 30px;
+        padding-bottom: 30px; }

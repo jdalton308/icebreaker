@@ -37,6 +37,7 @@ h4 {
 }
 
 a {
+	font-size: 1.6rem;
 	color: $text-color;
 	text-decoration: none;
 	@include transition();
@@ -51,18 +52,30 @@ p {
 	font-weight: 300;
 }
 
-button {
+button,
+.button {
 	border: 2px solid $sketchup-gray;
 	box-shadow: none;
-	padding: 10px 15px;
-	background-color: $white;
+	padding: 6px 20px;
+	background-color: transparent;
 	color: $sketchup-gray;
 	cursor: pointer;
-	font-size: 1.2rem;
+	font-size: 1.6rem;
+	line-height: 1.42em;
 	text-align: center;
 
 	&:focus {
 		outline: none;
+	}
+
+	&.red {
+		border: none;
+		background-color: $sketchup-red;
+		color: $white;
+
+		&:hover {
+			background-color: darken($sketchup-red, 10%);
+		}
 	}
 }
 .container {
