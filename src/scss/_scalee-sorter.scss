@@ -26,7 +26,7 @@
 		text-align: center;
 		white-space: nowrap;
 		overflow: visible;
-		@include transition();
+		@include transition(1s);
 
 		img {
 			display: inline-block;
@@ -57,11 +57,31 @@
 
 		.close-btn {
 			position: absolute;
-			top: 20px;
-			left: 30px;
-			padding: 15px;
-			cursor: pointer;
-			font-size: 3rem;
+			display: inline-block;
+			width: 50px;
+			height: 50px;
+			padding: 10px;
+			@include transition(0.8s);
+
+			&:before,
+			&:after {
+				content: '';
+				display: inline-block;
+				@include centerMe();
+				background-color: $sketchup-gray;
+			}
+			&:before {
+				width: 60%;
+				height: 2px;
+			}
+			&:after {
+				width: 2px;
+				height: 60%;
+			}
+
+			&:hover {
+				@include transform( rotate(225deg) );
+			}
 		}
 		img {
 			display: inline-block;
@@ -209,32 +229,46 @@
 		box-shadow: 0 0 15px -2px $sketchup-gray;
 
 		#open-filter {
-			@include centerX();
-			z-index: -1;
-			top: -23px;
-			@include transform( translateX(50%) rotate(45deg) );
+			// @include centerX();
+			// z-index: -1;
+			// top: -23px;
+			// @include transform( translateX(50%) rotate(45deg) );
 
-			height: 50px;
-			width: 50px;
-			background-color: $sketchup-gray;
-			color: $white;
-			text-align: center;
-			border-radius: 5%;
+			// height: 50px;
+			// width: 50px;
+			// background-color: $sketchup-gray;
+			// color: $white;
+			// text-align: center;
+			// border-radius: 5%;
 			box-shadow: 0 0 15px -2px $sketchup-gray;
 
-			.up-text {
-				// Arrow
-				display: inline-block;
-				position: absolute;
-				top: 7px;
-				left: 8px;
-				width: 0;
-				height: 0;
-				border-top: 13px solid $sketchup-ltgray;
-				border-left: 13px solid $sketchup-ltgray;
-				border-bottom: 13px solid transparent;
-				border-right: 13px solid transparent;
-				@include transition();
+			// .up-btn {
+			// 	// Arrow
+			// 	display: inline-block;
+			// 	position: absolute;
+			// 	top: 7px;
+			// 	left: 8px;
+			// 	width: 0;
+			// 	height: 0;
+			// 	border-top: 13px solid $sketchup-ltgray;
+			// 	border-left: 13px solid $sketchup-ltgray;
+			// 	border-bottom: 13px solid transparent;
+			// 	border-right: 13px solid transparent;
+			// 	@include transition();
+			// }
+
+			// As text bar
+			display: block;
+			position: absolute;
+			bottom: 100%;
+			width: 100%;
+			padding: 5px;
+			text-align: center;
+			background-color: $sketchup-medgray;
+			cursor: pointer;
+
+			h3 {
+				margin: 0;
 			}
 
 			&:hover {
@@ -242,6 +276,8 @@
 					border-top-color: $sketchup-red;
 					border-left-color: $sketchup-red;
 				}
+
+
 			}
 		}
 
@@ -257,35 +293,52 @@
 				text-align: center;
 
 				.selector-title {
-					// position: absolute;
-					// top: 0;
 					width: 100%;
 					margin: 0;
-					padding: 7px;
+					padding: 10px 5px;
 					font-size: 1.3rem;
 					line-height: 1em;
 					color: $white;
 					background-color: $sketchup-gray;
-					// border-right: 1px solid $sketchup-ltgray;
-					// border-left: 1px solid $sketchup-ltgray;
+				}
+				.wheel-shadow-holder {
+					position: relative;
+
+					// Element just to add inset box shadow
+					.shadow-frame {
+						position: absolute;
+						z-index: 3;
+						top: 0;
+						right: 0;
+						bottom: 0;
+						left: 0;
+						pointer-events: none;
+						box-shadow: inset 1px 0 25px $sketchup-gray;
+					}
 				}
 				.wheel-selector {
 					position: relative;
 					height: auto;
-					background-color: $sketchup-red;
-					color: $sketchup-gray;
 					overflow: hidden;
-					border-left: 1px solid $sketchup-gray;
-					border-right: 1px solid $sketchup-gray;
+					pointer-events: auto;
+
+					color: $sketchup-gray;
+					border-left: 5px solid $sketchup-gray;
+					border-right: 5px solid $sketchup-gray;
 					@include transition();
+					background-color: $sketchup-gray;
 
 					.item {
 						width: 100%;
 						padding: 15px 10px;
 						text-align: center;
-						font-size: 1.5rem;
+						font-size: 1.7rem;
 						background-color: $white;
-						border-bottom: 1px solid $sketchup-ltgray;
+						border-bottom: 3px solid $sketchup-gray;
+
+						&:last-child {
+							border-bottom: none;
+						}
 
 						&.selected {
 							background-color: $sketchup-red;
@@ -365,7 +418,7 @@
 			@media (min-width: $mobile) {
 				&:hover {
 					img {
-						@include filter( blur(3px) grayscale(70%) );
+						@include filter( blur(2px) grayscale(70%) );
 
 						// &.focus {
 						// 	@include filter( blur(0) grayscale(0%) );

@@ -308,4 +308,7 @@ function init() {
 }
 
 
-module.exports = init;
+
+module.exports.init = init;
+module.exports.eventsOff = eventsOff;
+module.exports.eventsOn = eventsOn;

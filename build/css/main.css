@@ -220,8 +220,8 @@ header {
     text-align: center;
     white-space: nowrap;
     overflow: visible;
-    -webkit-transition: all 0.5s;
-    transition: all 0.5s; }
+    -webkit-transition: all 1s;
+    transition: all 1s; }
     .slide1 .scalee-cont img {
       display: inline-block;
       height: 100%;
@@ -248,11 +248,32 @@ header {
     transition: all 1s; }
     .slide1 .info-slide .close-btn {
       position: absolute;
-      top: 20px;
-      left: 30px;
-      padding: 15px;
-      cursor: pointer;
-      font-size: 3rem; }
+      display: inline-block;
+      width: 50px;
+      height: 50px;
+      padding: 10px;
+      -webkit-transition: all 0.8s;
+      transition: all 0.8s; }
+      .slide1 .info-slide .close-btn:before, .slide1 .info-slide .close-btn:after {
+        content: '';
+        display: inline-block;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        -ms-transform: translate(-50%, -50%);
+        -webkit-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+        background-color: #363545; }
+      .slide1 .info-slide .close-btn:before {
+        width: 60%;
+        height: 2px; }
+      .slide1 .info-slide .close-btn:after {
+        width: 2px;
+        height: 60%; }
+      .slide1 .info-slide .close-btn:hover {
+        -ms-transform: rotate(225deg);
+        -webkit-transform: rotate(225deg);
+        transform: rotate(225deg); }
     .slide1 .info-slide img {
       display: inline-block;
       height: 50vh;
@@ -339,36 +360,17 @@ header {
     transition: all 0.5s;
     box-shadow: 0 0 15px -2px #363545; }
     .slide1 .control-panel #open-filter {
+      box-shadow: 0 0 15px -2px #363545;
+      display: block;
       position: absolute;
-      right: 50%;
-      -ms-transform: translateX(50%);
-      -webkit-transform: translateX(50%);
-      transform: translateX(50%);
-      z-index: -1;
-      top: -23px;
-      -ms-transform: translateX(50%) rotate(45deg);
-      -webkit-transform: translateX(50%) rotate(45deg);
-      transform: translateX(50%) rotate(45deg);
-      height: 50px;
-      width: 50px;
-      background-color: #363545;
-      color: #ffffff;
+      bottom: 100%;
+      width: 100%;
+      padding: 5px;
       text-align: center;
-      border-radius: 5%;
-      box-shadow: 0 0 15px -2px #363545; }
-      .slide1 .control-panel #open-filter .up-text {
-        display: inline-block;
-        position: absolute;
-        top: 7px;
-        left: 8px;
-        width: 0;
-        height: 0;
-        border-top: 13px solid #f3f3f7;
-        border-left: 13px solid #f3f3f7;
-        border-bottom: 13px solid transparent;
-        border-right: 13px solid transparent;
-        -webkit-transition: all 0.5s;
-        transition: all 0.5s; }
+      background-color: #E2E2E7;
+      cursor: pointer; }
+      .slide1 .control-panel #open-filter h3 {
+        margin: 0; }
       .slide1 .control-panel #open-filter:hover .up-text {
         border-top-color: #e72b2d;
         border-left-color: #e72b2d; }
@@ -384,28 +386,42 @@ header {
         .slide1 .control-panel .selectors .selector .selector-title {
           width: 100%;
           margin: 0;
-          padding: 7px;
+          padding: 10px 5px;
           font-size: 1.3rem;
           line-height: 1em;
           color: #ffffff;
           background-color: #363545; }
+        .slide1 .control-panel .selectors .selector .wheel-shadow-holder {
+          position: relative; }
+          .slide1 .control-panel .selectors .selector .wheel-shadow-holder .shadow-frame {
+            position: absolute;
+            z-index: 3;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            pointer-events: none;
+            box-shadow: inset 1px 0 25px #363545; }
         .slide1 .control-panel .selectors .selector .wheel-selector {
           position: relative;
           height: auto;
-          background-color: #e72b2d;
-          color: #363545;
           overflow: hidden;
-          border-left: 1px solid #363545;
-          border-right: 1px solid #363545;
+          pointer-events: auto;
+          color: #363545;
+          border-left: 5px solid #363545;
+          border-right: 5px solid #363545;
           -webkit-transition: all 0.5s;
-          transition: all 0.5s; }
+          transition: all 0.5s;
+          background-color: #363545; }
           .slide1 .control-panel .selectors .selector .wheel-selector .item {
             width: 100%;
             padding: 15px 10px;
             text-align: center;
-            font-size: 1.5rem;
+            font-size: 1.7rem;
             background-color: #ffffff;
-            border-bottom: 1px solid #f3f3f7; }
+            border-bottom: 3px solid #363545; }
+            .slide1 .control-panel .selectors .selector .wheel-selector .item:last-child {
+              border-bottom: none; }
             .slide1 .control-panel .selectors .selector .wheel-selector .item.selected {
               background-color: #e72b2d; }
       .slide1 .control-panel .selectors .button-cont {
@@ -444,8 +460,8 @@ header {
       cursor: pointer; }
     @media (min-width: 768px) {
       .slide1.active2 .scalee-cont:hover img {
-        -webkit-filter: blur(3px) grayscale(70%);
-        filter: blur(3px) grayscale(70%); }
+        -webkit-filter: blur(2px) grayscale(70%);
+        filter: blur(2px) grayscale(70%); }
       .slide1.active2 .scalee-cont img:hover {
         -webkit-filter: blur(0) grayscale(0%);
         filter: blur(0) grayscale(0%);

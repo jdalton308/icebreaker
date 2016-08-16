@@ -11015,7 +11015,7 @@ var ScaleeSorter = require('./modules/scalee-sorter.js');
 var JobPostings = require('./modules/job-postings.js');
 var TwoTruths = require('./modules/two-truths.js');
 
-ScrollNav();
+ScrollNav.init();
 ScaleeSorter.init();
 JobPostings();
 TwoTruths();
@@ -11087,6 +11087,7 @@ module.exports = leaders;
 
 var $ = require('jquery');
 var LeaderData = require('./leaderboard.js');
+var ScrollNav = require('./scroll-nav.js');
 
 
 // ------------------------
@@ -11105,7 +11106,7 @@ var $filterControls = $('.container.selectors');
 var $wheelSelectors = $filterControls.find('.wheel-selector');
 var $filterItems = $wheelSelectors.children('.item');
 
-var $sortTrigger = $('#sort-me');
+// var $sortTrigger = $('#sort-me');
 var $scaleeCont = $('.scalee-cont');
 var $scalees = $scaleeCont.find('img');
 var $infoSlide = $('.info-slide');
@@ -11147,19 +11148,23 @@ function eventsOn() {
 
   // Select filters -----
   $filterItems.click(function(){
+    // Show selected state
     $(this).toggleClass('selected').siblings().removeClass('selected');
+
+    // Trigger sorting
+    sort();
   });
 
 
   // Sort button -----
-  $sortTrigger.click(function(){
-    // close panel
-    closePanel();
-    panelOpen = false;
+  // $sortTrigger.click(function(){
+  //   // close panel
+  //   closePanel();
+  //   panelOpen = false;
 
-    // Trigger sort
-    sort();
-  });
+  //   // Trigger sort
+  //   sort();
+  // });
 
 
   // Focus on scalee -----
@@ -11207,6 +11212,9 @@ function openPanel() {
     $wheelSelectors.css('height', openHeight+'px');
   }
 
+  // Turn off scroll-triggered nav when open
+  ScrollNav.eventsOff();
+
   openFilters();
 }
 
@@ -11219,19 +11227,27 @@ function closePanel() {
   function getAndSlideSelection() {
 
     // Get selected elements
-    var $selectedFilters = $('.selectors .selected');
-
-    // reset filters
-    filters = [];
+    var $selectedFilters = $wheelSelectors.find('.selected');
 
     // For each selection, slide up, and save value
     $selectedFilters.each(function(){
       var $this = $(this);
-      slideUpSelection($this);
 
-      // Store value
-      var filterValue = $this.text();
-      filters.push(filterValue);
+      // Try getting index, multiplying height, then scrolling to that
+      var itemIndex = $this.index();
+
+      // console.log('---------');
+      // console.log('Scrolling to number '+ itemIndex);
+
+      var scrollAmt = itemIndex * (itemHeight + 3); // Not sure why need to add the extra 3 px
+
+      // console.log('Scroll Amt: '+ scrollAmt);
+      // console.log('top Pos: '+ scrollPos);
+
+      // $item.parents('.wheel-selector').scrollTop(scrollAmt);
+      $this.parents('.wheel-selector').animate({
+        scrollTop: scrollAmt
+      }, 300);
     });
 
     // Wait for animation, then remove scroll ability
@@ -11240,30 +11256,6 @@ function closePanel() {
     }, 500);
 
   }
-
-
-  // Move selected items to top
-  function slideUpSelection($item) {
-    // Get scrollTop() of selection
-    // var scrollPos = $item.position().top;
-
-    // Try getting index, multiplying height, then scrolling to that
-    var itemIndex = $item.index();
-
-    // console.log('---------');
-    // console.log('Scrolling to number '+ itemIndex);
-
-    var scrollAmt = itemIndex * (itemHeight + 3); // Not sure why need to add the extra 3 px
-
-    // console.log('Scroll Amt: '+ scrollAmt);
-    // console.log('top Pos: '+ scrollPos);
-
-    // $item.parents('.wheel-selector').scrollTop(scrollAmt);
-    $item.parents('.wheel-selector').animate({
-      scrollTop: scrollAmt
-    }, 300);
-  }
-
 
   // Change height of 'wheel-selector' to only show one item
   function collapseFilters() {
@@ -11274,6 +11266,9 @@ function closePanel() {
   collapseFilters();
   getAndSlideSelection();
 
+  // Turn back on scroll-triggered nav
+  ScrollNav.eventsOn();
+
 } // end closePanel();
 
 
@@ -11281,10 +11276,27 @@ function closePanel() {
 //---------------
 function sort() {
 
+  // 1. Get filters
+  // - Get selected elements
+  var $selectedFilters = $wheelSelectors.find('.selected');
+
+  // - reset filters
+  filters = [];
+
+  // - For each selection, slide up, and save value
+  $selectedFilters.each(function(){
+    var $this = $(this);
+
+    // - Store text value
+    var filterValue = $this.text();
+    filters.push(filterValue);
+  });
+
+
   // console.log('Sorting for the filters:');
   // console.log(filters);
 
-  // Loop through all scalees and see if 'data-tag' attributes match all filters
+  // 2. Loop through all scalees and see if 'data-tag' attributes match all filters
   $scalees.each(function(){
     var $this = $(this);
     $this.removeClass('hide show'); // reset each sort
@@ -11406,13 +11418,12 @@ function init() {
 
 
 
-module.exports = {
-  init: init,
-  closePanel: closePanel,
-  sort: sort,
-  closeLeaders: hideLeaderboard
-};
-},{"./leaderboard.js":4,"jquery":1}],6:[function(require,module,exports){
+module.exports.init = init;
+module.exports.closePanel = closePanel;
+module.exports.sort = sort;
+module.exports.closeLeaders = closeLeaders;
+
+},{"./leaderboard.js":4,"./scroll-nav.js":6,"jquery":1}],6:[function(require,module,exports){
 'use strict';
 
 var $ = require('jquery');
@@ -11723,7 +11734,10 @@ function init() {
 }
 
 
-module.exports = init;
+
+module.exports.init = init;
+module.exports.eventsOff = eventsOff;
+module.exports.eventsOn = eventsOn;
 },{"./scalee-sorter.js":5,"jquery":1}],7:[function(require,module,exports){
 'use strict';
 
