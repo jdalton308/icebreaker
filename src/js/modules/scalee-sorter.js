@@ -32,7 +32,7 @@ var $leaderCont = $('.leader-cont');
 var $leaderTitle = $leaderCont.find('.leaderboard-title h1');
 var $leaderBoxes = $leaderCont.children('.position-box');
 var $leaderboardControls = $('.container.leaderboard');
-var $leaderClose = $leaderboardControls.find('.back-btn');
+var $leaderClose = $leaderCont.find('.back-btn');
 
 var itemHeight = $filterItems.outerHeight();
 

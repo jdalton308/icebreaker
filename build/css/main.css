@@ -1,3 +1,31 @@
+@font-face {
+  font-family: 'icebreaker';
+  src: url("/fonts/icebreaker.ttf?iw0n7r") format("truetype"), url("/fonts/icebreaker.woff?iw0n7r") format("woff"), url("/fonts/icebreaker.svg?iw0n7r#icebreaker") format("svg");
+  font-weight: normal;
+  font-style: normal; }
+
+[class^="icon-"],
+[class*=" icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'icebreaker' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale; }
+
+.icon-expand:before {
+  content: "\e01a"; }
+
+.icon-profile-male:before {
+  content: "\e040"; }
+
+.icon-chat:before {
+  content: "\e049"; }
+
 * {
   box-sizing: border-box; }
 
@@ -520,6 +548,33 @@ header {
       transition: all 0.5s; }
       .slide1 .leader-cont .leaderboard-title h1.fade {
         opacity: 0; }
+  .slide1 .leader-cont .back-btn {
+    position: absolute;
+    top: 0;
+    left: 30px;
+    font-size: 1.8rem;
+    padding: 8px 16px 6px;
+    color: #363545; }
+    .slide1 .leader-cont .back-btn:before {
+      content: '';
+      display: inline-block;
+      width: 12px;
+      height: 12px;
+      margin-right: 7px;
+      border-top: 2px solid #363545;
+      border-left: 2px solid #363545;
+      -ms-transform: rotate(-45deg);
+      -webkit-transform: rotate(-45deg);
+      transform: rotate(-45deg);
+      -webkit-transition: all 0.5s;
+      transition: all 0.5s; }
+    .slide1 .leader-cont .back-btn:hover {
+      border-color: #000;
+      color: #000; }
+      .slide1 .leader-cont .back-btn:hover:before {
+        -ms-transform: rotate(315deg);
+        -webkit-transform: rotate(315deg);
+        transform: rotate(315deg); }
   .slide1 .leader-cont .position-box {
     display: inline-block;
     vertical-align: top;
@@ -594,15 +649,6 @@ header {
       .slide1 .leaderboard-control-panel .leaderboard button:hover {
         background-color: #ffffff;
         color: #363545; }
-      .slide1 .leaderboard-control-panel .leaderboard button.back-btn {
-        position: absolute;
-        top: 10px;
-        left: 20px;
-        background-color: #ffffff;
-        color: #363545; }
-        .slide1 .leaderboard-control-panel .leaderboard button.back-btn:hover {
-          background-color: #363545;
-          color: #ffffff; }
 
 .slide1.leader-mode .leader-cont {
   top: 100px; }
@@ -641,11 +687,26 @@ header {
     .slide2 a.nav-box:hover {
       color: #363545;
       background-color: #ffffff; }
-    .slide2 a.nav-box img {
+      .slide2 a.nav-box:hover .icon {
+        background-color: #363545;
+        color: #ffffff; }
+    .slide2 a.nav-box .icon {
       display: inline-block;
+      position: relative;
       height: 150px;
-      width: auto;
-      margin-bottom: 15px; }
+      width: 150px;
+      margin-bottom: 15px;
+      border-radius: 50%;
+      -webkit-transition: all 0.5s;
+      transition: all 0.5s; }
+      .slide2 a.nav-box .icon:before {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        -ms-transform: translate(-50%, -50%);
+        -webkit-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+        font-size: 7rem; }
     .slide2 a.nav-box h3 {
       margin: 0; }
   @media (min-width: 768px) {

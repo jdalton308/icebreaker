@@ -25,13 +25,26 @@
 		&:hover {
 			color: $sketchup-gray;
 			background-color: $white;
+
+			.icon {
+				background-color: $sketchup-gray;
+				color: $white;
+			}
 		}
 
-		img {
+		.icon {
 			display: inline-block;
+			position: relative;
 			height: 150px;
-			width: auto;
+			width: 150px;
 			margin-bottom: 15px;
+			border-radius: 50%;
+			@include transition();
+
+			&:before {
+				@include centerMe();
+				font-size: 7rem;
+			}
 		}
 		h3 {
 			margin: 0;

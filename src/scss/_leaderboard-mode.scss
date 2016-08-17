@@ -23,6 +23,36 @@
 				}
 			}
 		}
+		.back-btn {
+			position: absolute;
+			top: 0;
+			left: 30px;
+			font-size: 1.8rem;
+			padding: 8px 16px 6px;
+			color: $sketchup-gray;
+			// background-color: transparent;
+
+			&:before {
+				content: '';
+				display: inline-block;
+				width: 12px;
+				height: 12px;
+				margin-right: 7px;
+				border-top: 2px solid $sketchup-gray;
+				border-left: 2px solid $sketchup-gray;
+				@include transform( rotate(-45deg) );
+				@include transition();
+			}
+
+			&:hover {
+				border-color: $black;
+				color: $black;
+
+				&:before {
+					@include transform( rotate(315deg) );
+				}
+			}
+		}
 
 		.position-box {
 			display: inline-block;
@@ -124,19 +154,6 @@
 				&:hover {
 					background-color: $white;
 					color: $sketchup-gray;
-				}
-
-				&.back-btn {
-					position: absolute;
-					top: 10px;
-					left: 20px;
-					background-color: $white;
-					color: $sketchup-gray;
-
-					&:hover {
-						background-color: $sketchup-gray;
-						color: $white;
-					}
 				}
 			}
 		}
