@@ -115,7 +115,7 @@ main {
 	width: 100%;
 	background-color: $sketchup-ltgray;
 	border-bottom: 1px solid $sketchup-gray;
-	@include transition();
+	@include transition(0.9s);
 
 	// Showing state
 	&.active {

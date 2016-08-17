@@ -266,18 +266,35 @@
 			text-align: center;
 			background-color: $sketchup-medgray;
 			cursor: pointer;
+			@include transition();
 
 			h3 {
 				margin: 0;
 			}
+			.arrow-icon {
+				display: inline-block;
+				margin-left: 10px;
+					
+				&:before {
+					content: '';
+					display: inline-block;
+					position: relative;
+					top: 2px;
+					width: 12px;
+					height: 12px;
+					border-top: 3px solid $sketchup-gray;
+					border-right: 3px solid $sketchup-gray;
+					@include transform( rotate(-45deg) );
+					@include transition();
+				}
+			}
 
 			&:hover {
-				.up-text {
-					border-top-color: $sketchup-red;
-					border-left-color: $sketchup-red;
-				}
-
-
+				// .up-text {
+				// 	border-top-color: $sketchup-red;
+				// 	border-left-color: $sketchup-red;
+				// }
+				background-color: $white;
 			}
 		}
 
@@ -335,6 +352,7 @@
 						font-size: 1.7rem;
 						background-color: $white;
 						border-bottom: 3px solid $sketchup-gray;
+						pointer-events: none;
 
 						&:last-child {
 							border-bottom: none;
@@ -439,21 +457,28 @@
 	&.edit-mode {
 		.control-panel {
 
-			.selectors {
-				.button-cont {
-					padding-top: 20px;
+			// .selectors {
+			// 	.button-cont {
+			// 		padding-top: 20px;
 
-					button {
-						&#sort-me {
-							margin-bottom: 15px;
-						}
-						&#leaders {
-							padding-top: 12px;
-							padding-bottom: 12px;
-							border-color: $sketchup-ltgray;
-							max-height: 40px;
-						}
-					}
+			// 		button {
+			// 			&#sort-me {
+			// 				margin-bottom: 15px;
+			// 			}
+			// 			&#leaders {
+			// 				padding-top: 12px;
+			// 				padding-bottom: 12px;
+			// 				border-color: $sketchup-ltgray;
+			// 				max-height: 40px;
+			// 			}
+			// 		}
+			// 	}
+			// }
+		}
+		#open-filter {
+			.arrow-icon {
+				&:before {
+					@include transform( rotate(135deg) translateY(6px) translateX(-2px) );
 				}
 			}
 		}
@@ -465,9 +490,14 @@
 
 					.item {
 						cursor: pointer;
+						pointer-events: auto;
 					}
 				}
 			}
+		}
+		.scalee-cont {
+			bottom: 45vh;
+			height: 35vh;
 		}
 	}
 

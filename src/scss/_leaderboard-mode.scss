@@ -5,8 +5,8 @@
 .slide1 {
 	.leader-cont {
 		@include centerX();
-		bottom: -100vh;
-		height: 60vh;
+		top: -100vh;
+		// height: 60vh;
 		width: 100%;
 		text-align: center;
 		@include transition();
@@ -14,36 +14,72 @@
 		.leaderboard-title {
 			width: 100%;
 			text-align: center;
+
+			h1 {
+				@include transition();
+
+				&.fade {
+					opacity: 0;
+				}
+			}
 		}
 
 		.position-box {
 			display: inline-block;
 			vertical-align: top;
-			width: 15%;
-			max-width: 200px;
-			height: 100%;
-			padding: 20px 30px;
+			min-width: 12%;
+			max-width: 18%;
+			padding: 0 0 30px;
 			margin-right: 50px;
-			background-color: $sketchup-medgray;
+			// background-color: $sketchup-medgray;
+			border: 5px solid $sketchup-medgray;
+			box-shadow: 1px 1px 15px -2px $sketchup-gray;
+			border-radius: 3px;
+			@include transition();
 
 			&:last-child {
 				margin-right: 0;
 			}
 
 			&.first {
-				background-color: $error-yellow;
+				// background-color: $error-yellow;
+				border-color: $gold;
+				box-shadow: 1px 1px 15px $gold;
+
+				.box-title {
+					border-color: $gold;
+				}
 			}
 			&.second {
-				background-color: $silver;
+				// background-color: $silver;
+				border-color: $silver;
+				box-shadow: 1px 1px 15px 1px $silver;
+
+				.box-title {
+					border-color: $silver;
+				}
 			}
 			&.third {
-				background-color: $sketchup-red;
+				// background-color: $sketchup-red;
+				border-color: $bronze;
+				box-shadow: 1px 1px 15px -1px $bronze;
+
+				.box-title {
+					border-color: $bronze;
+				}
 			}
 
+			.box-title {
+				width: 100%;
+				margin: 0 0 30px;
+				padding: 8px 12px;
+				text-align: center;
+				border-bottom: 5px solid $sketchup-medgray;
+			}
 			img {
-				max-height: 100%;
+				height: 40vh;
 				width: auto;
-				max-width: 100%;
+				// max-width: 100%;
 				@include transition(0.3s);
 
 				&.hide {
@@ -55,34 +91,64 @@
 	.leaderboard-control-panel {
 		position: absolute;
 		z-index: 4;
-		bottom: -150px;
+		bottom: -250px;
 		left: 0;
 		width: 100%;
-		padding-bottom: 5px;
-		background-color: $sketchup-ltgray;
-		@include transition;
+		padding: 15px 0 20px;
+		background-color: $sketchup-gray;
+		color: $white;
+		@include transition(0.9s);
 		box-shadow: 0 0 15px -2px $sketchup-gray;
 
 		.leaderboard {
 			text-align: center;
 			@include transition();
 
+			&.show {
+				top: 0;
+			}
+
 			.leader-title {
 				width: 100%;
 				text-align: center;
-				color: $sketchup-gray;
+				color: $white;
 			}
+			button {
+				margin: 0 10px 10px 0;
+				border-color: $white;
+				color: $white;
 
-			&.show {
-				top: 0;
+				&:last-child {
+					margin: 0;
+				}
+				&:hover {
+					background-color: $white;
+					color: $sketchup-gray;
+				}
+
+				&.back-btn {
+					position: absolute;
+					top: 10px;
+					left: 20px;
+					background-color: $white;
+					color: $sketchup-gray;
+
+					&:hover {
+						background-color: $sketchup-gray;
+						color: $white;
+					}
+				}
 			}
 		}
 	}
 
 	// Enter Leaderboard mode
 	&.leader-mode {
+		.leader-cont {
+			top: 100px;
+		}
 		.leaderboard-control-panel {
-			bottom: 0;
+			bottom: -2px;
 		}
 		.control-panel {
 			bottom: -150px;
@@ -94,9 +160,6 @@
 		}
 		.scalee-cont {
 			bottom: 100vh;
-		}
-		.leader-cont {
-			bottom: 20vh;
 		}
 
 	}

@@ -27,11 +27,12 @@ var $scalees = $scaleeCont.find('img');
 var $infoSlide = $('.info-slide');
 var $infoClose = $infoSlide.find('.close-btn');
 
-var $leaderTrigger = $('#leaders');
+var $leaderTrigger = $('#leader-trigger');
 var $leaderCont = $('.leader-cont');
 var $leaderTitle = $leaderCont.find('.leaderboard-title h1');
 var $leaderBoxes = $leaderCont.children('.position-box');
 var $leaderboardControls = $('.container.leaderboard');
+var $leaderClose = $leaderboardControls.find('.back-btn');
 
 var itemHeight = $filterItems.outerHeight();
 
@@ -71,16 +72,6 @@ function eventsOn() {
   });
 
 
-  // Sort button -----
-  // $sortTrigger.click(function(){
-  //   // close panel
-  //   closePanel();
-  //   panelOpen = false;
-
-  //   // Trigger sort
-  //   sort();
-  // });
-
 
   // Focus on scalee -----
   $scalees.click(function(){
@@ -113,6 +104,11 @@ function eventsOn() {
   $leaderTrigger.click(function(){
     showLeaderboard();
   });
+
+  // Exit Leaderboard mode -----
+  $leaderClose.click(function(){
+    hideLeaderboard();
+  });
 }
 
 
@@ -136,10 +132,15 @@ function openPanel() {
 
 // Collapse Filter Bar
 //---------------
+// Change height of 'wheel-selector' to only show one item
+function setClosedHeight() {
+  $wheelSelectors.css('height', itemHeight+'px');
+}
+
 function closePanel() {
 
   // Get and position selected items
-  function getAndSlideSelection() {
+  function setFilterPos() {
 
     // Get selected elements
     var $selectedFilters = $wheelSelectors.find('.selected');
@@ -172,14 +173,8 @@ function closePanel() {
 
   }
 
-  // Change height of 'wheel-selector' to only show one item
-  function collapseFilters() {
-    $wheelSelectors.css('height', itemHeight+'px');
-    // console.log('=== Collapsed ====');
-  }
-
-  collapseFilters();
-  getAndSlideSelection();
+  setClosedHeight();
+  setFilterPos();
 
   // Turn back on scroll-triggered nav
   ScrollNav.eventsOn();
@@ -236,24 +231,34 @@ function sort() {
 
   // Todo: Create "nobody found" message
 }
+function resetFilters() {
+  // Remove '.seleccted' tag
+  $wheelSelectors.find('.selected').removeClass('selected');
+
+  // Re-sort scalees
+  sort();
+}
 
 
 // Enter 'Leaderboard Mode'
 //--------------------------
 function showLeaderboard() {
 
-  // Change colors
+  // Trigger most changes through CSS
   $slide1.addClass('leader-mode');
-  // - Hide scalees
-  // - Show boxes for first five places
-  // - Hide sorting selectors
 
   // Wait 0.5s, then show new buttons
   window.setTimeout(function(){
     $leaderboardControls.addClass('show');
   }, 500);
 
+  // Scroll to exit
+  ScrollNav.eventsOn();
+
+  // Reset filters
+  resetFilters();
 }
+
 function hideLeaderboard() {
   // Undo everything above
   $slide1.removeClass('leader-mode');
@@ -318,7 +323,17 @@ function switchLeaderboard(eventName) {
   }
 
   // Finally, switch title
-  $leaderTitle.text(eventObj.name);
+  switchLeaderTitle(eventObj.name);
+}
+
+function switchLeaderTitle(newTitle) {
+  // Animate title out of view
+  $leaderTitle.addClass('fade');
+
+  // Wait for animation, then change title and animate back in
+  window.setTimeout(function(){
+    $leaderTitle.text(newTitle).removeClass('fade');
+  }, 600);
 }
 
 
@@ -336,4 +351,4 @@ function init() {
 module.exports.init = init;
 module.exports.closePanel = closePanel;
 module.exports.sort = sort;
-module.exports.closeLeaders = closeLeaders;
+module.exports.closeLeaders = hideLeaderboard;

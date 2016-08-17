@@ -4,7 +4,7 @@ var ScaleeSorter = require('./modules/scalee-sorter.js');
 var JobPostings = require('./modules/job-postings.js');
 var TwoTruths = require('./modules/two-truths.js');
 
-ScrollNav.init();
+// ScrollNav.init();
 ScaleeSorter.init();
 JobPostings();
 TwoTruths();
