@@ -72,34 +72,6 @@ function eventsOn() {
   });
 
 
-
-  // Focus on scalee -----
-  $scalees.click(function(){
-    $scaleeInFocus = $(this);
-
-    // TODO: Populate 'bubble' with correct information
-
-    // Copy the img src attribute into 'bubble'
-    var imgSrc = $scaleeInFocus.attr('src');
-    var $infoImg = $infoSlide.find('img');
-    $infoImg.attr('src', imgSrc);
-
-    // Move scalee to correct position // Didn't work very well
-    // $scaleeInFocus.addClass('focus');
-
-    // Slide-in the 'bubble' with the correct information
-    $infoSlide.addClass('show');
-  });
-
-
-  // Hide scalee focus ------
-  $infoClose.click(function(){
-    // Reverse above actions
-    $scaleeInFocus.removeClass('focus');
-    $infoSlide.removeClass('show');
-  });
-
-
   // Switch to Leaderboard-mode -----
   $leaderTrigger.click(function(){
     showLeaderboard();

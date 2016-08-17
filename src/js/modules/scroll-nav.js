@@ -2,6 +2,7 @@
 
 var $ = require('jquery');
 var ScaleeSorter = require('./scalee-sorter.js');
+var ScaleeBios = require('./scalee-bios.js');
 
 
 // ------------------------
@@ -205,6 +206,7 @@ function prevSlide() {
       // Close the sorting panel, and leaderboard panel
       ScaleeSorter.closePanel();
       ScaleeSorter.closeLeaders();
+      ScaleeBios.off();
     } else {
       var $target = $slides.eq(currentSlide-1);
       var removedClass = 'active';
@@ -239,6 +241,8 @@ function nextSlide() {
       // Close leaderboard and sorting panel
       ScaleeSorter.closePanel();
       ScaleeSorter.closeLeaders();
+    } else if (!currentSlide) {
+      ScaleeBios.on();
     }
 
     // Remember state

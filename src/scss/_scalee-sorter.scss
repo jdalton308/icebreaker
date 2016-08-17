@@ -47,10 +47,10 @@
 		z-index: 7;
 		left: 105%;
 		top: 50px;
-		width: 100%;
+		width: 50%;
 		height: 100%;
 		padding-top: 100px; // arbitrary
-		text-align: center;
+		text-align: left;
 		background-color: $sketchup-ltgray;
 		box-shadow: 0 0 15px -3px $sketchup-gray;
 		@include transition(1s);
@@ -58,10 +58,14 @@
 		.close-btn {
 			position: absolute;
 			display: inline-block;
+			top: 20px;
+			right: 30px;
 			width: 50px;
 			height: 50px;
 			padding: 10px;
 			@include transition(0.8s);
+			@include transform( rotate(45deg) );
+			cursor: pointer;
 
 			&:before,
 			&:after {
@@ -83,17 +87,13 @@
 				@include transform( rotate(225deg) );
 			}
 		}
-		img {
-			display: inline-block;
-			height: 50vh;
-			width: auto;
-			margin-right: 75px;
-		}
 		.content-cont {
 			position: relative;
 			display: inline-block;
 			vertical-align: top;
-			width: 50%;
+			width: 90%;
+			max-width: 600px;
+			padding: 0 40px;
 			text-align: left;
 
 			button.truths {
@@ -215,7 +215,19 @@
 			}
 		}
 
+	} // end .info-slide
+	.scalee-bio-background {
+		position: fixed;
+		left: 0;
+		bottom: 100%;
+		width: 100%;
+		height: 100%;
+		opacity: 0;
+		background-color: $white;
+		-webkit-transition: opacity 1s;
+		transition: opacity 1s;
 	}
+
 	.control-panel {
 		position: absolute;
 		z-index: 3;
@@ -398,7 +410,7 @@
 		}
 	} // end .control-panel
 
-	// Show bottom filter bar, hide text, make scalees larger
+	// Show bottom control panel, hide title text, make scalees larger
 	&.active2 {
 		.title-cont {
 			top: -150px;
@@ -407,74 +419,79 @@
 		.control-panel {
 			bottom: 0;
 		}
-		.info-slide {
-			&.show {
-				left: 0;
-			}
-		}
 		.scalee-cont {
 			bottom: 20vh;
 			height: 55vh;
 
+			&:hover {
+				img {
+					@include filter( blur(2px) grayscale(70%) );
+				}
+			}
+
 			img {
 				cursor: pointer;
 
-				// Scalee when selected...
-				// --- Didn't work---
-				// &.focus {
-				// 	position: absolute;
-				// 	z-index: 15;
-				// 	top: 0;
-				// 	left: calc(50% - 300px);
+				&:hover {
+					@include filter( blur(0) grayscale(0%) );
+					@include transform( scale(1.05) );
+				}
 
-				// 	&:hover {
-				// 		@include transform( none );
-				// 	}
-				// }
+				&.bio-scalee {
+				}
+				&.invisible {
+					@include transition( 0s );
+					visibility: hidden;
+				}
 			}
 
-			@media (min-width: $mobile) {
-				&:hover {
-					img {
-						@include filter( blur(2px) grayscale(70%) );
+			&.focus-mode {
+				pointer-events: none;
 
-						// &.focus {
-						// 	@include filter( blur(0) grayscale(0%) );
-						// }
-					}
-				}
 				img {
-					&:hover {
-						@include filter( blur(0) grayscale(0%) );
-						@include transform( scale(1.05) );
-					}
+					pointer-events: none;
+					@include filter( blur(2px) grayscale(70%) );
+					@include transform( scale(1) );
+
+					// // 1/ Indicate the new scalee
+					// &.bio-scalee {
+					// 	position: fixed;
+					// 	z-index: 15;
+					// 	@include filter( blur(0) grayscale(0%) );
+					// 	@include transform( scale(1.1) );
+					// 	// @include transition( 0s );
+					// }
 				}
+			}
+		}
+
+		// Open scalee bio
+		.info-slide {
+			&.show {
+				left: 50%;
+			}
+		}
+		.scalee-bio-background {
+			&.show {
+				bottom: 0;
+				z-index: 4;
+				opacity: 0.9;
+			}
+		}
+		img.bio-scalee {
+			position: fixed;
+			z-index: 5;
+			@include transition();
+			@include transform( scale(1.05) );
+
+			&.fly-away {
+				@include transform( scale(1) );
 			}
 		}
 	}
 
 	// 'control-panel' open
 	&.edit-mode {
-		.control-panel {
-
-			// .selectors {
-			// 	.button-cont {
-			// 		padding-top: 20px;
-
-			// 		button {
-			// 			&#sort-me {
-			// 				margin-bottom: 15px;
-			// 			}
-			// 			&#leaders {
-			// 				padding-top: 12px;
-			// 				padding-bottom: 12px;
-			// 				border-color: $sketchup-ltgray;
-			// 				max-height: 40px;
-			// 			}
-			// 		}
-			// 	}
-			// }
-		}
 		#open-filter {
 			.arrow-icon {
 				&:before {

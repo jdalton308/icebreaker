@@ -11012,14 +11012,16 @@ return jQuery;
 
 var ScrollNav = require('./modules/scroll-nav.js');
 var ScaleeSorter = require('./modules/scalee-sorter.js');
+var ScaleeBios = require('./modules/scalee-bios.js');
 var JobPostings = require('./modules/job-postings.js');
 var TwoTruths = require('./modules/two-truths.js');
 
 // ScrollNav.init();
 ScaleeSorter.init();
+ScaleeBios.init();
 JobPostings();
 TwoTruths();
-},{"./modules/job-postings.js":3,"./modules/scalee-sorter.js":5,"./modules/scroll-nav.js":6,"./modules/two-truths.js":7}],3:[function(require,module,exports){
+},{"./modules/job-postings.js":3,"./modules/scalee-bios.js":5,"./modules/scalee-sorter.js":6,"./modules/scroll-nav.js":7,"./modules/two-truths.js":8}],3:[function(require,module,exports){
 
 var $ = require('jquery');
 
@@ -11091,6 +11093,150 @@ var ScrollNav = require('./scroll-nav.js');
 
 
 // ------------------------
+// Scalee Bios
+// ------------------------
+// Order of actions:
+// 1/ Click scalee
+// 2/ Copy scalee element
+// 3/ Position new scalee over old scalee
+// 4/ Opacity = 0 for old scalee
+// 5/ Move new scalee across screen to the desired location
+// 6/ Slide in the page with bio
+
+
+// Elements
+//------------
+var $window = $(window);
+var $page = $('body');
+var $header = $('header');
+var $slide1 = $('.slide1');
+
+var $scaleeCont = $('.scalee-cont');
+var $scalees = $scaleeCont.find('img');
+var $infoSlide = $('.info-slide');
+var $infoBg = $('.scalee-bio-background');
+var $infoClose = $infoSlide.find('.close-btn');
+
+
+// State Vars
+//---------------
+var $scaleeInFocus;
+var $newScalee;
+var initialPos;
+
+
+// Bind Events
+//----------------
+function eventsOn() {
+
+  // Click on scalee: Open Bio -----
+  $scalees.click(clickHandler);
+}
+
+// Unbind Events
+//-----------------
+function eventsOff() {
+  $scalees.off('click');
+}
+
+// Main Click Logic
+//------------------------
+function clickHandler() {
+  $scaleeInFocus = $(this);
+
+  var scaleePos = $scaleeInFocus.position();
+
+  // - copy scalee and set position on top of old one
+  $newScalee = copyScalee($scaleeInFocus);
+  $slide1.append($newScalee);
+  // $newScalee.css({
+  //   top: 0,
+  //   left: (scaleePos.left + 5) // not sure why offset is off by 5px
+  // });
+
+  // - then hide old scalee
+  $scaleeCont.addClass('focus-mode');
+  $scaleeInFocus.addClass('invisible');
+
+  // - animate newScalee into position
+  var targetLeft = 0.25;
+  var windowWidth = window.innerWidth;
+  var newLeftPos = windowWidth * targetLeft;
+
+  $newScalee.animate({
+    left: newLeftPos
+  }, 300);
+
+  // - show info slide with bio and left-side overlay
+  $infoSlide.addClass('show');
+  $infoBg.addClass('show');
+
+  // - finally, disable scalee click events while open
+
+
+  function copyScalee($el) {
+    var $newEl = $el.clone().removeClass('show').addClass('bio-scalee');
+    var elPos = $el.offset();
+    $newEl.css({
+      height: $el.height(),
+      top: elPos.top,
+      left: elPos.left
+    });
+
+    // Remember the initial placement
+    initialPos = elPos;
+
+    return $newEl;
+  }
+
+
+  // TODO: Bind closing actions
+  // TODO: Prevent click of two people
+}
+
+
+// Close Bio and Return Scalee
+//------------------------------
+function closeBio(){
+    // - move newScalee to original position
+    $newScalee.animate({
+      left: initialPos.left
+    }, 400).addClass('fly-away');
+    // - remove scalee and reset view
+    window.setTimeout(function(){
+      $scaleeInFocus.removeClass('invisible');
+      $newScalee.remove();
+      $scaleeCont.removeClass('focus-mode');
+    }, 800);
+
+    // - and hide info slide
+    $infoSlide.removeClass('show');
+    $infoBg.removeClass('show');
+  }
+
+
+// General init
+//------------------
+function init() {
+  // Close Bio Btn ------
+  $infoClose.click(closeBio);
+}
+
+
+// Exports
+//-------------
+module.exports.init = init;
+module.exports.on = eventsOn;
+module.exports.off = eventsOff;
+},{"./leaderboard.js":4,"./scroll-nav.js":7,"jquery":1}],6:[function(require,module,exports){
+'use strict';
+
+var $ = require('jquery');
+var LeaderData = require('./leaderboard.js');
+var ScrollNav = require('./scroll-nav.js');
+
+
+// ------------------------
 // Scalee Sorter
 // ------------------------
 
@@ -11154,34 +11300,6 @@ function eventsOn() {
 
     // Trigger sorting
     sort();
-  });
-
-
-
-  // Focus on scalee -----
-  $scalees.click(function(){
-    $scaleeInFocus = $(this);
-
-    // TODO: Populate 'bubble' with correct information
-
-    // Copy the img src attribute into 'bubble'
-    var imgSrc = $scaleeInFocus.attr('src');
-    var $infoImg = $infoSlide.find('img');
-    $infoImg.attr('src', imgSrc);
-
-    // Move scalee to correct position // Didn't work very well
-    // $scaleeInFocus.addClass('focus');
-
-    // Slide-in the 'bubble' with the correct information
-    $infoSlide.addClass('show');
-  });
-
-
-  // Hide scalee focus ------
-  $infoClose.click(function(){
-    // Reverse above actions
-    $scaleeInFocus.removeClass('focus');
-    $infoSlide.removeClass('show');
   });
 
 
@@ -11438,11 +11556,12 @@ module.exports.closePanel = closePanel;
 module.exports.sort = sort;
 module.exports.closeLeaders = hideLeaderboard;
 
-},{"./leaderboard.js":4,"./scroll-nav.js":6,"jquery":1}],6:[function(require,module,exports){
+},{"./leaderboard.js":4,"./scroll-nav.js":7,"jquery":1}],7:[function(require,module,exports){
 'use strict';
 
 var $ = require('jquery');
 var ScaleeSorter = require('./scalee-sorter.js');
+var ScaleeBios = require('./scalee-bios.js');
 
 
 // ------------------------
@@ -11646,6 +11765,7 @@ function prevSlide() {
       // Close the sorting panel, and leaderboard panel
       ScaleeSorter.closePanel();
       ScaleeSorter.closeLeaders();
+      ScaleeBios.off();
     } else {
       var $target = $slides.eq(currentSlide-1);
       var removedClass = 'active';
@@ -11680,6 +11800,8 @@ function nextSlide() {
       // Close leaderboard and sorting panel
       ScaleeSorter.closePanel();
       ScaleeSorter.closeLeaders();
+    } else if (!currentSlide) {
+      ScaleeBios.on();
     }
 
     // Remember state
@@ -11753,7 +11875,7 @@ function init() {
 module.exports.init = init;
 module.exports.eventsOff = eventsOff;
 module.exports.eventsOn = eventsOn;
-},{"./scalee-sorter.js":5,"jquery":1}],7:[function(require,module,exports){
+},{"./scalee-bios.js":5,"./scalee-sorter.js":6,"jquery":1}],8:[function(require,module,exports){
 'use strict';
 
 var $ = require('jquery');
@@ -11834,4 +11956,4 @@ function initGame() {
 }
 
 module.exports = initGame;
-},{"./scalee-sorter.js":5,"jquery":1}]},{},[2]);
+},{"./scalee-sorter.js":6,"jquery":1}]},{},[2]);
