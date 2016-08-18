@@ -139,6 +139,7 @@ main {
       position: absolute;
       top: 100%;
       left: 0;
+      height: 100vh;
       padding: 0;
       -webkit-transition: all 0.9s;
       transition: all 0.9s; }
