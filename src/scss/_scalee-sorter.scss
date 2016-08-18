@@ -18,7 +18,7 @@
 		opacity: 1;
 		width: 100%;
 		max-width: 1170px;
-		margin: 0 auto 15vh;
+		margin: 0 auto 50px;
 		padding: 0 20px;
 		text-align: center;
 		@include transition();
@@ -111,11 +111,7 @@
 			width: 100%;
 			max-height: 0;
 			overflow: hidden;
-
-			&.open {
-				max-height: 100vh;
-				overflow-y: auto;
-			}
+			@include transition();
 
 			.selector {
 				display: block;
@@ -154,6 +150,8 @@
 					position: relative;
 					max-width: 2000px; // arbitrary, to allow lateral scroll
 					height: auto;
+					white-space: nowrap;
+					overflow-x: auto;
 					pointer-events: auto;
 
 					color: $sketchup-gray;
@@ -165,9 +163,7 @@
 					.item {
 						display: inline-block;
 						width: auto;
-						white-space: nowrap;
-						overflow-x: auto;
-						padding: 15px 10px;
+						padding: 15px 20px;
 						text-align: center;
 						font-size: 1.7rem;
 						background-color: $white;
@@ -196,11 +192,11 @@
 						overflow: hidden;
 						width: 100%;
 						max-width: none;
+						white-space: normal;
+						overflow-x: auto;
 
 						.item {
 							display: block;
-							white-space: normal;
-							overflow-x: auto;
 							width: 100%;
 							border-right: none;
 							border-bottom: 3px solid $sketchup-gray;
@@ -267,30 +263,46 @@
 
 	// 'control-panel' open
 	&.edit-mode {
-		.open-panel {
-			.arrow-icon {
-				&:before {
-					@include transform( rotate(135deg) translateY(6px) translateX(-2px) );
-				}
-			}
-		}
-		.selectors {
-			.selector {
-				.wheel-selector {
-					overflow-y: auto;
-					width: 100%;
 
-					.item {
-						cursor: pointer;
-						pointer-events: auto;
+		.selectors {
+			max-height: 100vh;
+			overflow-y: auto;
+			padding-top: 20px;
+			padding-bottom: 20px;
+		}
+
+		@media (min-width: $mobile) {
+			.open-panel {
+				.arrow-icon {
+					&:before {
+						@include transform( rotate(135deg) translateY(6px) translateX(-2px) );
 					}
 				}
 			}
+			.selectors {
+				max-height: none;
+				overflow-y: visible;
+				padding: 0;
+
+				.selector {
+					.wheel-selector {
+
+						overflow-y: auto;
+						width: 100%;
+
+						.item {
+							cursor: pointer;
+							pointer-events: auto;
+						}
+					}
+				}
+			}
+			.scalee-cont {
+				bottom: 45vh;
+				height: 35vh;
+			}
 		}
-		.scalee-cont {
-			bottom: 45vh;
-			height: 35vh;
-		}
+			
 	}
 
 }

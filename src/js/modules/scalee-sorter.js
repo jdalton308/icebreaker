@@ -43,6 +43,7 @@ var itemHeight = $filterItems.outerHeight();
 var filters = [];
 var panelOpen = $slide1.hasClass('edit-mode');
 var $scaleeInFocus;
+var isMobile = Util.isMobile();
 
 
 // Bind events
@@ -84,7 +85,6 @@ function eventsOn() {
   });
 }
 
-
 // Open Filter Bar
 //------------
 function openPanel() {
@@ -96,10 +96,13 @@ function openPanel() {
     $wheelSelectors.css('height', openHeight+'px');
   }
 
-  // Turn off scroll-triggered nav when open
-  ScrollNav.eventsOff();
+  if (!isMobile) {
+    // Turn off scroll-triggered nav when open
+    ScrollNav.eventsOff();
 
-  openFilters();
+    openFilters();
+  }
+
 }
 
 
@@ -146,12 +149,17 @@ function closePanel() {
 
   }
 
-  setClosedHeight();
-  setFilterPos();
 
-  // Turn back on scroll-triggered nav
+  // On mobile, just remove the class and collapse control panel...
+  if (isMobile) {
+    $slide1.removeClass('edit-mode');
 
-  if (!Util.isMobile()) {
+  // Else collapse the wheels and show the selected...
+  } else {
+    setClosedHeight();
+    setFilterPos();
+
+    // - turn back on scroll-triggered nav
     ScrollNav.eventsOn();
   }
 

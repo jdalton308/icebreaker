@@ -11021,6 +11021,21 @@ ScaleeSorter.init();
 ScaleeBios.init();
 JobPostings();
 TwoTruths();
+
+
+
+// If mobile
+// X - Don't use ScrollNav. At all
+// X- Scalee sorter control-panel opens like accordion
+// X- Scalee filters in control-panel can be scrolled laterally
+// - Scalee bio is totally different. Simpler
+	// - Bind click event immediately, not when in 'active2'
+	// - Just copy the clicked img src attribute, and insert into .info-card
+	// - Show info card fixed. Add fixed class to body to stop scroll
+
+// - Sort() is same
+// - Job postings are the same
+// - Two truths game is the same
 },{"./modules/job-postings.js":3,"./modules/scalee-bios.js":5,"./modules/scalee-sorter.js":6,"./modules/scroll-nav.js":7,"./modules/two-truths.js":8}],3:[function(require,module,exports){
 
 var $ = require('jquery');
@@ -11365,6 +11380,7 @@ var itemHeight = $filterItems.outerHeight();
 var filters = [];
 var panelOpen = $slide1.hasClass('edit-mode');
 var $scaleeInFocus;
+var isMobile = Util.isMobile();
 
 
 // Bind events
@@ -11406,7 +11422,6 @@ function eventsOn() {
   });
 }
 
-
 // Open Filter Bar
 //------------
 function openPanel() {
@@ -11418,10 +11433,13 @@ function openPanel() {
     $wheelSelectors.css('height', openHeight+'px');
   }
 
-  // Turn off scroll-triggered nav when open
-  ScrollNav.eventsOff();
+  if (!isMobile) {
+    // Turn off scroll-triggered nav when open
+    ScrollNav.eventsOff();
 
-  openFilters();
+    openFilters();
+  }
+
 }
 
 
@@ -11468,12 +11486,17 @@ function closePanel() {
 
   }
 
-  setClosedHeight();
-  setFilterPos();
 
-  // Turn back on scroll-triggered nav
+  // On mobile, just remove the class and collapse control panel...
+  if (isMobile) {
+    $slide1.removeClass('edit-mode');
 
-  if (!Util.isMobile()) {
+  // Else collapse the wheels and show the selected...
+  } else {
+    setClosedHeight();
+    setFilterPos();
+
+    // - turn back on scroll-triggered nav
     ScrollNav.eventsOn();
   }
 

@@ -29,6 +29,9 @@
 * {
   box-sizing: border-box; }
 
+:focus {
+  outline: none; }
+
 html,
 body {
   margin: 0;
@@ -238,7 +241,7 @@ header {
     opacity: 1;
     width: 100%;
     max-width: 1170px;
-    margin: 0 auto 15vh;
+    margin: 0 auto 50px;
     padding: 0 20px;
     text-align: center;
     -webkit-transition: all 0.5s;
@@ -322,10 +325,9 @@ header {
       position: relative;
       width: 100%;
       max-height: 0;
-      overflow: hidden; }
-      .slide1 .control-panel .selectors.open {
-        max-height: 100vh;
-        overflow-y: auto; }
+      overflow: hidden;
+      -webkit-transition: all 0.5s;
+      transition: all 0.5s; }
       .slide1 .control-panel .selectors .selector {
         display: block;
         position: relative;
@@ -357,6 +359,8 @@ header {
           position: relative;
           max-width: 2000px;
           height: auto;
+          white-space: nowrap;
+          overflow-x: auto;
           pointer-events: auto;
           color: #363545;
           border-left: 5px solid #363545;
@@ -367,9 +371,7 @@ header {
           .slide1 .control-panel .selectors .selector .wheel-selector .item {
             display: inline-block;
             width: auto;
-            white-space: nowrap;
-            overflow-x: auto;
-            padding: 15px 10px;
+            padding: 15px 20px;
             text-align: center;
             font-size: 1.7rem;
             background-color: #ffffff;
@@ -388,11 +390,11 @@ header {
             .slide1 .control-panel .selectors .selector .wheel-selector {
               overflow: hidden;
               width: 100%;
-              max-width: none; }
+              max-width: none;
+              white-space: normal;
+              overflow-x: auto; }
               .slide1 .control-panel .selectors .selector .wheel-selector .item {
                 display: block;
-                white-space: normal;
-                overflow-x: auto;
                 width: 100%;
                 border-right: none;
                 border-bottom: 3px solid #363545;
@@ -431,19 +433,29 @@ header {
         -ms-transform: scale(1);
         -webkit-transform: scale(1);
         transform: scale(1); }
-  .slide1.edit-mode .open-panel .arrow-icon:before {
-    -ms-transform: rotate(135deg) translateY(6px) translateX(-2px);
-    -webkit-transform: rotate(135deg) translateY(6px) translateX(-2px);
-    transform: rotate(135deg) translateY(6px) translateX(-2px); }
-  .slide1.edit-mode .selectors .selector .wheel-selector {
+  .slide1.edit-mode .selectors {
+    max-height: 100vh;
     overflow-y: auto;
-    width: 100%; }
-    .slide1.edit-mode .selectors .selector .wheel-selector .item {
-      cursor: pointer;
-      pointer-events: auto; }
-  .slide1.edit-mode .scalee-cont {
-    bottom: 45vh;
-    height: 35vh; }
+    padding-top: 20px;
+    padding-bottom: 20px; }
+  @media (min-width: 768px) {
+    .slide1.edit-mode .open-panel .arrow-icon:before {
+      -ms-transform: rotate(135deg) translateY(6px) translateX(-2px);
+      -webkit-transform: rotate(135deg) translateY(6px) translateX(-2px);
+      transform: rotate(135deg) translateY(6px) translateX(-2px); }
+    .slide1.edit-mode .selectors {
+      max-height: none;
+      overflow-y: visible;
+      padding: 0; }
+      .slide1.edit-mode .selectors .selector .wheel-selector {
+        overflow-y: auto;
+        width: 100%; }
+        .slide1.edit-mode .selectors .selector .wheel-selector .item {
+          cursor: pointer;
+          pointer-events: auto; }
+    .slide1.edit-mode .scalee-cont {
+      bottom: 45vh;
+      height: 35vh; } }
 
 .slide1 .info-slide {
   position: absolute;
