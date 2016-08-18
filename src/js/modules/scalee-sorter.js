@@ -1,7 +1,7 @@
 'use strict';
 
 var $ = require('jquery');
-var LeaderData = require('./leaderboard.js');
+var LeaderData = require('./leaderboard-data.js');
 var ScrollNav = require('./scroll-nav.js');
 var Util = require('./util.js');
 
@@ -33,6 +33,7 @@ var $leaderCont = $('.leader-cont');
 var $leaderTitle = $leaderCont.find('.leaderboard-title h1');
 var $leaderBoxes = $leaderCont.children('.position-box');
 var $leaderboardControls = $('.container.leaderboard');
+var $leaderBtnCont = $leaderboardControls.children('.leaderboard-buttons');
 var $leaderClose = $leaderCont.find('.back-btn');
 
 var itemHeight = $filterItems.outerHeight();
@@ -231,16 +232,23 @@ function showLeaderboard() {
   // Trigger most changes through CSS
   $slide1.addClass('leader-mode');
 
+  if (isMobile) {
+    $slide1.removeClass('edit-mode');
+  }
+
   // Wait 0.5s, then show new buttons
   window.setTimeout(function(){
     $leaderboardControls.addClass('show');
   }, 500);
 
-  // Scroll to exit
-  ScrollNav.eventsOn();
-
   // Reset filters
   resetFilters();
+
+  // if (!isMobile) {
+  //   // Scroll to exit
+  //   ScrollNav.eventsOn();
+  // }
+  closePanel();
 }
 
 function hideLeaderboard() {
@@ -258,7 +266,7 @@ function initLeaderboard() {
     var $newBtn = $buttonTemplate.clone().text( eventObj.name ).attr('data-leader-id', event);
 
     // Insert new btn
-    $leaderboardControls.append( $newBtn );
+    $leaderBtnCont.append( $newBtn );
 
     // Closure for eventId
     function bindClick() {

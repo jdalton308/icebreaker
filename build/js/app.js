@@ -11194,7 +11194,6 @@ module.exports = leaders;
 'use strict';
 
 var $ = require('jquery');
-var LeaderData = require('./leaderboard.js');
 var ScrollNav = require('./scroll-nav.js');
 
 
@@ -11334,11 +11333,11 @@ function init() {
 module.exports.init = init;
 module.exports.on = eventsOn;
 module.exports.off = eventsOff;
-},{"./leaderboard.js":4,"./scroll-nav.js":7,"jquery":1}],6:[function(require,module,exports){
+},{"./scroll-nav.js":7,"jquery":1}],6:[function(require,module,exports){
 'use strict';
 
 var $ = require('jquery');
-var LeaderData = require('./leaderboard.js');
+var LeaderData = require('./leaderboard-data.js');
 var ScrollNav = require('./scroll-nav.js');
 var Util = require('./util.js');
 
@@ -11370,6 +11369,7 @@ var $leaderCont = $('.leader-cont');
 var $leaderTitle = $leaderCont.find('.leaderboard-title h1');
 var $leaderBoxes = $leaderCont.children('.position-box');
 var $leaderboardControls = $('.container.leaderboard');
+var $leaderBtnCont = $leaderboardControls.children('.leaderboard-buttons');
 var $leaderClose = $leaderCont.find('.back-btn');
 
 var itemHeight = $filterItems.outerHeight();
@@ -11568,16 +11568,23 @@ function showLeaderboard() {
   // Trigger most changes through CSS
   $slide1.addClass('leader-mode');
 
+  if (isMobile) {
+    $slide1.removeClass('edit-mode');
+  }
+
   // Wait 0.5s, then show new buttons
   window.setTimeout(function(){
     $leaderboardControls.addClass('show');
   }, 500);
 
-  // Scroll to exit
-  ScrollNav.eventsOn();
-
   // Reset filters
   resetFilters();
+
+  // if (!isMobile) {
+  //   // Scroll to exit
+  //   ScrollNav.eventsOn();
+  // }
+  closePanel();
 }
 
 function hideLeaderboard() {
@@ -11595,7 +11602,7 @@ function initLeaderboard() {
     var $newBtn = $buttonTemplate.clone().text( eventObj.name ).attr('data-leader-id', event);
 
     // Insert new btn
-    $leaderboardControls.append( $newBtn );
+    $leaderBtnCont.append( $newBtn );
 
     // Closure for eventId
     function bindClick() {
@@ -11674,7 +11681,7 @@ module.exports.closePanel = closePanel;
 module.exports.sort = sort;
 module.exports.closeLeaders = hideLeaderboard;
 
-},{"./leaderboard.js":4,"./scroll-nav.js":7,"./util.js":9,"jquery":1}],7:[function(require,module,exports){
+},{"./leaderboard-data.js":4,"./scroll-nav.js":7,"./util.js":9,"jquery":1}],7:[function(require,module,exports){
 'use strict';
 
 var $ = require('jquery');

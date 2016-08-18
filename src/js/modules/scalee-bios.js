@@ -1,7 +1,6 @@
 'use strict';
 
 var $ = require('jquery');
-var LeaderData = require('./leaderboard.js');
 var ScrollNav = require('./scroll-nav.js');
 
 

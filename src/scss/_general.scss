@@ -103,13 +103,11 @@ button,
 }
 main {
 	width: 100vw;
-	overflow-x: hidden;
+	overflow: hidden;
 
 	@media (min-width: $mobile) {
 		position: relative;
-		width: 100vw;
 		height: 100vh;
-		overflow: hidden;
 	}
 }
 .slide {

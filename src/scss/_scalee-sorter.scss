@@ -25,10 +25,12 @@
 	}
 	.scalee-cont {
 		height: 40vh;
+		width: 100%;
 		margin-bottom: 30px;
 		text-align: center;
 		white-space: nowrap;
 		overflow-x: auto;
+		overflow-y: hidden;
 		@include transition(1s);
 
 		img {
@@ -47,6 +49,7 @@
 		@media (min-width: $mobile) {
 			@include centerX();
 			bottom: 10vh;
+			margin: 0;
 		}
 	}
 

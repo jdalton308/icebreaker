@@ -7,13 +7,15 @@
 		visibility: hidden;
 		@include centerX();
 		top: -100vh;
-		// height: 60vh;
 		width: 100%;
 		text-align: center;
+		padding-top: 75px;
 		@include transition();
+		background-color: $sketchup-ltgray;
 
 		.leaderboard-title {
 			width: 100%;
+			padding: 0 20px;
 			text-align: center;
 
 			h1 {
@@ -26,9 +28,9 @@
 		}
 		.back-btn {
 			position: absolute;
-			top: 0;
-			left: 30px;
-			font-size: 1.8rem;
+			top: 60px;
+			left: 10px;
+			font-size: 1.5rem;
 			padding: 8px 16px 6px;
 			color: $sketchup-gray;
 			// background-color: transparent;
@@ -54,14 +56,19 @@
 				}
 			}
 		}
-
+		.position-boxes {
+			white-space: nowrap;
+			overflow-x: auto;
+			padding: 0 30px;
+		}
 		.position-box {
 			display: inline-block;
 			vertical-align: top;
-			min-width: 12%;
-			max-width: 18%;
-			padding: 0 0 30px;
-			margin-right: 50px;
+			min-width: 100px;
+			max-width: 150px;
+			padding: 0 0 20px;
+			margin-right: 30px;
+
 			// background-color: $sketchup-medgray;
 			border: 5px solid $sketchup-medgray;
 			box-shadow: 1px 1px 15px -2px $sketchup-gray;
@@ -102,13 +109,13 @@
 
 			.box-title {
 				width: 100%;
-				margin: 0 0 30px;
+				margin: 0 0 20px;
 				padding: 8px 12px;
 				text-align: center;
 				border-bottom: 5px solid $sketchup-medgray;
 			}
 			img {
-				height: 40vh;
+				height: 25vh;
 				width: auto;
 				// max-width: 100%;
 				@include transition(0.3s);
@@ -116,6 +123,33 @@
 				&.hide {
 					opacity: 0;
 				}
+			}
+		}
+
+		@media (min-width: $mobile) {
+			background-color: transparent;
+			
+			.leaderboard-title {
+				padding: 0;
+			}
+			.position-boxes {
+				padding: 0;
+			}
+			.position-box {
+				min-width: 12%;
+				max-width: 18%;
+				padding: 0 0 30px;
+				margin-right: 50px;
+
+				.box-title {
+					margin: 0 0 30px;
+				}
+			}
+			.back-btn {
+				top: 0;
+				left: 30px;
+				font-size: 1.8rem;
+				padding: 8px 16px 6px;
 			}
 		}
 	}
@@ -139,7 +173,10 @@
 			&.show {
 				top: 0;
 			}
-
+			.leaderboard-buttons {
+				white-space: nowrap;
+				overflow-x: auto;
+			}
 			.leader-title {
 				width: 100%;
 				text-align: center;
@@ -153,9 +190,23 @@
 				&:last-child {
 					margin: 0;
 				}
-				&:hover {
-					background-color: $white;
-					color: $sketchup-gray;
+			}
+		}
+
+		@media (min-width: $mobile) {
+			padding: 15px 0 20px;
+
+			.leaderboard {
+				.leaderboard-buttons {
+					white-space: normal;
+					overflow: visible;
+				}
+				
+				button {
+					&:hover {
+						background-color: $white;
+						color: $sketchup-gray;
+					}
 				}
 			}
 		}
@@ -167,7 +218,7 @@
 
 		.leader-cont {
 			visibility: visible;
-			top: 100px;
+			top: 0;
 		}
 		.leaderboard-control-panel {
 			visibility: visible;
@@ -182,7 +233,29 @@
 			}
 		}
 		.scalee-cont {
-			bottom: 100vh;
+			opacity: 0;
+			visibility: hidden;
+		}
+
+		@media (min-width: $mobile) {
+			.leader-cont {
+				top: 100px;
+			}
+			.leaderboard-control-panel {
+				visibility: visible;
+				bottom: -2px;
+			}
+			.control-panel {
+				bottom: -150px;
+				background-color: $sketchup-medgray;
+
+				#open-filter {
+					top: 5px;
+				}
+			}
+			.scalee-cont {
+				bottom: 100vh;
+			}
 		}
 
 	}
