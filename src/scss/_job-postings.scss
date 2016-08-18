@@ -1,101 +1,184 @@
 
 .slide3 {
-	padding: 100px 0;
+	padding: 200px 0 100px;
 	overflow-y: auto;
 
 	.container {
 		min-height: 101%; // Need to make scrollable on desktop for js
+	}
+	.title-cont {
+		margin-bottom: 70px;
+		text-align: center;
+	}
+	.job-postings {
+		position: relative;
+		text-align: center;
 
-		.title-cont {
-			margin-bottom: 70px;
+		// &.focus {
+		// 	.job-posting {
+
+		// 	}
+		// }
+	}
+	.job-posting {
+		position: relative;
+		display: inline-block;
+		vertical-align: top;
+		width: 30%;
+		min-height: 300px; // arbitrary
+		margin-right: 3%;
+		margin-bottom: 4%;
+		padding-left: 3%;
+		padding: 20px 30px;
+
+		text-align: left;
+		color: $white;
+		border: 2px solid $sketchup-gray;
+		background-color: $sketchup-gray;
+		@include transition();
+		cursor: pointer;
+
+		// &:nth-child(3n) {
+		// 	margin-right: 0;
+		// }
+		&:hover {
+			// background-color: $white;
+			box-shadow: 0 0 15px -2px $sketchup-gray;
+			// border-bottom-color: $sketchup-red;
+		}
+
+		&.placeholder {
+			background-color: transparent;
+			border-color: transparent;
+
+			&:hover {
+				box-shadow: none;
+			}
+		}
+
+		.title-bar {
+			@include centerMe();
+			width: 100%;
+			// padding: 5px 10px;
 			text-align: center;
-		}
-		.job-postings {
+			// cursor: pointer;
+			// border-bottom: 1px solid transparent;
+			// @include transition(0.4s);
+			-webkit-transition: opacity 0.3s;
+			transition: opacity 0.3s;
 
+			h3 {
+				// display: inline-block;
+				// width: calc(100% - 45px);
+				margin: 0 0 10px;
+			}
+			h4 {
+				margin: 0;
+			}
+			.close-btn {
+				position: absolute;
+				top: 20px;
+				right: 20px;
+				display: inline-block;
+				vertical-align: top;
+				width: 41px;
+				height: 41px;
+				@include transition();
+				cursor: pointer;
+
+				&:before,
+				&:after {
+					content: '';
+					display: inline-block;
+					@include centerMe();
+					background-color: $sketchup-gray;
+				}
+				&:before {
+					width: 60%;
+					height: 2px;
+				}
+				&:after {
+					width: 2px;
+					height: 60%;
+				}
+			}
 		}
-		.job-posting {
-			margin-bottom: 50px;
+		.posting-content {
+			max-height: 0;
+			padding: 0;
+			overflow: hidden;
+			// background-color: $white;
+			color: $sketchup-gray;
+			@include transition();
+			-webkit-transition-delay: 0.5s;
+			transition-delay: 0.5s;
+
+			.button-row {
+				text-align: center;
+			}
+			a.button {
+				display: inline-block;
+				margin: 30px 0 0;
+			}
+		}
+
+		&.open-start {
+			position: absolute;
+			z-index: 3;
+			cursor: auto;
+			@include transition(0s);
 
 			.title-bar {
-				cursor: pointer;
-				border-bottom: 1px solid transparent;
-				@include transition(0.4s);
+				opacity: 0;
+			}
+		}
+		&.open-end {
+			width: 100%;
+			min-height: calc(100%);
+			background-color: $white;
+			color: $sketchup-gray;
+			@include transition();
+
+			.title-bar {
+				position: static;
+				opacity: 1;
+				// border-bottom-color: $sketchup-red;
+				@include transform( none );
 
 				&:hover {
 					// background-color: $sketchup-medgray;
-					border-bottom-color: $sketchup-red;
-				}
 
-				h3 {
-					display: inline-block;
-					width: calc(100% - 45px);
-					margin: 0;
-					padding: 5px 10px;
+					.close-btn {
+						@include transform( rotate(45deg) );
+					}
 				}
-				.open-btn {
-					position: relative;
-					display: inline-block;
-					vertical-align: top;
-					width: 41px;
-					height: 41px;
-					@include transition(0.8s);
-
-					&:before,
-					&:after {
-						content: '';
-						display: inline-block;
-						@include centerMe();
-						background-color: $sketchup-gray;
-					}
-					&:before {
-						width: 60%;
-						height: 2px;
-					}
-					&:after {
-						width: 2px;
-						height: 60%;
-					}
+				.close-btn {
+					@include transform( rotate(315deg) );
 				}
 			}
 			.posting-content {
-				max-height: 0;
-				padding: 0 20px;
-				overflow: hidden;
-				// background-color: $white;
-				@include transition(1s);
-
-				.button-row {
-					text-align: center;
-				}
-				a.button {
-					display: inline-block;
-					margin: 30px 0 0;
-				}
+				max-height: 1000px; // arbitrary height
+				padding-top: 30px;
+				padding-bottom: 30px;
 			}
 
-			&.open {
-				background-color: $white;
+			&.close-start {
+				width: 30%;
+				min-height: 300px;
+				background-color: $sketchup-gray;
+				-webkit-transition-delay: 0.5s;
+				transition-delay: 0.5s;
 
-				.title-bar {
-					border-bottom-color: $sketchup-red;
-
-					&:hover {
-						background-color: $sketchup-medgray;
-
-						.open-btn {
-							@include transform( rotate(225deg) );
-						}
-					}
-					.open-btn {
-						@include transform( rotate(315deg) );
-					}
-				}
 				.posting-content {
-					max-height: 1000px; // arbitrary height
-					padding-top: 30px;
-					padding-bottom: 30px;
+					max-height: 0;
+					padding: 0;
+					-webkit-transition-delay: 0s;
+					transition-delay: 0s;
+				}
+				.title-bar {
+					opacity: 0;
 				}
 			}
-		} // end .job-posting
-	}
+		}
+	} // end .job-posting
 }
