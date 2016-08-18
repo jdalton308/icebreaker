@@ -7,30 +7,19 @@
 	color: $white;
 	
 	.center-me {
-		width: 100%;
+		@media (min-width: $mobile) {
+			@include centerMe();
+		}
 	}
-	.button-cont {
-		display: inline-block;
-		width: 100%;
-	}
+
 	a.nav-box {
-		display: inline-block;
-		width: 100%;
+		display: block;
 		max-width: 300px;
+		margin: 0 auto 50px;
 		padding: 20px 30px;
 		border: 1px solid $white;
 		background-color: transparent;
 		color: $white;
-
-		&:hover {
-			color: $sketchup-gray;
-			background-color: $white;
-
-			.icon {
-				background-color: $sketchup-gray;
-				color: $white;
-			}
-		}
 
 		.icon {
 			display: inline-block;
@@ -53,10 +42,21 @@
 
 	@media (min-width: $mobile) {
 		a.nav-box {
+			display: inline-block;
 			margin-right: 50px;
 
 			&:last-child {
 				margin-right: 0;
+			}
+
+			&:hover {
+				color: $sketchup-gray;
+				background-color: $white;
+
+				.icon {
+					background-color: $sketchup-gray;
+					color: $white;
+				}
 			}
 		}
 	}

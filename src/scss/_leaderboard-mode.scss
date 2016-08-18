@@ -4,6 +4,7 @@
 //--------------------------
 .slide1 {
 	.leader-cont {
+		visibility: hidden;
 		@include centerX();
 		top: -100vh;
 		// height: 60vh;
@@ -119,6 +120,7 @@
 		}
 	}
 	.leaderboard-control-panel {
+		visibility: hidden;
 		position: absolute;
 		z-index: 4;
 		bottom: -250px;
@@ -161,10 +163,14 @@
 
 	// Enter Leaderboard mode
 	&.leader-mode {
+		overflow: hidden;
+
 		.leader-cont {
+			visibility: visible;
 			top: 100px;
 		}
 		.leaderboard-control-panel {
+			visibility: visible;
 			bottom: -2px;
 		}
 		.control-panel {

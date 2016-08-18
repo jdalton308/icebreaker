@@ -1,11 +1,15 @@
 
 .slide3 {
-	padding: 200px 0 100px;
-	overflow-y: auto;
 
-	.container {
-		min-height: 101%; // Need to make scrollable on desktop for js
+	@media (min-width: $mobile) {
+		padding: 200px 0 100px;
+		overflow-y: auto;
+
+		.container {
+			min-height: 101%; // Need to make scrollable on desktop for js
+		}
 	}
+		
 	.title-cont {
 		margin-bottom: 70px;
 		text-align: center;
@@ -13,22 +17,16 @@
 	.job-postings {
 		position: relative;
 		text-align: center;
-
-		// &.focus {
-		// 	.job-posting {
-
-		// 	}
-		// }
+		padding-left: 3%;
 	}
 	.job-posting {
 		position: relative;
 		display: inline-block;
 		vertical-align: top;
-		width: 30%;
-		min-height: 300px; // arbitrary
+		width: 40%;
+		min-height: 200px; // arbitrary
 		margin-right: 3%;
 		margin-bottom: 4%;
-		padding-left: 3%;
 		padding: 20px 30px;
 
 		text-align: left;
@@ -37,15 +35,6 @@
 		background-color: $sketchup-gray;
 		@include transition();
 		cursor: pointer;
-
-		// &:nth-child(3n) {
-		// 	margin-right: 0;
-		// }
-		&:hover {
-			// background-color: $white;
-			box-shadow: 0 0 15px -2px $sketchup-gray;
-			// border-bottom-color: $sketchup-red;
-		}
 
 		&.placeholder {
 			background-color: transparent;
@@ -59,10 +48,7 @@
 		.title-bar {
 			@include centerMe();
 			width: 100%;
-			// padding: 5px 10px;
 			text-align: center;
-			// cursor: pointer;
-			// border-bottom: 1px solid transparent;
 			// @include transition(0.4s);
 			-webkit-transition: opacity 0.3s;
 			transition: opacity 0.3s;
@@ -178,6 +164,15 @@
 				.title-bar {
 					opacity: 0;
 				}
+			}
+		}
+
+		@media (min-width: $mobile) {
+			width: 30%;
+			min-height: 300px; // arbitrary
+			
+			&:hover {
+				box-shadow: 0 0 15px -2px $sketchup-gray;
 			}
 		}
 	} // end .job-posting

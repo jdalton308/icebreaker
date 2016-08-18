@@ -11338,7 +11338,7 @@ var $page = $('body');
 var $header = $('header');
 var $slide1 = $('.slide1');
 
-var $openFilter = $('#open-filter');
+var $openFilter = $('.open-panel');
 var $filterControls = $('.container.selectors');
 var $wheelSelectors = $filterControls.find('.wheel-selector');
 var $filterItems = $wheelSelectors.children('.item');
