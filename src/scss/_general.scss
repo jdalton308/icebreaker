@@ -99,6 +99,9 @@ button,
 	padding: 0 20px;
 }
 main {
+	width: 100vw;
+	overflow-x: hidden;
+
 	@media (min-width: $mobile) {
 		position: relative;
 		width: 100vw;
@@ -130,35 +133,34 @@ main {
 // Dot nav
 //----------------
 .dots-nav {
-	position: fixed;
-	z-index: 8;
-	top: 50%;
-	right: 20px;
-	@include transform( translateY(-50%) );
-
-	.dot {
-		display: block;
-		padding: 12px;
-		cursor: pointer;
-
-		&:before {
-			content: '';
-			display: inline-block;
-			width: 10px;
-			height: 10px;
-			border: 2px solid $sketchup-red;
-			@include transition();
-		}
-
-		&.current {
-			&:before {
-				background-color: $sketchup-red;				
-			}
-		}
-	}
+	display: none;
 
 	@media (min-width: $mobile) {
+		display: block;
+		position: fixed;
+		z-index: 8;
+		top: 50%;
+		right: 20px;
+		@include transform( translateY(-50%) );
+
 		.dot {
+			display: block;
+			padding: 12px;
+			cursor: pointer;
+
+			&.current {
+				&:before {
+					background-color: $sketchup-red;				
+				}
+			}
+			&:before {
+				content: '';
+				display: inline-block;
+				width: 10px;
+				height: 10px;
+				border: 2px solid $sketchup-red;
+				@include transition();
+			}
 			&:hover {
 				&:before {
 					border-color: $black;

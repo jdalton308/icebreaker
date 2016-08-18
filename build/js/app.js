@@ -11325,6 +11325,7 @@ module.exports.off = eventsOff;
 var $ = require('jquery');
 var LeaderData = require('./leaderboard.js');
 var ScrollNav = require('./scroll-nav.js');
+var Util = require('./util.js');
 
 
 // ------------------------
@@ -11471,7 +11472,10 @@ function closePanel() {
   setFilterPos();
 
   // Turn back on scroll-triggered nav
-  ScrollNav.eventsOn();
+
+  if (!Util.isMobile()) {
+    ScrollNav.eventsOn();
+  }
 
 } // end closePanel();
 
@@ -11647,12 +11651,13 @@ module.exports.closePanel = closePanel;
 module.exports.sort = sort;
 module.exports.closeLeaders = hideLeaderboard;
 
-},{"./leaderboard.js":4,"./scroll-nav.js":7,"jquery":1}],7:[function(require,module,exports){
+},{"./leaderboard.js":4,"./scroll-nav.js":7,"./util.js":9,"jquery":1}],7:[function(require,module,exports){
 'use strict';
 
 var $ = require('jquery');
 var ScaleeSorter = require('./scalee-sorter.js');
 var ScaleeBios = require('./scalee-bios.js');
+var Util = require('./util.js');
 
 
 // ------------------------
@@ -11966,7 +11971,7 @@ function init() {
 module.exports.init = init;
 module.exports.eventsOff = eventsOff;
 module.exports.eventsOn = eventsOn;
-},{"./scalee-bios.js":5,"./scalee-sorter.js":6,"jquery":1}],8:[function(require,module,exports){
+},{"./scalee-bios.js":5,"./scalee-sorter.js":6,"./util.js":9,"jquery":1}],8:[function(require,module,exports){
 'use strict';
 
 var $ = require('jquery');
@@ -12047,4 +12052,16 @@ function initGame() {
 }
 
 module.exports = initGame;
-},{"./scalee-sorter.js":6,"jquery":1}]},{},[2]);
+},{"./scalee-sorter.js":6,"jquery":1}],9:[function(require,module,exports){
+
+// ----------------
+// Utilities 
+// ----------------
+
+// Check if screen size is < iPad width
+function isMobile() {
+	return window.innerWidth < 768;
+}
+
+module.exports.isMobile = isMobile;
+},{}]},{},[2]);

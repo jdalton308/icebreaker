@@ -8,6 +8,4 @@ function isMobile() {
 	return window.innerWidth < 768;
 }
 
-module.exports = {
-	isMobile: isMobile
-};
+module.exports.isMobile = isMobile;

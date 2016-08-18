@@ -3,6 +3,7 @@
 var $ = require('jquery');
 var ScaleeSorter = require('./scalee-sorter.js');
 var ScaleeBios = require('./scalee-bios.js');
+var Util = require('./util.js');
 
 
 // ------------------------

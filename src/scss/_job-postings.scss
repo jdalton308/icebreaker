@@ -17,15 +17,15 @@
 	.job-postings {
 		position: relative;
 		text-align: center;
-		padding-left: 3%;
+		padding-left: 4%;
 	}
 	.job-posting {
 		position: relative;
 		display: inline-block;
 		vertical-align: top;
-		width: 40%;
+		width: 200px;
 		min-height: 200px; // arbitrary
-		margin-right: 3%;
+		margin-right: 4%;
 		margin-bottom: 4%;
 		padding: 20px 30px;
 
@@ -48,6 +48,7 @@
 		.title-bar {
 			@include centerMe();
 			width: 100%;
+			padding: 0 20px;
 			text-align: center;
 			// @include transition(0.4s);
 			-webkit-transition: opacity 0.3s;
@@ -170,7 +171,7 @@
 		@media (min-width: $mobile) {
 			width: 30%;
 			min-height: 300px; // arbitrary
-			
+
 			&:hover {
 				box-shadow: 0 0 15px -2px $sketchup-gray;
 			}

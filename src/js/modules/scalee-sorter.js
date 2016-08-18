@@ -3,6 +3,7 @@
 var $ = require('jquery');
 var LeaderData = require('./leaderboard.js');
 var ScrollNav = require('./scroll-nav.js');
+var Util = require('./util.js');
 
 
 // ------------------------
@@ -149,7 +150,10 @@ function closePanel() {
   setFilterPos();
 
   // Turn back on scroll-triggered nav
-  ScrollNav.eventsOn();
+
+  if (!Util.isMobile()) {
+    ScrollNav.eventsOn();
+  }
 
 } // end closePanel();
 
