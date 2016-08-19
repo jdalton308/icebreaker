@@ -312,9 +312,9 @@ header {
           height: 12px;
           border-top: 3px solid #363545;
           border-right: 3px solid #363545;
-          -ms-transform: rotate(-45deg);
-          -webkit-transform: rotate(-45deg);
-          transform: rotate(-45deg);
+          -ms-transform: rotate(135deg) translateY(6px) translateX(-2px);
+          -webkit-transform: rotate(135deg) translateY(6px) translateX(-2px);
+          transform: rotate(135deg) translateY(6px) translateX(-2px);
           -webkit-transition: all 0.5s;
           transition: all 0.5s; }
       @media (min-width: 768px) {
@@ -384,7 +384,8 @@ header {
               background-color: #e72b2d; }
       @media (min-width: 768px) {
         .slide1 .control-panel .selectors {
-          display: flex; }
+          display: flex;
+          max-height: none; }
           .slide1 .control-panel .selectors .selector {
             flex: 1 0 auto;
             width: auto;
@@ -440,6 +441,10 @@ header {
     overflow-y: auto;
     padding-top: 20px;
     padding-bottom: 20px; }
+  .slide1.edit-mode .open-panel .arrow-icon:before {
+    -ms-transform: rotate(315deg);
+    -webkit-transform: rotate(315deg);
+    transform: rotate(315deg); }
   @media (min-width: 768px) {
     .slide1.edit-mode .open-panel .arrow-icon:before {
       -ms-transform: rotate(135deg) translateY(6px) translateX(-2px);
@@ -626,7 +631,7 @@ header {
   background-color: #f3f3f7; }
   .slide1 .leader-cont .leaderboard-title {
     width: 100%;
-    padding: 0 20px;
+    padding: 0 60px;
     text-align: center; }
     .slide1 .leader-cont .leaderboard-title h1 {
       -webkit-transition: all 0.5s;
@@ -635,17 +640,17 @@ header {
         opacity: 0; }
   .slide1 .leader-cont .back-btn {
     position: absolute;
-    top: 60px;
+    top: 80px;
     left: 10px;
     font-size: 1.5rem;
-    padding: 8px 16px 6px;
+    padding: 10px 8px 10px 13px;
+    font-size: 0;
     color: #363545; }
     .slide1 .leader-cont .back-btn:before {
       content: '';
       display: inline-block;
       width: 12px;
       height: 12px;
-      margin-right: 7px;
       border-top: 2px solid #363545;
       border-left: 2px solid #363545;
       -ms-transform: rotate(-45deg);
@@ -724,7 +729,9 @@ header {
         top: 0;
         left: 30px;
         font-size: 1.8rem;
-        padding: 8px 16px 6px; } }
+        padding: 8px 16px 6px; }
+        .slide1 .leader-cont .back-btn:before {
+          margin-right: 7px; } }
 
 .slide1 .leaderboard-control-panel {
   visibility: hidden;

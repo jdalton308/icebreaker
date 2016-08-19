@@ -11367,7 +11367,7 @@ var $infoClose = $infoSlide.find('.close-btn');
 var $leaderTrigger = $('#leader-trigger');
 var $leaderCont = $('.leader-cont');
 var $leaderTitle = $leaderCont.find('.leaderboard-title h1');
-var $leaderBoxes = $leaderCont.children('.position-box');
+var $leaderBoxes = $leaderCont.find('.position-box');
 var $leaderboardControls = $('.container.leaderboard');
 var $leaderBtnCont = $leaderboardControls.children('.leaderboard-buttons');
 var $leaderClose = $leaderCont.find('.back-btn');
@@ -11397,7 +11397,6 @@ function eventsOn() {
       openPanel();
     }
 
-    panelOpen = !panelOpen;
   });
 
 
@@ -11425,20 +11424,24 @@ function eventsOn() {
 // Open Filter Bar
 //------------
 function openPanel() {
-  $slide1.addClass('edit-mode');
 
-  // Change height of 'wheel-selector'
+  // - change height of 'wheel-selector'
   function openFilters() {
     var openHeight = itemHeight * 4; // arbitrary
     $wheelSelectors.css('height', openHeight+'px');
   }
 
   if (!isMobile) {
-    // Turn off scroll-triggered nav when open
+    // - turn off scroll-triggered nav when open
     ScrollNav.eventsOff();
-
     openFilters();
   }
+
+  // - change styles
+  $slide1.addClass('edit-mode');
+
+  // - save state
+  panelOpen = true;
 
 }
 
@@ -11452,34 +11455,24 @@ function setClosedHeight() {
 
 function closePanel() {
 
-  // Get and position selected items
   function setFilterPos() {
 
-    // Get selected elements
+    // - get selected elements
     var $selectedFilters = $wheelSelectors.find('.selected');
 
-    // For each selection, slide up, and save value
+    // - for each selection, slide up, and save value
     $selectedFilters.each(function(){
+      // - get index, multiplying height, then scrolling to that
       var $this = $(this);
-
-      // Try getting index, multiplying height, then scrolling to that
       var itemIndex = $this.index();
-
-      // console.log('---------');
-      // console.log('Scrolling to number '+ itemIndex);
-
       var scrollAmt = itemIndex * (itemHeight + 3); // Not sure why need to add the extra 3 px
 
-      // console.log('Scroll Amt: '+ scrollAmt);
-      // console.log('top Pos: '+ scrollPos);
-
-      // $item.parents('.wheel-selector').scrollTop(scrollAmt);
       $this.parents('.wheel-selector').animate({
         scrollTop: scrollAmt
       }, 300);
     });
 
-    // Wait for animation, then remove scroll ability
+    // - wait for animation, then remove scroll ability
     window.setTimeout(function(){
       $slide1.removeClass('edit-mode');
     }, 500);
@@ -11499,6 +11492,9 @@ function closePanel() {
     // - turn back on scroll-triggered nav
     ScrollNav.eventsOn();
   }
+
+  // - save state
+  panelOpen = false;
 
 } // end closePanel();
 
@@ -11523,26 +11519,21 @@ function sort() {
     filters.push(filterValue);
   });
 
-
-  // console.log('Sorting for the filters:');
-  // console.log(filters);
-
   // 2. Loop through all scalees and see if 'data-tag' attributes match all filters
   $scalees.each(function(){
     var $this = $(this);
     $this.removeClass('hide show'); // reset each sort
 
-    // Compare each filter to data-tags;
+    // - compare each filter to data-tags;
     var elTags = $this.attr('data-tags');
     filters.forEach(function(filter, i){
       if (elTags.indexOf(filter) == -1) {
-        // el does not have tag
         // if has all the tags, will never get here
         $this.addClass('hide');
       }
     });
 
-    // If no 'hide' class, add 'show' class, for animation
+    // - if no 'hide' class, add 'show' class, for animation
     if ( !$this.hasClass('hide') ) {
       $this.addClass('show');
     }
@@ -11565,34 +11556,30 @@ function resetFilters() {
 //--------------------------
 function showLeaderboard() {
 
-  // Trigger most changes through CSS
+  // - trigger most changes through CSS
   $slide1.addClass('leader-mode');
 
-  if (isMobile) {
-    $slide1.removeClass('edit-mode');
-  }
-
-  // Wait 0.5s, then show new buttons
+  // - wait 0.5s, then show new buttons
   window.setTimeout(function(){
     $leaderboardControls.addClass('show');
   }, 500);
 
-  // Reset filters
+  // - reset filters and close sorting panel
   resetFilters();
 
-  // if (!isMobile) {
-  //   // Scroll to exit
-  //   ScrollNav.eventsOn();
-  // }
   closePanel();
 }
 
+// Exit 'Leaderboard Mode'
+//----------------------------
 function hideLeaderboard() {
   // Undo everything above
   $slide1.removeClass('leader-mode');
   $leaderboardControls.removeClass('show');
 }
 
+// Initialize leaderboard: Make buttons, bind events
+//-----------------------------
 function initLeaderboard() {
   var $buttonTemplate = $('<button class="leader"></button>');
 
@@ -11619,22 +11606,25 @@ function initLeaderboard() {
   } // end for loop
 }
 
+
+// Switch between rankings
+//----------------------------
 function switchLeaderboard(eventName) {
   // Switch src attribute to those of the top 5 poeple's scalee
 
   var eventObj = LeaderData[eventName];
   var leaders = eventObj.leaders;
 
-  // Loop through data, get img src attribute, then apply to 'leader-boxes'
+  // - loop through data, get img src attribute, then apply to 'leader-boxes'
   for (var position in leaders) {
     var personId = leaders[position];
 
-    // Closure for setTimeout
+    // - closure for setTimeout
     function animateChange() {
       var personImgSrc = getScaleeSrc(personId);
       var $targetImg = $leaderBoxes.eq( position-1 ).children('img');
       
-      // Hide, then wait for transition, then switch img and show
+      // - hide img, wait for transition, then switch img and show
       $targetImg.addClass('hide');
 
       window.setTimeout(function(){
@@ -11675,7 +11665,8 @@ function init() {
 }
 
 
-
+// Exports
+//------------------
 module.exports.init = init;
 module.exports.closePanel = closePanel;
 module.exports.sort = sort;

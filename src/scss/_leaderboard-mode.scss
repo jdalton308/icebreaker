@@ -15,7 +15,7 @@
 
 		.leaderboard-title {
 			width: 100%;
-			padding: 0 20px;
+			padding: 0 60px; // space for .back-btn
 			text-align: center;
 
 			h1 {
@@ -28,10 +28,11 @@
 		}
 		.back-btn {
 			position: absolute;
-			top: 60px;
+			top: 80px;
 			left: 10px;
 			font-size: 1.5rem;
-			padding: 8px 16px 6px;
+			padding: 10px 8px 10px 13px;
+			font-size: 0;
 			color: $sketchup-gray;
 			// background-color: transparent;
 
@@ -40,7 +41,7 @@
 				display: inline-block;
 				width: 12px;
 				height: 12px;
-				margin-right: 7px;
+				// margin-right: 7px;
 				border-top: 2px solid $sketchup-gray;
 				border-left: 2px solid $sketchup-gray;
 				@include transform( rotate(-45deg) );
@@ -150,6 +151,10 @@
 				left: 30px;
 				font-size: 1.8rem;
 				padding: 8px 16px 6px;
+
+				&:before {
+					margin-right: 7px;
+				}
 			}
 		}
 	}

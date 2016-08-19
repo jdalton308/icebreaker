@@ -94,7 +94,7 @@
 					height: 12px;
 					border-top: 3px solid $sketchup-gray;
 					border-right: 3px solid $sketchup-gray;
-					@include transform( rotate(-45deg) );
+					@include transform( rotate(135deg) translateY(6px) translateX(-2px) );
 					@include transition();
 				}
 			}
@@ -185,6 +185,7 @@
 
 			@media (min-width: $mobile) {
 				display: flex;
+				max-height: none;
 
 				.selector {
 					flex: 1 0 auto;
@@ -272,6 +273,13 @@
 			overflow-y: auto;
 			padding-top: 20px;
 			padding-bottom: 20px;
+		}
+		.open-panel {
+			.arrow-icon {
+				&:before {
+					@include transform( rotate(315deg) );
+				}
+			}
 		}
 
 		@media (min-width: $mobile) {
