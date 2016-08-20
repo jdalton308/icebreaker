@@ -50,22 +50,39 @@
 			width: 100%;
 			padding: 0 20px;
 			text-align: center;
+			overflow: hidden;
 			// @include transition(0.4s);
 			-webkit-transition: opacity 0.3s;
 			transition: opacity 0.3s;
 
+			.icon {
+				position: relative;
+				display: inline-block;
+				width: 120px;
+				height: 120px;
+				margin-bottom: 8px;
+				border-radius: 50%;
+				font-size: 6rem;
+				border: 2px solid transparent;
+				background-color: $sketchup-gray;
+				overflow: hidden;
+				@include transition(0.8s);
+
+				&:before {
+					@include centerMe();
+				}
+			}
 			h3 {
-				// display: inline-block;
-				// width: calc(100% - 45px);
 				margin: 0 0 10px;
 			}
 			h4 {
 				margin: 0;
 			}
 			.close-btn {
+				display: none;
 				position: absolute;
 				top: 20px;
-				right: 20px;
+				right: -80px;
 				display: inline-block;
 				vertical-align: top;
 				width: 41px;
@@ -78,7 +95,7 @@
 					content: '';
 					display: inline-block;
 					@include centerMe();
-					background-color: $sketchup-gray;
+					background-color: $sketchup-ltgray;
 				}
 				&:before {
 					width: 60%;
@@ -95,7 +112,7 @@
 			padding: 0;
 			overflow: hidden;
 			// background-color: $white;
-			color: $sketchup-gray;
+			color: $sketchup-ltgray;
 			@include transition();
 			-webkit-transition-delay: 0.5s;
 			transition-delay: 0.5s;
@@ -117,36 +134,40 @@
 
 			.title-bar {
 				opacity: 0;
+
+				.icon {
+					height: 0;
+					display: none;
+				}
 			}
 		}
 		&.open-end {
 			width: 100%;
 			min-height: calc(100%);
-			background-color: $white;
-			color: $sketchup-gray;
+			background-color: $sketchup-gray;
+			color: $sketchup-ltgray;
 			@include transition();
 
 			.title-bar {
 				position: static;
 				opacity: 1;
-				// border-bottom-color: $sketchup-red;
+				padding-bottom: 15px;
+				border-bottom: 1px solid $sketchup-ltgray;
 				@include transform( none );
 
-				&:hover {
-					// background-color: $sketchup-medgray;
+				.close-btn {
+					right: 20px;
+					@include transform( rotate(315deg) );
 
-					.close-btn {
+					&:hover {
 						@include transform( rotate(45deg) );
 					}
-				}
-				.close-btn {
-					@include transform( rotate(315deg) );
 				}
 			}
 			.posting-content {
 				max-height: 1000px; // arbitrary height
-				padding-top: 30px;
-				padding-bottom: 30px;
+				padding-top: 20px;
+				padding-bottom: 15px;
 			}
 
 			&.close-start {
@@ -166,6 +187,10 @@
 					opacity: 0;
 				}
 			}
+
+			&:hover {
+				@include transform( none );
+			}
 		}
 
 		@media (min-width: $mobile) {
@@ -173,7 +198,9 @@
 			min-height: 300px; // arbitrary
 
 			&:hover {
-				box-shadow: 0 0 15px -2px $sketchup-gray;
+				.icon {
+					border-color: $sketchup-ltgray;
+				}
 			}
 		}
 	} // end .job-posting

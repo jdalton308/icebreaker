@@ -89,6 +89,8 @@ function clickHandler() {
   function copyScalee($el) {
     var $newEl = $el.clone().removeClass('show').addClass('bio-scalee');
     var elPos = $el.offset();
+    elPos.top = elPos.top + 7; // not sure why this is necessary
+    elPos.left = elPos.left + 5;
     $newEl.css({
       height: $el.height(),
       top: elPos.top,

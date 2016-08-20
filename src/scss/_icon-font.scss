@@ -26,12 +26,39 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-presentation:before {
+  content: "\e00e";
+}
 .icon-expand:before {
   content: "\e01a";
+}
+.icon-puzzle:before {
+  content: "\e026";
+}
+.icon-streetsign:before {
+  content: "\e029";
+}
+.icon-gears:before {
+  content: "\e02b";
+}
+.icon-pencil:before {
+  content: "\e032";
+}
+.icon-paintbrush:before {
+  content: "\e036";
+}
+.icon-strategy:before {
+  content: "\e03b";
+}
+.icon-beaker:before {
+  content: "\e03c";
 }
 .icon-profile-male:before {
   content: "\e040";
 }
 .icon-chat:before {
   content: "\e049";
+}
+.icon-target:before {
+  content: "\e04e";
 }

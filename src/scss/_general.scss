@@ -70,28 +70,37 @@ p {
 
 button,
 .button {
-	border: 2px solid $sketchup-gray;
-	box-shadow: none;
 	padding: 6px 20px 4px;
-	background-color: transparent;
-	color: $sketchup-gray;
-	cursor: pointer;
+	text-align: center;
 	font-size: 1.6rem;
 	line-height: 1.42em;
-	text-align: center;
-	@include transition();
+	color: $sketchup-gray;
+	border: 2px solid $sketchup-gray;
+	box-shadow: none;
+	background-color: transparent;
+	@include transition(0.3s);
+	cursor: pointer;
 
 	&:focus {
 		outline: none;
 	}
 
 	&.red {
-		border: none;
-		background-color: $sketchup-red;
-		color: $white;
+		border-color: $sketchup-red;
+		color: $sketchup-red;
 
 		&:hover {
-			background-color: darken($sketchup-red, 10%);
+			border-color: darken($sketchup-red, 10%);
+			color: darken($sketchup-red, 10%);
+		}
+	}
+	&.white {
+		border-color: $sketchup-ltgray;
+		color: $sketchup-ltgray;
+
+		&:hover {
+			border-color: $white;
+			color: $white;
 		}
 	}
 }
