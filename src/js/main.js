@@ -9,7 +9,7 @@ var TwoTruths = require('./modules/two-truths.js');
 ScaleeSorter.init();
 ScaleeBios.init();
 JobPostings();
-TwoTruths();
+TwoTruths.init();
 
 
 

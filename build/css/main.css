@@ -69,6 +69,9 @@ html {
   font-family: "Open Sans", "Helvetica Neue", Arial, Helvetica, sans-serif;
   color: #363545; }
 
+body.fixed {
+  overflow: hidden; }
+
 h1,
 h2,
 h3,
@@ -152,8 +155,7 @@ button,
 .container {
   width: 100%;
   max-width: 1170px;
-  margin: 0 auto;
-  padding: 0 20px; }
+  margin: 0 auto; }
 
 main {
   width: 100vw;
@@ -260,7 +262,7 @@ header {
   width: 100%;
   padding: 10px;
   background-color: #363545;
-  box-shadow: 1px 1px 6px #363545; }
+  box-shadow: 1px 1px 6px #000; }
   header img {
     display: inline-block;
     height: 36px; }
@@ -511,24 +513,30 @@ header {
       height: 35vh; } }
 
 .slide1 .info-slide {
-  position: absolute;
+  position: fixed;
+  overflow-y: auto;
+  overflow-x: hidden;
   z-index: 7;
   left: 105%;
-  top: 50px;
-  width: 50%;
-  height: 100%;
-  padding-top: 50px;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+  padding-top: 75px;
   text-align: left;
   color: #f3f3f7;
   background-color: #363545;
   box-shadow: 0 0 15px -3px #363545;
   -webkit-transition: all 1s;
   transition: all 1s; }
+  .slide1 .info-slide img.new-img {
+    display: block;
+    margin: 0 auto 20px;
+    max-height: 30vh; }
   .slide1 .info-slide .close-btn {
     position: absolute;
     display: inline-block;
-    top: 20px;
-    right: 30px;
+    top: 60px;
+    right: 10px;
     width: 50px;
     height: 50px;
     padding: 10px;
@@ -562,9 +570,9 @@ header {
     position: relative;
     display: inline-block;
     vertical-align: top;
-    width: 90%;
+    width: 100%;
     max-width: 600px;
-    padding: 0 40px;
+    padding: 0 20px 30px;
     text-align: left; }
     .slide1 .info-slide .content-cont > h1 {
       margin-bottom: 8px; }
@@ -577,9 +585,13 @@ header {
       margin: 40px auto 0;
       background-color: #363545; }
     .slide1 .info-slide .content-cont .swap-cont {
-      position: relative; }
+      position: relative;
+      overflow: hidden; }
     .slide1 .info-slide .content-cont .description-cont {
-      position: relative; }
+      position: relative;
+      bottom: 0;
+      -webkit-transition: all 1s;
+      transition: all 1s; }
     .slide1 .info-slide .content-cont .game-cont {
       position: absolute;
       top: 100vh;
@@ -604,14 +616,6 @@ header {
         box-shadow: 1px 1px 15px -2px #000;
         -webkit-transition: all 0.3s;
         transition: all 0.3s; }
-        .slide1 .info-slide .content-cont .game-cont .fact-item:hover {
-          box-shadow: 1px 1px 15px #000;
-          -ms-transform: scale(1.02);
-          -webkit-transform: scale(1.02);
-          transform: scale(1.02);
-          background-color: #ffffff; }
-          .slide1 .info-slide .content-cont .game-cont .fact-item:hover h3 {
-            color: #e72b2d; }
         .slide1 .info-slide .content-cont .game-cont .fact-item h3 {
           margin: 0;
           padding: 8px 5px 6px;
@@ -630,7 +634,7 @@ header {
         .slide1 .info-slide .content-cont .game-cont .fact-item.lie .answer {
           color: #e72b2d; }
     .slide1 .info-slide .content-cont.question-mode .description-cont {
-      bottom: 150%; }
+      bottom: 120%; }
     .slide1 .info-slide .content-cont.question-mode .game-cont {
       top: 0; }
       .slide1 .info-slide .content-cont.question-mode .game-cont.reveal .fact-item {
@@ -643,10 +647,41 @@ header {
           -ms-transform: scale(0.95);
           -webkit-transform: scale(0.95);
           transform: scale(0.95); }
-          .slide1 .info-slide .content-cont.question-mode .game-cont.reveal .fact-item.truth:hover {
-            -ms-transform: scale(0.95);
-            -webkit-transform: scale(0.95);
-            transform: scale(0.95); }
+        .slide1 .info-slide .content-cont.question-mode .game-cont.reveal .fact-item .answer {
+          opacity: 1; }
+  @media (min-width: 768px) {
+    .slide1 .info-slide {
+      position: absolute;
+      overflow: hidden;
+      top: 50px;
+      width: 50%;
+      height: 100%;
+      padding-top: 50px; }
+      .slide1 .info-slide img.new-img {
+        display: none; }
+      .slide1 .info-slide .close-btn {
+        top: 20px;
+        right: 30px; }
+      .slide1 .info-slide .content-cont {
+        padding: 0 40px; }
+        .slide1 .info-slide .content-cont .swap-cont {
+          overflow: visible; }
+        .slide1 .info-slide .content-cont .game-cont .fact-item:hover {
+          box-shadow: 1px 1px 15px #000;
+          -ms-transform: scale(1.02);
+          -webkit-transform: scale(1.02);
+          transform: scale(1.02);
+          background-color: #ffffff; }
+          .slide1 .info-slide .content-cont .game-cont .fact-item:hover h3 {
+            color: #e72b2d; }
+        .slide1 .info-slide .content-cont.question-mode .game-cont.reveal .fact-item:hover {
+          background-color: #f3f3f7; }
+          .slide1 .info-slide .content-cont.question-mode .game-cont.reveal .fact-item:hover h3 {
+            color: #363545; }
+        .slide1 .info-slide .content-cont.question-mode .game-cont.reveal .fact-item.truth:hover {
+          -ms-transform: scale(0.95);
+          -webkit-transform: scale(0.95);
+          transform: scale(0.95); }
         .slide1 .info-slide .content-cont.question-mode .game-cont.reveal .fact-item.lie {
           -ms-transform: scale(1.05);
           -webkit-transform: scale(1.05);
@@ -656,7 +691,9 @@ header {
             -webkit-transform: scale(1.05);
             transform: scale(1.05); }
         .slide1 .info-slide .content-cont.question-mode .game-cont.reveal .fact-item .answer {
-          opacity: 1; }
+          opacity: 1; } }
+  .slide1 .info-slide.show {
+    left: 0; }
 
 .slide1 .scalee-bio-background {
   position: fixed;
@@ -955,8 +992,8 @@ header {
   position: relative;
   display: inline-block;
   vertical-align: top;
-  width: 200px;
-  min-height: 200px;
+  width: 250px;
+  min-height: 250px;
   margin-right: 3%;
   margin-bottom: 3%;
   padding: 20px 30px;
@@ -988,11 +1025,10 @@ header {
     .slide3 .job-posting .title-bar .icon {
       position: relative;
       display: inline-block;
-      width: 120px;
-      height: 120px;
+      width: 70px;
+      height: 70px;
       margin-bottom: 8px;
-      border-radius: 50%;
-      font-size: 6rem;
+      font-size: 5rem;
       border: 2px solid transparent;
       background-color: #363545;
       overflow: hidden;
@@ -1112,4 +1148,10 @@ header {
       width: 30%;
       min-height: 300px; }
       .slide3 .job-posting:hover .icon {
-        border-color: #f3f3f7; } }
+        border-color: #f3f3f7; }
+      .slide3 .job-posting .title-bar .icon {
+        width: 120px;
+        height: 120px;
+        margin-bottom: 8px;
+        border-radius: 50%;
+        font-size: 6rem; } }

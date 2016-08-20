@@ -77,4 +77,5 @@ function initGame() {
 
 }
 
-module.exports = initGame;
+module.exports.init = initGame;
+module.exports.endGame = endGame;

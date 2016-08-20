@@ -4,24 +4,32 @@
 //--------------------------
 .slide1 {
 	.info-slide {
-		position: absolute;
+		position: fixed;
+		overflow-y: auto;
+		overflow-x: hidden;
 		z-index: 7;
 		left: 105%;
-		top: 50px;
-		width: 50%;
-		height: 100%;
-		padding-top: 50px; // arbitrary
+		top: 0;
+		width: 100%;
+		height: 100vh;
+		padding-top: 75px; // arbitrary
 		text-align: left;
 		color: $sketchup-ltgray;
 		background-color: $sketchup-gray;
 		box-shadow: 0 0 15px -3px $sketchup-gray;
 		@include transition(1s);
 
+		img.new-img {
+			display: block;
+			margin: 0 auto 20px;
+			max-height: 30vh;
+		}
+
 		.close-btn {
 			position: absolute;
 			display: inline-block;
-			top: 20px;
-			right: 30px;
+			top: 60px;
+			right: 10px;
 			width: 50px;
 			height: 50px;
 			padding: 10px;
@@ -49,22 +57,16 @@
 				@include transform( rotate(225deg) );
 			}
 		}
+
 		.content-cont {
 			position: relative;
 			display: inline-block;
 			vertical-align: top;
-			width: 90%;
+			width: 100%;
 			max-width: 600px;
-			padding: 0 40px;
+			padding: 0 20px 30px;
 			text-align: left;
 
-			// > h1,
-			// > h3 {
-			// 	display: inline-block;
-			// }
-			// > h3 {
-			// 	margin-left: 15px;
-			// }
 			> h1 {
 				margin-bottom: 8px;
 			}
@@ -81,10 +83,13 @@
 
 			.swap-cont {
 				position: relative;
+				overflow: hidden;
 			}
 
 			.description-cont {
 				position: relative;
+				bottom: 0;
+				@include transition(1s);
 			}
 			.game-cont {
 				position: absolute;
@@ -107,34 +112,17 @@
 						margin: 0;
 					}
 				}
-					
-				.fact-cont {
 
-				}
 				.fact-item {
 					margin-bottom: 10px;
-					// padding: 10px 5px;
 					cursor: pointer;
-					// border: 2px solid transparent;
 					background-color: $sketchup-ltgray;
 					color: $sketchup-gray;
 					box-shadow: 1px 1px 15px -2px $black;
 					@include transition(0.3s);
 
-					&:hover {
-						box-shadow: 1px 1px 15px $black;
-						@include transform( scale(1.02) );
-						background-color: $white;
-
-						h3 {
-							// background-color: $sketchup-red;
-							color: $sketchup-red;
-						}
-					}
-
 					h3 {
 						margin: 0;
-						// padding: 0 0 6px;
 						padding: 8px 5px 6px;
 						border-bottom: 1px solid $sketchup-gray;
 						@include transition(0.3s);
@@ -165,7 +153,7 @@
 			// Playing two-truths game...
 			&.question-mode {
 				.description-cont {
-					bottom: 150%;
+					bottom: 120%;
 				}
 				.game-cont {
 					top: 0;
@@ -186,17 +174,6 @@
 
 							&.truth {
 								@include transform( scale(0.95) );
-								
-								&:hover {
-									@include transform( scale(0.95) );
-								}
-							}
-							&.lie {
-								@include transform( scale(1.05) );
-								
-								&:hover {
-									@include transform( scale(1.05) );
-								}
 							}
 
 							.answer {
@@ -206,6 +183,91 @@
 					}
 				}
 			}
+		}
+
+
+		@media (min-width: $mobile) {
+			position: absolute;
+			overflow: hidden;
+			top: 50px;
+			width: 50%;
+			height: 100%;
+			padding-top: 50px; // arbitrary
+
+			img.new-img {
+				display: none;
+			}
+			.close-btn {
+				top: 20px;
+				right: 30px;
+			}
+			.content-cont {
+				padding: 0 40px;
+
+				.swap-cont {
+					overflow: visible;
+				}
+				.game-cont {
+					.fact-item {
+						&:hover {
+							box-shadow: 1px 1px 15px $black;
+							@include transform( scale(1.02) );
+							background-color: $white;
+
+							h3 {
+								color: $sketchup-red;
+							}
+						}
+					}
+				}
+
+				// Playing two-truths game...
+				&.question-mode {
+					.game-cont {
+
+						// Show answers
+						&.reveal {
+							.fact-item {
+
+								&:hover {
+									// Reset so no hover state
+									background-color: $sketchup-ltgray;
+
+									h3 {
+										color: $sketchup-gray;
+									}
+								}
+
+								&.truth {									
+									&:hover {
+										@include transform( scale(0.95) );
+									}
+								}
+								&.lie {
+									@include transform( scale(1.05) );
+									
+									&:hover {
+										@include transform( scale(1.05) );
+									}
+								}
+
+								.answer {
+									opacity: 1;
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+
+
+		// Showing bio on mobile
+		//-----------------------
+		&.show {
+			left: 0;
+
+
 		}
 
 	} // end .info-slide
@@ -223,8 +285,8 @@
 	}
 
 
-	// Showing the bio...
-	//-----------------------
+	// Showing the bio on desktop...
+	//--------------------------------
 	&.active2 {
 
 		.info-slide {

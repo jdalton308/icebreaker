@@ -11020,7 +11020,7 @@ var TwoTruths = require('./modules/two-truths.js');
 ScaleeSorter.init();
 ScaleeBios.init();
 JobPostings();
-TwoTruths();
+TwoTruths.init();
 
 
 
@@ -11750,6 +11750,8 @@ module.exports = leaders;
 
 var $ = require('jquery');
 var ScrollNav = require('./scroll-nav.js');
+var TwoTruths = require('./two-truths.js');
+var Util = require('./util.js');
 
 
 // ------------------------
@@ -11783,15 +11785,19 @@ var $infoClose = $infoSlide.find('.close-btn');
 var $scaleeInFocus;
 var $newScalee;
 var initialPos;
+var isMobile = Util.isMobile();
 
 
 // Bind Events
 //----------------
 function eventsOn() {
-
   // Click on scalee: Open Bio -----
   $scalees.click(clickHandler);
 }
+function mobileEventsOn() {
+  $scalees.click(mobileClickHandler);
+}
+
 
 // Unbind Events
 //-----------------
@@ -11799,20 +11805,19 @@ function eventsOff() {
   $scalees.off('click');
 }
 
+
 // Main Click Logic
 //------------------------
 function clickHandler() {
-  $scaleeInFocus = $(this);
 
+  // TODO: Insert scalee's data into .info-slide
+
+  $scaleeInFocus = $(this);
   var scaleePos = $scaleeInFocus.position();
 
   // - copy scalee and set position on top of old one
   $newScalee = copyScalee($scaleeInFocus);
   $slide1.append($newScalee);
-  // $newScalee.css({
-  //   top: 0,
-  //   left: (scaleePos.left + 5) // not sure why offset is off by 5px
-  // });
 
   // - then hide old scalee
   $scaleeCont.addClass('focus-mode');
@@ -11853,13 +11858,52 @@ function clickHandler() {
 
 
   // TODO: Bind closing actions
-  // TODO: Prevent click of two people
+}
+function mobileClickHandler() {
+  
+  // TODO: Insert scalee's data into .info-slide
+
+  // - copy the clicked img src
+  $scaleeInFocus = $(this);
+  var imgSrc = $scaleeInFocus.attr('src');
+
+  // - insert new img into .info-card with new imgSrc
+  var prevImg = $infoSlide.children('img');
+  if ( prevImg.length ) {
+    prevImg.attr('src', imgSrc);
+  } else {
+    var $newImg = $('<img src="'+ imgSrc +'" class="new-img">');
+    $infoSlide.prepend( $newImg );
+  }
+
+  // - ensure enough room for 2-truths game
+  var $swapCont = $infoSlide.find('.swap-cont');
+  var bioHeight = $swapCont.children('.description-cont').height();
+  var gameHeight = $swapCont.children('.game-cont').height();
+  if (gameHeight > bioHeight) {
+    $swapCont.css('height', gameHeight);
+  }
+
+  // - Prevent scrolling on rest of page, so that .info-slide can scroll
+  $page.addClass('fixed');
+
+  // - Show .info-slide
+  $infoSlide.addClass('show');
 }
 
 
 // Close Bio and Return Scalee
 //------------------------------
 function closeBio(){
+  if (isMobile) {
+    // - hide .info-slide
+    $infoSlide.removeClass('show');
+
+    // - let body scroll again
+    $page.removeClass('fixed');
+
+
+  } else {
     // - move newScalee to original position
     $newScalee.animate({
       left: initialPos.left
@@ -11876,12 +11920,22 @@ function closeBio(){
     $infoBg.removeClass('show');
   }
 
+  // Either way, close the two-truths game
+  TwoTruths.endGame();
+
+}
+
 
 // General init
 //------------------
 function init() {
   // Close Bio Btn ------
   $infoClose.click(closeBio);
+
+  // On mobile, bind click event------
+  if ( isMobile ) {
+    mobileEventsOn();
+  }
 }
 
 
@@ -11890,7 +11944,7 @@ function init() {
 module.exports.init = init;
 module.exports.on = eventsOn;
 module.exports.off = eventsOff;
-},{"./scroll-nav.js":7,"jquery":1}],6:[function(require,module,exports){
+},{"./scroll-nav.js":7,"./two-truths.js":8,"./util.js":9,"jquery":1}],6:[function(require,module,exports){
 'use strict';
 
 var $ = require('jquery');
@@ -12629,7 +12683,8 @@ function initGame() {
 
 }
 
-module.exports = initGame;
+module.exports.init = initGame;
+module.exports.endGame = endGame;
 },{"./scalee-sorter.js":6,"jquery":1}],9:[function(require,module,exports){
 
 // ----------------
