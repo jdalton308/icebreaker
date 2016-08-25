@@ -161,20 +161,20 @@ main {
 	.slide-number {
 		display: inline-block;
 		margin-bottom: 10px;
-		padding: 10px;
-		font-size: 1.6rem;
+		padding: 10px 10px 8px;
+		font-size: 1.7rem;
 		color: $white;
-		background-color: $sketchup-gray;
+		background-color: $new-red;
 		box-shadow: 2px 2px 15px -3px $black;
 	}
 	h1 {
-		margin: 0 0 10px;
+		margin: 0 0 15px;
 	}
 	.underline {
 		display: inline-block;
 		width: 150px;
 		height: 3px;
-		margin-bottom: 7px;
+		margin-bottom: 12px;
 		background-color: $sketchup-gray;
 		box-shadow: 1px 1px 15px -3px $black;
 	}

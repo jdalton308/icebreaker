@@ -1,62 +1,114 @@
 
 .slide2 {
-	text-align: center;
-	background-color: $sketchup-gray;
-	background-image: url('/img/texture_poly-blend-darkgray.jpg');
-	background-attachment: fixed;
-	color: $white;
-	
-	.center-me {
-		@media (min-width: $mobile) {
-			@include centerMe();
-			width: 100%;
-		}
+	padding-top: 8vh;
+	text-align: right;
+	padding-bottom: 150px;
+
+	.title-box {
+		margin: 0 0 30vh;
 	}
 
 	a.nav-box {
+		position: relative;
 		display: block;
-		max-width: 300px;
+		width: 260px;
+		max-height: 142px;
 		margin: 0 auto 50px;
-		padding: 20px 30px;
-		border: 1px solid $white;
-		background-color: transparent;
+		padding: 30px 20px;
+		text-align: left;
 		color: $white;
+		background-color: $new-red;
+		box-shadow: 2px 2px 15px -3px $black;
 
 		.icon {
 			display: inline-block;
-			position: relative;
-			height: 150px;
-			width: 150px;
-			margin-bottom: 15px;
+			position: absolute;
+			z-index: 2;
+			top: 90%;
+			right: -15px;
+			height: 60px;
+			width: 60px;
 			border-radius: 50%;
+			background-color: $white;
+			color: $new-red;
 			@include transition();
+			box-shadow: 2px 2px 15px -3px $black;
 
 			&:before {
 				@include centerMe();
-				font-size: 7rem;
+				font-size: 2.5rem;
 			}
 		}
-		h3 {
-			margin: 0;
+		h5 {
+			margin-bottom: 10px;
 		}
+		p {
+			margin: 0;
+			line-height: 1.2em;
+		}
+		.poly {
+			display: inline-block;
+			position: absolute;
+			top: 100%;
+			width: 0;
+			height: 0;
+		}
+		.bottom-right-poly {
+			right: 0;
+			border-top: 100px solid $new-red;
+			border-right: 95px solid $new-red;
+			border-bottom: 10px solid transparent;
+			border-left: 103px solid transparent;
+		}
+		.bottom-left-poly {
+			left: 0;
+		}
+
+		&:nth-child(1) {
+			.bottom-left-poly {
+				border-top: 15px solid $new-red;
+				border-right: 200px solid $new-red;
+				border-bottom: 4px solid transparent;
+				border-left: 12px solid transparent;
+			}
+		}
+		&:nth-child(2) {
+			.bottom-left-poly {
+				border-top: 15px solid $new-red;
+				border-right: 200px solid $new-red;
+				border-bottom: 40px solid transparent;
+				border-left: 12px solid transparent;
+			}
+		}
+		&:nth-child(3) {
+			.bottom-left-poly {
+				border-top: 40px solid $new-red;
+				border-right: 70px solid transparent;
+				border-bottom: 0px solid transparent;
+				border-left: 20px solid $new-red;
+			}
+		}
+
 	}
 
 	@media (min-width: $mobile) {
 		a.nav-box {
 			display: inline-block;
-			margin-right: 50px;
+			vertical-align: top;
+			margin: 0 50px 0 0;
 
 			&:last-child {
 				margin-right: 0;
 			}
 
 			&:hover {
-				color: $sketchup-gray;
-				background-color: $white;
+				// color: $sketchup-gray;
+				// background-color: $white;
 
 				.icon {
-					background-color: $sketchup-gray;
-					color: $white;
+					// background-color: $sketchup-gray;
+					// color: $white;
+					box-shadow: 3px 3px 15px -1px $sketchup-gray;
 				}
 			}
 		}

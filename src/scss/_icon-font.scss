@@ -2,6 +2,24 @@
 // Font generated on Icomoon
 //--------------------------------
 
+$icon-presentation: "\e00e";
+$icon-expand: "\e01a";
+$icon-puzzle: "\e026";
+$icon-envelope: "\e028";
+$icon-streetsign: "\e029";
+$icon-gears: "\e02b";
+$icon-pencil: "\e032";
+$icon-paintbrush: "\e036";
+$icon-strategy: "\e03b";
+$icon-beaker: "\e03c";
+$icon-profile-male: "\e040";
+$icon-chat: "\e049";
+$icon-target: "\e04e";
+$icon-facebook2: "\ea8d";
+$icon-twitter: "\ea91";
+$icon-linkedin2: "\eac9";
+
+
 @font-face {
   font-family: 'icebreaker';
   src:
@@ -26,39 +44,85 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-.icon-presentation:before {
-  content: "\e00e";
+.icon-presentation {
+  &:before {
+    content: $icon-presentation;
+  }
 }
-.icon-expand:before {
-  content: "\e01a";
+.icon-expand {
+  &:before {
+    content: $icon-expand;
+  }
 }
-.icon-puzzle:before {
-  content: "\e026";
+.icon-puzzle {
+  &:before {
+    content: $icon-puzzle;
+  }
 }
-.icon-streetsign:before {
-  content: "\e029";
+.icon-mail {
+  &:before {
+    content: $icon-envelope;
+  }
 }
-.icon-gears:before {
-  content: "\e02b";
+.icon-streetsign {
+  &:before {
+    content: $icon-streetsign;
+  }
 }
-.icon-pencil:before {
-  content: "\e032";
+.icon-gears {
+  &:before {
+    content: $icon-gears;
+  }
 }
-.icon-paintbrush:before {
-  content: "\e036";
+.icon-pencil {
+  &:before {
+    content: $icon-pencil;
+  }
 }
-.icon-strategy:before {
-  content: "\e03b";
+.icon-paintbrush {
+  &:before {
+    content: $icon-paintbrush;
+  }
 }
-.icon-beaker:before {
-  content: "\e03c";
+.icon-strategy {
+  &:before {
+    content: $icon-strategy;
+  }
 }
-.icon-profile-male:before {
-  content: "\e040";
+.icon-beaker {
+  &:before {
+    content: $icon-beaker;
+  }
 }
-.icon-chat:before {
-  content: "\e049";
+.icon-profile-male {
+  &:before {
+    content: $icon-profile-male;
+  }
 }
-.icon-target:before {
-  content: "\e04e";
+.icon-chat {
+  &:before {
+    content: $icon-chat;
+  }
 }
+.icon-target {
+  &:before {
+    content: $icon-target;
+  }
+}
+.icon-facebook {
+  &:before {
+    content: $icon-facebook2;
+  }
+}
+.icon-twitter {
+  &:before {
+    content: $icon-twitter;
+  }
+}
+.icon-linkedin {
+  &:before {
+    content: $icon-linkedin2;
+  }
+}
+
+
