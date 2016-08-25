@@ -17,7 +17,7 @@
 .slide0 {
 	padding: 0;
 	background-color: $new-blue;
-	@include animation(landing, 1.2s, $curve2, 1s);
+	@include animation(landing, 0.7s, $curve2, 1s);
 
 	.title-box {
 		@include centerY();

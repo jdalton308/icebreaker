@@ -3,274 +3,6 @@
 // Scalee Bios
 //--------------------------
 .slide1 {
-	.info-slide {
-		position: fixed;
-		overflow-y: auto;
-		overflow-x: hidden;
-		z-index: 7;
-		left: 105%;
-		top: 0;
-		width: 100%;
-		height: 100vh;
-		padding-top: 75px; // arbitrary
-		text-align: left;
-		color: $sketchup-ltgray;
-		background-color: $sketchup-gray;
-		box-shadow: 0 0 15px -3px $sketchup-gray;
-		@include transition(1s);
-
-		img.new-img {
-			display: block;
-			margin: 0 auto 20px;
-			max-height: 30vh;
-		}
-
-		.close-btn {
-			position: absolute;
-			display: inline-block;
-			top: 60px;
-			right: 10px;
-			width: 50px;
-			height: 50px;
-			padding: 10px;
-			@include transition(0.8s);
-			@include transform( rotate(45deg) );
-			cursor: pointer;
-
-			&:before,
-			&:after {
-				content: '';
-				display: inline-block;
-				@include centerMe();
-				background-color: $sketchup-ltgray;
-			}
-			&:before {
-				width: 60%;
-				height: 2px;
-			}
-			&:after {
-				width: 2px;
-				height: 60%;
-			}
-
-			&:hover {
-				@include transform( rotate(225deg) );
-			}
-		}
-
-		.content-cont {
-			position: relative;
-			display: inline-block;
-			vertical-align: top;
-			width: 100%;
-			max-width: 600px;
-			padding: 0 20px 30px;
-			text-align: left;
-
-			> h1 {
-				margin-bottom: 8px;
-			}
-			> h3 {
-				padding-bottom: 12px;
-				border-bottom: 1px solid $sketchup-ltgray;
-			}
-			button.truths {
-				display: block;
-				width: auto;
-				margin: 40px auto 0;
-				background-color: $sketchup-gray;
-			}
-
-			.swap-cont {
-				position: relative;
-				overflow: hidden;
-			}
-
-			.description-cont {
-				position: relative;
-				bottom: 0;
-				@include transition(1s);
-			}
-			.game-cont {
-				position: absolute;
-				top: 100vh;
-				min-height: 100%;
-				background-color: $sketchup-gray;
-				@include transition(1s);
-
-				.game-title-cont {
-					margin-bottom: 20px;
-
-					h4 {
-						display: inline-block;
-						margin-bottom: 10px;
-					}
-					.close-game-btn {
-						float: right;
-					}
-					p {
-						margin: 0;
-					}
-				}
-
-				.fact-item {
-					margin-bottom: 10px;
-					cursor: pointer;
-					background-color: $sketchup-ltgray;
-					color: $sketchup-gray;
-					box-shadow: 1px 1px 15px -2px $black;
-					@include transition(0.3s);
-
-					h3 {
-						margin: 0;
-						padding: 8px 5px 6px;
-						border-bottom: 1px solid $sketchup-gray;
-						@include transition(0.3s);
-					}
-					.answer {
-						display: inline-block;
-						opacity: 0;
-						font-weight: 700;
-					}
-					p {
-						margin: 0;
-						padding: 12px 10px;
-					}
-
-					&.truth {
-						.answer {
-							color: $trimble-green;
-						}
-					}
-					&.lie {
-						.answer {
-							color: $sketchup-red;
-						}
-					}
-				}
-			}
-
-			// Playing two-truths game...
-			&.question-mode {
-				.description-cont {
-					bottom: 120%;
-				}
-				.game-cont {
-					top: 0;
-
-					// Show answers
-					&.reveal {
-						.fact-item {
-							cursor: auto;
-
-							&:hover {
-								// Reset so no hover state
-								background-color: $sketchup-ltgray;
-
-								h3 {
-									color: $sketchup-gray;
-								}
-							}
-
-							&.truth {
-								@include transform( scale(0.95) );
-							}
-
-							.answer {
-								opacity: 1;
-							}
-						}
-					}
-				}
-			}
-		}
-
-
-		@media (min-width: $mobile) {
-			position: absolute;
-			overflow: hidden;
-			top: 0;
-			width: 50%;
-			height: 100%;
-			padding-top: 50px; // arbitrary
-
-			img.new-img {
-				display: none;
-			}
-			.close-btn {
-				top: 20px;
-				right: 30px;
-			}
-			.content-cont {
-				padding: 0 40px;
-
-				.swap-cont {
-					overflow: visible;
-				}
-				.game-cont {
-					.fact-item {
-						&:hover {
-							box-shadow: 1px 1px 15px $black;
-							@include transform( scale(1.02) );
-							background-color: $white;
-
-							h3 {
-								color: $sketchup-red;
-							}
-						}
-					}
-				}
-
-				// Playing two-truths game...
-				&.question-mode {
-					.game-cont {
-
-						// Show answers
-						&.reveal {
-							.fact-item {
-
-								&:hover {
-									// Reset so no hover state
-									background-color: $sketchup-ltgray;
-
-									h3 {
-										color: $sketchup-gray;
-									}
-								}
-
-								&.truth {									
-									&:hover {
-										@include transform( scale(0.95) );
-									}
-								}
-								&.lie {
-									@include transform( scale(1.05) );
-									
-									&:hover {
-										@include transform( scale(1.05) );
-									}
-								}
-
-								.answer {
-									opacity: 1;
-								}
-							}
-						}
-					}
-				}
-			}
-		}
-
-
-		// Showing bio on mobile
-		//-----------------------
-		&.show {
-			left: 0;
-
-
-		}
-
-	} // end .info-slide
 
 	.scalee-bio-background {
 		position: absolute;
@@ -283,6 +15,223 @@
 		-webkit-transition: opacity 1s;
 		transition: opacity 1s;
 	}
+
+	.info-slide {
+		position: fixed;
+		overflow-y: auto;
+		overflow-x: hidden;
+		z-index: 7;
+		left: 105%;
+		top: 0;
+		width: 100%;
+		height: 100vh;
+		padding: 12px 10px;
+		text-align: left;
+		// color: $sketchup-ltgray;
+		background-color: $new-blue;
+		box-shadow: 0 0 15px -3px $sketchup-gray;
+		@include transition(1s);
+
+		img.new-img {
+			display: block;
+			margin: 0 auto 20px;
+			max-height: 30vh;
+		}
+
+		.close-btn {
+			position: absolute;
+			display: inline-block;
+			top: 10px;
+			right: 10px;
+			width: 50px;
+			height: 50px;
+			margin-bottom: 12px;
+			padding: 10px;
+			@include transition(0.8s);
+			@include transform( rotate(45deg) );
+			cursor: pointer;
+
+			&:before,
+			&:after {
+				content: '';
+				display: inline-block;
+				@include centerMe();
+				background-color: $new-blue;
+			}
+			&:before {
+				width: 60%;
+				height: 3px;
+			}
+			&:after {
+				width: 3px;
+				height: 60%;
+			}
+
+			&:hover {
+				// @include transform( rotate(90deg) );
+			}
+		}
+
+		.content-cont {
+			position: relative;
+			display: inline-block;
+			vertical-align: top;
+			width: 100%;
+			max-width: 600px;
+			height: 100%;
+			overflow-y: auto;
+			overflow-x: hidden;
+			padding: 20px 30px;
+			text-align: left;
+			background-color: $white;
+
+			.title-box {
+				margin-bottom: 15px;
+
+				h1 {
+					margin-bottom: 20px;
+				}
+			}
+			.description-cont {
+				position: relative;
+				margin-bottom: 50px;
+
+				.button-row {
+					padding-top: 10px;
+
+					button {
+						margin-right: 15px; // just in case
+					}
+					.social-icon {
+						float: right;
+					}
+				}
+			}
+			.game-cont {
+				h4 {
+					display: inline-block;
+					margin-bottom: 20px;
+				}
+				.fact-item {
+					margin-bottom: 20px;
+					cursor: pointer;
+					@include transition(0.3s);
+					
+					.fact-radio {
+						display: inline-block;
+						vertical-align: top;
+						width: 20px;
+						height: 20px;
+						margin-right: 15px;
+						border: 3px solid $new-blue;
+						background-color: $sketchup-ltgray;
+						border-radius: 50%;
+						@include transition(0.5s);
+					}
+					p {
+						display: inline-block;
+						width: calc(100% - 40px);
+						margin: 0;
+						padding: 0;
+						font-size: 1.4rem;
+						@include transition(0.5s);
+					}
+
+					&.truth {
+						// .answer {
+						// 	color: $trimble-green;
+						// }
+					}
+					&.lie {
+						// .answer {
+						// 	color: $sketchup-red;
+						// }
+					}
+				}
+				// Show answers
+				&.reveal {
+					.fact-item {
+						&.truth {
+							// @include transform( scale(0.95) );
+
+							.fact-radio {
+								border-color: $trimble-green;
+								background-color: $trimble-green;
+								box-shadow: 0 0 5px $trimble-green;
+							}
+							p {
+								text-shadow: 0 0 3px $sketchup-gray;
+							}
+						}
+						&.lie {
+							.fact-radio {
+								border-color: $new-red;
+								background-color: $new-red;
+							}
+						}
+					}
+				}
+
+			} // end .game-cont
+
+		}
+
+
+		@media (min-width: $mobile) {
+			position: absolute;
+			overflow: hidden;
+			top: 0;
+			width: 50%;
+			height: 100%;
+			// padding-top: 50px; // arbitrary
+
+			img.new-img {
+				display: none;
+			}
+			.close-btn {
+				position: relative;
+				top: 0;
+				right: 10px;
+			}
+			.content-cont {
+				padding: 25px 40px;
+
+				.game-cont {
+					.fact-item {
+						&:hover {
+							.fact-radio {
+								background-color: $new-blue;
+							}
+							// p {
+							// 	font-weight: 700;
+							// }
+						}
+					}
+					// Show answers
+					&.reveal {
+						.fact-item {
+							cursor: auto;
+
+							&:hover {
+								// Reset so no hover state
+								p {
+									font-weight: 400;
+								}
+							}
+						}
+					}
+				}
+			}
+		} // end media()
+
+
+		// Showing bio on mobile
+		//-----------------------
+		&.show {
+			left: 0;
+		}
+
+	} // end .info-slide
 
 
 	// Showing the bio on desktop...
