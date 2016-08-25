@@ -11022,21 +11022,8 @@ ScaleeBios.init();
 JobPostings();
 TwoTruths.init();
 
-
-
-// If mobile
-// X - Don't use ScrollNav. At all
-// X- Scalee sorter control-panel opens like accordion
-// X- Scalee filters in control-panel can be scrolled laterally
-// - Scalee bio is totally different. Simpler
-	// - Bind click event immediately, not when in 'active2'
-	// - Just copy the clicked img src attribute, and insert into .info-card
-	// - Show info card fixed. Add fixed class to body to stop scroll
-
-// - Sort() is same
-// - Job postings are the same
-// - Two truths game is the same
 },{"./modules/job-postings.js":3,"./modules/scalee-bios.js":5,"./modules/scalee-sorter.js":6,"./modules/scroll-nav.js":7,"./modules/two-truths.js":8}],3:[function(require,module,exports){
+'use strict';
 
 var $ = require('jquery');
 
@@ -11785,6 +11772,7 @@ var $infoClose = $infoSlide.find('.close-btn');
 var $scaleeInFocus;
 var $newScalee;
 var initialPos;
+var initialHeight;
 var isMobile = Util.isMobile();
 
 
@@ -11809,6 +11797,7 @@ function eventsOff() {
 // Main Click Logic
 //------------------------
 function clickHandler() {
+  console.log('--scalee click--');
 
   // TODO: Insert scalee's data into .info-slide
 
@@ -11824,12 +11813,13 @@ function clickHandler() {
   $scaleeInFocus.addClass('invisible');
 
   // - animate newScalee into position
-  var targetLeft = 0.25;
+  var targetLeft = 0.1;
   var windowWidth = window.innerWidth;
   var newLeftPos = windowWidth * targetLeft;
 
   $newScalee.animate({
-    left: newLeftPos
+    left: newLeftPos,
+    height: (initialHeight * 3)
   }, 300);
 
   // - show info slide with bio and left-side overlay
@@ -11844,8 +11834,10 @@ function clickHandler() {
     var elPos = $el.offset();
     elPos.top = elPos.top + 7; // not sure why this is necessary
     elPos.left = elPos.left + 5;
+    initialHeight = $el.height();
+
     $newEl.css({
-      height: $el.height(),
+      height: initialHeight,
       top: elPos.top,
       left: elPos.left
     });
@@ -11860,8 +11852,8 @@ function clickHandler() {
   // TODO: Bind closing actions
 }
 function mobileClickHandler() {
-  
-  // TODO: Insert scalee's data into .info-slide
+
+  // TODO: Insert scalee's data into .info-slide  
 
   // - copy the clicked img src
   $scaleeInFocus = $(this);
@@ -11906,7 +11898,8 @@ function closeBio(){
   } else {
     // - move newScalee to original position
     $newScalee.animate({
-      left: initialPos.left
+      left: initialPos.left,
+      height: initialHeight
     }, 400).addClass('fly-away');
     // - remove scalee and reset view
     window.setTimeout(function(){
@@ -11935,6 +11928,8 @@ function init() {
   // On mobile, bind click event------
   if ( isMobile ) {
     mobileEventsOn();
+  } else {
+    eventsOn();
   }
 }
 
@@ -12044,7 +12039,7 @@ function openPanel() {
 
   if (!isMobile) {
     // - turn off scroll-triggered nav when open
-    ScrollNav.eventsOff();
+    // ScrollNav.eventsOff();
     openFilters();
   }
 
@@ -12101,7 +12096,7 @@ function closePanel() {
     setFilterPos();
 
     // - turn back on scroll-triggered nav
-    ScrollNav.eventsOn();
+    // ScrollNav.eventsOn();
   }
 
   // - save state

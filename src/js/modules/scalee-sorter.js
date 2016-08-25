@@ -97,7 +97,7 @@ function openPanel() {
 
   if (!isMobile) {
     // - turn off scroll-triggered nav when open
-    ScrollNav.eventsOff();
+    // ScrollNav.eventsOff();
     openFilters();
   }
 
@@ -154,7 +154,7 @@ function closePanel() {
     setFilterPos();
 
     // - turn back on scroll-triggered nav
-    ScrollNav.eventsOn();
+    // ScrollNav.eventsOn();
   }
 
   // - save state

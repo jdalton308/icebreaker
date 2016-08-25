@@ -37,6 +37,7 @@ var $infoClose = $infoSlide.find('.close-btn');
 var $scaleeInFocus;
 var $newScalee;
 var initialPos;
+var initialHeight;
 var isMobile = Util.isMobile();
 
 
@@ -61,6 +62,7 @@ function eventsOff() {
 // Main Click Logic
 //------------------------
 function clickHandler() {
+  console.log('--scalee click--');
 
   // TODO: Insert scalee's data into .info-slide
 
@@ -76,12 +78,13 @@ function clickHandler() {
   $scaleeInFocus.addClass('invisible');
 
   // - animate newScalee into position
-  var targetLeft = 0.25;
+  var targetLeft = 0.1;
   var windowWidth = window.innerWidth;
   var newLeftPos = windowWidth * targetLeft;
 
   $newScalee.animate({
-    left: newLeftPos
+    left: newLeftPos,
+    height: (initialHeight * 3)
   }, 300);
 
   // - show info slide with bio and left-side overlay
@@ -96,8 +99,10 @@ function clickHandler() {
     var elPos = $el.offset();
     elPos.top = elPos.top + 7; // not sure why this is necessary
     elPos.left = elPos.left + 5;
+    initialHeight = $el.height();
+
     $newEl.css({
-      height: $el.height(),
+      height: initialHeight,
       top: elPos.top,
       left: elPos.left
     });
@@ -112,8 +117,8 @@ function clickHandler() {
   // TODO: Bind closing actions
 }
 function mobileClickHandler() {
-  
-  // TODO: Insert scalee's data into .info-slide
+
+  // TODO: Insert scalee's data into .info-slide  
 
   // - copy the clicked img src
   $scaleeInFocus = $(this);
@@ -158,7 +163,8 @@ function closeBio(){
   } else {
     // - move newScalee to original position
     $newScalee.animate({
-      left: initialPos.left
+      left: initialPos.left,
+      height: initialHeight
     }, 400).addClass('fly-away');
     // - remove scalee and reset view
     window.setTimeout(function(){
@@ -187,6 +193,8 @@ function init() {
   // On mobile, bind click event------
   if ( isMobile ) {
     mobileEventsOn();
+  } else {
+    eventsOn();
   }
 }
 

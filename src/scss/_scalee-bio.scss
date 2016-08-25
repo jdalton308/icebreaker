@@ -189,7 +189,7 @@
 		@media (min-width: $mobile) {
 			position: absolute;
 			overflow: hidden;
-			top: 50px;
+			top: 0;
 			width: 50%;
 			height: 100%;
 			padding-top: 50px; // arbitrary
@@ -273,7 +273,7 @@
 	} // end .info-slide
 
 	.scalee-bio-background {
-		position: fixed;
+		position: absolute;
 		left: 0;
 		bottom: 100%;
 		width: 100%;
@@ -287,7 +287,7 @@
 
 	// Showing the bio on desktop...
 	//--------------------------------
-	&.active2 {
+	&.active {
 
 		.info-slide {
 			&.show {
@@ -302,7 +302,7 @@
 			}
 		}
 		img.bio-scalee {
-			position: fixed;
+			position: absolute;
 			z-index: 5;
 			@include transition();
 			@include transform( scale(1.05) );

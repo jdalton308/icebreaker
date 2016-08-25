@@ -5,39 +5,48 @@
 .slide1 {
 	position: relative;
 	z-index: 0;
-	padding: 15vh 0 0;
+	height: 100vh;
+	padding: 5vh 0 0; //
+	@include transition();
 
 	@media (min-width: $mobile) {
 		.title-cont {
 		}
 	}
-
-	.title-cont {
-		position: relative;
-		top: 0; // declared for transition states
-		opacity: 1;
-		width: 100%;
-		max-width: 1170px;
-		margin: 0 auto 50px;
-		padding: 0 20px;
-		text-align: center;
-		@include transition();
-	}
 	.scalee-cont {
+		position: relative;
 		height: 40vh;
 		width: 100%;
 		margin-bottom: 30px;
 		text-align: center;
 		white-space: nowrap;
-		overflow-x: auto;
-		overflow-y: hidden;
+		overflow: hidden;
 		@include transition(1s);
 
 		img {
+			position: relative;
+			z-index: 1;
 			display: inline-block;
 			height: 100%;
 			@include transition(0.7s);
 
+			// Create stagger and overlap
+			margin-right: -20px;
+
+			&:nth-child(3n) {
+				z-index: 0;
+				@include transform( perspective(100px) scale(0.8) translateY(-45px) );
+			}
+			&:nth-child(4n) {
+				left: 5px;
+				@include transform( perspective(100px) translateZ(1px) );
+			}
+			&:nth-child(5n+1) {
+				right: 5px;
+				z-index: 0;
+				@include transform( perspective(100px) scale(0.8) translateY(-45px) );
+			}
+	
 			&.hide {
 				@include animation(hideScalee, 1s);
 			}
@@ -47,24 +56,38 @@
 		}
 
 		@media (min-width: $mobile) {
-			@include centerX();
-			bottom: 10vh;
+			height: 70vh;
 			margin: 0;
 			padding: 20px 0;
+		}
+	}
+	.scalee-background {
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		z-index: -1;
+		width: 100%;
+		height: 90%; // animated on slide focus
+		background-color: $sketchup-ltgray;
+		border-top: 1px solid $sketchup-medgray;
+		@include transition();
+
+		@media(min-width: $mobile) {
+
 		}
 	}
 
 	.control-panel {
 		position: relative;
 		width: 100%;
-		background-color: $sketchup-gray;
+		background-color: $new-blue;
 		box-shadow: 0 0 15px -2px $sketchup-gray;
 		@include transition();
 
 		@media (min-width: $mobile) {
 			position: absolute;
 			z-index: 3;
-			bottom: -150px;
+			bottom: 0;
 			left: 0;
 			padding-bottom: 5px;
 		}
@@ -93,8 +116,8 @@
 					top: 2px;
 					width: 12px;
 					height: 12px;
-					border-top: 3px solid $sketchup-gray;
-					border-right: 3px solid $sketchup-gray;
+					border-top: 3px solid $new-blue;
+					border-right: 3px solid $new-blue;
 					@include transform( rotate(135deg) translateY(6px) translateX(-2px) );
 					@include transition();
 				}
@@ -102,6 +125,7 @@
 
 			@media (min-width: $mobile) {
 				position: absolute;
+				z-index: 4;
 				bottom: 100%;
 
 				&:hover {
@@ -138,7 +162,7 @@
 					font-size: 1.3rem;
 					line-height: 1em;
 					color: $white;
-					background-color: $sketchup-gray;
+					background-color: $new-blue;
 				}
 				.wheel-shadow-holder {
 					position: relative;
@@ -149,11 +173,11 @@
 						position: absolute;
 						z-index: 3;
 						top: 0;
-						right: 0;
-						bottom: 0;
 						left: 0;
+						width: 100%;
+						height: 100%;
 						pointer-events: none;
-						box-shadow: inset 1px 0 25px $sketchup-gray;
+						box-shadow: inset 1px 0 25px $new-blue;
 					}
 				}
 				.wheel-selector {
@@ -165,8 +189,8 @@
 					pointer-events: auto;
 
 					color: $sketchup-gray;
-					border-left: 5px solid $sketchup-gray;
-					border-right: 5px solid $sketchup-gray;
+					border-left: 5px solid $new-blue;
+					border-right: 5px solid $new-blue;
 					background-color: $sketchup-gray;
 					@include transition();
 
@@ -177,7 +201,7 @@
 						text-align: center;
 						font-size: 1.7rem;
 						background-color: $sketchup-ltgray;
-						border-right: 3px solid $sketchup-gray;
+						border-right: 3px solid $new-blue;
 						@include transition(0.3s);
 
 						&:last-child {
@@ -202,6 +226,16 @@
 					width: auto;
 					margin: 0;
 
+					.wheel-shadow-holder {
+						overflow-x: hidden;
+
+						.shadow-frame {
+							width: 104%;
+							left: -2%;
+							box-shadow: inset 1px 0 10px 8px $new-blue;
+						}
+					}
+
 					.wheel-selector {
 						overflow: hidden;
 						width: 100%;
@@ -213,7 +247,7 @@
 							display: block;
 							width: 100%;
 							border-right: none;
-							border-bottom: 3px solid $sketchup-gray;
+							border-bottom: 3px solid $new-blue;
 							pointer-events: none;
 
 							&:last-child {
@@ -232,17 +266,13 @@
 	} // end .control-panel
 
 	// Show bottom control panel, hide title text, make scalees larger
-	&.active2 {
-		.title-cont {
-			top: -150px;
-			opacity: 0;
-		}
-		.control-panel {
-			bottom: 0;
+	&.active {
+		padding-top: 8vh;
+
+		.scalee-background {
+			height: 40%;
 		}
 		.scalee-cont {
-			bottom: 20vh;
-			height: 55vh;
 
 			&:hover {
 				img {
@@ -273,8 +303,14 @@
 				img {
 					pointer-events: none;
 					@include filter( blur(2px) grayscale(70%) );
-					@include transform( scale(1) );
+					// @include transform( scale(1) );
 				}
+			}
+		}
+
+		@media (min-width: $mobile) {
+			.scalee-cont {
+				height: 85vh;
 			}
 		}
 	}
@@ -322,10 +358,10 @@
 					}
 				}
 			}
-			.scalee-cont {
-				bottom: 45vh;
-				height: 35vh;
-			}
+			// .scalee-cont {
+			// 	bottom: 45vh;
+			// 	height: 35vh;
+			// }
 		}
 			
 	}

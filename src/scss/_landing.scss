@@ -1,0 +1,31 @@
+
+@include keyframes(landing) {
+	// height of slide is full screen, then 
+	0% {
+		min-height: 0;
+		height: 100vh;
+	}
+	20% {
+		height: 105vh;
+	}
+	100% {
+		min-height: 0;
+		height: 60vh;
+	}
+}
+
+.slide0 {
+	padding: 0;
+	background-color: $new-blue;
+	@include animation(landing, 1.2s, $curve2, 1s);
+
+	.title-box {
+		@include centerY();
+		right: 10%;
+		text-align: right;
+
+		.slide-number {
+			background-color: $new-red;
+		}
+	}
+}

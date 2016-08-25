@@ -14,7 +14,7 @@ body {
 }
 html {
 	font-size: $base-font-size;
-	font-family: $base-font-family;
+	font-family: $new-body-fonts;
 	color: $sketchup-gray;
 }
 body {
@@ -28,17 +28,19 @@ h3,
 h4,
 h5 {
 	margin-top: 0;
+	font-family: $new-header-fonts;
 }
 
 h1 {
 	font-size: $h1-font-size;
-	font-weight: 300;
+	font-weight: 900;
 	line-height: 1.2em;
 }
 h2 {
 	font-size: $h2-font-size;
 	font-weight: 300;
 	line-height: 1.2em;
+	font-family: $new-body-fonts;
 }
 h3 {
 	font-size: $h3-font-size;
@@ -116,32 +118,55 @@ button,
 }
 main {
 	width: 100vw;
-	overflow: hidden;
-
-	@media (min-width: $mobile) {
-		position: relative;
-		height: 100vh;
-	}
+	height: 100vh;
+	overflow-x: hidden;
+	overflow-y: auto;
 }
 .slide {
+	position: relative;
 	min-height: 100vh;
 	width: 100%;
 	padding: 50px 20px;
-	background-color: $sketchup-ltgray;
+	background-color: $white;
 	border-bottom: 1px solid $sketchup-gray;
 
 	@media (min-width: $mobile) {
-		position: absolute;
-		top: 100%;
-		left: 0;
-		height: 100vh;
-		padding: 0;
-		@include transition(0.9s);
+		// position: absolute;
+		// top: 100%;
+		// left: 0;
+		// min-height: 100vh;
+		// padding: 0;
+		// @include transition(0.9s);
 		
-		// Showing state
-		&.active {
-			top: 0;
-		}
+		// // Showing state
+		// &.active {
+		// 	top: 0;
+		// }
+	}
+}
+.title-box {
+	.slide-number {
+		display: inline-block;
+		margin-bottom: 10px;
+		padding: 10px;
+		font-size: 1.6rem;
+		color: $white;
+		background-color: $sketchup-gray;
+		box-shadow: 2px 2px 15px -3px $black;
+	}
+	h1 {
+		margin: 0 0 10px;
+	}
+	.underline {
+		display: inline-block;
+		width: 150px;
+		height: 3px;
+		margin-bottom: 7px;
+		background-color: $sketchup-gray;
+		box-shadow: 1px 1px 15px -3px $black;
+	}
+	h2 {
+		margin: 0;
 	}
 }
 

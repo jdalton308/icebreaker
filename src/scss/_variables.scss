@@ -4,23 +4,14 @@
 
 //// COLORS ////
 //-------------
-// $black:		    #000;
-// $grey:		    #666;
-// $light-grey:	#aaa;
-// $lighter-grey:  #ddd;
-// $off-white: 	#FAFAFA;
-// $white: 		#FFF;
-
-// $main-bg: 		$grey;
-// $text-color: 	$white;
-// $box-shadow: 	 4px 2px 20px -10px $black;
-// $box-shadow-active: 	 4px 2px 20px -14px $black;
+$new-red:     #D0011B;
+$new-blue:    #498FE1;
 
 
 //// FONTS ////
 //-------------
-// $base-font-size: 	20px;
-// $sansFamily: 		Arial, sans-serif;
+$new-header-fonts:  "Proxima Nova", arial, sans-serif;
+$new-body-fonts:    "Letter Gothic Std", "Lucida Console", Monaco, monospace;
 
 
 //// BREAKPOINTS ////
@@ -28,12 +19,6 @@
 $mobile:    768px;
 $tablet:    1024px;
 $desktop:   1200px;
-
-
-//// LAYOUT ////
-//-------------------
-// $container:   800px;
-// $container-lg:  1000px;
 
 
 //// OTHER ////
