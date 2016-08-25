@@ -1,18 +1,12 @@
 
 .slide3 {
+	padding: 10vh 0;
 
 	@media (min-width: $mobile) {
-		padding: 200px 0 100px;
-		overflow-y: auto;
-
-		.container {
-			min-height: 101%; // Need to make scrollable on desktop for js
-		}
 	}
 		
-	.title-cont {
+	.title-box {
 		margin-bottom: 70px;
-		text-align: center;
 	}
 	.job-postings {
 		position: relative;
@@ -21,107 +15,72 @@
 	}
 	.job-posting {
 		position: relative;
-		display: inline-block;
-		vertical-align: top;
-		width: 250px;
-		min-height: 250px; // arbitrary
-		margin-right: 3%;
-		margin-bottom: 3%;
-		padding: 20px 30px;
+		// display: inline-block;
+		// vertical-align: top;
+		// width: 250px;
+		max-height: 250px; // arbitrary
+		margin: 0 0 50px;
+		padding: 0 0 0 100px;
 
 		text-align: left;
-		color: $white;
-		border: 2px solid $sketchup-gray;
-		background-color: $sketchup-gray;
+		// color: $white;
+		// border: 2px solid $sketchup-gray;
+		// background-color: $sketchup-gray;
 		@include transition();
 		cursor: pointer;
 
-		&.placeholder {
-			background-color: transparent;
-			border-color: transparent;
+		// &.placeholder {
+		// 	background-color: transparent;
+		// 	border-color: transparent;
 
-			&:hover {
-				box-shadow: none;
-			}
-		}
+		// 	&:hover {
+		// 		box-shadow: none;
+		// 	}
+		// }
 
-		.title-bar {
-			@include centerMe();
-			width: 100%;
-			padding: 0 20px;
-			text-align: center;
-			overflow: hidden;
-			// @include transition(0.4s);
-			-webkit-transition: opacity 0.3s;
-			transition: opacity 0.3s;
+		.job-title-box {
+			// @include centerMe();
+			display: inline-block;
+			width: 200px;
+			height: 200px;
+			margin-right: 20px;
+			padding: 10px;
+			text-align: left;
+			background-color: $new-blue;
+			color: $white;
+			@include transition(0.4s);
 
-			.icon {
-				position: relative;
-				display: inline-block;
-				width: 70px;
-				height: 70px;
-				margin-bottom: 8px;
-				font-size: 5rem;
-				border: 2px solid transparent;
-				background-color: $sketchup-gray;
-				overflow: hidden;
-				@include transition(0.8s);
-
-				&:before {
-					@include centerMe();
-				}
-			}
-			h3 {
-				margin: 0 0 10px;
-			}
 			h4 {
 				margin: 0;
 			}
-			.close-btn {
-				display: none;
-				position: absolute;
-				top: 20px;
-				right: -80px;
-				display: inline-block;
-				vertical-align: top;
-				width: 41px;
-				height: 41px;
-				@include transition();
-				cursor: pointer;
-
-				&:before,
-				&:after {
-					content: '';
-					display: inline-block;
-					@include centerMe();
-					background-color: $sketchup-ltgray;
-				}
-				&:before {
-					width: 60%;
-					height: 2px;
-				}
-				&:after {
-					width: 2px;
-					height: 60%;
-				}
+			p {
+				margin: 0;
 			}
 		}
 		.posting-content {
-			max-height: 0;
-			padding: 0;
-			overflow: hidden;
-			// background-color: $white;
-			color: $sketchup-ltgray;
+			display: inline-block;
+			width: calc(100% - 230px);
+			vertical-align: top;
 			@include transition();
-			-webkit-transition-delay: 0.5s;
-			transition-delay: 0.5s;
 
+			.posting-description {
+				max-height: 140px;
+				overflow: hidden;
+				margin-bottom: 10px;
+				padding-top: 10px;
+
+				p {
+					font-size: 1.5rem;
+					line-height: 1.1em;
+				}
+			}
 			.button-row {
-				text-align: center;
+				text-align: right;
+				margin: 0;
 			}
 			a.button {
 				display: inline-block;
-				margin: 30px 0 0;
+				margin: 0;
 			}
 		}
 
@@ -193,22 +152,12 @@
 		}
 
 		@media (min-width: $mobile) {
-			width: 30%;
-			min-height: 300px; // arbitrary
+			// width: 30%;
+			// min-height: 300px; // arbitrary
 
 			&:hover {
 				.icon {
 					border-color: $sketchup-ltgray;
-				}
-			}
-
-			.title-bar {
-				.icon {
-					width: 120px;
-					height: 120px;
-					margin-bottom: 8px;
-					border-radius: 50%;
-					font-size: 6rem;
 				}
 			}
 

@@ -8,5 +8,5 @@ var TwoTruths = require('./modules/two-truths.js');
 // ScrollNav.init();
 ScaleeSorter.init();
 ScaleeBios.init();
-JobPostings();
+// JobPostings();
 TwoTruths.init();

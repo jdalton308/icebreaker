@@ -11019,7 +11019,7 @@ var TwoTruths = require('./modules/two-truths.js');
 // ScrollNav.init();
 ScaleeSorter.init();
 ScaleeBios.init();
-JobPostings();
+// JobPostings();
 TwoTruths.init();
 
 },{"./modules/job-postings.js":3,"./modules/scalee-bios.js":5,"./modules/scalee-sorter.js":6,"./modules/scroll-nav.js":7,"./modules/two-truths.js":8}],3:[function(require,module,exports){

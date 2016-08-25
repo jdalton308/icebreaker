@@ -1,28 +1,38 @@
 
-@include keyframes(landing) {
+@include keyframes(landingSlide) {
 	// height of slide is full screen, then 
 	0% {
 		min-height: 0;
 		height: 100vh;
 	}
-	20% {
-		height: 105vh;
+	17% {
+		height: 102vh;
 	}
 	100% {
 		min-height: 0;
 		height: 60vh;
 	}
 }
+@include keyframes(fadeIn) {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}
 
 .slide0 {
 	padding: 0;
 	background-color: $new-blue;
-	@include animation(landing, 0.7s, $curve2, 1s);
+	@include animation(landingSlide, 1.2s, $curve3, 2.6s);
 
 	.container {
 		@include centerMe();
+		text-align: right;
 	}
 	.title-box {
-		text-align: right;
+		opacity: 0; // animate in
+		@include animation(fadeIn, 1.5s, $curve3, 1.2s);
 	}
 }
