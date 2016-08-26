@@ -1,4 +1,5 @@
 
+var $ = require('jquery');
 var ScrollNav = require('./modules/scroll-nav.js');
 var ScaleeSorter = require('./modules/scalee-sorter.js');
 var ScaleeBios = require('./modules/scalee-bios.js');
@@ -10,3 +11,8 @@ ScaleeSorter.init();
 ScaleeBios.init();
 // JobPostings();
 TwoTruths.init();
+
+window.setTimeout(function(){
+	ScaleeSorter.center();
+}, 1500);
+	

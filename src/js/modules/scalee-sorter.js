@@ -27,6 +27,8 @@ var $scaleeCont = $('.scalee-cont');
 var $scalees = $scaleeCont.find('img');
 var $infoSlide = $('.info-slide');
 var $infoClose = $infoSlide.find('.close-btn');
+var $scaleeLeftBtn = $('.scalee-scroll.prev');
+var $scaleeRightBtn = $('.scalee-scroll.next');
 
 var $leaderTrigger = $('#leader-trigger');
 var $leaderCont = $('.leader-cont');
@@ -82,6 +84,15 @@ function eventsOn() {
   // Exit Leaderboard mode -----
   $leaderClose.click(function(){
     hideLeaderboard();
+  });
+
+
+  // Scroll scalees ------
+  $scaleeLeftBtn.click(function(){
+    scrollScalees(200);
+  });
+  $scaleeRightBtn.click(function(){
+    scrollScalees(-200);
   });
 }
 
@@ -204,6 +215,9 @@ function sort() {
 
   });
 
+  // 3. Center scalees
+  centerScalees();
+
 
   // Todo: Create "nobody found" message
 }
@@ -319,6 +333,51 @@ function switchLeaderTitle(newTitle) {
 }
 
 
+// Scalee lateral scrolling
+//-----------------------------
+var scaleeContWidth;
+var scaleeOffset;
+var windowCenter = window.innerWidth/2
+
+function centerScalees() {
+  console.log('centering scalees..');
+
+   // - get width
+  scaleeContWidth = $scaleeCont.width();
+  console.log('scaleeCont width: '+ scaleeContWidth);
+
+  // - check if even need to center
+  if (scaleeContWidth > window.innerWidth) {
+    // - get amount to move to left...
+    scaleeOffset = -(scaleeContWidth - window.innerWidth)/2;
+
+    console.log('new offset: '+ scaleeOffset);
+    // - move to left
+    $scaleeCont.css({
+      'left': scaleeOffset
+    });
+  }
+}
+
+function scrollScalees(dist) {
+  console.log('scrolling...');
+
+  // on each click, move (int) (if > 0, moves right)
+  scaleeOffset += dist;
+
+  // Prevent overscrolling
+  if ( (scaleeOffset > windowCenter) || (scaleeOffset < (-scaleeContWidth + windowCenter)) ) {
+    // reset to prev spot
+    scaleeOffset -= dist;
+    return;
+  }
+
+  $scaleeCont.css({
+    'left': scaleeOffset
+  });
+}
+
+
 // Initialize sorter
 //------------------
 function init() {
@@ -335,3 +394,4 @@ module.exports.init = init;
 module.exports.closePanel = closePanel;
 module.exports.sort = sort;
 module.exports.closeLeaders = hideLeaderboard;
+module.exports.center = centerScalees;
