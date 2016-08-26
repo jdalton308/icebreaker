@@ -77,53 +77,6 @@ p {
 	margin: 0 0 11px;
 }
 
-button,
-.button {
-	padding: 6px 20px 4px;
-	text-align: center;
-	font-size: 1.6rem;
-	line-height: 1.42em;
-	color: $sketchup-gray;
-	border: 2px solid $sketchup-gray;
-	box-shadow: none;
-	background-color: transparent;
-	@include transition(0.3s);
-	cursor: pointer;
-	font-family: $new-body-fonts;
-
-	&:focus {
-		outline: none;
-	}
-
-	&.red {
-		border-color: $sketchup-red;
-		color: $sketchup-red;
-
-		&:hover {
-			border-color: darken($sketchup-red, 10%);
-			color: darken($sketchup-red, 10%);
-		}
-	}
-	&.white {
-		border-color: $sketchup-ltgray;
-		color: $sketchup-ltgray;
-
-		&:hover {
-			border-color: $white;
-			color: $white;
-		}
-	}
-	&.blue {
-		padding: 14px 30px 8px;
-		border: none;
-		background-color: $new-blue;
-		color: $white;
-
-		&:hover {
-			background-color: darken($new-blue, 10%);
-		}
-	}
-}
 .container {
 	width: 100%;
 	max-width: 1170px;
@@ -183,6 +136,79 @@ main {
 	}
 	h2 {
 		margin: 0;
+	}
+}
+
+button,
+.button {
+	padding: 6px 20px 4px;
+	text-align: center;
+	font-size: 1.6rem;
+	line-height: 1.42em;
+	color: $sketchup-gray;
+	border: 2px solid $sketchup-gray;
+	box-shadow: none;
+	background-color: transparent;
+	@include transition(0.3s);
+	cursor: pointer;
+	font-family: $new-body-fonts;
+
+	&:focus {
+		outline: none;
+	}
+
+	&.red {
+		border-color: $sketchup-red;
+		color: $sketchup-red;
+
+		&:hover {
+			border-color: darken($sketchup-red, 10%);
+			color: darken($sketchup-red, 10%);
+		}
+	}
+	&.red-solid {
+		padding: 14px 30px 8px;
+		border: none;
+		background-color: $new-red;
+		color: $white;
+
+		&:hover {
+			background-color: darken($new-red, 5%);
+		}
+	}
+	&.white {
+		border-color: $sketchup-ltgray;
+		color: $sketchup-ltgray;
+
+		&:hover {
+			border-color: $white;
+			color: $white;
+		}
+	}
+	&.blue {
+		padding: 14px 30px 8px;
+		border: none;
+		background-color: $new-blue;
+		color: $white;
+
+		&:hover {
+			background-color: darken($new-blue, 10%);
+		}
+	}
+}
+.arrow-icon {
+	display: inline-block;
+		
+	&:before {
+		content: '';
+		display: inline-block;
+		position: relative;
+		top: 2px;
+		width: 12px;
+		height: 12px;
+		border-top: 3px solid $new-blue;
+		border-right: 3px solid $new-blue;
+		@include transition();
 	}
 }
 

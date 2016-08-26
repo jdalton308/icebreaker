@@ -18,12 +18,42 @@
 	.scalee-scroll {
 		@include centerY();
 		z-index: 2;
+		height: 45px;
+		width: 45px;
+		padding: 0;
+		font-size: 1.5rem;
+		background-color: $new-red;
+		color: $white;
+		box-shadow: $box-shadow;
+		border: none;
+
+		&:before {
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			border-color: $white;
+		}
+
+		&:active {
+			box-shadow: $box-shadow-active;
+		}
+		&:hover {
+			background-color: darken($new-red, 5%);
+		}
 
 		&.prev {
 			left: 20px;
+
+			&:before {
+				@include transform( translate(-30%, -50%) rotate(-135deg) );
+			}
 		}
 		&.next {
 			right: 20px;
+
+			&:before {
+				@include transform( translate(-70%, -50%) rotate(45deg) );
+			}
 		}
 	}
 	.scalee-cont {
@@ -70,7 +100,7 @@
 		}
 
 		@media (min-width: $mobile) {
-			height: 70vh;
+			height: 60vh;
 			margin: 0;
 			padding: 20px 0;
 		}
@@ -107,39 +137,27 @@
 		}
 
 		.open-panel {
-			width: 100%;
-			padding: 5px;
+			@include centerX();
+			top: -66px;
+			box-shadow: $box-shadow;
 
-			text-align: center;
-			background-color: $white;
-			cursor: pointer;
-			@include transition();
-
-			h3 {
-				margin: 0;
+			&:active {
+				box-shadow: $box-shadow-active;
 			}
+
 			.arrow-icon {
-				display: inline-block;
 				margin-left: 10px;
-					
+
 				&:before {
-					content: '';
-					display: inline-block;
-					position: relative;
-					top: 2px;
-					width: 12px;
-					height: 12px;
-					border-top: 3px solid $new-blue;
-					border-right: 3px solid $new-blue;
+					border-color: $white;
 					@include transform( rotate(135deg) translateY(6px) translateX(-2px) );
-					@include transition();
 				}
 			}
 
 			@media (min-width: $mobile) {
-				&:hover {
-					background-color: $white;
-				}
+				// &:hover {
+				// 	background-color: $white;
+				// }
 
 				.arrow-icon {
 					&:before {
@@ -277,13 +295,11 @@
 
 	// Show bottom control panel, hide title text, make scalees larger
 	&.active {
-		padding-top: 8vh;
-
 		.scalee-background {
 			height: 40%;
 		}
 		.scalee-cont {
-			top: 8vh;
+			top: 15vh;
 
 			&:hover {
 				img {
