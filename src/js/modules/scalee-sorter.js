@@ -2,7 +2,7 @@
 
 var $ = require('jquery');
 var LeaderData = require('./leaderboard-data.js');
-var ScrollNav = require('./scroll-nav.js');
+// var ScrollNav = require('./scroll-nav.js');
 var Util = require('./util.js');
 
 

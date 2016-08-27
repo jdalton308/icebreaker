@@ -80,7 +80,8 @@ body {
 html {
   font-size: 10px;
   font-family: "Letter Gothic Std", "Lucida Console", Monaco, monospace;
-  color: #363545; }
+  color: #363545;
+  background-color: #ffffff; }
 
 body.fixed {
   overflow: hidden; }
@@ -152,7 +153,6 @@ main {
   min-height: 100vh;
   width: 100%;
   padding: 50px 20px;
-  background-color: #ffffff;
   border-bottom: 1px solid #363545; }
 
 .title-box {
@@ -244,34 +244,11 @@ button,
     -webkit-transition: all 0.5s;
     transition: all 0.5s; }
 
-.dots-nav {
-  display: none; }
-  @media (min-width: 768px) {
-    .dots-nav {
-      display: block;
-      position: fixed;
-      z-index: 8;
-      top: 50%;
-      right: 20px;
-      -ms-transform: translateY(-50%);
-      -webkit-transform: translateY(-50%);
-      transform: translateY(-50%); }
-      .dots-nav .dot {
-        display: block;
-        padding: 12px;
-        cursor: pointer; }
-        .dots-nav .dot.current:before {
-          background-color: #e72b2d; }
-        .dots-nav .dot:before {
-          content: '';
-          display: inline-block;
-          width: 10px;
-          height: 10px;
-          border: 2px solid #e72b2d;
-          -webkit-transition: all 0.5s;
-          transition: all 0.5s; }
-        .dots-nav .dot:hover:before {
-          border-color: #000; } }
+#large-poly {
+  position: fixed;
+  z-index: 0;
+  top: -50%;
+  left: -50%; }
 
 @-webkit-keyframes hideScalee {
   0% {
@@ -331,7 +308,7 @@ button,
   .slide0 #landing-poly {
     position: absolute;
     top: -10%;
-    right: -20%; }
+    right: 40%; }
   .slide0 .title-box {
     position: relative;
     top: 50px; }
@@ -437,7 +414,7 @@ button,
         animation: showScalee 1s cubic-bezier(0.22, 0.07, 0.23, 0.99) 0s 1 normal forwards; }
     @media (min-width: 768px) {
       .slide1 .scalee-cont {
-        height: 60vh;
+        height: 85vh;
         margin: 0;
         padding: 20px 0; } }
   .slide1 .scalee-background {
