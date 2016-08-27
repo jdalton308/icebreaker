@@ -1,38 +1,70 @@
 
-@include keyframes(landingSlide) {
-	// height of slide is full screen, then 
-	0% {
-		min-height: 0;
-		height: 100vh;
-	}
-	17% {
-		height: 102vh;
-	}
-	100% {
-		min-height: 0;
-		height: 60vh;
-	}
-}
-@include keyframes(fadeIn) {
-	0% {
-		opacity: 0;
-	}
-	100% {
-		opacity: 1;
-	}
-}
+// @include keyframes(landingSlide) {
+// 	// height of slide is full screen, then 
+// 	0% {
+// 		min-height: 0;
+// 		height: 100vh;
+// 	}
+// 	17% {
+// 		height: 102vh;
+// 	}
+// 	100% {
+// 		min-height: 0;
+// 		height: 60vh;
+// 	}
+// }
+// @include keyframes(fadeIn) {
+// 	0% {
+// 		opacity: 0;
+// 	}
+// 	100% {
+// 		opacity: 1;
+// 	}
+// }
 
 .slide0 {
+	height: 100vh;
+	min-height: 0;
 	padding: 0;
 	background-color: $new-blue;
-	@include animation(landingSlide, 1.2s, $curve3, 2.6s);
+	// @include animation(landingSlide, 1.2s, $curve3, 2.6s);
 
 	.container {
 		@include centerMe();
+		// padding-top: 20vh;
 		text-align: right;
 	}
+
+	// svg element
+	#landing-poly {
+		position: absolute;
+		top: -10%;
+		right: -20%;
+	}
+
+	// Everything below is animated in and out
 	.title-box {
-		opacity: 0; // animate in
-		@include animation(fadeIn, 1.5s, $curve3, 1.2s);
+		position: relative;
+		top: 50px;
+
+		.slide-number {
+			position: relative;
+			opacity: 0;
+		}
+		h1 {
+			position: relative;
+			top: 30px;
+			opacity: 0;
+		}
+		.underline {
+			position: relative;
+			// top: 40px;
+			opacity: 0;
+		}
+		h2 {
+			position: relative;
+			top: 50px;
+			opacity: 0;
+		}
 	}
 }

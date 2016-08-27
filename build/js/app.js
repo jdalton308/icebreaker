@@ -11011,132 +11011,27 @@ return jQuery;
 },{}],2:[function(require,module,exports){
 
 var $ = require('jquery');
-var ScrollNav = require('./modules/scroll-nav.js');
+// var ScrollNav = require('./modules/scroll-nav.js');
 var ScaleeSorter = require('./modules/scalee-sorter.js');
 var ScaleeBios = require('./modules/scalee-bios.js');
-var JobPostings = require('./modules/job-postings.js');
+// var JobPostings = require('./modules/job-postings.js');
 var TwoTruths = require('./modules/two-truths.js');
+var ScrollAnimate = require('./modules/scroll-animation');
 
-// ScrollNav.init();
-ScaleeSorter.init();
-ScaleeBios.init();
-// JobPostings();
-TwoTruths.init();
+$(function(){
+	// ScrollNav.init();
+	ScaleeSorter.init();
+	ScaleeBios.init();
+	// JobPostings();
+	TwoTruths.init();
+	ScrollAnimate();
 
-window.setTimeout(function(){
-	ScaleeSorter.center();
-}, 1500);
+	window.setTimeout(function(){
+		ScaleeSorter.center();
+	}, 1500);
 	
-
-},{"./modules/job-postings.js":3,"./modules/scalee-bios.js":5,"./modules/scalee-sorter.js":6,"./modules/scroll-nav.js":7,"./modules/two-truths.js":8,"jquery":1}],3:[function(require,module,exports){
-'use strict';
-
-var $ = require('jquery');
-
-
-// ------------------------
-// Job Postings
-// ------------------------
-// - On click of posting tile...
-// 1/ Set position to top left of .job-postings
-// 2/ Insert a placeholder, so the other postings don't reorganzie
-// 2/ Change size of box to be width of .job-postings
-// 3/ Change height of box to allow content to show
-// 4/ Show .posting-content copy
-
-
-// Elements
-// ---------------
-var $postingCont = $('.job-postings');
-var $postings = $postingCont.children('.job-posting');
-var $titleBars = $postings.children('.title-bar');
-var $postingClose = $titleBars.children('.close-btn');
-
-// State Variables
-//------------------
-var originalPos;
-
-
-// Functions
-//-----------------
-function init() {
-
-	// Open Posting------
-	$postings.click(postingClickHandler);
-
-	// Close Posting-------
-	$postingClose.click(postingCloseHandler);
-}
-
-function postingClickHandler(){
-	var $this = $(this);
-	var $placeholder = $('<div class="job-posting placeholder"></div>');
-
-	// - insert placeholder
-	$placeholder.insertAfter($this);
-
-	// - position posting
-	originalPos = $this.position();
-	$this.addClass('open-start').css({
-		top: originalPos.top,
-		left: originalPos.left
-	});
-	window.setTimeout(function(){
-		$this.animate({
-		// - animate posting position
-			top: 0,
-			left: 0
-		}, 500);
-	}, 100);
-
-	window.setTimeout(function(){
-		$this.addClass('open-end');
-			// - change colors
-			// - show description
-			// - show close btn
-	}, 700);
-
-	// - remove click handler on this
-	console.log('turning off postings click...');
-	$postings.off();
-}
-
-function postingCloseHandler(ev){
-	ev.stopPropagation();
-
-	var $this = $(this);
-	var $postingParent = $this.closest('.open-end');
-
-	console.log('OriginalPos:');
-	console.log(originalPos);
-
-	// - animate back to position
-	$postingParent.addClass('close-start');
-
-	window.setTimeout(function(){
-		$postingParent.removeClass('open-end close-start').animate({
-			top: originalPos.top,
-			left: originalPos.left
-		}, 500);
-	}, 1000);
-		
-	window.setTimeout(function(){
-		// - remove placeholder
-		$postingParent.siblings('.placeholder').remove();
-		$postingParent.removeClass('open-start').attr('style', '');
-	}, 1700);
-
-
-	// - re-bind click event
-	console.log('rebinding postings click...');
-	$postings.click(postingClickHandler);
-}
-
-
-// Exports
-//---------------
-module.exports = init;
-},{"jquery":1}],4:[function(require,module,exports){
+});
+},{"./modules/scalee-bios.js":4,"./modules/scalee-sorter.js":5,"./modules/scroll-animation":6,"./modules/two-truths.js":8,"jquery":1}],3:[function(require,module,exports){
 
 var leaders = {
 	"discgolf": {
@@ -11738,7 +11633,7 @@ var scalees = [
 
 
 module.exports = leaders;
-},{}],5:[function(require,module,exports){
+},{}],4:[function(require,module,exports){
 'use strict';
 
 var $ = require('jquery');
@@ -11945,7 +11840,7 @@ function init() {
 module.exports.init = init;
 module.exports.on = eventsOn;
 module.exports.off = eventsOff;
-},{"./scroll-nav.js":7,"./two-truths.js":8,"./util.js":9,"jquery":1}],6:[function(require,module,exports){
+},{"./scroll-nav.js":7,"./two-truths.js":8,"./util.js":9,"jquery":1}],5:[function(require,module,exports){
 'use strict';
 
 var $ = require('jquery');
@@ -12004,10 +11899,8 @@ function eventsOn() {
   // Open/close filter panel -----
   $openFilter.click(function(){
     if (panelOpen) {
-      // console.log('closing panel...');
       closePanel();
     } else {
-      // console.log('opening panel...');
       openPanel();
     }
 
@@ -12288,18 +12181,14 @@ var scaleeOffset;
 var windowCenter = window.innerWidth/2
 
 function centerScalees() {
-  console.log('centering scalees..');
-
    // - get width
   scaleeContWidth = $scaleeCont.width();
-  console.log('scaleeCont width: '+ scaleeContWidth);
 
   // - check if even need to center
   if (scaleeContWidth > window.innerWidth) {
     // - get amount to move to left...
     scaleeOffset = -(scaleeContWidth - window.innerWidth)/2;
 
-    console.log('new offset: '+ scaleeOffset);
     // - move to left
     $scaleeCont.css({
       'left': scaleeOffset
@@ -12308,7 +12197,6 @@ function centerScalees() {
 }
 
 function scrollScalees(dist) {
-  console.log('scrolling...');
 
   // on each click, move (int) (if > 0, moves right)
   scaleeOffset += dist;
@@ -12344,7 +12232,93 @@ module.exports.sort = sort;
 module.exports.closeLeaders = hideLeaderboard;
 module.exports.center = centerScalees;
 
-},{"./leaderboard-data.js":4,"./scroll-nav.js":7,"./util.js":9,"jquery":1}],7:[function(require,module,exports){
+},{"./leaderboard-data.js":3,"./scroll-nav.js":7,"./util.js":9,"jquery":1}],6:[function(require,module,exports){
+'use strict';
+
+var $ = require('jquery');
+// var ScrollMagic = require('ScrollMagic');
+
+// NOTE: All GSAP dependencies are Scrollmagic plugins do not work with Browserify, so they have they are concatenated in their own gulp task, then loaded on the page in their own file
+
+// var TweenLite = require('../../../node_modules/gsap/src/uncompressed/TweenLite.js');
+// var TweenMax = require('../../../node_modules/gsap/src/uncompressed/TweenMax.js');
+// var TimelineMax = require('../../../node_modules/gsap/src/uncompressed/TimelineMax.js');
+// var TimelineLite = require('../../../node_modules/gsap/src/uncompressed/TimelineLite.js');
+// var gsap = require('gsap');
+// var animation.gsap = require('../../../node_modules/scrollmagic/scrollmagic/uncompressed/plugins/animation.gsap.js');
+
+
+
+// -------------------------------
+// Scroll-controlled Animations
+// -------------------------------
+
+function scrollAnimate() {
+
+	// Init Scroll Magic controller
+	var controller = new ScrollMagic.Controller();
+
+
+	//----------------
+	// Landing Slide
+	//--------------------
+	var slide1 = $('.slide0').get(0);
+	var $title1 = $('#title1');
+
+	var title1_el = $title1.get(0);
+	var title1_num = $title1.find('.slide-number').get(0);
+	var title1_h1 = $title1.find('h1').get(0);
+	var title1_line = $title1.find('.underline').get(0);
+	var title1_h2 = $title1.find('h2').get(0);
+
+	var landingPoly = document.getElementById('landing-poly');
+
+	// Since we have GSAP here, use it to animate in the landing, then use scrollmagic to animate it out
+	var intro_dur = 1;
+	var intro_delay = 1;
+
+	// Landing text animation
+	//-----------------------
+	var title1_tl = new TimelineMax();
+	title1_tl.to(title1_el, intro_dur, {top: 0}, intro_delay);
+	title1_tl.to(title1_num, intro_dur, {opacity: 1, top: 0}, intro_delay);
+	title1_tl.to(title1_h1, intro_dur, {opacity: 1, top: 0}, intro_delay);
+	title1_tl.to(title1_h2, intro_dur, {opacity: 1, top: 0}, intro_delay);
+	title1_tl.to(title1_line, 0.5, {opacity: 1, ease: Expo.easeOut});
+	// title1_tl.to(slide1, 1.3, {height: '80vh', ease: Elastic.easeOut.config(1, 0.5)});
+
+	// Landing floating polygon
+	//--------------------------
+	//ease: Power2.easeInOut
+	var title1_polytl = new TimelineMax({repeat:-1, yoyo:true});
+	title1_polytl.to(landingPoly, 12, {right:'50%', top:'0%', scale: 0.7, ease: Power0.easeNone});
+	title1_polytl.to(landingPoly, 7, {right:'90%', top:'5%', scale: 0.8, ease: Power0.easeNone});
+	title1_polytl.to(landingPoly, 12, {right:'0', top:'0', scale: 1.0, ease: Power0.easeNone});
+
+	// Landing scroll-out
+	//-------------------------
+	var title_out_dur = 1;
+
+	var title1_tlout = new TimelineMax;
+	title1_tlout.to(title1_el, title_out_dur, {top: 0}, 0);
+	title1_tlout.to(title1_num, title_out_dur, {opacity: 0.8, top: '-100px'}, 0);
+	title1_tlout.to(title1_h1, title_out_dur, {opacity: 0.8, top: '-90px', textShadow: '0 0 3px #000'}, 0);
+	title1_tlout.to(title1_line, title_out_dur, {opacity: 0.5, top: '-70px'}, 0);
+	title1_tlout.to(title1_h2, title_out_dur, {opacity: 0.8, top: '-50px', textShadow: '0 0 3px #000'}, 0);
+
+	var titleScene1 = new ScrollMagic.Scene({
+			triggerElement: slide1,
+			triggerHook: 'onLeave',
+			duration: '100%' // since slide0 is only 80vh
+		})
+		.setTween(title1_tlout)
+		.addTo(controller);
+
+}
+
+
+module.exports = scrollAnimate;
+},{"jquery":1}],7:[function(require,module,exports){
 'use strict';
 
 var $ = require('jquery');
@@ -12664,7 +12638,7 @@ function init() {
 module.exports.init = init;
 module.exports.eventsOff = eventsOff;
 module.exports.eventsOn = eventsOn;
-},{"./scalee-bios.js":5,"./scalee-sorter.js":6,"./util.js":9,"jquery":1}],8:[function(require,module,exports){
+},{"./scalee-bios.js":4,"./scalee-sorter.js":5,"./util.js":9,"jquery":1}],8:[function(require,module,exports){
 'use strict';
 
 var $ = require('jquery');
@@ -12746,7 +12720,7 @@ function initGame() {
 
 module.exports.init = initGame;
 module.exports.endGame = endGame;
-},{"./scalee-sorter.js":6,"jquery":1}],9:[function(require,module,exports){
+},{"./scalee-sorter.js":5,"jquery":1}],9:[function(require,module,exports){
 
 // ----------------
 // Utilities 

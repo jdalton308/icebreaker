@@ -56,10 +56,8 @@ function eventsOn() {
   // Open/close filter panel -----
   $openFilter.click(function(){
     if (panelOpen) {
-      // console.log('closing panel...');
       closePanel();
     } else {
-      // console.log('opening panel...');
       openPanel();
     }
 
@@ -340,18 +338,14 @@ var scaleeOffset;
 var windowCenter = window.innerWidth/2
 
 function centerScalees() {
-  console.log('centering scalees..');
-
    // - get width
   scaleeContWidth = $scaleeCont.width();
-  console.log('scaleeCont width: '+ scaleeContWidth);
 
   // - check if even need to center
   if (scaleeContWidth > window.innerWidth) {
     // - get amount to move to left...
     scaleeOffset = -(scaleeContWidth - window.innerWidth)/2;
 
-    console.log('new offset: '+ scaleeOffset);
     // - move to left
     $scaleeCont.css({
       'left': scaleeOffset
@@ -360,7 +354,6 @@ function centerScalees() {
 }
 
 function scrollScalees(dist) {
-  console.log('scrolling...');
 
   // on each click, move (int) (if > 0, moves right)
   scaleeOffset += dist;

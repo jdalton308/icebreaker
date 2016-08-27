@@ -17,6 +17,14 @@ var styleFiles = [
 // 		'node_modules/jquery/dist/jquery.min.js',
 // 		'./src/js/**/*.js'
 // 	];
+var gsapFiles = [
+		// './node_modules/gsap/src/uncompressed/TweenLite.js',
+		'./node_modules/gsap/src/uncompressed/TweenMax.js',
+		// './node_modules/gsap/src/uncompressed/TimelineLite.js',
+		'./node_modules/gsap/src/uncompressed/TimelineMax.js',
+		'./node_modules/scrollmagic/scrollmagic/uncompressed/ScrollMagic.js',
+		'./node_modules/scrollmagic/scrollmagic/uncompressed/plugins/animation.gsap.js',
+	];
 var htmlFiles = [
 		'./src/html/**/*.html'
 ]
@@ -27,6 +35,14 @@ gulp.task('styles', function() {
         .pipe(concat('main.css'))
         .pipe(sass())
         .pipe(gulp.dest('./build/css/'));
+});
+
+gulp.task('gsapScripts', function(){
+	gulp.src(gsapFiles)
+		.pipe(concat('gsap.js'))
+		// .pipe(uglify())
+		.pipe(gulp.dest('./build/js/'))
+		.on('error', gutil.log);
 });
 
 gulp.task('scripts', function(){
@@ -59,6 +75,6 @@ gulp.task('watch', function(){
     gulp.watch(['./src/html/**/*.html'], ['html'])
 });
 
-gulp.task('build', ['styles', 'scripts', 'html']);
+gulp.task('build', ['styles', 'scripts', 'gsapScripts', 'html']);
 
 gulp.task('default', ['build', 'watch', 'server']);
