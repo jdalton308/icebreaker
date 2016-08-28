@@ -152,8 +152,8 @@ p {
   padding: 50px 20px;
   border-bottom: 1px solid #363545; }
   .slide.slide2, .slide.slide3 {
-    padding-top: 20vh;
-    padding-bottom: 20vh; }
+    padding-top: 40vh;
+    padding-bottom: 40vh; }
 
 .title-box {
   position: relative;
@@ -161,7 +161,7 @@ p {
   max-width: 800px; }
   .title-box .slide-number {
     position: relative;
-    top: 50px;
+    top: -50px;
     opacity: 0;
     display: inline-block;
     margin-bottom: 20px;
@@ -173,7 +173,7 @@ p {
   .title-box h1 {
     position: relative;
     opacity: 0;
-    top: 70px;
+    top: -70px;
     margin: 0 0 15px; }
   .title-box .underline {
     position: relative;
@@ -187,7 +187,7 @@ p {
   .title-box h2 {
     position: relative;
     opacity: 0;
-    top: 100px;
+    top: -100px;
     margin: 0; }
 
 button,
@@ -324,22 +324,22 @@ button,
     transform: translate(-50%, -50%);
     text-align: right; }
   .slide0 .title-box {
-    position: relative;
-    top: 50px; }
+    opacity: 0; }
     .slide0 .title-box .slide-number {
-      position: relative;
+      top: 0;
       opacity: 0; }
     .slide0 .title-box h1 {
-      position: relative;
-      top: 30px;
-      opacity: 0; }
+      top: 0;
+      opacity: 1;
+      color: rgba(54, 53, 69, 0);
+      text-shadow: 0 0 15px #363545; }
     .slide0 .title-box .underline {
-      position: relative;
-      opacity: 0; }
+      top: 0; }
     .slide0 .title-box h2 {
-      position: relative;
-      top: 50px;
-      opacity: 0; }
+      top: 0;
+      opacity: 1;
+      color: rgba(54, 53, 69, 0);
+      text-shadow: 0 0 15px #363545; }
 
 .slide1 {
   position: relative;
@@ -1071,64 +1071,62 @@ button,
         color: #ffffff;
         box-shadow: 3px 3px 15px -1px #363545; } }
 
-.slide3 {
-  padding: 10vh 0; }
-  .slide3 .title-box {
+.slide.slide3 {
+  padding-bottom: 40vh; }
+  .slide.slide3 .title-box {
     margin-bottom: 70px; }
-  .slide3 .job-postings {
+  .slide.slide3 .job-postings {
     position: relative;
     text-align: center;
     padding-left: 4%; }
-  .slide3 .job-posting {
+  .slide.slide3 .job-posting {
     position: relative;
     max-height: 250px;
     margin: 0 0 50px;
     padding: 0 0 0 100px;
-    text-align: left;
-    -webkit-transition: all 0.5s;
-    transition: all 0.5s;
-    cursor: pointer; }
-    .slide3 .job-posting .job-title-box {
+    text-align: left; }
+    .slide.slide3 .job-posting .job-title-box {
       display: inline-block;
       width: 200px;
       height: 200px;
-      margin-right: 20px;
       padding: 10px;
       text-align: left;
       background-color: #498FE1;
-      color: #ffffff;
-      text-shadow: 0 0 15px #ffffff;
-      -webkit-transition: all 0.4s;
-      transition: all 0.4s; }
-      .slide3 .job-posting .job-title-box h4 {
+      color: rgba(255, 255, 255, 0);
+      text-shadow: 0 0 15px white;
+      box-shadow: 0 0 20px 10px #498fe1; }
+      .slide.slide3 .job-posting .job-title-box h4 {
         margin: 0; }
-      .slide3 .job-posting .job-title-box p {
+      .slide.slide3 .job-posting .job-title-box p {
         margin: 0; }
-    .slide3 .job-posting .posting-content {
+    .slide.slide3 .job-posting .posting-content {
       display: inline-block;
       width: calc(100% - 230px);
       vertical-align: top;
       -webkit-transition: all 0.5s;
       transition: all 0.5s; }
-      .slide3 .job-posting .posting-content .posting-description {
+      .slide.slide3 .job-posting .posting-content .posting-description {
         max-height: 140px;
         overflow: hidden;
         margin-bottom: 10px;
         padding-top: 10px;
-        text-shadow: 0 0 15px #000; }
-        .slide3 .job-posting .posting-content .posting-description p {
+        color: transparent;
+        text-shadow: 0 0 15px #363545; }
+        .slide.slide3 .job-posting .posting-content .posting-description p {
           font-size: 1.5rem;
-          line-height: 1.1em; }
-      .slide3 .job-posting .posting-content .button-row {
+          line-height: 1.1em;
+          padding-left: 20px; }
+      .slide.slide3 .job-posting .posting-content .button-row {
         text-align: right;
         margin: 0; }
-      .slide3 .job-posting .posting-content a.button {
+      .slide.slide3 .job-posting .posting-content a.button {
         position: relative;
         top: 100px;
         display: inline-block;
         margin: 0;
+        box-shadow: 2px 2px 15px -2px #000;
         -webkit-transition: background-color 0.5s;
         transition: background-color 0.5s; }
     @media (min-width: 768px) {
-      .slide3 .job-posting:hover .icon {
+      .slide.slide3 .job-posting:hover .icon {
         border-color: #f3f3f7; } }

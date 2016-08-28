@@ -12282,17 +12282,35 @@ function scrollAnimate() {
 
 	// Since we have GSAP here, use it to animate in the landing, then use scrollmagic to animate it out
 	var intro_dur = 1;
-	var intro_delay = 1;
+	var intro_delay = 2.2;
+
+	// Text blur/focus objects
+	var textFocusObj = {
+		color: 'rgba(54, 53, 69, 1)',
+		textShadow: '0 0 10px rgba(54, 53, 69, 0)'
+	};
+	var textBlurObj = {
+		color: 'rgba(54, 53, 69, 0)',
+		textShadow: '0 0 10px rgba(54, 53, 69, 1)'
+	}
+	var whiteTextBlur = {
+		color:'rgba(255,255,255,0)', 
+		textShadow:'0 0 15px rgba(255,255,255,1)',
+	}
+	var whiteTextFocus = {
+		color:'rgba(255,255,255,1)', 
+		textShadow:'0 0 15px rgba(255,255,255,0)',
+	}
 
 
 	// Landing text animation
 	//-----------------------
 	var title1_tl = new TimelineMax();
-	title1_tl.to(title1_el, intro_dur, {top: 0}, intro_delay);
-	title1_tl.to(title1_num, intro_dur, {opacity: 1, top: 0}, intro_delay);
-	title1_tl.to(title1_h1, intro_dur, {opacity: 1, top: 0}, intro_delay);
-	title1_tl.to(title1_h2, intro_dur, {opacity: 1, top: 0}, intro_delay);
-	title1_tl.to(title1_line, 0.8, {opacity: 1, ease: Expo.easeOut});
+	title1_tl.to(title1_el, intro_dur, {opacity: 1, top:0}, 1);
+	title1_tl.to(title1_h1, intro_dur, textFocusObj, intro_delay);
+	title1_tl.to(title1_h2, intro_dur, textFocusObj, intro_delay);
+	title1_tl.to(title1_num, intro_dur/2, {opacity: 1});
+	title1_tl.to(title1_line, intro_dur/2, {opacity: 1, ease: Expo.easeOut});
 	// title1_tl.to(slide1, 2, {height: '80vh', ease: Elastic.easeOut.config(1, 0.5)});
 
 
@@ -12301,11 +12319,20 @@ function scrollAnimate() {
 	var title_out_dur = 1;
 
 	var title1_tlout = new TimelineMax();
-	// title1_tlout.to(title1_el, title_out_dur, {top: '150px'}, 0);
-	title1_tlout.to(title1_num, title_out_dur, {top: '-150px', opacity:0}, 0);
-	title1_tlout.to(title1_h1, title_out_dur, {top: '-70px', opacity:0}, 0);
+
+	// Slide down and fade out
+	// // title1_tlout.to(title1_el, title_out_dur, {top: '150px'}, 0);
+	// title1_tlout.to(title1_num, title_out_dur, {top: '50px', opacity:0}, 0);
+	// title1_tlout.to(title1_h1, title_out_dur, {top: '70px', opacity:0}, 0);
+	// title1_tlout.to(title1_line, title_out_dur, {top: '0px', opacity:0}, 0);
+	// title1_tlout.to(title1_h2, title_out_dur, {top: '100px', opacity:0}, 0);
+
+	// Blur out
+	title1_tlout.to(title1_num, title_out_dur, whiteTextBlur, 0);
+	title1_tlout.to(title1_h1, title_out_dur, textBlurObj, 0);
 	title1_tlout.to(title1_line, title_out_dur, {top: '0px', opacity:0}, 0);
-	title1_tlout.to(title1_h2, title_out_dur, {top: '80px', opacity:0}, 0);
+	title1_tlout.to(title1_h2, title_out_dur, textBlurObj, 0);
+
 
 	var landingTextScene = new ScrollMagic.Scene({
 			triggerElement: slide1,
@@ -12393,7 +12420,7 @@ function scrollAnimate() {
 	//-----------------------
 
 	// Constructor function
-	function newTitleScene($titleBox) {
+	function newTitleBoxScene($titleBox) {
 
 		// - define elements
 		var title_el = $titleBox.get(0);
@@ -12416,10 +12443,10 @@ function scrollAnimate() {
 			newTitle_tl.to(title_line, in_duration, {opacity: 1, ease: Expo.easeOut}, in_delay);
 			// - animations out
 			// newTitle_tl.to(title_el, title_out_dur, {top: '150px'}, (in_duration+in_delay));
-			newTitle_tl.to(title_num, title_out_dur, {top:'-50px'}, (in_duration+in_delay));
-			newTitle_tl.to(title_h1, title_out_dur, {top:'-70px'}, (in_duration+in_delay));
+			newTitle_tl.to(title_num, title_out_dur, {top:'50px'}, (in_duration+in_delay));
+			newTitle_tl.to(title_h1, title_out_dur, {top:'70px'}, (in_duration+in_delay));
 			newTitle_tl.to(title_line, title_out_dur, {top:'0px', opacity:0}, (in_duration+in_delay));
-			newTitle_tl.to(title_h2, title_out_dur, {top:'-100px'}, (in_duration+in_delay));
+			newTitle_tl.to(title_h2, title_out_dur, {top:'100px'}, (in_duration+in_delay));
 
 		// - bind to scroll
 		var newTitleScene = new ScrollMagic.Scene({
@@ -12434,8 +12461,8 @@ function scrollAnimate() {
 	}
 
 	// Create .title-box scenes
-	var titleScene2 = newTitleScene($('#title2'));
-	var titleScene3 = newTitleScene($('#title3'));
+	var titleBoxScene2 = newTitleBoxScene($('#title2'));
+	var titleBoxScene3 = newTitleBoxScene($('#title3'));
 
 
 
@@ -12498,28 +12525,34 @@ function scrollAnimate() {
 		// - elements
 		var post_el = $postEl.get(0);
 		var $titleBox = $postEl.find('.job-title-box');
+		var titleBox_el = $titleBox.get(0);
 		var $content = $postEl.find('.posting-description');
 		var content_el = $content.get(0);
 		var $buttonRow = $postEl.find('.button-row');
 		var button_el = $buttonRow.find('.button').get(0);
 
 		var in_duration = 1;
-		var pause_duration = 0;
 		var out_duration = 1;
-		var outDelay = pause_duration + out_duration;
 
 		// - create timeline
 		var job_tl = new TimelineMax();
-			job_tl.to(content_el, in_duration, {textShadow: '0 0 0 transparent'}, 0);
-			job_tl.to(button_el, in_duration, {top: 0}, 0);
-			job_tl.to(content_el, out_duration, {textShadow: '0 0 15px #000'}, in_duration);
-			job_tl.to(button_el, out_duration, {top:'-100px'}, in_duration);
+			job_tl.to(content_el, in_duration, {
+					textShadow:'0px 0px 0px rgba(0,0,0,0)', 
+					color:'#363545'
+				}, 0);
+			job_tl.to(titleBox_el, in_duration, {
+					textShadow:'0px 0px 0px rgba(255,255,255,0)', 
+					color:'#FFF', 
+					boxShadow:'0 0 20px 10px rgba(73,143,225, 0)', 
+				}, 0);
+			job_tl.to(button_el, (in_duration*3), {top:'-50px'}, 0);
 
 		// Create Scene
 		var jobScene = new ScrollMagic.Scene({
 				triggerElement: post_el,
 				triggerHook: 'onEnter',
-				duration: '110%'
+				offset: 200,
+				duration: '100%'
 			})
 			.setTween(job_tl)
 			.addTo(controller);

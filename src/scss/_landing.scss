@@ -37,26 +37,35 @@
 
 	// Everything below is animated in and out
 	.title-box {
-		position: relative;
-		top: 50px;
+		// top: -50px;
+		opacity: 0;
 
 		.slide-number {
-			position: relative;
+			top: 0;
 			opacity: 0;
+
+			// animate in from blur
+			// color: rgba(255,255,255, 0); // -> white
+			// text-shadow: 0 0 15px rgba(255,255,255, 1); // -> opacity:0
 		}
 		h1 {
-			position: relative;
-			top: 30px;
-			opacity: 0;
+			top: 0;
+			opacity: 1;
+
+			// animate in from blur
+			color: $su-gray-rgba-0;
+			text-shadow: 0 0 15px $su-gray-rgba;
 		}
 		.underline {
-			position: relative;
-			opacity: 0;
+			top: 0;
 		}
 		h2 {
-			position: relative;
-			top: 50px;
-			opacity: 0;
+			top: 0;
+			opacity: 1;
+
+			// animate in from blur
+			color: $su-gray-rgba-0;
+			text-shadow: 0 0 15px $su-gray-rgba;
 		}
 	}
 }

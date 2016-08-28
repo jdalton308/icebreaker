@@ -95,8 +95,8 @@ p {
 
 	&.slide2,
 	&.slide3 {
-		padding-top: 20vh;
-		padding-bottom: 20vh;
+		padding-top: 40vh;
+		padding-bottom: 40vh;
 	}
 
 	@media (min-width: $mobile) {
@@ -120,7 +120,7 @@ p {
 
 	.slide-number {
 		position: relative;
-		top: 50px;
+		top: -50px;
 		opacity: 0;
 		display: inline-block;
 		margin-bottom: 20px;
@@ -133,7 +133,7 @@ p {
 	h1 {
 		position: relative;
 		opacity: 0;
-		top: 70px;
+		top: -70px;
 		margin: 0 0 15px;
 	}
 	.underline {
@@ -149,7 +149,7 @@ p {
 	h2 {
 		position: relative;
 		opacity: 0;
-		top: 100px;
+		top: -100px;
 		margin: 0;
 	}
 }
