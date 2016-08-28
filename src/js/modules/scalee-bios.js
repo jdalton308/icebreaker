@@ -84,6 +84,7 @@ function clickHandler() {
 
   $newScalee.animate({
     left: newLeftPos,
+    top: 50,
     height: (initialHeight * 3)
   }, 300);
 
@@ -95,10 +96,21 @@ function clickHandler() {
 
 
   function copyScalee($el) {
+
     var $newEl = $el.clone().removeClass('show').addClass('bio-scalee');
-    var elPos = $el.offset();
-    elPos.top = elPos.top + 7; // not sure why this is necessary
-    elPos.left = elPos.left + 5;
+    var elPos = $el.position();
+
+    // Calculate left position in window
+    var scaleeContLeft = parseInt( $scaleeCont.css('left'), 10);
+    elPos.left = elPos.left + scaleeContLeft;
+
+    // Calculate top position in element
+    var scaleeContTop = $scaleeCont.position().top;
+    elPos.top += scaleeContTop;
+
+    // Tweaks...
+    elPos.top += 7; // not sure why the extra px are necessary
+    elPos.left += 5;
     initialHeight = $el.height();
 
     $newEl.css({
@@ -164,6 +176,7 @@ function closeBio(){
     // - move newScalee to original position
     $newScalee.animate({
       left: initialPos.left,
+      top: initialPos.top,
       height: initialHeight
     }, 400).addClass('fly-away');
     // - remove scalee and reset view

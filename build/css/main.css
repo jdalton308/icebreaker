@@ -151,11 +151,18 @@ p {
   width: 100%;
   padding: 50px 20px;
   border-bottom: 1px solid #363545; }
+  .slide.slide2, .slide.slide3 {
+    padding-top: 20vh;
+    padding-bottom: 20vh; }
 
 .title-box {
+  position: relative;
   display: inline-block;
   max-width: 800px; }
   .title-box .slide-number {
+    position: relative;
+    top: 50px;
+    opacity: 0;
     display: inline-block;
     margin-bottom: 20px;
     padding: 10px 10px 8px;
@@ -164,8 +171,13 @@ p {
     background-color: #D0011B;
     box-shadow: 2px 2px 15px -3px #000; }
   .title-box h1 {
+    position: relative;
+    opacity: 0;
+    top: 70px;
     margin: 0 0 15px; }
   .title-box .underline {
+    position: relative;
+    opacity: 0;
     display: inline-block;
     width: 150px;
     height: 3px;
@@ -173,6 +185,9 @@ p {
     background-color: #363545;
     box-shadow: 1px 1px 15px -3px #000; }
   .title-box h2 {
+    position: relative;
+    opacity: 0;
+    top: 100px;
     margin: 0; }
 
 button,
@@ -681,7 +696,11 @@ button,
       display: block;
       margin-bottom: 15px; }
       .slide1 .info-slide .content-cont .title-box h1 {
-        margin-bottom: 20px; }
+        position: static;
+        margin-bottom: 20px;
+        opacity: 1; }
+      .slide1 .info-slide .content-cont .title-box .underline {
+        opacity: 1; }
     .slide1 .info-slide .content-cont .description-cont {
       position: relative;
       margin-bottom: 50px; }
@@ -966,13 +985,12 @@ button,
     .slide1.leader-mode .scalee-cont {
       bottom: 100vh; } }
 
-.slide2 {
-  padding-top: 8vh;
+.slide.slide2 {
   text-align: right;
-  padding-bottom: 150px; }
-  .slide2 .title-box {
+  padding-bottom: calc(20vh + 110px); }
+  .slide.slide2 .title-box {
     margin: 0 0 30vh; }
-  .slide2 a.nav-box {
+  .slide.slide2 a.nav-box {
     position: relative;
     display: block;
     width: 260px;
@@ -983,21 +1001,21 @@ button,
     color: #ffffff;
     background-color: #D0011B;
     box-shadow: 2px 2px 15px -3px #000; }
-    .slide2 a.nav-box .icon {
+    .slide.slide2 a.nav-box .icon {
       display: inline-block;
       position: absolute;
       z-index: 2;
-      top: 90%;
+      top: 180%;
       right: -15px;
       height: 60px;
       width: 60px;
       border-radius: 50%;
       background-color: #ffffff;
       color: #D0011B;
-      -webkit-transition: all 0.5s;
-      transition: all 0.5s;
-      box-shadow: 2px 2px 15px -3px #000; }
-      .slide2 a.nav-box .icon:before {
+      box-shadow: 2px 2px 15px -3px #000;
+      -webkit-transition: box-shadow 0.4s, background-color 0.6s, color 0.4s;
+      transition: box-shadow 0.4s, background-color 0.6s, color 0.4s; }
+      .slide.slide2 a.nav-box .icon:before {
         position: absolute;
         top: 50%;
         left: 50%;
@@ -1005,48 +1023,52 @@ button,
         -webkit-transform: translate(-50%, -50%);
         transform: translate(-50%, -50%);
         font-size: 2.5rem; }
-    .slide2 a.nav-box h5 {
-      margin-bottom: 10px; }
-    .slide2 a.nav-box p {
+    .slide.slide2 a.nav-box h5 {
+      margin-bottom: 10px;
+      text-shadow: 0 0 20px #ffffff; }
+    .slide.slide2 a.nav-box p {
       margin: 0;
-      line-height: 1.2em; }
-    .slide2 a.nav-box .poly {
+      line-height: 1.2em;
+      text-shadow: 0 0 20px #ffffff; }
+    .slide.slide2 a.nav-box .poly {
       display: inline-block;
       position: absolute;
       top: 100%;
       width: 0;
       height: 0; }
-    .slide2 a.nav-box .bottom-right-poly {
+    .slide.slide2 a.nav-box .bottom-right-poly {
       right: 0;
       border-top: 100px solid #D0011B;
       border-right: 95px solid #D0011B;
       border-bottom: 10px solid transparent;
       border-left: 103px solid transparent; }
-    .slide2 a.nav-box .bottom-left-poly {
+    .slide.slide2 a.nav-box .bottom-left-poly {
       left: 0; }
-    .slide2 a.nav-box:nth-child(1) .bottom-left-poly {
+    .slide.slide2 a.nav-box:nth-child(1) .bottom-left-poly {
       border-top: 15px solid #D0011B;
       border-right: 200px solid #D0011B;
       border-bottom: 4px solid transparent;
       border-left: 12px solid transparent; }
-    .slide2 a.nav-box:nth-child(2) .bottom-left-poly {
+    .slide.slide2 a.nav-box:nth-child(2) .bottom-left-poly {
       border-top: 15px solid #D0011B;
       border-right: 200px solid #D0011B;
       border-bottom: 40px solid transparent;
       border-left: 12px solid transparent; }
-    .slide2 a.nav-box:nth-child(3) .bottom-left-poly {
+    .slide.slide2 a.nav-box:nth-child(3) .bottom-left-poly {
       border-top: 40px solid #D0011B;
       border-right: 70px solid transparent;
       border-bottom: 0px solid transparent;
       border-left: 20px solid #D0011B; }
   @media (min-width: 768px) {
-    .slide2 a.nav-box {
+    .slide.slide2 a.nav-box {
       display: inline-block;
       vertical-align: top;
       margin: 0 50px 0 0; }
-      .slide2 a.nav-box:last-child {
+      .slide.slide2 a.nav-box:last-child {
         margin-right: 0; }
-      .slide2 a.nav-box:hover .icon {
+      .slide.slide2 a.nav-box:hover .icon {
+        background-color: #D0011B;
+        color: #ffffff;
         box-shadow: 3px 3px 15px -1px #363545; } }
 
 .slide3 {
@@ -1075,6 +1097,7 @@ button,
       text-align: left;
       background-color: #498FE1;
       color: #ffffff;
+      text-shadow: 0 0 15px #ffffff;
       -webkit-transition: all 0.4s;
       transition: all 0.4s; }
       .slide3 .job-posting .job-title-box h4 {
@@ -1091,7 +1114,8 @@ button,
         max-height: 140px;
         overflow: hidden;
         margin-bottom: 10px;
-        padding-top: 10px; }
+        padding-top: 10px;
+        text-shadow: 0 0 15px #000; }
         .slide3 .job-posting .posting-content .posting-description p {
           font-size: 1.5rem;
           line-height: 1.1em; }
@@ -1099,64 +1123,12 @@ button,
         text-align: right;
         margin: 0; }
       .slide3 .job-posting .posting-content a.button {
+        position: relative;
+        top: 100px;
         display: inline-block;
-        margin: 0; }
-    .slide3 .job-posting.open-start {
-      position: absolute;
-      z-index: 3;
-      cursor: auto;
-      -webkit-transition: all 0s;
-      transition: all 0s; }
-      .slide3 .job-posting.open-start .title-bar {
-        opacity: 0; }
-        .slide3 .job-posting.open-start .title-bar .icon {
-          height: 0;
-          display: none; }
-    .slide3 .job-posting.open-end {
-      width: 100%;
-      min-height: calc(100%);
-      background-color: #363545;
-      color: #f3f3f7;
-      -webkit-transition: all 0.5s;
-      transition: all 0.5s; }
-      .slide3 .job-posting.open-end .title-bar {
-        position: static;
-        opacity: 1;
-        padding-bottom: 15px;
-        border-bottom: 1px solid #f3f3f7;
-        -ms-transform: none;
-        -webkit-transform: none;
-        transform: none; }
-        .slide3 .job-posting.open-end .title-bar .close-btn {
-          right: 20px;
-          -ms-transform: rotate(315deg);
-          -webkit-transform: rotate(315deg);
-          transform: rotate(315deg); }
-          .slide3 .job-posting.open-end .title-bar .close-btn:hover {
-            -ms-transform: rotate(45deg);
-            -webkit-transform: rotate(45deg);
-            transform: rotate(45deg); }
-      .slide3 .job-posting.open-end .posting-content {
-        max-height: 1000px;
-        padding-top: 20px;
-        padding-bottom: 15px; }
-      .slide3 .job-posting.open-end.close-start {
-        width: 30%;
-        min-height: 300px;
-        background-color: #363545;
-        -webkit-transition-delay: 0.5s;
-        transition-delay: 0.5s; }
-        .slide3 .job-posting.open-end.close-start .posting-content {
-          max-height: 0;
-          padding: 0;
-          -webkit-transition-delay: 0s;
-          transition-delay: 0s; }
-        .slide3 .job-posting.open-end.close-start .title-bar {
-          opacity: 0; }
-      .slide3 .job-posting.open-end:hover {
-        -ms-transform: none;
-        -webkit-transform: none;
-        transform: none; }
+        margin: 0;
+        -webkit-transition: background-color 0.5s;
+        transition: background-color 0.5s; }
     @media (min-width: 768px) {
       .slide3 .job-posting:hover .icon {
         border-color: #f3f3f7; } }

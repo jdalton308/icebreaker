@@ -90,7 +90,12 @@
 				margin-bottom: 15px;
 
 				h1 {
+					position: static;
 					margin-bottom: 20px;
+					opacity: 1;
+				}
+				.underline {
+					opacity: 1;
 				}
 			}
 			.description-cont {

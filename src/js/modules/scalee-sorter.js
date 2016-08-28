@@ -192,6 +192,7 @@ function sort() {
     filters.push(filterValue);
   });
 
+
   // 2. Loop through all scalees and see if 'data-tag' attributes match all filters
   $scalees.each(function(){
     var $this = $(this);
@@ -212,6 +213,7 @@ function sort() {
     }
 
   });
+
 
   // 3. Center scalees
   centerScalees();

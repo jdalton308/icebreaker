@@ -93,6 +93,12 @@ p {
 	padding: 50px 20px;
 	border-bottom: 1px solid $sketchup-gray;
 
+	&.slide2,
+	&.slide3 {
+		padding-top: 20vh;
+		padding-bottom: 20vh;
+	}
+
 	@media (min-width: $mobile) {
 		// position: absolute;
 		// top: 100%;
@@ -108,10 +114,14 @@ p {
 	}
 }
 .title-box {
+	position: relative;
 	display: inline-block;
 	max-width: 800px;
 
 	.slide-number {
+		position: relative;
+		top: 50px;
+		opacity: 0;
 		display: inline-block;
 		margin-bottom: 20px;
 		padding: 10px 10px 8px;
@@ -121,9 +131,14 @@ p {
 		box-shadow: 2px 2px 15px -3px $black;
 	}
 	h1 {
+		position: relative;
+		opacity: 0;
+		top: 70px;
 		margin: 0 0 15px;
 	}
 	.underline {
+		position: relative;
+		opacity: 0;
 		display: inline-block;
 		width: 150px;
 		height: 3px;
@@ -132,6 +147,9 @@ p {
 		box-shadow: 1px 1px 15px -3px $black;
 	}
 	h2 {
+		position: relative;
+		opacity: 0;
+		top: 100px;
 		margin: 0;
 	}
 }

@@ -15,31 +15,15 @@
 	}
 	.job-posting {
 		position: relative;
-		// display: inline-block;
-		// vertical-align: top;
-		// width: 250px;
 		max-height: 250px; // arbitrary
 		margin: 0 0 50px;
 		padding: 0 0 0 100px;
 
 		text-align: left;
-		// color: $white;
-		// border: 2px solid $sketchup-gray;
-		// background-color: $sketchup-gray;
 		@include transition();
 		cursor: pointer;
 
-		// &.placeholder {
-		// 	background-color: transparent;
-		// 	border-color: transparent;
-
-		// 	&:hover {
-		// 		box-shadow: none;
-		// 	}
-		// }
-
 		.job-title-box {
-			// @include centerMe();
 			display: inline-block;
 			width: 200px;
 			height: 200px;
@@ -48,6 +32,7 @@
 			text-align: left;
 			background-color: $new-blue;
 			color: $white;
+			text-shadow: 0 0 15px $white;
 			@include transition(0.4s);
 
 			h4 {
@@ -68,6 +53,7 @@
 				overflow: hidden;
 				margin-bottom: 10px;
 				padding-top: 10px;
+				text-shadow: 0 0 15px $black;				
 
 				p {
 					font-size: 1.5rem;
@@ -79,75 +65,12 @@
 				margin: 0;
 			}
 			a.button {
+				position: relative;
+				top: 100px; // animated into place
 				display: inline-block;
 				margin: 0;
-			}
-		}
-
-		&.open-start {
-			position: absolute;
-			z-index: 3;
-			cursor: auto;
-			@include transition(0s);
-
-			.title-bar {
-				opacity: 0;
-
-				.icon {
-					height: 0;
-					display: none;
-				}
-			}
-		}
-		&.open-end {
-			width: 100%;
-			min-height: calc(100%);
-			background-color: $sketchup-gray;
-			color: $sketchup-ltgray;
-			@include transition();
-
-			.title-bar {
-				position: static;
-				opacity: 1;
-				padding-bottom: 15px;
-				border-bottom: 1px solid $sketchup-ltgray;
-				@include transform( none );
-
-				.close-btn {
-					right: 20px;
-					@include transform( rotate(315deg) );
-
-					&:hover {
-						@include transform( rotate(45deg) );
-					}
-				}
-			}
-			.posting-content {
-				max-height: 1000px; // arbitrary height
-				padding-top: 20px;
-				padding-bottom: 15px;
-			}
-
-			&.close-start {
-				width: 30%;
-				min-height: 300px;
-				background-color: $sketchup-gray;
-				-webkit-transition-delay: 0.5s;
-				transition-delay: 0.5s;
-
-				.posting-content {
-					max-height: 0;
-					padding: 0;
-					-webkit-transition-delay: 0s;
-					transition-delay: 0s;
-				}
-				.title-bar {
-					opacity: 0;
-				}
-			}
-
-			&:hover {
-				@include transform( none );
+				-webkit-transition: background-color 0.5s;
+				transition: background-color 0.5s;
 			}
 		}
 

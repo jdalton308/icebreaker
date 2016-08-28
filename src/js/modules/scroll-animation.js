@@ -111,7 +111,7 @@ function scrollAnimate() {
 	var landingPolyScene = new ScrollMagic.Scene({
 			triggerElement: slide1,
 			triggerHook: 'onLeave',
-			duration: '400%'
+			duration: '500%'
 		})
 		.setTween(smallPoly_tl)
 		.addTo(controller);
@@ -130,7 +130,7 @@ function scrollAnimate() {
 	var polyScene = new ScrollMagic.Scene({
 			triggerElement: slide2_el,
 			triggerHook: '1',
-			duration: '400%' // last entire page
+			duration: '500%' // last entire page
 		})
 		.setTween(poly_tl)
 		.addTo(controller);
@@ -165,16 +165,16 @@ function scrollAnimate() {
 			newTitle_tl.to(title_line, in_duration, {opacity: 1, ease: Expo.easeOut}, in_delay);
 			// - animations out
 			// newTitle_tl.to(title_el, title_out_dur, {top: '150px'}, (in_duration+in_delay));
-			newTitle_tl.to(title_num, title_out_dur, {top: '-150px'}, (in_duration+in_delay));
-			newTitle_tl.to(title_h1, title_out_dur, {top: '-70px'}, (in_duration+in_delay));
-			newTitle_tl.to(title_line, title_out_dur, {top: '0px'}, (in_duration+in_delay));
-			newTitle_tl.to(title_h2, title_out_dur, {top: '80px'}, (in_duration+in_delay));
+			newTitle_tl.to(title_num, title_out_dur, {top:'-50px'}, (in_duration+in_delay));
+			newTitle_tl.to(title_h1, title_out_dur, {top:'-70px'}, (in_duration+in_delay));
+			newTitle_tl.to(title_line, title_out_dur, {top:'0px', opacity:0}, (in_duration+in_delay));
+			newTitle_tl.to(title_h2, title_out_dur, {top:'-100px'}, (in_duration+in_delay));
 
 		// - bind to scroll
 		var newTitleScene = new ScrollMagic.Scene({
 				triggerElement: title_el,
 				triggerHook: 'onEnter',
-				duration: '100%'
+				duration: '150%'
 			})
 			.setTween(newTitle_tl)
 			.addTo(controller);
@@ -183,8 +183,8 @@ function scrollAnimate() {
 	}
 
 	// Create .title-box scenes
-	// var titleScene2 = newTitleScene($('#title2'));
-	// var titleScene3 = newTitleScene($('#title3'));
+	var titleScene2 = newTitleScene($('#title2'));
+	var titleScene3 = newTitleScene($('#title3'));
 
 
 
@@ -194,10 +194,8 @@ function scrollAnimate() {
 
 	// Constructor function
 	function newHelloBoxScene($boxEl) {
-		// Move icon
-		// Leave text
-		// Move whole el
-		// Move polygon behind
+
+		// - element
 		var box_el = $boxEl.get(0);
 		var icon_el = $boxEl.find('.icon').get(0);
 		var h5_el = $boxEl.find('h5').get(0);
@@ -206,20 +204,22 @@ function scrollAnimate() {
 		var step1_dur = 1;
 		var step2_dur = 1;
 
+		// - timeline
 		var hello_tl = new TimelineMax();
-		// - inward animations
-		hello_tl.to(icon_el, step1_dur, {top: 0}, 0);
-		hello_tl.to(h5_el, step1_dur, {textShadow:'0 0 0 transparent'}, 0);
-		hello_tl.to(p_el, step1_dur, {textShadow:'0 0 0 transparent'}, 0);
-		// - outward animations
-		hello_tl.to(icon_el, step2_dur, {top:'-50px'}, step1_dur);
-		hello_tl.to(h5_el, step2_dur, {textShadow:'0 0 10px #FFF'}, step1_dur);
-		hello_tl.to(p_el, step2_dur, {textShadow:'0 0 10px #FFF'}, step1_dur);
+			// - inward animations
+			hello_tl.to(icon_el, step1_dur, {top:'90%'}, 0);
+			hello_tl.to(h5_el, step1_dur, {textShadow:'0 0 0 transparent'}, 0);
+			hello_tl.to(p_el, step1_dur, {textShadow:'0 0 0 transparent'}, 0);
+			// - outward animations
+			hello_tl.to(icon_el, step2_dur, {top:'0%'}, step1_dur);
+			hello_tl.to(h5_el, step2_dur, {textShadow:'0 0 20px #FFF'}, step1_dur);
+			hello_tl.to(p_el, step2_dur, {textShadow:'0 0 20px #FFF'}, step1_dur);
 
+		// - create scene
 		var boxScene = new ScrollMagic.Scene({
 				triggerElement: box_el,
 				triggerHook: 'onEnter',
-				duration: '100%'
+				duration: '110%'
 			})
 			.setTween(hello_tl)
 			.addTo(controller);
@@ -228,9 +228,9 @@ function scrollAnimate() {
 	}
 
 	// Create box scenes
-	// $('.slide2 .nav-box').each(function(){
-	// 	newHelloBoxScene( $(this) );
-	// });
+	$('.slide2 .nav-box').each(function(){
+		newHelloBoxScene( $(this) );
+	});
 
 
 
@@ -247,28 +247,28 @@ function scrollAnimate() {
 		// - elements
 		var post_el = $postEl.get(0);
 		var $titleBox = $postEl.find('.job-title-box');
-		var $content = $postEl.find('posting-description');
+		var $content = $postEl.find('.posting-description');
 		var content_el = $content.get(0);
 		var $buttonRow = $postEl.find('.button-row');
 		var button_el = $buttonRow.find('.button').get(0);
 
 		var in_duration = 1;
-		var pause_duration = 5;
+		var pause_duration = 0;
 		var out_duration = 1;
 		var outDelay = pause_duration + out_duration;
 
 		// - create timeline
 		var job_tl = new TimelineMax();
-		job_tl.to(content_el, in_duration, {textShadow: '0 0 0 transparent'}, 0);
-		job_tl.to(button_el, in_duration, {top: 0}, 0);
-		job_tl.to(content_el, out_duration, {textShadow: '0 0 15px #000'}, outDelay);
-		job_tl.to(button_el, out_duration, {top:'-100px'}, outDelay);
+			job_tl.to(content_el, in_duration, {textShadow: '0 0 0 transparent'}, 0);
+			job_tl.to(button_el, in_duration, {top: 0}, 0);
+			job_tl.to(content_el, out_duration, {textShadow: '0 0 15px #000'}, in_duration);
+			job_tl.to(button_el, out_duration, {top:'-100px'}, in_duration);
 
 		// Create Scene
 		var jobScene = new ScrollMagic.Scene({
 				triggerElement: post_el,
 				triggerHook: 'onEnter',
-				duration: '100%'
+				duration: '110%'
 			})
 			.setTween(job_tl)
 			.addTo(controller);
@@ -277,9 +277,9 @@ function scrollAnimate() {
 	}
 
 	// Create scene for each job posting
-	// $('.slide3 .job-posting').each(function(){
-	// 	newJobPostingScene( $(this) );
-	// });
+	$('.slide3 .job-posting').each(function(){
+		newJobPostingScene( $(this) );
+	});
 }
 
 
