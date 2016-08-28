@@ -19,6 +19,9 @@ html {
 	background-color: $white;
 }
 body {
+	position: relative;
+	overflow-x: hidden;
+
 	&.fixed {
 		overflow: hidden;
 	}
@@ -82,12 +85,6 @@ p {
 	width: 100%;
 	max-width: 1170px;
 	margin: 0 auto;
-}
-main {
-	width: 100vw;
-	height: 100vh;
-	overflow-x: hidden;
-	overflow-y: auto;
 }
 .slide {
 	position: relative;
@@ -217,8 +214,17 @@ button,
 #large-poly {
 	position: fixed;
 	z-index: 0;
-	top: -50%;
+	top: -10%;
 	left: -50%;
+}
+
+// Small airplane-like .svg
+//----------------------------
+#landing-poly {
+	position: fixed;
+	z-index: 2;
+	top: -10%;
+	right: 40%;
 }
 
 
