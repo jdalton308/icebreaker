@@ -299,6 +299,89 @@ button,
 // 	}
 // }
 
+// Side scrollbar
+//------------------
+.progress-bar {
+	@include centerY();
+	position: fixed;
+	z-index: 10;
+	left: 50px;
+	display: inline-block;
+	height: 70vh;
+
+	.progress-bar-track {
+		position: relative;
+		height: 100%;
+		width: 10px;
+		background-color: $white;
+		border-radius: 10px;
+		box-shadow: $box-shadow;
+		overflow: hidden;
+
+		.progress-bar-indicator {
+			position: absolute;
+			bottom: calc(100% - 50px);
+			left: 0;
+			z-index: 0;
+			height: 50px;
+			width: 100%;
+			border-radius: 10px;
+			background-color: $black;
+			box-shadow: $box-shadow;
+		}
+	}
+	.sections {
+		position: absolute;
+		top: 0;
+		left: 10px;
+		height: 100%;
+		width: 120px;
+		opacity: 0.5;
+		overflow: hidden;
+
+		.progress-nav-item {
+			position: absolute;
+			right: 100%;
+			
+			display: inline-block;
+			width: 100px;
+			padding: 8px 13px 5px;
+			text-align: center;
+			font-size: 1.5rem;
+			color: $sketchup-gray;
+			border: 1px solid $sketchup-gray;
+			cursor: pointer;
+			@include transition();
+
+			&.active,
+			&:hover {
+				background-color: $sketchup-gray;
+				color: $white;	
+			}
+
+			&.meet {
+				top: 0;
+			}
+			&.hello {
+				top: 30%;
+			}
+			&.jobs {
+				top: 60%;
+			}
+		}
+	}
+
+	&:hover {
+		.sections {
+			opacity: 1;
+
+			.progress-nav-item {
+				right: 0;
+			}
+		}
+	}
+}
+
 
 // Keyframes
 //--------------

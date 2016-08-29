@@ -272,6 +272,70 @@ button,
   top: -120%;
   left: -50%; }
 
+.progress-bar {
+  position: absolute;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
+  transform: translateY(-50%);
+  position: fixed;
+  z-index: 10;
+  left: 50px;
+  display: inline-block;
+  height: 70vh; }
+  .progress-bar .progress-bar-track {
+    position: relative;
+    height: 100%;
+    width: 10px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 2px 2px 15px -2px #000;
+    overflow: hidden; }
+    .progress-bar .progress-bar-track .progress-bar-indicator {
+      position: absolute;
+      bottom: calc(100% - 50px);
+      left: 0;
+      z-index: 0;
+      height: 50px;
+      width: 100%;
+      border-radius: 10px;
+      background-color: #000;
+      box-shadow: 2px 2px 15px -2px #000; }
+  .progress-bar .sections {
+    position: absolute;
+    top: 0;
+    left: 10px;
+    height: 100%;
+    width: 120px;
+    opacity: 0.5;
+    overflow: hidden; }
+    .progress-bar .sections .progress-nav-item {
+      position: absolute;
+      right: 100%;
+      display: inline-block;
+      width: 100px;
+      padding: 8px 13px 5px;
+      text-align: center;
+      font-size: 1.5rem;
+      color: #363545;
+      border: 1px solid #363545;
+      cursor: pointer;
+      -webkit-transition: all 0.5s;
+      transition: all 0.5s; }
+      .progress-bar .sections .progress-nav-item.active, .progress-bar .sections .progress-nav-item:hover {
+        background-color: #363545;
+        color: #ffffff; }
+      .progress-bar .sections .progress-nav-item.meet {
+        top: 0; }
+      .progress-bar .sections .progress-nav-item.hello {
+        top: 30%; }
+      .progress-bar .sections .progress-nav-item.jobs {
+        top: 60%; }
+  .progress-bar:hover .sections {
+    opacity: 1; }
+    .progress-bar:hover .sections .progress-nav-item {
+      right: 0; }
+
 @-webkit-keyframes hideScalee {
   0% {
     opacity: 1; }
@@ -562,9 +626,9 @@ button,
                 .slide1 .control-panel .selectors .selector .wheel-selector .item:hover {
                   background-color: #ffffff; } }
   .slide1.active .scalee-scroll.prev {
-    left: 20px; }
+    left: 80px; }
   .slide1.active .scalee-scroll.next {
-    right: 20px; }
+    right: 80px; }
   .slide1.active .control-panel .open-panel {
     top: -66px; }
   .slide1.active .scalee-cont:hover img {
@@ -694,9 +758,11 @@ button,
       .slide1 .info-slide .content-cont .title-box h1 {
         position: static;
         margin-bottom: 20px;
-        opacity: 1; }
+        color: #363545;
+        text-shadow: none; }
       .slide1 .info-slide .content-cont .title-box .underline {
-        opacity: 1; }
+        opacity: 1;
+        box-shadow: none; }
     .slide1 .info-slide .content-cont .description-cont {
       position: relative;
       margin-bottom: 50px; }

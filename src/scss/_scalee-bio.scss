@@ -92,10 +92,12 @@
 				h1 {
 					position: static;
 					margin-bottom: 20px;
-					opacity: 1;
+					color: $sketchup-gray;
+					text-shadow: none;
 				}
 				.underline {
 					opacity: 1;
+					box-shadow: none;
 				}
 			}
 			.description-cont {

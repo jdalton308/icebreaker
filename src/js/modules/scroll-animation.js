@@ -46,12 +46,59 @@ function scrollAnimate() {
 	var controller = new ScrollMagic.Controller();
 
 
+	// ----------------
+	// Scroll-progress bar
+	//------------------------
+	(function(){
+		// - Track progress with a tween
+		var $progressBar = $('.progress-bar');
+		var progressIndicator = $progressBar.find('.progress-bar-indicator');
+
+		var progressTween = TweenMax.to(progressIndicator, 1, {bottom: 0});
+		var pageHeight = Math.max($(document).height(), $(window).height());
+
+		var progressBarScene = new ScrollMagic.Scene({
+				triggerElement: slide1,
+				triggerHook: 'onLeave',
+				duration: pageHeight
+			})
+			.setTween(progressTween)
+			.addTo(controller);
+
+
+		// - Navigate page with section clicks
+		var navTriggers = $progressBar.find('.progress-nav-item');
+		navTriggers.click(function(){
+			var $this = $(this);
+
+			console.log('--click');
+
+			// -get target
+			var target = $this.attr('data-target');
+			var $target = $('#'+ target);
+
+			// - get offset
+			var offset = $target.offset().top;
+
+			console.log('target offset: '+ offset);
+
+			// - animate scroll to section
+			$('body').animate({
+				scrollTop: offset
+			}, 400);
+
+		});
+	})();
+
+
+
 	//------------------
 	// Scalee Sorter
 	//-----------------------
 	// - Adjust background height
 	// - Adjust scalee-cont size
 
+	var slide1 = $('.slide0').get(0);
 	var $slide2 = $('.slide1');
 	var slide2_el = $slide2.get(0);
 	var $scaleeBg = $('.scalee-background');
@@ -83,29 +130,31 @@ function scrollAnimate() {
 	//-----------------------
 	// Small airplane-like polygon in forefront
 	//--------------------------
-	var slide1 = $('.slide0').get(0);
-	var landingPoly = document.getElementById('landing-poly');
-	var group1 = document.getElementById('landing-poly-g1');
-	var group2 = document.getElementById('landing-poly-g2');
-	var group3 = document.getElementById('landing-poly-g3');
-	var group4 = document.getElementById('landing-poly-g4');
 
-	var smallPoly_tl = new TimelineMax();
-		smallPoly_tl.to(landingPoly, 1, {right:'100%', top:'-20%', scale:0.7, rotation:'80deg', zIndex:-1});
-		smallPoly_tl.to(group1, 0.1, {fill:'#D0011B'}, 1);
-		smallPoly_tl.to(group2, 0.1, {fill:'#D0011B'}, 1);
-		smallPoly_tl.to(group3, 0.1, {fill:'#D0011B'}, 1);
-		smallPoly_tl.to(group4, 0.1, {fill:'#D0011B'}, 1);
-		smallPoly_tl.to(landingPoly, 3, {right:'5%', top:'-5%', scale:0.5, rotation:'170deg'}, 1);
-	// var title1_poly = TweenMax.to(landingPoly, 1, {right:'90%', top:'50%', scale: 0.7, rotation:'80deg'});
+	(function(){
+		var landingPoly = document.getElementById('landing-poly');
+		var group1 = document.getElementById('landing-poly-g1');
+		var group2 = document.getElementById('landing-poly-g2');
+		var group3 = document.getElementById('landing-poly-g3');
+		var group4 = document.getElementById('landing-poly-g4');
 
-	var landingPolyScene = new ScrollMagic.Scene({
-			triggerElement: slide1,
-			triggerHook: 'onLeave',
-			duration: '600%'
-		})
-		.setTween(smallPoly_tl)
-		.addTo(controller);
+		var smallPoly_tl = new TimelineMax();
+			smallPoly_tl.to(landingPoly, 1, {right:'100%', top:'-20%', scale:0.7, rotation:'80deg', zIndex:-1});
+			smallPoly_tl.to(group1, 0.1, {fill:'#D0011B'}, 1);
+			smallPoly_tl.to(group2, 0.1, {fill:'#D0011B'}, 1);
+			smallPoly_tl.to(group3, 0.1, {fill:'#D0011B'}, 1);
+			smallPoly_tl.to(group4, 0.1, {fill:'#D0011B'}, 1);
+			smallPoly_tl.to(landingPoly, 3, {right:'5%', top:'-5%', scale:0.5, rotation:'170deg'}, 1);
+		// var title1_poly = TweenMax.to(landingPoly, 1, {right:'90%', top:'50%', scale: 0.7, rotation:'80deg'});
+
+		var landingPolyScene = new ScrollMagic.Scene({
+				triggerElement: slide1,
+				triggerHook: 'onLeave',
+				duration: '600%'
+			})
+			.setTween(smallPoly_tl)
+			.addTo(controller);
+	})();
 
 
 	//------------------
@@ -113,20 +162,22 @@ function scrollAnimate() {
 	//-----------------------
 	// - Fix to window and rotate during scroll
 
-	var largePoly_el = $('#large-poly')[0];
-	var poly_tl = new TimelineMax();
-		poly_tl.to(largePoly_el, 1, {rotation:'15deg', top:'-5%', left:'-50%'});
-		poly_tl.to(largePoly_el, 3, {rotation:'30deg', top:'0%', left:'-40%', scale:1.2});
+	(function() {
+		var largePoly_el = $('#large-poly')[0];
+		var poly_tl = new TimelineMax();
+			poly_tl.to(largePoly_el, 1, {rotation:'15deg', top:'-5%', left:'-50%'});
+			poly_tl.to(largePoly_el, 3, {rotation:'30deg', top:'0%', left:'-40%', scale:1.2});
 
-	var poly_tween = TweenMax.to(largePoly_el, 1, {rotation:'90deg', top:'-150%', left:'50%', scale:1.2})
+		var poly_tween = TweenMax.to(largePoly_el, 1, {rotation:'90deg', top:'-150%', left:'50%', scale:1.2})
 
-	var polyScene = new ScrollMagic.Scene({
-			triggerElement: slide2_el,
-			triggerHook: '1',
-			duration: '600%' // last entire page
-		})
-		.setTween(poly_tween)
-		.addTo(controller);
+		var polyScene = new ScrollMagic.Scene({
+				triggerElement: slide2_el,
+				triggerHook: '1',
+				duration: '600%' // last entire page
+			})
+			.setTween(poly_tween)
+			.addTo(controller);
+	})();
 
 
 
