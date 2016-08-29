@@ -85,16 +85,24 @@ function scrollAnimate() {
 	//--------------------------
 	var slide1 = $('.slide0').get(0);
 	var landingPoly = document.getElementById('landing-poly');
+	var group1 = document.getElementById('landing-poly-g1');
+	var group2 = document.getElementById('landing-poly-g2');
+	var group3 = document.getElementById('landing-poly-g3');
+	var group4 = document.getElementById('landing-poly-g4');
 
 	var smallPoly_tl = new TimelineMax();
-		smallPoly_tl.to(landingPoly, 1, {right:'100%', top:'-20%', scale:0.7, rotation:'80deg', zIndex:0});
-		smallPoly_tl.to(landingPoly, 3, {right:'60%', top:'-5%', scale:0.5, rotation:'130deg'});
+		smallPoly_tl.to(landingPoly, 1, {right:'100%', top:'-20%', scale:0.7, rotation:'80deg', zIndex:-1});
+		smallPoly_tl.to(group1, 0.1, {fill:'#D0011B'}, 1);
+		smallPoly_tl.to(group2, 0.1, {fill:'#D0011B'}, 1);
+		smallPoly_tl.to(group3, 0.1, {fill:'#D0011B'}, 1);
+		smallPoly_tl.to(group4, 0.1, {fill:'#D0011B'}, 1);
+		smallPoly_tl.to(landingPoly, 3, {right:'5%', top:'-5%', scale:0.5, rotation:'170deg'}, 1);
 	// var title1_poly = TweenMax.to(landingPoly, 1, {right:'90%', top:'50%', scale: 0.7, rotation:'80deg'});
 
 	var landingPolyScene = new ScrollMagic.Scene({
 			triggerElement: slide1,
 			triggerHook: 'onLeave',
-			duration: '500%'
+			duration: '600%'
 		})
 		.setTween(smallPoly_tl)
 		.addTo(controller);
@@ -110,12 +118,14 @@ function scrollAnimate() {
 		poly_tl.to(largePoly_el, 1, {rotation:'15deg', top:'-5%', left:'-50%'});
 		poly_tl.to(largePoly_el, 3, {rotation:'30deg', top:'0%', left:'-40%', scale:1.2});
 
+	var poly_tween = TweenMax.to(largePoly_el, 1, {rotation:'90deg', top:'-150%', left:'50%', scale:1.2})
+
 	var polyScene = new ScrollMagic.Scene({
 			triggerElement: slide2_el,
 			triggerHook: '1',
-			duration: '500%' // last entire page
+			duration: '600%' // last entire page
 		})
-		.setTween(poly_tl)
+		.setTween(poly_tween)
 		.addTo(controller);
 
 

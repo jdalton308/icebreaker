@@ -260,17 +260,17 @@ button,
     -webkit-transition: all 0.5s;
     transition: all 0.5s; }
 
-#large-poly {
-  position: fixed;
-  z-index: 0;
-  top: -10%;
-  left: -50%; }
-
 #landing-poly {
   position: fixed;
   z-index: 2;
   top: -10%;
   right: 40%; }
+
+#large-poly {
+  position: fixed;
+  z-index: 0;
+  top: -120%;
+  left: -50%; }
 
 @-webkit-keyframes hideScalee {
   0% {

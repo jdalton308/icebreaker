@@ -337,51 +337,9 @@ function switchLeaderTitle(newTitle) {
 
 // Scalee lateral scrolling
 //-----------------------------
-// var scaleeContWidth;
 var scaleeOffset;
-var windowCenter = window.innerWidth/2;
 
 function centerScalees() {
-   // - get width by summing width of scalees, so animation can happen
-
-   // window.setTimeout(function(){
-    // scaleeContWidth = $scaleeCont.width();
-    // scaleeContWidth = 0;
-
-    // $scalees.each(function(){
-    //   var $this = $(this);
-    //   if ($this.hasClass('show')) {
-    //     scaleeContWidth += $this.width();
-    //     // console.log('this scalee is showing:');
-    //     // console.log($this);
-    //     console.log('Scalee is showing and is '+ $this.width() + ' wide');
-    //   }
-
-    //   console.log('new scaleeContWith: '+ scaleeContWidth);
-    // });
-
-    // console.log('TOTAL scaleeContWith: '+ scaleeContWidth);
-    // console.log('--------')
-
-    // // - check if even need to center
-    // if (scaleeContWidth > window.innerWidth) {
-    //   var newOffset = -(scaleeContWidth - window.innerWidth)/2;
-    //   // - get amount to move to left...
-    //   scaleeOffset = newOffset;
-
-    //   console.log('newOffset: '+ newOffset);
-    // } else {
-    //   scaleeOffset = 0;
-    //   scaleeContWidth = $scaleeCont.width();
-    // }
-
-    // // - move to left
-    // $scaleeCont.css({
-    //   'left': scaleeOffset
-    // });
-
-  // }, 1000);
-
   // Just reset the translateX CSS property to 50%;
   scaleeOffset = 0.5;
   setTranslate();
@@ -389,21 +347,6 @@ function centerScalees() {
 
 function scrollScalees(dist) {
 
-  // // on each click, move (int) (if > 0, moves right)
-  // scaleeOffset += dist;
-
-  // // Prevent overscrolling
-  // if ( (scaleeOffset > windowCenter) || (scaleeOffset < (-scaleeContWidth + windowCenter)) ) {
-  //   // reset to prev spot
-  //   scaleeOffset -= dist;
-  //   return;
-  // }
-
-  // $scaleeCont.css({
-  //   'left': scaleeOffset
-  // });
-
-  // Just move translateX CSS property +/-
   if ( (scaleeOffset >= 0.95 && dist > 0) || 
         (scaleeOffset <= 0.05 && dist < 0) ) {
     return;

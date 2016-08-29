@@ -12191,51 +12191,9 @@ function switchLeaderTitle(newTitle) {
 
 // Scalee lateral scrolling
 //-----------------------------
-// var scaleeContWidth;
 var scaleeOffset;
-var windowCenter = window.innerWidth/2;
 
 function centerScalees() {
-   // - get width by summing width of scalees, so animation can happen
-
-   // window.setTimeout(function(){
-    // scaleeContWidth = $scaleeCont.width();
-    // scaleeContWidth = 0;
-
-    // $scalees.each(function(){
-    //   var $this = $(this);
-    //   if ($this.hasClass('show')) {
-    //     scaleeContWidth += $this.width();
-    //     // console.log('this scalee is showing:');
-    //     // console.log($this);
-    //     console.log('Scalee is showing and is '+ $this.width() + ' wide');
-    //   }
-
-    //   console.log('new scaleeContWith: '+ scaleeContWidth);
-    // });
-
-    // console.log('TOTAL scaleeContWith: '+ scaleeContWidth);
-    // console.log('--------')
-
-    // // - check if even need to center
-    // if (scaleeContWidth > window.innerWidth) {
-    //   var newOffset = -(scaleeContWidth - window.innerWidth)/2;
-    //   // - get amount to move to left...
-    //   scaleeOffset = newOffset;
-
-    //   console.log('newOffset: '+ newOffset);
-    // } else {
-    //   scaleeOffset = 0;
-    //   scaleeContWidth = $scaleeCont.width();
-    // }
-
-    // // - move to left
-    // $scaleeCont.css({
-    //   'left': scaleeOffset
-    // });
-
-  // }, 1000);
-
   // Just reset the translateX CSS property to 50%;
   scaleeOffset = 0.5;
   setTranslate();
@@ -12243,21 +12201,6 @@ function centerScalees() {
 
 function scrollScalees(dist) {
 
-  // // on each click, move (int) (if > 0, moves right)
-  // scaleeOffset += dist;
-
-  // // Prevent overscrolling
-  // if ( (scaleeOffset > windowCenter) || (scaleeOffset < (-scaleeContWidth + windowCenter)) ) {
-  //   // reset to prev spot
-  //   scaleeOffset -= dist;
-  //   return;
-  // }
-
-  // $scaleeCont.css({
-  //   'left': scaleeOffset
-  // });
-
-  // Just move translateX CSS property +/-
   if ( (scaleeOffset >= 0.95 && dist > 0) || 
         (scaleeOffset <= 0.05 && dist < 0) ) {
     return;
@@ -12382,16 +12325,24 @@ function scrollAnimate() {
 	//--------------------------
 	var slide1 = $('.slide0').get(0);
 	var landingPoly = document.getElementById('landing-poly');
+	var group1 = document.getElementById('landing-poly-g1');
+	var group2 = document.getElementById('landing-poly-g2');
+	var group3 = document.getElementById('landing-poly-g3');
+	var group4 = document.getElementById('landing-poly-g4');
 
 	var smallPoly_tl = new TimelineMax();
-		smallPoly_tl.to(landingPoly, 1, {right:'100%', top:'-20%', scale:0.7, rotation:'80deg', zIndex:0});
-		smallPoly_tl.to(landingPoly, 3, {right:'60%', top:'-5%', scale:0.5, rotation:'130deg'});
+		smallPoly_tl.to(landingPoly, 1, {right:'100%', top:'-20%', scale:0.7, rotation:'80deg', zIndex:-1});
+		smallPoly_tl.to(group1, 0.1, {fill:'#D0011B'}, 1);
+		smallPoly_tl.to(group2, 0.1, {fill:'#D0011B'}, 1);
+		smallPoly_tl.to(group3, 0.1, {fill:'#D0011B'}, 1);
+		smallPoly_tl.to(group4, 0.1, {fill:'#D0011B'}, 1);
+		smallPoly_tl.to(landingPoly, 3, {right:'5%', top:'-5%', scale:0.5, rotation:'170deg'}, 1);
 	// var title1_poly = TweenMax.to(landingPoly, 1, {right:'90%', top:'50%', scale: 0.7, rotation:'80deg'});
 
 	var landingPolyScene = new ScrollMagic.Scene({
 			triggerElement: slide1,
 			triggerHook: 'onLeave',
-			duration: '500%'
+			duration: '600%'
 		})
 		.setTween(smallPoly_tl)
 		.addTo(controller);
@@ -12407,12 +12358,14 @@ function scrollAnimate() {
 		poly_tl.to(largePoly_el, 1, {rotation:'15deg', top:'-5%', left:'-50%'});
 		poly_tl.to(largePoly_el, 3, {rotation:'30deg', top:'0%', left:'-40%', scale:1.2});
 
+	var poly_tween = TweenMax.to(largePoly_el, 1, {rotation:'90deg', top:'-150%', left:'50%', scale:1.2})
+
 	var polyScene = new ScrollMagic.Scene({
 			triggerElement: slide2_el,
 			triggerHook: '1',
-			duration: '500%' // last entire page
+			duration: '600%' // last entire page
 		})
-		.setTween(poly_tl)
+		.setTween(poly_tween)
 		.addTo(controller);
 
 
@@ -12601,326 +12554,326 @@ function scrollAnimate() {
 
 module.exports = scrollAnimate;
 },{"jquery":1}],7:[function(require,module,exports){
-'use strict';
+// 'use strict';
 
-var $ = require('jquery');
-var ScaleeSorter = require('./scalee-sorter.js');
-var ScaleeBios = require('./scalee-bios.js');
-var Util = require('./util.js');
-
-
-// ------------------------
-// Scroll-Triggered Nav
-// ------------------------
-
-// Elements
-//------------
-var $window = $(window);
-var $page = $('body');
-var $header = $('header');
-
-var $dotNav = $('.dots-nav');
-var $dots = $dotNav.children('.dot');
-var $slides = $('.slide');
-// var onMobile = isMobile();
-
-var currentSlide = 0;
-var slideNum = $slides.length + 1; // Add 1 for first movement
-var slideTimeout = 800;
+// var $ = require('jquery');
+// var ScaleeSorter = require('./scalee-sorter.js');
+// var ScaleeBios = require('./scalee-bios.js');
+// var Util = require('./util.js');
 
 
-// Events On/Off functions
-//-------------------------
-function eventsOn() {
-  // $page.addClass('fixed');
-  console.log('turning events on');
+// // ------------------------
+// // Scroll-Triggered Nav
+// // ------------------------
 
-  $window.on({
-    'DOMMouseScroll mousewheel': wheelHandler,
-    keydown: keyHandler,
-    touchstart: touchHandler
-  });
-  $dots.click(handleDotClick);
-}
+// // Elements
+// //------------
+// var $window = $(window);
+// var $page = $('body');
+// var $header = $('header');
 
-function eventsOff() {
-  console.log('turning events off');
+// var $dotNav = $('.dots-nav');
+// var $dots = $dotNav.children('.dot');
+// var $slides = $('.slide');
+// // var onMobile = isMobile();
 
-  $window.off({
-    'DOMMouseScroll mousewheel': wheelHandler,
-    keydown: keyHandler,
-    touchstart: touchHandler
-  });
-  $dots.off({click: handleDotClick});
-}
+// var currentSlide = 0;
+// var slideNum = $slides.length + 1; // Add 1 for first movement
+// var slideTimeout = 800;
 
 
-// Event Handlers
-// - Scroll, touch, nav, and arrow-keys
-//----------------------
-function wheelHandler(ev) {
-  var delta = (ev.type == 'DOMMouseScroll' ? // Mozilla calculates scroll differently, with this event
-      ev.originalEvent.detail * -40 :
-      ev.originalEvent.wheelDelta);
+// // Events On/Off functions
+// //-------------------------
+// function eventsOn() {
+//   // $page.addClass('fixed');
+//   console.log('turning events on');
 
-  var up = delta > 20;
-  var down = delta < -20;
+//   $window.on({
+//     'DOMMouseScroll mousewheel': wheelHandler,
+//     keydown: keyHandler,
+//     touchstart: touchHandler
+//   });
+//   $dots.click(handleDotClick);
+// }
 
-  var prevent = function() {
-    ev.stopPropagation();
-    ev.preventDefault();
-    ev.returnValue = false;
-    return false;
-  }
+// function eventsOff() {
+//   console.log('turning events off');
 
-  if (up) {
-    prevSlide();
-  } else if (down) {
-    nextSlide();
-  }
-
-  return prevent();
-}
+//   $window.off({
+//     'DOMMouseScroll mousewheel': wheelHandler,
+//     keydown: keyHandler,
+//     touchstart: touchHandler
+//   });
+//   $dots.off({click: handleDotClick});
+// }
 
 
-function handleDotClick(ev) {
-  var index = $dots.index(this);
+// // Event Handlers
+// // - Scroll, touch, nav, and arrow-keys
+// //----------------------
+// function wheelHandler(ev) {
+//   var delta = (ev.type == 'DOMMouseScroll' ? // Mozilla calculates scroll differently, with this event
+//       ev.originalEvent.detail * -40 :
+//       ev.originalEvent.wheelDelta);
 
-  setSlide(index);
-}
+//   var up = delta > 20;
+//   var down = delta < -20;
 
+//   var prevent = function() {
+//     ev.stopPropagation();
+//     ev.preventDefault();
+//     ev.returnValue = false;
+//     return false;
+//   }
 
-function touchHandler(ev) {
-  ev.preventDefault();
-  // watch for direction of touchmove event after touchdown.  If up, prevSlide(), if down, nextSlide()
-  var event = ev.originalEvent.changedTouches[0];
-  var startX = event.clientX;
-  var startY = event.clientY;
+//   if (up) {
+//     prevSlide();
+//   } else if (down) {
+//     nextSlide();
+//   }
 
-  $featureEl.on({
-    touchmove: touchMoveHandler,
-    touchend: touchEndHandler
-  });
-
-  function touchMoveHandler(ev) {
-    ev.preventDefault(); // only using preventDefault() here to allow click() event to occur on dots
-  }
-  function touchEndHandler(ev) {
-    ev.preventDefault();
-    var event = ev.originalEvent.changedTouches[0];
-    var newX = event.clientX;
-    var newY = event.clientY;
-
-    var deltaY = newY - startY;
-    var up = (deltaY > 50);
-    var down = (deltaY < -50);
-
-    if (up) {
-      prevSlide();
-    } else if (down) {
-      nextSlide();
-    }
+//   return prevent();
+// }
 
 
-    $featureEl.off({
-      touchmove: touchMoveHandler,
-      touchend: touchEndHandler
-    });
-  }
-}
+// function handleDotClick(ev) {
+//   var index = $dots.index(this);
+
+//   setSlide(index);
+// }
 
 
-function keyHandler(ev) {
-  // if up or left arrow...
-  if (ev.keyCode === 37 || ev.keyCode === 38) {
-    prevSlide();
+// function touchHandler(ev) {
+//   ev.preventDefault();
+//   // watch for direction of touchmove event after touchdown.  If up, prevSlide(), if down, nextSlide()
+//   var event = ev.originalEvent.changedTouches[0];
+//   var startX = event.clientX;
+//   var startY = event.clientY;
 
-  // or if down or right arrow...
-  } else if (ev.keyCode === 39 || ev.keyCode === 40) {
-    nextSlide();
-  }
-}
+//   $featureEl.on({
+//     touchmove: touchMoveHandler,
+//     touchend: touchEndHandler
+//   });
 
+//   function touchMoveHandler(ev) {
+//     ev.preventDefault(); // only using preventDefault() here to allow click() event to occur on dots
+//   }
+//   function touchEndHandler(ev) {
+//     ev.preventDefault();
+//     var event = ev.originalEvent.changedTouches[0];
+//     var newX = event.clientX;
+//     var newY = event.clientY;
 
-// Allow natural scrolling on last slide
-//------------------------------------------
-function allowScrolling() {
-  // If on last slide...
-  // - turn off events
-  // - watch scroll position of last slide for top
-  // - if at top, move to previous slide
+//     var deltaY = newY - startY;
+//     var up = (deltaY > 50);
+//     var down = (deltaY < -50);
 
-  var $lastSlide = $slides.filter('.slide3');
-  var lastScrollPos = null;
-
-  function watchScrollHandler(ev) {
-    var topPos = $lastSlide.scrollTop();    
-    console.log('TopPos: '+ topPos);
-
-    // If topPos == 0, and going up, go back to previous slide and turn events on
-    if (!topPos && topPos < lastScrollPos) {
-      eventsOn();
-      prevSlide();
-      turnOffScrollWatch();
-    } else {
-      pauseScrollWatch();
-      lastScrollPos = topPos;
-    }
-
-  }
-
-  // On/off/pause functions
-  function turnOffScrollWatch() {
-    $window.off('DOMMouseScroll mousewheel', watchScrollHandler);
-  }
-  function turnOnScrollWatch() {
-    $window.on('DOMMouseScroll mousewheel', watchScrollHandler);
-  }
-
-  function pauseScrollWatch() {
-    // Turn off scroll watch, wait 100ms, turn back on
-    turnOffScrollWatch();
-
-    window.setTimeout(function(){
-      turnOnScrollWatch();
-    }, 500) // NOTE: Increase timeout to make less sensitive
-  }
-
-  // Turn events off
-  eventsOff();
-
-  // Bind watching function
-  turnOnScrollWatch();
-}
+//     if (up) {
+//       prevSlide();
+//     } else if (down) {
+//       nextSlide();
+//     }
 
 
-// Navigation functions
-// - Prev slide, next slide, setSlide (for the dot nav)
-// - On last slide (job postings), allow normal scroll until scrolling up when already at top
-//-------------------------
-function prevSlide() {
+//     $featureEl.off({
+//       touchmove: touchMoveHandler,
+//       touchend: touchEndHandler
+//     });
+//   }
+// }
 
-  // remove 'active' class from current slide
-  if (currentSlide) { // ensure not 0, If 0, do nothing
 
-    if (currentSlide == 1) { // change state on first slide
-      var $target = $slides.eq(0);
-      var removedClass = 'active2';
+// function keyHandler(ev) {
+//   // if up or left arrow...
+//   if (ev.keyCode === 37 || ev.keyCode === 38) {
+//     prevSlide();
 
-      // Close the sorting panel, and leaderboard panel
-      ScaleeSorter.closePanel();
-      ScaleeSorter.closeLeaders();
-      ScaleeBios.off();
-    } else {
-      var $target = $slides.eq(currentSlide-1);
-      var removedClass = 'active';
-    }
+//   // or if down or right arrow...
+//   } else if (ev.keyCode === 39 || ev.keyCode === 40) {
+//     nextSlide();
+//   }
+// }
 
-    // Remove 'active'
-    $target.removeClass(removedClass);
 
-    // Set other states
-    currentSlide--;
-    setDots(currentSlide);
+// // Allow natural scrolling on last slide
+// //------------------------------------------
+// function allowScrolling() {
+//   // If on last slide...
+//   // - turn off events
+//   // - watch scroll position of last slide for top
+//   // - if at top, move to previous slide
 
-    // Wait for animation
-    wait();
-  }
-}
+//   var $lastSlide = $slides.filter('.slide3');
+//   var lastScrollPos = null;
 
-function nextSlide() {
+//   function watchScrollHandler(ev) {
+//     var topPos = $lastSlide.scrollTop();    
+//     console.log('TopPos: '+ topPos);
 
-  // Add 'active' class to next slide
-  if (currentSlide !== $slides.length) { // ensure not last slide. If so, do nothing
+//     // If topPos == 0, and going up, go back to previous slide and turn events on
+//     if (!topPos && topPos < lastScrollPos) {
+//       eventsOn();
+//       prevSlide();
+//       turnOffScrollWatch();
+//     } else {
+//       pauseScrollWatch();
+//       lastScrollPos = topPos;
+//     }
+
+//   }
+
+//   // On/off/pause functions
+//   function turnOffScrollWatch() {
+//     $window.off('DOMMouseScroll mousewheel', watchScrollHandler);
+//   }
+//   function turnOnScrollWatch() {
+//     $window.on('DOMMouseScroll mousewheel', watchScrollHandler);
+//   }
+
+//   function pauseScrollWatch() {
+//     // Turn off scroll watch, wait 100ms, turn back on
+//     turnOffScrollWatch();
+
+//     window.setTimeout(function(){
+//       turnOnScrollWatch();
+//     }, 500) // NOTE: Increase timeout to make less sensitive
+//   }
+
+//   // Turn events off
+//   eventsOff();
+
+//   // Bind watching function
+//   turnOnScrollWatch();
+// }
+
+
+// // Navigation functions
+// // - Prev slide, next slide, setSlide (for the dot nav)
+// // - On last slide (job postings), allow normal scroll until scrolling up when already at top
+// //-------------------------
+// function prevSlide() {
+
+//   // remove 'active' class from current slide
+//   if (currentSlide) { // ensure not 0, If 0, do nothing
+
+//     if (currentSlide == 1) { // change state on first slide
+//       var $target = $slides.eq(0);
+//       var removedClass = 'active2';
+
+//       // Close the sorting panel, and leaderboard panel
+//       ScaleeSorter.closePanel();
+//       ScaleeSorter.closeLeaders();
+//       ScaleeBios.off();
+//     } else {
+//       var $target = $slides.eq(currentSlide-1);
+//       var removedClass = 'active';
+//     }
+
+//     // Remove 'active'
+//     $target.removeClass(removedClass);
+
+//     // Set other states
+//     currentSlide--;
+//     setDots(currentSlide);
+
+//     // Wait for animation
+//     wait();
+//   }
+// }
+
+// function nextSlide() {
+
+//   // Add 'active' class to next slide
+//   if (currentSlide !== $slides.length) { // ensure not last slide. If so, do nothing
     
-    var $target = $slides.eq(currentSlide);
+//     var $target = $slides.eq(currentSlide);
 
-    // If currentSlide == 0, add 'active2' class
-    var addedClass = (currentSlide) ? 'active' : 'active2';
+//     // If currentSlide == 0, add 'active2' class
+//     var addedClass = (currentSlide) ? 'active' : 'active2';
 
-    // Add 'active'
-    $target.addClass(addedClass);
+//     // Add 'active'
+//     $target.addClass(addedClass);
 
-    if (currentSlide == 1) {
-      // Close leaderboard and sorting panel
-      ScaleeSorter.closePanel();
-      ScaleeSorter.closeLeaders();
-    } else if (!currentSlide) {
-      ScaleeBios.on();
-    }
+//     if (currentSlide == 1) {
+//       // Close leaderboard and sorting panel
+//       ScaleeSorter.closePanel();
+//       ScaleeSorter.closeLeaders();
+//     } else if (!currentSlide) {
+//       ScaleeBios.on();
+//     }
 
-    // Remember state
-    currentSlide++;
-    setDots(currentSlide);
+//     // Remember state
+//     currentSlide++;
+//     setDots(currentSlide);
 
-    // If moved to last slide, turn scroll-control off
-    if (currentSlide == $slides.length) {
-      allowScrolling();
-    } else {
-      // Wait for animation
-      wait();
-    }
+//     // If moved to last slide, turn scroll-control off
+//     if (currentSlide == $slides.length) {
+//       allowScrolling();
+//     } else {
+//       // Wait for animation
+//       wait();
+//     }
 
-  }
-}
-function setSlide(index) {
-  // Close leaderboard and sorting panel if leaving scalee-sorter
-  if (currentSlide == 1) {
-    ScaleeSorter.closePanel();
-    ScaleeSorter.closeLeaders();
-  }
+//   }
+// }
+// function setSlide(index) {
+//   // Close leaderboard and sorting panel if leaving scalee-sorter
+//   if (currentSlide == 1) {
+//     ScaleeSorter.closePanel();
+//     ScaleeSorter.closeLeaders();
+//   }
 
-  var slideCount = $slides.length;
+//   var slideCount = $slides.length;
 
-  // set 'active(2)' class on slides <= index
-  for (var i = 0; i <= slideCount; i++) {
-    var $target = (i == 0) ? $slides.eq(i) : $slides.eq( i-1 );
-    var targetClass = (i == 1) ? 'active2' : 'active';
+//   // set 'active(2)' class on slides <= index
+//   for (var i = 0; i <= slideCount; i++) {
+//     var $target = (i == 0) ? $slides.eq(i) : $slides.eq( i-1 );
+//     var targetClass = (i == 1) ? 'active2' : 'active';
 
-    // if over clicked index, then remove the class
-    $target.toggleClass(targetClass, (i <= index));
-  }
+//     // if over clicked index, then remove the class
+//     $target.toggleClass(targetClass, (i <= index));
+//   }
 
-  // Set dots
-  setDots(index);
+//   // Set dots
+//   setDots(index);
 
-  // If last slide, allow scrolling, else wait for animation
-  if (index == slideCount) {
-    allowScrolling();
-  } else {
-    wait();
-  }
+//   // If last slide, allow scrolling, else wait for animation
+//   if (index == slideCount) {
+//     allowScrolling();
+//   } else {
+//     wait();
+//   }
 
-  // Remember state
-  currentSlide = index;
-}
+//   // Remember state
+//   currentSlide = index;
+// }
 
-function wait() {
-  // allow for transition animation before sliding again
-  eventsOff();
-  window.setTimeout(function(){
-    eventsOn();
-  }, slideTimeout);
-}
+// function wait() {
+//   // allow for transition animation before sliding again
+//   eventsOff();
+//   window.setTimeout(function(){
+//     eventsOn();
+//   }, slideTimeout);
+// }
 
-function setDots(num) {
-  var $targetDot = $dots.eq(num);
-  $targetDot.addClass('current').siblings().removeClass('current');
-}
-
-
-// Initailize
-//--------------
-function init() {
-  eventsOn();
-}
+// function setDots(num) {
+//   var $targetDot = $dots.eq(num);
+//   $targetDot.addClass('current').siblings().removeClass('current');
+// }
 
 
+// // Initailize
+// //--------------
+// function init() {
+//   eventsOn();
+// }
 
-module.exports.init = init;
-module.exports.eventsOff = eventsOff;
-module.exports.eventsOn = eventsOn;
-},{"./scalee-bios.js":4,"./scalee-sorter.js":5,"./util.js":9,"jquery":1}],8:[function(require,module,exports){
+
+
+// module.exports.init = init;
+// module.exports.eventsOff = eventsOff;
+// module.exports.eventsOn = eventsOn;
+},{}],8:[function(require,module,exports){
 'use strict';
 
 var $ = require('jquery');

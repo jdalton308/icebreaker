@@ -238,15 +238,6 @@ button,
 	}
 }
 
-// Large rotating .svg
-//-----------------------
-#large-poly {
-	position: fixed;
-	z-index: 0;
-	top: -10%;
-	left: -50%;
-}
-
 // Small airplane-like .svg
 //----------------------------
 #landing-poly {
@@ -254,6 +245,17 @@ button,
 	z-index: 2;
 	top: -10%;
 	right: 40%;
+}
+
+// Large rotating .svg
+//-----------------------
+#large-poly {
+	position: fixed;
+	z-index: 0;
+	top: -120%;
+	left: -50%;
+	// -webkit-filter: drop-shadow(9px 8px 4px $sketchup-gray);
+	// filter: drop-shadow(9px 8px 4px $sketchup-gray);
 }
 
 
