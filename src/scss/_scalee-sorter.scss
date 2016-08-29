@@ -42,14 +42,14 @@
 		}
 
 		&.prev {
-			left: 20px;
+			left: -100px;
 
 			&:before {
 				@include transform( translate(-30%, -50%) rotate(-135deg) );
 			}
 		}
 		&.next {
-			right: 20px;
+			right: -100px;
 
 			&:before {
 				@include transform( translate(-70%, -50%) rotate(45deg) );
@@ -57,11 +57,12 @@
 		}
 	}
 	.scalee-cont {
-		position: absolute;
+		@include centerX();
 		top: 5vh;
-		left: 0;
+
 		height: 40vh;
 		width: auto;
+		// min-width: 100%;
 		margin-bottom: 30px;
 		text-align: center;
 		white-space: nowrap;
@@ -140,7 +141,7 @@
 
 		.open-panel {
 			@include centerX();
-			top: -66px;
+			top: -10px;
 			box-shadow: $box-shadow;
 
 			&:active {
@@ -295,13 +296,24 @@
 		} // end .selectors
 	} // end .control-panel
 
-	// Show bottom control panel, hide title text, make scalees larger
+
+	// Show buttons, and allow clicks on scalees
 	&.active {
-		.scalee-background {
-			// height: 40%;
+
+		.scalee-scroll {
+			&.prev {
+				left: 20px;
+			}
+			&.next {
+				right: 20px;
+			}
+		}
+		.control-panel {
+			.open-panel {
+				top: -66px;
+			}
 		}
 		.scalee-cont {
-			// top: 15vh;
 
 			&:hover {
 				img {
@@ -338,9 +350,6 @@
 		}
 
 		@media (min-width: $mobile) {
-			.scalee-cont {
-				// height: 85vh;
-			}
 		}
 	}
 
@@ -395,10 +404,6 @@
 					}
 				}
 			}
-			// .scalee-cont {
-			// 	bottom: 45vh;
-			// 	height: 35vh;
-			// }
 		}
 			
 	}

@@ -120,37 +120,48 @@ p {
 
 	.slide-number {
 		position: relative;
-		top: -50px;
-		opacity: 0;
+		top: 100px;
+		z-index: 4;
+
 		display: inline-block;
 		margin-bottom: 20px;
 		padding: 10px 10px 8px;
 		font-size: 1.7rem;
 		color: $white;
 		background-color: $new-red;
-		box-shadow: 2px 2px 15px -3px $black;
+		box-shadow: 4px 4px 14px -1px $sketchup-gray;
 	}
 	h1 {
 		position: relative;
-		opacity: 0;
-		top: -70px;
+		top: -100px;
+		z-index: 2;
 		margin: 0 0 15px;
+
+		// animate in from blur
+		color: $su-gray-rgba-0;
+		text-shadow: 0 0 15px $su-gray-rgba;
 	}
 	.underline {
 		position: relative;
-		opacity: 0;
+		// top: -100px;
+		z-index: 3;
+
 		display: inline-block;
 		width: 150px;
 		height: 3px;
 		margin-bottom: 18px;
 		background-color: $sketchup-gray;
-		box-shadow: 1px 1px 15px -3px $black;
+		box-shadow: 4px 4px 9px $sketchup-gray;
 	}
 	h2 {
 		position: relative;
-		opacity: 0;
 		top: -100px;
+		z-index: 1;
 		margin: 0;
+
+		// animate in from blur
+		color: $su-gray-rgba-0;
+		text-shadow: 0 0 15px $su-gray-rgba;
 	}
 }
 

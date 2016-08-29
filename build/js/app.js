@@ -11011,26 +11011,23 @@ return jQuery;
 },{}],2:[function(require,module,exports){
 
 var $ = require('jquery');
-// var ScrollNav = require('./modules/scroll-nav.js');
+
 var ScaleeSorter = require('./modules/scalee-sorter.js');
 var ScaleeBios = require('./modules/scalee-bios.js');
-// var JobPostings = require('./modules/job-postings.js');
 var TwoTruths = require('./modules/two-truths.js');
 var ScrollAnimate = require('./modules/scroll-animation');
 
 
 $(function(){
-	// ScrollNav.init();
 	ScaleeSorter.init();
 	ScaleeBios.init();
-	// JobPostings();
 	TwoTruths.init();
 	ScrollAnimate();
 
 	window.setTimeout(function(){
 		ScaleeSorter.center();
 	}, 1500);
-	
+
 });
 },{"./modules/scalee-bios.js":4,"./modules/scalee-sorter.js":5,"./modules/scroll-animation":6,"./modules/two-truths.js":8,"jquery":1}],3:[function(require,module,exports){
 
@@ -11944,10 +11941,10 @@ function eventsOn() {
 
   // Scroll scalees ------
   $scaleeLeftBtn.click(function(){
-    scrollScalees(200);
+    scrollScalees(0.1);
   });
   $scaleeRightBtn.click(function(){
-    scrollScalees(-200);
+    scrollScalees(-0.1);
   });
 }
 
@@ -12068,6 +12065,8 @@ function sort() {
     if ( !$this.hasClass('hide') ) {
       $this.addClass('show');
     }
+
+    console.log('checked another scalee for show/hide');
 
   });
 
@@ -12192,40 +12191,87 @@ function switchLeaderTitle(newTitle) {
 
 // Scalee lateral scrolling
 //-----------------------------
-var scaleeContWidth;
+// var scaleeContWidth;
 var scaleeOffset;
-var windowCenter = window.innerWidth/2
+var windowCenter = window.innerWidth/2;
 
 function centerScalees() {
-   // - get width
-  scaleeContWidth = $scaleeCont.width();
+   // - get width by summing width of scalees, so animation can happen
 
-  // - check if even need to center
-  if (scaleeContWidth > window.innerWidth) {
-    // - get amount to move to left...
-    scaleeOffset = -(scaleeContWidth - window.innerWidth)/2;
+   // window.setTimeout(function(){
+    // scaleeContWidth = $scaleeCont.width();
+    // scaleeContWidth = 0;
 
-    // - move to left
-    $scaleeCont.css({
-      'left': scaleeOffset
-    });
-  }
+    // $scalees.each(function(){
+    //   var $this = $(this);
+    //   if ($this.hasClass('show')) {
+    //     scaleeContWidth += $this.width();
+    //     // console.log('this scalee is showing:');
+    //     // console.log($this);
+    //     console.log('Scalee is showing and is '+ $this.width() + ' wide');
+    //   }
+
+    //   console.log('new scaleeContWith: '+ scaleeContWidth);
+    // });
+
+    // console.log('TOTAL scaleeContWith: '+ scaleeContWidth);
+    // console.log('--------')
+
+    // // - check if even need to center
+    // if (scaleeContWidth > window.innerWidth) {
+    //   var newOffset = -(scaleeContWidth - window.innerWidth)/2;
+    //   // - get amount to move to left...
+    //   scaleeOffset = newOffset;
+
+    //   console.log('newOffset: '+ newOffset);
+    // } else {
+    //   scaleeOffset = 0;
+    //   scaleeContWidth = $scaleeCont.width();
+    // }
+
+    // // - move to left
+    // $scaleeCont.css({
+    //   'left': scaleeOffset
+    // });
+
+  // }, 1000);
+
+  // Just reset the translateX CSS property to 50%;
+  scaleeOffset = 0.5;
+  setTranslate();
 }
 
 function scrollScalees(dist) {
 
-  // on each click, move (int) (if > 0, moves right)
-  scaleeOffset += dist;
+  // // on each click, move (int) (if > 0, moves right)
+  // scaleeOffset += dist;
 
-  // Prevent overscrolling
-  if ( (scaleeOffset > windowCenter) || (scaleeOffset < (-scaleeContWidth + windowCenter)) ) {
-    // reset to prev spot
-    scaleeOffset -= dist;
+  // // Prevent overscrolling
+  // if ( (scaleeOffset > windowCenter) || (scaleeOffset < (-scaleeContWidth + windowCenter)) ) {
+  //   // reset to prev spot
+  //   scaleeOffset -= dist;
+  //   return;
+  // }
+
+  // $scaleeCont.css({
+  //   'left': scaleeOffset
+  // });
+
+  // Just move translateX CSS property +/-
+  if ( (scaleeOffset >= 0.95 && dist > 0) || 
+        (scaleeOffset <= 0.05 && dist < 0) ) {
     return;
   }
 
+  scaleeOffset += dist;
+  setTranslate()
+}
+
+function setTranslate() {
+  var offsetString = (100 * scaleeOffset) + '%';
+
   $scaleeCont.css({
-    'left': scaleeOffset
+    transform: 'translateX(' + offsetString +')'
   });
 }
 
@@ -12262,86 +12308,39 @@ var $ = require('jquery');
 
 function scrollAnimate() {
 
+	// If need to adjust scroll sensitivity:
+	//-----------------------------------------
+	// function wheel(event) {
+	// 	var delta = 0;
+	// 	if (event.wheelDelta) {
+	// 		(delta = event.wheelDelta / 120);
+	// 	} else if (event.detail) {
+	// 		(delta = -event.detail / 3);
+	// 	}
+
+	// 	handle(delta);
+	// 	if (event.preventDefault) {
+	// 		(event.preventDefault());
+	// 	}
+	// 	event.returnValue = false;
+	// }
+
+	// function handle(delta) {
+	// 	var time = 100;
+	// 	var distance = 500;
+
+	// 	$('html, body').stop().animate({
+	// 		scrollTop: $(window).scrollTop() - (distance * delta)
+	// 	}, time );
+	// }
+
+	// if (window.addEventListener) {window.addEventListener('DOMMouseScroll', wheel, false);}
+	// window.onmousewheel = document.onmousewheel = wheel;
+
+
+
 	// Init Scroll Magic controller
 	var controller = new ScrollMagic.Controller();
-
-
-	//----------------
-	// Landing Slide
-	//--------------------
-	var slide1 = $('.slide0').get(0);
-	var $title1 = $('#title1');
-
-	var title1_el = $title1.get(0);
-	var title1_num = $title1.find('.slide-number').get(0);
-	var title1_h1 = $title1.find('h1').get(0);
-	var title1_line = $title1.find('.underline').get(0);
-	var title1_h2 = $title1.find('h2').get(0);
-
-	var landingPoly = document.getElementById('landing-poly');
-
-	// Since we have GSAP here, use it to animate in the landing, then use scrollmagic to animate it out
-	var intro_dur = 1;
-	var intro_delay = 2.2;
-
-	// Text blur/focus objects
-	var textFocusObj = {
-		color: 'rgba(54, 53, 69, 1)',
-		textShadow: '0 0 10px rgba(54, 53, 69, 0)'
-	};
-	var textBlurObj = {
-		color: 'rgba(54, 53, 69, 0)',
-		textShadow: '0 0 10px rgba(54, 53, 69, 1)'
-	}
-	var whiteTextBlur = {
-		color:'rgba(255,255,255,0)', 
-		textShadow:'0 0 15px rgba(255,255,255,1)',
-	}
-	var whiteTextFocus = {
-		color:'rgba(255,255,255,1)', 
-		textShadow:'0 0 15px rgba(255,255,255,0)',
-	}
-
-
-	// Landing text animation
-	//-----------------------
-	var title1_tl = new TimelineMax();
-	title1_tl.to(title1_el, intro_dur, {opacity: 1, top:0}, 1);
-	title1_tl.to(title1_h1, intro_dur, textFocusObj, intro_delay);
-	title1_tl.to(title1_h2, intro_dur, textFocusObj, intro_delay);
-	title1_tl.to(title1_num, intro_dur/2, {opacity: 1});
-	title1_tl.to(title1_line, intro_dur/2, {opacity: 1, ease: Expo.easeOut});
-	// title1_tl.to(slide1, 2, {height: '80vh', ease: Elastic.easeOut.config(1, 0.5)});
-
-
-	// Landing scroll-out
-	//-------------------------
-	var title_out_dur = 1;
-
-	var title1_tlout = new TimelineMax();
-
-	// Slide down and fade out
-	// // title1_tlout.to(title1_el, title_out_dur, {top: '150px'}, 0);
-	// title1_tlout.to(title1_num, title_out_dur, {top: '50px', opacity:0}, 0);
-	// title1_tlout.to(title1_h1, title_out_dur, {top: '70px', opacity:0}, 0);
-	// title1_tlout.to(title1_line, title_out_dur, {top: '0px', opacity:0}, 0);
-	// title1_tlout.to(title1_h2, title_out_dur, {top: '100px', opacity:0}, 0);
-
-	// Blur out
-	title1_tlout.to(title1_num, title_out_dur, whiteTextBlur, 0);
-	title1_tlout.to(title1_h1, title_out_dur, textBlurObj, 0);
-	title1_tlout.to(title1_line, title_out_dur, {top: '0px', opacity:0}, 0);
-	title1_tlout.to(title1_h2, title_out_dur, textBlurObj, 0);
-
-
-	var landingTextScene = new ScrollMagic.Scene({
-			triggerElement: slide1,
-			triggerHook: 'onLeave',
-			duration: '100%'
-		})
-		.setTween(title1_tlout)
-		.addTo(controller);
-
 
 
 	//------------------
@@ -12360,7 +12359,7 @@ function scrollAnimate() {
 	//----------------------
 	var scaleeClassScene = new ScrollMagic.Scene({
 			triggerElement: slide2_el,
-			triggerHook: '0.6'
+			triggerHook: '0.15'
 		})
 		.setClassToggle(slide2_el, 'active')
 		.addTo(controller);
@@ -12381,6 +12380,9 @@ function scrollAnimate() {
 	//-----------------------
 	// Small airplane-like polygon in forefront
 	//--------------------------
+	var slide1 = $('.slide0').get(0);
+	var landingPoly = document.getElementById('landing-poly');
+
 	var smallPoly_tl = new TimelineMax();
 		smallPoly_tl.to(landingPoly, 1, {right:'100%', top:'-20%', scale:0.7, rotation:'80deg', zIndex:0});
 		smallPoly_tl.to(landingPoly, 3, {right:'60%', top:'-5%', scale:0.5, rotation:'130deg'});
@@ -12416,11 +12418,27 @@ function scrollAnimate() {
 
 
 	//------------------
-	// Last two title-boxes
+	// Title-boxes
 	//-----------------------
 
 	// Constructor function
 	function newTitleBoxScene($titleBox) {
+		// Summary:
+		// - Blur in the text
+		// - Move text in parallax-type way, with the underline being the reference
+		// - Number is most forward, and moves slowest, then text, then underline
+
+		// - text blur/focus objects
+		var textFocusObj = {
+			color: 'rgba(54, 53, 69, 1)',
+			textShadow: '0px 0px 0px rgba(0,0,0,0)',
+			top: 0
+		};
+		var textBlurObj = {
+			color: 'rgba(54, 53, 69, 0)',
+			textShadow: '0 0 15px rgba(54, 53, 69, 1)',
+			top: '100px'
+		}
 
 		// - define elements
 		var title_el = $titleBox.get(0);
@@ -12431,27 +12449,30 @@ function scrollAnimate() {
 
 		var in_duration = 1;
 		var in_delay = 0;
+		var out_delay = in_duration + in_delay;
 		var out_duration = 1;
 
 		// - create timeline
 		var newTitle_tl = new TimelineMax();
 			// - animations in
-			newTitle_tl.to(title_el, in_duration, {top: 0}, in_delay);
-			newTitle_tl.to(title_num, in_duration, {opacity: 1, top: 0}, in_delay);
-			newTitle_tl.to(title_h1, in_duration, {opacity: 1, top: 0}, in_delay);
-			newTitle_tl.to(title_h2, in_duration, {opacity: 1, top: 0}, in_delay);
-			newTitle_tl.to(title_line, in_duration, {opacity: 1, ease: Expo.easeOut}, in_delay);
+			// newTitle_tl.to(title_el, in_duration, {top: 0}, in_delay);
+			newTitle_tl.to(title_num, in_duration, {top: 0}, in_delay);
+			newTitle_tl.to(title_h1, in_duration, textFocusObj, in_delay);
+			// newTitle_tl.to(title_line, in_duration, {top: 0}, in_delay);
+			newTitle_tl.to(title_h2, in_duration, textFocusObj, in_delay);
 			// - animations out
 			// newTitle_tl.to(title_el, title_out_dur, {top: '150px'}, (in_duration+in_delay));
-			newTitle_tl.to(title_num, title_out_dur, {top:'50px'}, (in_duration+in_delay));
-			newTitle_tl.to(title_h1, title_out_dur, {top:'70px'}, (in_duration+in_delay));
-			newTitle_tl.to(title_line, title_out_dur, {top:'0px', opacity:0}, (in_duration+in_delay));
-			newTitle_tl.to(title_h2, title_out_dur, {top:'100px'}, (in_duration+in_delay));
+			newTitle_tl.to(title_num, out_duration, {top:'-100px'}, out_delay);
+			newTitle_tl.to(title_h1, out_duration, textBlurObj, out_delay);
+			// newTitle_tl.to(title_line, out_duration, {top:'-100px'}, out_delay);
+			newTitle_tl.to(title_h2, out_duration, textBlurObj, out_delay);
 
 		// - bind to scroll
 		var newTitleScene = new ScrollMagic.Scene({
 				triggerElement: title_el,
-				triggerHook: 'onEnter',
+				triggerHook: '1.0', // when element enters
+				// offset: -300, // for number
+				// offset: ,
 				duration: '150%'
 			})
 			.setTween(newTitle_tl)
@@ -12461,6 +12482,7 @@ function scrollAnimate() {
 	}
 
 	// Create .title-box scenes
+	var titleBoxScene1 = newTitleBoxScene($('#title1'));
 	var titleBoxScene2 = newTitleBoxScene($('#title2'));
 	var titleBoxScene3 = newTitleBoxScene($('#title3'));
 
@@ -12482,22 +12504,33 @@ function scrollAnimate() {
 		var step1_dur = 1;
 		var step2_dur = 1;
 
+		// - text blur/focus objects
+		var whiteTextBlur = {
+			color:'rgba(255,255,255,0)',
+			textShadow:'0 0 15px rgba(255,255,255,1)',
+		}
+		var whiteTextFocus = {
+			color:'rgba(255,255,255,1)',
+			textShadow:'0 0 15px rgba(255,255,255,0)',
+		}
+
 		// - timeline
 		var hello_tl = new TimelineMax();
 			// - inward animations
 			hello_tl.to(icon_el, step1_dur, {top:'90%'}, 0);
-			hello_tl.to(h5_el, step1_dur, {textShadow:'0 0 0 transparent'}, 0);
-			hello_tl.to(p_el, step1_dur, {textShadow:'0 0 0 transparent'}, 0);
+			hello_tl.to(h5_el, step1_dur, whiteTextFocus, 0);
+			hello_tl.to(p_el, step1_dur, whiteTextFocus, 0);
 			// - outward animations
-			hello_tl.to(icon_el, step2_dur, {top:'0%'}, step1_dur);
-			hello_tl.to(h5_el, step2_dur, {textShadow:'0 0 20px #FFF'}, step1_dur);
-			hello_tl.to(p_el, step2_dur, {textShadow:'0 0 20px #FFF'}, step1_dur);
+			hello_tl.to(icon_el, step2_dur, {top:'50%'}, step1_dur);
+			hello_tl.to(h5_el, step2_dur, whiteTextBlur, step1_dur);
+			hello_tl.to(p_el, step2_dur, whiteTextBlur, step1_dur);
 
 		// - create scene
 		var boxScene = new ScrollMagic.Scene({
 				triggerElement: box_el,
 				triggerHook: 'onEnter',
-				duration: '110%'
+				offset: 100,
+				duration: '120%'
 			})
 			.setTween(hello_tl)
 			.addTo(controller);
@@ -12517,7 +12550,6 @@ function scrollAnimate() {
 	//-----------------------
 	// - blur in and out text: title and p
 	// - move button in and out of position
-	// - 
 
 	// Constructor
 	function newJobPostingScene($postEl) {
@@ -12545,13 +12577,13 @@ function scrollAnimate() {
 					color:'#FFF', 
 					boxShadow:'0 0 20px 10px rgba(73,143,225, 0)', 
 				}, 0);
-			job_tl.to(button_el, (in_duration*3), {top:'-50px'}, 0);
+			job_tl.to(button_el, (in_duration*3), {top:'-30px'}, 0);
 
 		// Create Scene
 		var jobScene = new ScrollMagic.Scene({
 				triggerElement: post_el,
 				triggerHook: 'onEnter',
-				offset: 200,
+				offset: 100,
 				duration: '100%'
 			})
 			.setTween(job_tl)

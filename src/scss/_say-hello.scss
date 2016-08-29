@@ -1,11 +1,9 @@
 
 .slide.slide2 {
-	// padding-top: 20vh;
 	text-align: right;
-	padding-bottom: calc(20vh + 110px);
 
 	.title-box {
-		margin: 0 0 30vh;
+		margin: 0 0 40vh;
 	}
 
 	a.nav-box {
@@ -24,7 +22,7 @@
 			display: inline-block;
 			position: absolute;
 			z-index: 2;
-			top: 180%; // animated
+			top: 130%; // animated
 			right: -15px;
 			height: 60px;
 			width: 60px;
@@ -40,14 +38,18 @@
 				font-size: 2.5rem;
 			}
 		}
+		h5,
+		p {
+			// animation starts
+			color: rgba(255,255,255, 0);
+			text-shadow: 0 0 15px rgba(255,255,255, 1);
+		}
 		h5 {
 			margin-bottom: 10px;
-			text-shadow: 0 0 20px $white; // animated
 		}
 		p {
 			margin: 0;
 			line-height: 1.2em;
-			text-shadow: 0 0 20px $white; // animated
 		}
 		.poly {
 			display: inline-block;
