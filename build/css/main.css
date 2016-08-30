@@ -161,7 +161,7 @@ p {
   max-width: 800px; }
   .title-box .slide-number {
     position: relative;
-    top: 100px;
+    top: 70px;
     z-index: 4;
     display: inline-block;
     margin-bottom: 20px;
@@ -172,7 +172,7 @@ p {
     box-shadow: 4px 4px 14px -1px #363545; }
   .title-box h1 {
     position: relative;
-    top: -100px;
+    top: -50px;
     z-index: 2;
     margin: 0 0 15px;
     color: rgba(54, 53, 69, 0);
@@ -188,7 +188,7 @@ p {
     box-shadow: 4px 4px 9px #363545; }
   .title-box h2 {
     position: relative;
-    top: -100px;
+    top: -50px;
     z-index: 1;
     margin: 0;
     color: rgba(54, 53, 69, 0);

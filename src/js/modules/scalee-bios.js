@@ -95,14 +95,19 @@ function clickHandler() {
   // - finally, disable scalee click events while open
 
 
+  // Function to place a new scalee right on top of the clicked scalee
   function copyScalee($el) {
 
     var $newEl = $el.clone().removeClass('show').addClass('bio-scalee');
-    var elPos = $el.position();
 
-    // Calculate left position in window
-    var scaleeContLeft = parseInt( $scaleeCont.css('left'), 10);
-    elPos.left = elPos.left + scaleeContLeft;
+
+    var elPos = {
+      top: $el.position().top,
+      left: $el.offset().left
+    };
+
+    console.log('elPos:');
+    console.log(elPos);
 
     // Calculate top position in element
     var scaleeContTop = $scaleeCont.position().top;

@@ -11,8 +11,9 @@ var $ = require('jquery');
 
 function scrollAnimate() {
 
-	// If need to adjust scroll sensitivity:
+	// If want to adjust scroll sensitivity, use this:
 	//-----------------------------------------
+
 	// function wheel(event) {
 	// 	var delta = 0;
 	// 	if (event.wheelDelta) {
@@ -39,6 +40,8 @@ function scrollAnimate() {
 
 	// if (window.addEventListener) {window.addEventListener('DOMMouseScroll', wheel, false);}
 	// window.onmousewheel = document.onmousewheel = wheel;
+
+	//-----------------------------------------------
 
 
 
@@ -201,7 +204,7 @@ function scrollAnimate() {
 		var textBlurObj = {
 			color: 'rgba(54, 53, 69, 0)',
 			textShadow: '0 0 15px rgba(54, 53, 69, 1)',
-			top: '100px'
+			top: '50px'
 		}
 
 		// - define elements
@@ -211,9 +214,9 @@ function scrollAnimate() {
 		var title_line = $titleBox.find('.underline').get(0);
 		var title_h2 = $titleBox.find('h2').get(0);
 
-		var in_duration = 1;
 		var in_delay = 0;
-		var out_delay = in_duration + in_delay;
+		var in_duration = 1;
+		var out_delay = in_duration + in_delay + 0.5;
 		var out_duration = 1;
 
 		// - create timeline
@@ -226,7 +229,7 @@ function scrollAnimate() {
 			newTitle_tl.to(title_h2, in_duration, textFocusObj, in_delay);
 			// - animations out
 			// newTitle_tl.to(title_el, title_out_dur, {top: '150px'}, (in_duration+in_delay));
-			newTitle_tl.to(title_num, out_duration, {top:'-100px'}, out_delay);
+			newTitle_tl.to(title_num, out_duration, {top:'-70px'}, out_delay);
 			newTitle_tl.to(title_h1, out_duration, textBlurObj, out_delay);
 			// newTitle_tl.to(title_line, out_duration, {top:'-100px'}, out_delay);
 			newTitle_tl.to(title_h2, out_duration, textBlurObj, out_delay);
@@ -235,8 +238,6 @@ function scrollAnimate() {
 		var newTitleScene = new ScrollMagic.Scene({
 				triggerElement: title_el,
 				triggerHook: '1.0', // when element enters
-				// offset: -300, // for number
-				// offset: ,
 				duration: '150%'
 			})
 			.setTween(newTitle_tl)
