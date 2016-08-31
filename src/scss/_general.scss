@@ -91,7 +91,8 @@ p {
 	min-height: 100vh;
 	width: 100%;
 	padding: 50px 20px;
-	border-bottom: 1px solid $sketchup-gray;
+	// border-bottom: 1px solid $sketchup-gray;
+	box-shadow: $box-shadow;
 
 	&.slide2,
 	&.slide3 {
@@ -120,7 +121,7 @@ p {
 
 	.slide-number {
 		position: relative;
-		top: 70px;
+		top: 30px;
 		z-index: 4;
 
 		display: inline-block;
@@ -129,7 +130,7 @@ p {
 		font-size: 1.7rem;
 		color: $white;
 		background-color: $new-red;
-		box-shadow: 4px 4px 14px -1px $sketchup-gray;
+		box-shadow: 4px 20px 14px -1px $sketchup-gray;
 	}
 	h1 {
 		position: relative;
@@ -151,7 +152,7 @@ p {
 		height: 3px;
 		margin-bottom: 18px;
 		background-color: $sketchup-gray;
-		box-shadow: 4px 4px 9px $sketchup-gray;
+		box-shadow: 4px 15px 9px $sketchup-gray; // animated
 	}
 	h2 {
 		position: relative;

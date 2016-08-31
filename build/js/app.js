@@ -12440,6 +12440,15 @@ function scrollAnimate() {
 		// - Move text in parallax-type way, with the underline being the reference
 		// - Number is most forward, and moves slowest, then text, then underline
 
+		// - title number: position and box-shadow
+		var titleNumMid = {
+			top: 0,
+			boxShadow: '4px 6px 14px -1px #363545'
+		};
+		var titleNumPast = {
+			top: '-30px',
+			boxShadow: '4px -10px 14px -1px #363545'
+		}
 		// - text blur/focus objects
 		var textFocusObj = {
 			color: 'rgba(54, 53, 69, 1)',
@@ -12451,6 +12460,13 @@ function scrollAnimate() {
 			textShadow: '0 0 15px rgba(54, 53, 69, 1)',
 			top: '50px'
 		}
+		// - box shadow for underline
+		var lineShadowMid = {
+			boxShadow: '4px 5px 9px #363545'
+		};
+		var lineShadowPast = {
+			boxShadow: '4px -5px 9px #363545'
+		};
 
 		// - define elements
 		var title_el = $titleBox.get(0);
@@ -12461,29 +12477,29 @@ function scrollAnimate() {
 
 		var in_delay = 0;
 		var in_duration = 1;
-		var out_delay = in_duration + in_delay + 0.5;
+		var out_delay = in_duration + in_delay;
 		var out_duration = 1;
 
 		// - create timeline
 		var newTitle_tl = new TimelineMax();
 			// - animations in
 			// newTitle_tl.to(title_el, in_duration, {top: 0}, in_delay);
-			newTitle_tl.to(title_num, in_duration, {top: 0}, in_delay);
+			newTitle_tl.to(title_num, in_duration, titleNumMid, in_delay);
 			newTitle_tl.to(title_h1, in_duration, textFocusObj, in_delay);
-			// newTitle_tl.to(title_line, in_duration, {top: 0}, in_delay);
+			newTitle_tl.to(title_line, in_duration, lineShadowMid, in_delay);
 			newTitle_tl.to(title_h2, in_duration, textFocusObj, in_delay);
 			// - animations out
 			// newTitle_tl.to(title_el, title_out_dur, {top: '150px'}, (in_duration+in_delay));
-			newTitle_tl.to(title_num, out_duration, {top:'-70px'}, out_delay);
+			newTitle_tl.to(title_num, out_duration, titleNumPast, out_delay);
 			newTitle_tl.to(title_h1, out_duration, textBlurObj, out_delay);
-			// newTitle_tl.to(title_line, out_duration, {top:'-100px'}, out_delay);
+			newTitle_tl.to(title_line, out_duration, lineShadowPast, out_delay);
 			newTitle_tl.to(title_h2, out_duration, textBlurObj, out_delay);
 
 		// - bind to scroll
 		var newTitleScene = new ScrollMagic.Scene({
 				triggerElement: title_el,
 				triggerHook: '1.0', // when element enters
-				duration: '150%'
+				duration: '180%'
 			})
 			.setTween(newTitle_tl)
 			.addTo(controller);
@@ -12527,11 +12543,11 @@ function scrollAnimate() {
 		// - timeline
 		var hello_tl = new TimelineMax();
 			// - inward animations
-			hello_tl.to(icon_el, step1_dur, {top:'90%'}, 0);
+			hello_tl.to(icon_el, step1_dur, {top:'50%'}, 0);
 			hello_tl.to(h5_el, step1_dur, whiteTextFocus, 0);
 			hello_tl.to(p_el, step1_dur, whiteTextFocus, 0);
 			// - outward animations
-			hello_tl.to(icon_el, step2_dur, {top:'50%'}, step1_dur);
+			hello_tl.to(icon_el, step2_dur, {top:'30%'}, step1_dur);
 			hello_tl.to(h5_el, step2_dur, whiteTextBlur, step1_dur);
 			hello_tl.to(p_el, step2_dur, whiteTextBlur, step1_dur);
 
