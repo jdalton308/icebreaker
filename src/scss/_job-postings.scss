@@ -1,8 +1,22 @@
 
 .slide.slide3 {
-	padding-bottom: 40vh;
+	// padding-bottom: 40vh;
+	overflow: hidden;
 
 	@media (min-width: $mobile) {
+	}
+
+	#jobs-small-poly {
+		position: absolute;
+		z-index: 2;
+		left: 90%;
+		top: 100px;
+		@include transform( scale(0.8) );
+	}
+	#jobs-large-poly {
+		position: absolute;
+		left: 60%;
+		top: -500px;
 	}
 		
 	.title-box {
@@ -24,7 +38,7 @@
 			display: inline-block;
 			width: 200px;
 			height: 200px;
-			padding: 10px;
+			padding: 30px 20px;
 			text-align: left;
 			background-color: $new-blue;
 
@@ -34,7 +48,7 @@
 			box-shadow: 0 0 20px 10px $new-blue-rgba;
 
 			h4 {
-				margin: 0;
+				margin: 0 0 5px;
 			}
 			p {
 				margin: 0;
@@ -71,7 +85,7 @@
 				top: 100px; // animated into place
 				display: inline-block;
 				margin: 0;
-				box-shadow: $box-shadow;
+				box-shadow: 2px 12px 15px -2px $sketchup-gray; // animated
 				-webkit-transition: background-color 0.5s;
 				transition: background-color 0.5s;
 			}

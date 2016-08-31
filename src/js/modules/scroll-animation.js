@@ -206,13 +206,37 @@ function scrollAnimate() {
 					ease: Power0.easeNone
 				}, 1);
 
-		// var jobsPoly_tl = new TimelineMax();
-		// 	// - inward animation
-		// 	helloPoly_tl.to(helloLargePoly, 1, {}, 0);
-		// 	helloPoly_tl.to(helloSmallPoly, 1, {}, 0);
-		// 	// - outward animation
-		// 	helloPoly_tl.to(helloLargePoly, 1, {}, 0);
-		// 	helloPoly_tl.to(helloSmallPoly, 1, {}, 0);
+
+		var jobsPoly_tl = new TimelineMax();
+			// - inward animation
+			jobsPoly_tl.to(jobsLargePoly, 1, {
+					top:'0px', 
+					left:'55%', 
+					rotation:'8deg',
+					ease: Power0.easeNone
+				}, 0);
+			jobsPoly_tl.to(jobsSmallPoly, 1, {
+					left:'77%', 
+					top:'500px',
+					rotation:'30deg', 
+					scale: 0.75,
+					ease: Power0.easeNone
+				}, 0);
+			// - outward animation
+			jobsPoly_tl.to(jobsLargePoly, 1, {
+					top:'500px', 
+					left:'50%', 
+					rotation:'16deg', 
+					ease: Power0.easeNone
+				}, 1);
+			jobsPoly_tl.to(jobsSmallPoly, 1, {
+					left:'65%', 
+					top:'900px',
+					rotation:'60deg',
+					scale: 0.7,
+					ease: Power0.easeNone
+				}, 1);
+
 
 		var helloPolyScene = new ScrollMagic.Scene({
 				triggerElement: helloSlide,
@@ -222,13 +246,13 @@ function scrollAnimate() {
 			.setTween(helloPoly_tl)
 			.addTo(controller);
 
-		// var jobsPolyScene = new ScrollMagic.Scene({
-		// 		triggerElement: jobsSlide,
-		// 		triggerHook: 1,
-		// 		duration: '100%'
-		// 	})
-		// 	.setTween(jobsPoly_tl)
-		// 	.addTo(controller);
+		var jobsPolyScene = new ScrollMagic.Scene({
+				triggerElement: jobsSlide,
+				triggerHook: 1,
+				duration: '300%'
+			})
+			.setTween(jobsPoly_tl)
+			.addTo(controller);
 
 	})();
 
@@ -365,7 +389,7 @@ function scrollAnimate() {
 		var boxScene = new ScrollMagic.Scene({
 				triggerElement: box_el,
 				triggerHook: 1,
-				offset: -100,
+				offset: 0,
 				duration: '150%'
 			})
 			.setTween(hello_tl)
@@ -413,7 +437,7 @@ function scrollAnimate() {
 					color:'#FFF', 
 					boxShadow:'0 0 20px 10px rgba(73,143,225, 0)', 
 				}, 0);
-			job_tl.to(button_el, (in_duration*3), {top:'-30px'}, 0);
+			job_tl.to(button_el, (in_duration*3), {top:'-30px', boxShadow:'2px 4px 15px -2px #363545'}, 0);
 
 		// Create Scene
 		var jobScene = new ScrollMagic.Scene({
