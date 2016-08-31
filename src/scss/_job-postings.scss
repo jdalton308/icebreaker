@@ -9,8 +9,8 @@
 	#jobs-small-poly {
 		position: absolute;
 		z-index: 2;
-		left: 90%;
-		top: -200px;
+		left: 80%;
+		top: 0px;
 		@include transform( rotate(45deg) );
 	}
 	#jobs-large-poly {
@@ -21,7 +21,7 @@
 	}
 		
 	.title-box {
-		margin-bottom: 300px;
+		margin-bottom: 200px;
 	}
 	.job-postings {
 		position: relative;

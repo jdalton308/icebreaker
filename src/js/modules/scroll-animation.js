@@ -11,6 +11,30 @@ var $ = require('jquery');
 
 function scrollAnimate() {
 
+	var $window = $(window);
+	var $body = $('body');
+
+// Test //
+$window.on('load', function(){
+	console.log('window loaded');
+});
+
+
+	// Hide scrollbar when scrolling
+	//----------------------------------
+	(function(){
+		var timer;
+		$window.scroll(function () {
+			$body.addClass('scrolling');
+			clearTimeout(timer);
+			timer = setTimeout( stopHandler, 100 );
+		});
+		function stopHandler() { 
+			console.log('Stopped Scrolling');
+			$body.removeClass('scrolling'); 
+		};
+	})();
+
 	// If want to adjust scroll sensitivity, use this:
 	//-----------------------------------------
 
@@ -155,26 +179,18 @@ function scrollAnimate() {
 	// - Fix to window and rotate during scroll
 
 	(function() {
-		// var largePoly_el = $('#large-poly')[0];
-		// var poly_tl = new TimelineMax();
-		// 	poly_tl.to(largePoly_el, 1, {rotation:'15deg', top:'-5%', left:'-50%'});
-		// 	poly_tl.to(largePoly_el, 3, {rotation:'30deg', top:'0%', left:'-40%', scale:1.2});
 
-		// var poly_tween = TweenMax.to(largePoly_el, 1, {rotation:'90deg', top:'-150%', left:'50%', scale:1.2})
+		var windowHeight = window.innerHeight;
 
-		// var polyScene = new ScrollMagic.Scene({
-		// 		triggerElement: slide2_el,
-		// 		triggerHook: '1',
-		// 		duration: '600%' // last entire page
-		// 	})
-		// 	.setTween(poly_tween)
-		// 	.addTo(controller);
-
-		var helloSlide = document.getElementById('hello');
+		var $helloSlide = $('#hello');
+		var helloHeight = $helloSlide.height();
+		var helloSlide = $helloSlide.get(0);
 		var helloLargePoly = document.getElementById('hello-large-poly');
 		var helloSmallPoly = document.getElementById('hello-small-poly');
 
-		var jobsSlide = document.getElementById('jobs');
+		var $jobsSlide = $('#jobs');
+		var jobsHeight = $jobsSlide.height();
+		var jobsSlide = $jobsSlide.get(0);
 		var jobsLargePoly = document.getElementById('jobs-large-poly');
 		var jobsSmallPoly = document.getElementById('jobs-small-poly');
 
@@ -198,13 +214,13 @@ function scrollAnimate() {
 			// - outward animation
 			jobsPoly_tl.to(jobsSmallPoly, 1, {
 					left:'70%', 
-					top:'80%',
+					top:'60%',
 					rotation:'-5deg',
 					scale: 0.6,
 					ease: Power0.easeNone
 				}, 0);
 			jobsPoly_tl.to(jobsLargePoly, 1, {
-					top:'600px', 
+					top:'700px', 
 					left:'53%', 
 					rotation:'-45deg', 
 					ease: Power0.easeNone
@@ -214,7 +230,7 @@ function scrollAnimate() {
 		var helloPolyScene = new ScrollMagic.Scene({
 				triggerElement: helloSlide,
 				triggerHook: 1,
-				duration: '200%'
+				duration: (helloHeight + windowHeight)
 			})
 			.setTween(helloPoly_tl)
 			.addTo(controller);
@@ -222,7 +238,7 @@ function scrollAnimate() {
 		var jobsPolyScene = new ScrollMagic.Scene({
 				triggerElement: jobsSlide,
 				triggerHook: 1,
-				duration: '300%'
+				duration: (jobsHeight + windowHeight)
 			})
 			.setTween(jobsPoly_tl)
 			.addTo(controller);

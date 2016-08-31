@@ -311,14 +311,30 @@ button,
 	display: inline-block;
 	height: 70vh;
 
+	@at-root .scrolling & {
+		.progress-bar-track {
+			opacity: 1;
+			-webkit-transition-delay: 0s;
+			transition-delay: 0s;
+
+			// .progress-bar-indicator {
+			// 	opacity: 1;
+			// }
+		}
+	}
+
 	.progress-bar-track {
+		opacity: 0; // shown during scroll
 		position: relative;
 		height: 100%;
 		width: 10px;
 		background-color: $white;
 		border-radius: 10px;
-		box-shadow: $box-shadow;
+		box-shadow: 3px 1px 12px -2px $sketchup-gray;
 		overflow: hidden;
+		@include transition();
+		-webkit-transition-delay: 0.2s;
+		transition-delay: 0.2s;
 
 		.progress-bar-indicator {
 			position: absolute;
@@ -328,8 +344,8 @@ button,
 			height: 50px;
 			width: 100%;
 			border-radius: 10px;
-			background-color: $black;
-			box-shadow: $box-shadow;
+			background-color: $gray-5;
+			box-shadow: 3px 2px 15px -1px $sketchup-gray;
 		}
 	}
 	.sections {
@@ -337,28 +353,30 @@ button,
 		top: 0;
 		left: 10px;
 		height: 100%;
-		width: 120px;
+		width: 140px;
 		opacity: 0.5;
 		overflow: hidden;
 
 		.progress-nav-item {
 			position: absolute;
-			right: 100%;
+			right: 110%;
 			
 			display: inline-block;
 			width: 100px;
 			padding: 8px 13px 5px;
 			text-align: center;
 			font-size: 1.5rem;
-			color: $sketchup-gray;
-			border: 1px solid $sketchup-gray;
+			color: $white;
+			background-color: $new-blue;
 			cursor: pointer;
 			@include transition();
+			box-shadow: 3px 2px 20px -3px $sketchup-gray;
 
-			&.active,
 			&:hover {
+				box-shadow: 3px 4px 20px -1px $sketchup-gray;
+			}
+			&.active {
 				background-color: $sketchup-gray;
-				color: $white;	
 			}
 
 			&.meet {
@@ -378,7 +396,7 @@ button,
 			opacity: 1;
 
 			.progress-nav-item {
-				right: 0;
+				right: 20px;
 			}
 		}
 	}
