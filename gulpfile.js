@@ -22,6 +22,7 @@ var gsapFiles = [
 		'./node_modules/gsap/src/uncompressed/TweenMax.js',
 		// './node_modules/gsap/src/uncompressed/TimelineLite.js',
 		'./node_modules/gsap/src/uncompressed/TimelineMax.js',
+		'./node_modules/gsap/src/uncompressed/plugins/AttrPlugin.js',
 		'./node_modules/scrollmagic/scrollmagic/uncompressed/ScrollMagic.js',
 		'./node_modules/scrollmagic/scrollmagic/uncompressed/plugins/animation.gsap.js',
 	];

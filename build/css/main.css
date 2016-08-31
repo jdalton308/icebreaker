@@ -169,7 +169,7 @@ p {
     font-size: 1.7rem;
     color: #ffffff;
     background-color: #D0011B;
-    box-shadow: 4px 20px 14px -1px #363545; }
+    box-shadow: 4px 30px 14px -1px #363545; }
   .title-box h1 {
     position: relative;
     top: -50px;
@@ -263,8 +263,11 @@ button,
 #landing-poly {
   position: fixed;
   z-index: 2;
-  top: -10%;
-  right: 40%; }
+  top: -250px;
+  right: 60%;
+  -ms-transform: rotate(40deg);
+  -webkit-transform: rotate(40deg);
+  transform: rotate(40deg); }
 
 #large-poly {
   position: fixed;
@@ -1049,7 +1052,20 @@ button,
 
 .slide.slide2 {
   text-align: right;
-  background-color: #498FE1; }
+  background-color: #498FE1;
+  overflow: hidden; }
+  .slide.slide2 #hello-small-poly {
+    position: absolute;
+    z-index: 2;
+    right: 80%;
+    top: -200px;
+    -ms-transform: rotate(40deg) scale(0.7);
+    -webkit-transform: rotate(40deg) scale(0.7);
+    transform: rotate(40deg) scale(0.7); }
+  .slide.slide2 #hello-large-poly {
+    position: absolute;
+    right: 70%;
+    top: -900px; }
   .slide.slide2 .title-box {
     margin: 0 0 20vh; }
   .slide.slide2 a.nav-box {

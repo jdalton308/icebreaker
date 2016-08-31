@@ -136,50 +136,100 @@ function scrollAnimate() {
 
 	(function(){
 		var landingPoly = document.getElementById('landing-poly');
-		var group1 = document.getElementById('landing-poly-g1');
-		var group2 = document.getElementById('landing-poly-g2');
-		var group3 = document.getElementById('landing-poly-g3');
-		var group4 = document.getElementById('landing-poly-g4');
 
-		var smallPoly_tl = new TimelineMax();
-			smallPoly_tl.to(landingPoly, 1, {right:'100%', top:'-20%', scale:0.7, rotation:'80deg', zIndex:-1});
-			smallPoly_tl.to(group1, 0.1, {fill:'#D0011B'}, 1);
-			smallPoly_tl.to(group2, 0.1, {fill:'#D0011B'}, 1);
-			smallPoly_tl.to(group3, 0.1, {fill:'#D0011B'}, 1);
-			smallPoly_tl.to(group4, 0.1, {fill:'#D0011B'}, 1);
-			smallPoly_tl.to(landingPoly, 3, {right:'5%', top:'-5%', scale:0.5, rotation:'170deg'}, 1);
-		// var title1_poly = TweenMax.to(landingPoly, 1, {right:'90%', top:'50%', scale: 0.7, rotation:'80deg'});
+		var smallPolyTween = TweenMax.to(landingPoly, 1, {right:'75%', top:'-500px', scale:0.7, rotation:'50deg', zIndex:-1});
 
 		var landingPolyScene = new ScrollMagic.Scene({
 				triggerElement: slide1,
 				triggerHook: 'onLeave',
-				duration: '600%'
+				duration: '120%'
 			})
-			.setTween(smallPoly_tl)
+			.setTween(smallPolyTween)
 			.addTo(controller);
 	})();
 
 
 	//------------------
-	// Large polygon in background
+	// Polygons in background of Say Hello and Jobs
 	//-----------------------
 	// - Fix to window and rotate during scroll
 
 	(function() {
-		var largePoly_el = $('#large-poly')[0];
-		var poly_tl = new TimelineMax();
-			poly_tl.to(largePoly_el, 1, {rotation:'15deg', top:'-5%', left:'-50%'});
-			poly_tl.to(largePoly_el, 3, {rotation:'30deg', top:'0%', left:'-40%', scale:1.2});
+		// var largePoly_el = $('#large-poly')[0];
+		// var poly_tl = new TimelineMax();
+		// 	poly_tl.to(largePoly_el, 1, {rotation:'15deg', top:'-5%', left:'-50%'});
+		// 	poly_tl.to(largePoly_el, 3, {rotation:'30deg', top:'0%', left:'-40%', scale:1.2});
 
-		var poly_tween = TweenMax.to(largePoly_el, 1, {rotation:'90deg', top:'-150%', left:'50%', scale:1.2})
+		// var poly_tween = TweenMax.to(largePoly_el, 1, {rotation:'90deg', top:'-150%', left:'50%', scale:1.2})
 
-		var polyScene = new ScrollMagic.Scene({
-				triggerElement: slide2_el,
-				triggerHook: '1',
-				duration: '600%' // last entire page
+		// var polyScene = new ScrollMagic.Scene({
+		// 		triggerElement: slide2_el,
+		// 		triggerHook: '1',
+		// 		duration: '600%' // last entire page
+		// 	})
+		// 	.setTween(poly_tween)
+		// 	.addTo(controller);
+
+		var helloSlide = document.getElementById('hello');
+		var helloLargePoly = document.getElementById('hello-large-poly');
+		var helloSmallPoly = document.getElementById('hello-small-poly');
+
+		var jobsSlide = document.getElementById('jobs');
+		var jobsLargePoly = document.getElementById('jobs-large-poly');
+		var jobsSmallPoly = document.getElementById('jobs-small-poly');
+
+		var helloPoly_tl = new TimelineMax();
+			// - inward animation
+			helloPoly_tl.to(helloLargePoly, 1, {
+					top:'-700px', 
+					right:'71%', 
+					rotation:'3deg', 
+					ease: Power0.easeNone
+				}, 0);
+			helloPoly_tl.to(helloSmallPoly, 1, {
+					right:'83%', 
+					top:'100px',
+					rotation:'47deg', 
+					ease: Power0.easeNone
+				}, 0);
+			// - outward animation
+			helloPoly_tl.to(helloLargePoly, 1, {
+					top:'-500px', 
+					right:'72%', 
+					rotation:'6deg', 
+					ease: Power0.easeNone
+				}, 1);
+			helloPoly_tl.to(helloSmallPoly, 1, {
+					right:'86%', 
+					top:'400px',
+					rotation:'54deg',
+					ease: Power0.easeNone
+				}, 1);
+
+		// var jobsPoly_tl = new TimelineMax();
+		// 	// - inward animation
+		// 	helloPoly_tl.to(helloLargePoly, 1, {}, 0);
+		// 	helloPoly_tl.to(helloSmallPoly, 1, {}, 0);
+		// 	// - outward animation
+		// 	helloPoly_tl.to(helloLargePoly, 1, {}, 0);
+		// 	helloPoly_tl.to(helloSmallPoly, 1, {}, 0);
+
+		var helloPolyScene = new ScrollMagic.Scene({
+				triggerElement: helloSlide,
+				triggerHook: 1,
+				duration: '200%'
 			})
-			.setTween(poly_tween)
+			.setTween(helloPoly_tl)
 			.addTo(controller);
+
+		// var jobsPolyScene = new ScrollMagic.Scene({
+		// 		triggerElement: jobsSlide,
+		// 		triggerHook: 1,
+		// 		duration: '100%'
+		// 	})
+		// 	.setTween(jobsPoly_tl)
+		// 	.addTo(controller);
+
 	})();
 
 
@@ -194,15 +244,16 @@ function scrollAnimate() {
 		// - Blur in the text
 		// - Move text in parallax-type way, with the underline being the reference
 		// - Number is most forward, and moves slowest, then text, then underline
+		// - Underline and number have box shadows move
 
 		// - title number: position and box-shadow
 		var titleNumMid = {
 			top: 0,
-			boxShadow: '4px 6px 14px -1px #363545'
+			boxShadow: '4px 4px 14px -1px #363545'
 		};
 		var titleNumPast = {
 			top: '-30px',
-			boxShadow: '4px -10px 14px -1px #363545'
+			boxShadow: '4px -22px 14px -1px #363545'
 		}
 		// - text blur/focus objects
 		var textFocusObj = {
@@ -282,6 +333,8 @@ function scrollAnimate() {
 		var h5_el = $boxEl.find('h5').get(0);
 		var p_el = $boxEl.find('p').get(0);
 
+		// var poly1_line1 = document.getElementById('Path-1-2');
+
 		var step1_dur = 1;
 		var step2_dur = 1;
 
@@ -301,17 +354,19 @@ function scrollAnimate() {
 			hello_tl.to(icon_el, step1_dur, {top:'50%'}, 0);
 			hello_tl.to(h5_el, step1_dur, whiteTextFocus, 0);
 			hello_tl.to(p_el, step1_dur, whiteTextFocus, 0);
+			// hello_tl.to(poly1_line1, step1_dur, {attr:{points: '1400 891.5 1433 784.5 1592 821'}});
 			// - outward animations
 			hello_tl.to(icon_el, step2_dur, {top:'30%'}, step1_dur);
 			hello_tl.to(h5_el, step2_dur, whiteTextBlur, step1_dur);
 			hello_tl.to(p_el, step2_dur, whiteTextBlur, step1_dur);
+			// hello_tl.to(poly1_line1, step2_dur, {attr:{points: '1433 886.5 1433 784.5 1592 821'}});
 
 		// - create scene
 		var boxScene = new ScrollMagic.Scene({
 				triggerElement: box_el,
-				triggerHook: 'onEnter',
-				offset: 100,
-				duration: '120%'
+				triggerHook: 1,
+				offset: -100,
+				duration: '150%'
 			})
 			.setTween(hello_tl)
 			.addTo(controller);

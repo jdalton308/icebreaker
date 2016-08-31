@@ -130,7 +130,7 @@ p {
 		font-size: 1.7rem;
 		color: $white;
 		background-color: $new-red;
-		box-shadow: 4px 20px 14px -1px $sketchup-gray;
+		box-shadow: 4px 30px 14px -1px $sketchup-gray;
 	}
 	h1 {
 		position: relative;
@@ -244,8 +244,9 @@ button,
 #landing-poly {
 	position: fixed;
 	z-index: 2;
-	top: -10%;
-	right: 40%;
+	top: -250px;
+	right: 60%;
+	@include transform( rotate(40deg) );
 }
 
 // Large rotating .svg

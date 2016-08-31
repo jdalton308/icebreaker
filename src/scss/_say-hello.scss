@@ -2,6 +2,21 @@
 .slide.slide2 {
 	text-align: right;
 	background-color: $new-blue;
+	overflow: hidden;
+
+	#hello-small-poly {
+		position: absolute;
+		z-index: 2;
+		right: 80%;
+		top: -200px;
+		@include transform( rotate(40deg) scale(0.7));
+	}
+	#hello-large-poly {
+		position: absolute;
+		right: 70%;
+		top: -900px;
+	}
+
 
 	.title-box {
 		margin: 0 0 20vh;
@@ -62,62 +77,6 @@
 				line-height: 1.2em;
 			}
 		}
-			
-
-		// .poly {
-		// 	display: inline-block;
-		// 	position: absolute;
-		// 	top: 100%;
-		// 	width: 0;
-		// 	height: 0;
-		// }
-		// .bottom-right-poly {
-		// 	right: 0;
-		// 	border-top: 100px solid $new-red;
-		// 	border-right: 95px solid $new-red;
-		// 	border-bottom: 10px solid transparent;
-		// 	border-left: 103px solid transparent;
-
-		// 	&:after {
-		// 		content: '';
-		// 		display: inline-block;
-		// 		position: absolute;
-		// 		z-index: -1;
-		// 		top: 0;
-		// 		right: 1px;
-		// 		height: 100%;
-		// 		width: 5px;
-		// 		box-shadow: 2px 2px 15px -3px $black;
-		// 	}
-		// }
-		// .bottom-left-poly {
-		// 	left: 0;
-		// }
-
-		// &:nth-child(1) {
-		// 	.bottom-left-poly {
-		// 		border-top: 15px solid $new-red;
-		// 		border-right: 200px solid $new-red;
-		// 		border-bottom: 4px solid transparent;
-		// 		border-left: 12px solid transparent;
-		// 	}
-		// }
-		// &:nth-child(2) {
-		// 	.bottom-left-poly {
-		// 		border-top: 15px solid $new-red;
-		// 		border-right: 200px solid $new-red;
-		// 		border-bottom: 40px solid transparent;
-		// 		border-left: 12px solid transparent;
-		// 	}
-		// }
-		// &:nth-child(3) {
-		// 	.bottom-left-poly {
-		// 		border-top: 40px solid $new-red;
-		// 		border-right: 70px solid transparent;
-		// 		border-bottom: 0px solid transparent;
-		// 		border-left: 20px solid $new-red;
-		// 	}
-		// }
 
 	}
 
