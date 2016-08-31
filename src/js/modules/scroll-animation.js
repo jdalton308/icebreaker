@@ -179,63 +179,36 @@ function scrollAnimate() {
 		var jobsSmallPoly = document.getElementById('jobs-small-poly');
 
 		var helloPoly_tl = new TimelineMax();
-			// - inward animation
-			helloPoly_tl.to(helloLargePoly, 1, {
-					top:'-700px', 
-					right:'71%', 
-					rotation:'3deg', 
-					ease: Power0.easeNone
-				}, 0);
-			helloPoly_tl.to(helloSmallPoly, 1, {
-					right:'83%', 
-					top:'100px',
-					rotation:'47deg', 
-					ease: Power0.easeNone
-				}, 0);
 			// - outward animation
-			helloPoly_tl.to(helloLargePoly, 1, {
-					top:'-500px', 
-					right:'72%', 
-					rotation:'6deg', 
-					ease: Power0.easeNone
-				}, 1);
 			helloPoly_tl.to(helloSmallPoly, 1, {
 					right:'86%', 
 					top:'400px',
 					rotation:'54deg',
 					ease: Power0.easeNone
-				}, 1);
+				}, 0);
+			helloPoly_tl.to(helloLargePoly, 1, {
+					top:'0px', 
+					right:'72%', 
+					rotation:'6deg', 
+					ease: Power0.easeNone
+				}, 0);
 
 
 		var jobsPoly_tl = new TimelineMax();
-			// - inward animation
-			jobsPoly_tl.to(jobsLargePoly, 1, {
-					top:'0px', 
-					left:'55%', 
-					rotation:'8deg',
-					ease: Power0.easeNone
-				}, 0);
-			jobsPoly_tl.to(jobsSmallPoly, 1, {
-					left:'77%', 
-					top:'500px',
-					rotation:'30deg', 
-					scale: 0.75,
-					ease: Power0.easeNone
-				}, 0);
 			// - outward animation
-			jobsPoly_tl.to(jobsLargePoly, 1, {
-					top:'500px', 
-					left:'50%', 
-					rotation:'16deg', 
-					ease: Power0.easeNone
-				}, 1);
 			jobsPoly_tl.to(jobsSmallPoly, 1, {
-					left:'65%', 
-					top:'900px',
-					rotation:'60deg',
-					scale: 0.7,
+					left:'70%', 
+					top:'80%',
+					rotation:'-5deg',
+					scale: 0.6,
 					ease: Power0.easeNone
-				}, 1);
+				}, 0);
+			jobsPoly_tl.to(jobsLargePoly, 1, {
+					top:'600px', 
+					left:'53%', 
+					rotation:'-45deg', 
+					ease: Power0.easeNone
+				}, 0);
 
 
 		var helloPolyScene = new ScrollMagic.Scene({

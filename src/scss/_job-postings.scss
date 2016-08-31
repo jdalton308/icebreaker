@@ -10,13 +10,14 @@
 		position: absolute;
 		z-index: 2;
 		left: 90%;
-		top: 100px;
-		@include transform( scale(0.8) );
+		top: -200px;
+		@include transform( rotate(45deg) );
 	}
 	#jobs-large-poly {
 		position: absolute;
 		left: 60%;
 		top: -500px;
+		@include transform( rotate(-41deg) );
 	}
 		
 	.title-box {
@@ -29,6 +30,7 @@
 	}
 	.job-posting {
 		position: relative;
+		z-index: 5;
 		max-height: 250px;
 		margin: 0 0 100px;
 		padding: 0 0 0 100px;
