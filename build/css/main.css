@@ -152,7 +152,7 @@ p {
   padding: 50px 20px;
   box-shadow: 2px 2px 15px -2px #000; }
   .slide.slide2, .slide.slide3 {
-    padding-top: 40vh;
+    padding-top: 30vh;
     padding-bottom: 40vh; }
 
 .title-box {
@@ -290,6 +290,8 @@ button,
     opacity: 1;
     -webkit-transition-delay: 0s;
     transition-delay: 0s; }
+  .scrolling .progress-bar .sections {
+    opacity: 0.5; }
   .progress-bar .progress-bar-track {
     opacity: 0;
     position: relative;
@@ -305,10 +307,10 @@ button,
     transition-delay: 0.2s; }
     .progress-bar .progress-bar-track .progress-bar-indicator {
       position: absolute;
-      bottom: calc(100% - 50px);
+      top: 0;
       left: 0;
       z-index: 0;
-      height: 50px;
+      height: 10px;
       width: 100%;
       border-radius: 10px;
       background-color: #9D9DA6;
@@ -319,8 +321,10 @@ button,
     left: 10px;
     height: 100%;
     width: 140px;
-    opacity: 0.5;
-    overflow: hidden; }
+    opacity: 0;
+    overflow: hidden;
+    -webkit-transition: all 0.5s;
+    transition: all 0.5s; }
     .progress-bar .sections .progress-nav-item {
       position: absolute;
       right: 110%;
@@ -338,16 +342,20 @@ button,
       .progress-bar .sections .progress-nav-item:hover {
         box-shadow: 3px 4px 20px -1px #363545; }
       .progress-bar .sections .progress-nav-item.active {
-        background-color: #363545; }
+        background-color: #363545;
+        right: 20px; }
       .progress-bar .sections .progress-nav-item.meet {
         top: 0; }
       .progress-bar .sections .progress-nav-item.hello {
         top: 30%; }
       .progress-bar .sections .progress-nav-item.jobs {
         top: 60%; }
+  .progress-bar:hover .progress-bar-track {
+    opacity: 1; }
   .progress-bar:hover .sections {
     opacity: 1; }
     .progress-bar:hover .sections .progress-nav-item {
+      opacity: 1;
       right: 20px; }
 
 @-webkit-keyframes hideScalee {

@@ -96,7 +96,7 @@ p {
 
 	&.slide2,
 	&.slide3 {
-		padding-top: 40vh;
+		padding-top: 30vh;
 		padding-bottom: 40vh;
 	}
 
@@ -261,46 +261,6 @@ button,
 }
 
 
-// Dot nav
-//----------------
-// .dots-nav {
-// 	display: none;
-
-// 	@media (min-width: $mobile) {
-// 		display: block;
-// 		position: fixed;
-// 		z-index: 8;
-// 		top: 50%;
-// 		right: 20px;
-// 		@include transform( translateY(-50%) );
-
-// 		.dot {
-// 			display: block;
-// 			padding: 12px;
-// 			cursor: pointer;
-
-// 			&.current {
-// 				&:before {
-// 					background-color: $sketchup-red;				
-// 				}
-// 			}
-// 			&:before {
-// 				content: '';
-// 				display: inline-block;
-// 				width: 10px;
-// 				height: 10px;
-// 				border: 2px solid $sketchup-red;
-// 				@include transition();
-// 			}
-// 			&:hover {
-// 				&:before {
-// 					border-color: $black;
-// 				}
-// 			}
-// 		}
-// 	}
-// }
-
 // Side scrollbar
 //------------------
 .progress-bar {
@@ -316,10 +276,13 @@ button,
 			opacity: 1;
 			-webkit-transition-delay: 0s;
 			transition-delay: 0s;
+		}
+		.sections {
+			opacity: 0.5;
 
-			// .progress-bar-indicator {
-			// 	opacity: 1;
-			// }
+			.progress-nav-item {
+				// opacity: 0.5;
+			}
 		}
 	}
 
@@ -338,10 +301,10 @@ button,
 
 		.progress-bar-indicator {
 			position: absolute;
-			bottom: calc(100% - 50px);
+			top: 0;
 			left: 0;
 			z-index: 0;
-			height: 50px;
+			height: 10px;
 			width: 100%;
 			border-radius: 10px;
 			background-color: $gray-5;
@@ -354,12 +317,14 @@ button,
 		left: 10px;
 		height: 100%;
 		width: 140px;
-		opacity: 0.5;
+		opacity: 0;
 		overflow: hidden;
+		@include transition();
 
 		.progress-nav-item {
 			position: absolute;
 			right: 110%;
+			// opacity: 0.5;
 			
 			display: inline-block;
 			width: 100px;
@@ -376,7 +341,9 @@ button,
 				box-shadow: 3px 4px 20px -1px $sketchup-gray;
 			}
 			&.active {
+				// opacity: 0.5;
 				background-color: $sketchup-gray;
+				right: 20px;
 			}
 
 			&.meet {
@@ -392,11 +359,18 @@ button,
 	}
 
 	&:hover {
+		.progress-bar-track {
+			opacity: 1;
+		}
 		.sections {
 			opacity: 1;
 
 			.progress-nav-item {
+				opacity: 1;
 				right: 20px;
+
+				&.active {
+				}
 			}
 		}
 	}

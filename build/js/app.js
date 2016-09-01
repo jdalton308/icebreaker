@@ -11029,7 +11029,7 @@ $(function(){
 	}, 1500);
 
 });
-},{"./modules/scalee-bios.js":4,"./modules/scalee-sorter.js":5,"./modules/scroll-animation":6,"./modules/two-truths.js":8,"jquery":1}],3:[function(require,module,exports){
+},{"./modules/scalee-bios.js":4,"./modules/scalee-sorter.js":5,"./modules/scroll-animation":6,"./modules/two-truths.js":7,"jquery":1}],3:[function(require,module,exports){
 
 var leaders = {
 	"discgolf": {
@@ -11635,7 +11635,6 @@ module.exports = leaders;
 'use strict';
 
 var $ = require('jquery');
-var ScrollNav = require('./scroll-nav.js');
 var TwoTruths = require('./two-truths.js');
 var Util = require('./util.js');
 
@@ -11856,12 +11855,11 @@ function init() {
 module.exports.init = init;
 module.exports.on = eventsOn;
 module.exports.off = eventsOff;
-},{"./scroll-nav.js":7,"./two-truths.js":8,"./util.js":9,"jquery":1}],5:[function(require,module,exports){
+},{"./two-truths.js":7,"./util.js":8,"jquery":1}],5:[function(require,module,exports){
 'use strict';
 
 var $ = require('jquery');
 var LeaderData = require('./leaderboard-data.js');
-// var ScrollNav = require('./scroll-nav.js');
 var Util = require('./util.js');
 
 
@@ -12071,8 +12069,6 @@ function sort() {
       $this.addClass('show');
     }
 
-    console.log('checked another scalee for show/hide');
-
   });
 
 
@@ -12136,7 +12132,6 @@ function initLeaderboard() {
 
       // Bind click event to show leaderboard
       $newBtn.click(function(){
-        // console.log('Switching leaderboard to '+ eventId);
         switchLeaderboard( eventId );
       });
     };
@@ -12242,7 +12237,7 @@ module.exports.sort = sort;
 module.exports.closeLeaders = hideLeaderboard;
 module.exports.center = centerScalees;
 
-},{"./leaderboard-data.js":3,"./util.js":9,"jquery":1}],6:[function(require,module,exports){
+},{"./leaderboard-data.js":3,"./util.js":8,"jquery":1}],6:[function(require,module,exports){
 'use strict';
 
 var $ = require('jquery');
@@ -12258,109 +12253,307 @@ function scrollAnimate() {
 
 	var $window = $(window);
 	var $body = $('body');
+	var pageHeight = Math.max($(document).height(), $window.height());
+	// pageHeight -= window.innerHeight; // adjust to let bar hit bottom
 
-// Test //
-$window.on('load', function(){
-	console.log('window loaded');
-});
+	var $progressBar = $('.progress-bar');
+	var $progressIndicator = $progressBar.find('.progress-bar-indicator');
+	var navTriggers = $progressBar.find('.progress-nav-item');
+
+	var $meetUsBtn = $('[data-target="meet"]');
+	var meetUsBtn = $meetUsBtn.get(0);
+	var $helloBtn = $('[data-target="hello"]');
+	var helloBtn = $helloBtn.get(0);
+	var $jobsBtn = $('[data-target="jobs"]');
+	var jobsBtn = $jobsBtn.get(0);
+
+	var landingSlide = $('.slide0').get(0);
+
+	var $sorterSlide = $('#meet');
+	var sorterSlide = $sorterSlide.get(0);
+	var $scaleeBg = $('.scalee-background');
+	var scalee_bgel = $scaleeBg.get(0);
+	var scaleeCont_el = $sorterSlide.find('.scalee-cont').get(0);
+
+	var $helloSlide = $('#hello');
+	var helloHeight = $helloSlide.innerHeight();
+	var helloSlide = $helloSlide.get(0);
+
+	var $jobsSlide = $('#jobs');
+	var jobsHeight = $jobsSlide.innerHeight();
+	var jobsSlide = $jobsSlide.get(0);
 
 
-	// Hide scrollbar when scrolling
+	// Create measurement reference
+	//--------------------------------
+	var scrollRef = createPositionReference();
+
+	function createPositionReference() {
+		// for each slide
+		// - height in px
+		// - height as percentage of page height
+		// - page offset, in px
+		// - page offset, in %
+
+		var ref = {};
+		ref.pageHeight = pageHeight - window.innerHeight;
+
+		function measureSection($slide) {
+			var slideRef = {};
+			slideRef.pxHeight = $slide.innerHeight();
+			slideRef.percHeight = slideRef.pxHeight / ref.pageHeight;
+			slideRef.pxOffset = $slide.offset().top;
+			slideRef.percOffset = slideRef.pxOffset / ref.pageHeight;
+
+			return slideRef;
+		}
+
+		var sectionIds = ['#meet', '#hello', '#jobs'];
+		sectionIds.forEach(function(val, i){
+			ref[val] = measureSection( $(val) );
+		});
+
+		return ref;
+	}
+
+
+	// Test //
+	$window.on('load', function(){
+		console.log('window loaded');
+	});
+
+
+	// Init Scroll Magic controller
+	//-------------------------------
+	var controller = new ScrollMagic.Controller();
+
+
+
+	// Hide Progress Bar when scrolling
 	//----------------------------------
 	(function(){
 		var timer;
 		$window.scroll(function () {
 			$body.addClass('scrolling');
+			// clear previous timeout, essentially resetting the timer
 			clearTimeout(timer);
 			timer = setTimeout( stopHandler, 100 );
 		});
 		function stopHandler() { 
-			console.log('Stopped Scrolling');
 			$body.removeClass('scrolling'); 
 		};
 	})();
 
-	// If want to adjust scroll sensitivity, use this:
+
+	// Progress Bar and Buttons
 	//-----------------------------------------
-
-	// function wheel(event) {
-	// 	var delta = 0;
-	// 	if (event.wheelDelta) {
-	// 		(delta = event.wheelDelta / 120);
-	// 	} else if (event.detail) {
-	// 		(delta = -event.detail / 3);
-	// 	}
-
-	// 	handle(delta);
-	// 	if (event.preventDefault) {
-	// 		(event.preventDefault());
-	// 	}
-	// 	event.returnValue = false;
-	// }
-
-	// function handle(delta) {
-	// 	var time = 100;
-	// 	var distance = 500;
-
-	// 	$('html, body').stop().animate({
-	// 		scrollTop: $(window).scrollTop() - (distance * delta)
-	// 	}, time );
-	// }
-
-	// if (window.addEventListener) {window.addEventListener('DOMMouseScroll', wheel, false);}
-	// window.onmousewheel = document.onmousewheel = wheel;
-
-	//-----------------------------------------------
-
-
-
-	// Init Scroll Magic controller
-	var controller = new ScrollMagic.Controller();
-
-
-	// ----------------
-	// Scroll-progress bar
-	//------------------------
 	(function(){
-		// - Track progress with a tween
-		var $progressBar = $('.progress-bar');
-		var progressIndicator = $progressBar.find('.progress-bar-indicator');
+		var progressHeight = $progressBar.height();
 
-		var progressTween = TweenMax.to(progressIndicator, 1, {bottom: 0});
-		var pageHeight = Math.max($(document).height(), $(window).height());
+		function setBtnPos($btn, sectId) {
+			// var offsetPerc = (height + extra)/pageHeight;
+			var topPos = progressHeight * scrollRef[sectId].percOffset;
+			$btn.css('top', topPos);
+		}
 
-		var progressBarScene = new ScrollMagic.Scene({
-				triggerElement: slide1,
-				triggerHook: 'onLeave',
-				duration: pageHeight
+		function setMarkerHeight(e, heightRatio) {
+			// Set height of progress bar marker:
+			// - Get height of 'section'
+			var sectionHeight = heightRatio * progressHeight;
+
+			// - Multiply section height by progress
+			var markerHeight = sectionHeight * e.progress;
+
+			// - Don't go less than 10px tall
+			var newHeight = (markerHeight < 10) ? 10 : markerHeight;
+			$progressIndicator.css('height', newHeight);
+		}
+		function setMarkerOffset(sectId) {
+			var newOffset = scrollRef[sectId].percOffset * progressHeight;
+			$progressIndicator.css('top', newOffset);
+		}
+
+
+		// - position the buttons
+		//--------------------------
+		setBtnPos($meetUsBtn, '#meet');
+		setBtnPos($helloBtn, '#hello');
+		setBtnPos($jobsBtn, '#jobs');
+
+		// - trigger class changes when in each section.
+		//-----------------------
+		new ScrollMagic.Scene({
+				triggerElement: sorterSlide,
+				duration: window.innerHeight
 			})
-			.setTween(progressTween)
-			.addTo(controller);
+			.setClassToggle(meetUsBtn, 'active')
+			.addTo(controller)
+			.on('progress', function(e){
+				setMarkerHeight(e, scrollRef['#meet'].percHeight);
+			})
+			.on('enter', function(e){
+				setMarkerOffset('#meet');
+			});
+			// .on('start', function(e){
+
+			// 	if (e.scrollDirection == 'FORWARD') {
+			// 		// jump down to position
+			// 		$body.animate({
+			// 			scrollTop: scrollRef['#meet'].pxOffset
+			// 		}, 800);
+			// 		// taperScrolling();
+			// 	}
+			// });
+
+		new ScrollMagic.Scene({
+				triggerElement: $helloSlide.get(0),
+				duration: helloHeight
+			})
+			.setClassToggle(helloBtn, 'active')
+			.addTo(controller)
+			.on('progress', function(e){
+				setMarkerHeight(e, scrollRef['#hello'].percHeight)
+			})
+			.on('enter', function(e){
+				setMarkerOffset('#hello');
+			})
+			.on('start', function(e){
+
+				if (e.scrollDirection == 'FORWARD') {
+					// jump down to position
+					$body.animate({
+						scrollTop: scrollRef['#hello'].pxOffset
+					}, 800);
+					// taperScrolling();
+				}
+			});
+
+		new ScrollMagic.Scene({
+				triggerElement: $jobsSlide.get(0),
+				duration: jobsHeight
+			})
+			.setClassToggle(jobsBtn, 'active')
+			.addTo(controller)
+			.on('progress', function(e){
+				setMarkerHeight(e, scrollRef['#jobs'].percHeight)
+			})
+			.on('enter', function(e){
+				setMarkerOffset('#jobs');
+			})
+			.on('start', function(e){
+
+				if (e.scrollDirection == 'FORWARD') {
+					// jump down to position
+					$body.animate({
+						scrollTop: scrollRef['#jobs'].pxOffset
+					}, 800);
+					// taperScrolling();
+				}
+
+			});
 
 
-		// - Navigate page with section clicks
-		var navTriggers = $progressBar.find('.progress-nav-item');
+		// - Jump from landing slide to sorter with one scroll
+		//------------------------------
+		new ScrollMagic.Scene({
+				triggerElement: sorterSlide,
+				triggerHook: 1
+			})
+			.addTo(controller)
+			.on('start', function(e){
+
+				if (e.scrollDirection == 'FORWARD') {
+					$body.addClass('fixed');
+
+					// jump down to position
+					$body.animate({
+						scrollTop: scrollRef['#meet'].pxOffset
+					}, 1200, function(){
+						$body.removeClass('fixed');
+					});
+				}
+			});
+
+
+
+		// - Navigate page with button clicks
+		//---------------------------------
 		navTriggers.click(function(){
 			var $this = $(this);
 
-			console.log('--click');
-
 			// -get target
 			var target = $this.attr('data-target');
-			var $target = $('#'+ target);
+			var $target = '#'+ target;
 
 			// - get offset
-			var offset = $target.offset().top;
-
-			console.log('target offset: '+ offset);
+			var offset = scrollRef[$target].pxOffset;
 
 			// - animate scroll to section
-			$('body').animate({
+			$body.animate({
 				scrollTop: offset
 			}, 400);
 
 		});
 	})();
+
+
+	// TODO: Taper the scrolling at section starts
+	//-----------------------------------------
+
+	// function taperScrolling() {
+	// 	console.log('tapering scrolling...')
+	// 	var totalDelta = 0;
+
+	// 	function slowWheel(event) {
+	// 		console.log('Scroll event:');
+	// 		console.log(event);
+
+	// 		var delta = 0;
+	// 		if (event.wheelDelta) {
+	// 			(delta = event.wheelDelta / 120);
+	// 		} else if (event.detail) {
+	// 			(delta = -event.detail / 3);
+	// 		}
+
+	// 		handle(delta);
+	// 		totalDelta += delta;
+	// 		if (event.preventDefault) {
+	// 			(event.preventDefault());
+	// 		}
+	// 		event.returnValue = false;
+
+	// 		totalDelta += delta;
+
+	// 		console.log('Delta: '+ delta);
+	// 		console.log('Total: '+ totalDelta);
+	// 		console.log('---------------------')
+
+	// 	 	if (totalDelta > 10 || totalDelta < -10) {
+	// 	 		console.log('---taper off---')
+	// 	 		// after scrolling enough, unbind taper
+	// 			window.removeEventListener('wheel', slowWheel);
+	// 		}
+	// 	}
+
+	// 	function handle(delta) {
+	// 		var time = 100;
+	// 		var distance = 50;
+	// 		var movement = (distance * delta);
+	// 		// totalDelta += movement;
+
+	// 		$body.stop().animate({
+	// 			scrollTop: $window.scrollTop() - movement
+	// 		}, time);
+	// 	}
+
+	// 	window.removeEventListener('wheel', slowWheel);
+	// 	window.addEventListener('wheel', slowWheel);
+	// 	// window.onmousewheel = document.onmousewheel = slowWheel;
+	// }
+
+
+	//-----------------------------------------------
+
 
 
 
@@ -12370,20 +12563,13 @@ $window.on('load', function(){
 	// - Adjust background height
 	// - Adjust scalee-cont size
 
-	var slide1 = $('.slide0').get(0);
-	var $slide2 = $('.slide1');
-	var slide2_el = $slide2.get(0);
-	var $scaleeBg = $('.scalee-background');
-	var scalee_bgel = $scaleeBg.get(0);
-	var scaleeCont_el = $slide2.find('.scalee-cont').get(0);
-
 	// Toggle active class
 	//----------------------
 	var scaleeClassScene = new ScrollMagic.Scene({
-			triggerElement: slide2_el,
+			triggerElement: sorterSlide,
 			triggerHook: '0.15'
 		})
-		.setClassToggle(slide2_el, 'active')
+		.setClassToggle(sorterSlide, 'active')
 		.addTo(controller);
 
 	// Adjust background height
@@ -12391,7 +12577,7 @@ $window.on('load', function(){
 	var sorter_tween = TweenMax.to(scalee_bgel, 1, {height:'40%'});
 
 	var scaleeScene = new ScrollMagic.Scene({
-			triggerElement: slide2_el,
+			triggerElement: sorterSlide,
 			triggerHook: '0.5',
 			duration: '100%'
 		})
@@ -12409,7 +12595,7 @@ $window.on('load', function(){
 		var smallPolyTween = TweenMax.to(landingPoly, 1, {right:'75%', top:'-500px', scale:0.7, rotation:'50deg', zIndex:-1});
 
 		var landingPolyScene = new ScrollMagic.Scene({
-				triggerElement: slide1,
+				triggerElement: landingSlide,
 				triggerHook: 'onLeave',
 				duration: '120%'
 			})
@@ -12427,15 +12613,9 @@ $window.on('load', function(){
 
 		var windowHeight = window.innerHeight;
 
-		var $helloSlide = $('#hello');
-		var helloHeight = $helloSlide.height();
-		var helloSlide = $helloSlide.get(0);
 		var helloLargePoly = document.getElementById('hello-large-poly');
 		var helloSmallPoly = document.getElementById('hello-small-poly');
 
-		var $jobsSlide = $('#jobs');
-		var jobsHeight = $jobsSlide.height();
-		var jobsSlide = $jobsSlide.get(0);
 		var jobsLargePoly = document.getElementById('jobs-large-poly');
 		var jobsSmallPoly = document.getElementById('jobs-small-poly');
 
@@ -12465,7 +12645,7 @@ $window.on('load', function(){
 					ease: Power0.easeNone
 				}, 0);
 			jobsPoly_tl.to(jobsLargePoly, 1, {
-					top:'700px', 
+					top:'1000px', 
 					left:'53%', 
 					rotation:'-45deg', 
 					ease: Power0.easeNone
@@ -12695,326 +12875,6 @@ $window.on('load', function(){
 
 module.exports = scrollAnimate;
 },{"jquery":1}],7:[function(require,module,exports){
-// 'use strict';
-
-// var $ = require('jquery');
-// var ScaleeSorter = require('./scalee-sorter.js');
-// var ScaleeBios = require('./scalee-bios.js');
-// var Util = require('./util.js');
-
-
-// // ------------------------
-// // Scroll-Triggered Nav
-// // ------------------------
-
-// // Elements
-// //------------
-// var $window = $(window);
-// var $page = $('body');
-// var $header = $('header');
-
-// var $dotNav = $('.dots-nav');
-// var $dots = $dotNav.children('.dot');
-// var $slides = $('.slide');
-// // var onMobile = isMobile();
-
-// var currentSlide = 0;
-// var slideNum = $slides.length + 1; // Add 1 for first movement
-// var slideTimeout = 800;
-
-
-// // Events On/Off functions
-// //-------------------------
-// function eventsOn() {
-//   // $page.addClass('fixed');
-//   console.log('turning events on');
-
-//   $window.on({
-//     'DOMMouseScroll mousewheel': wheelHandler,
-//     keydown: keyHandler,
-//     touchstart: touchHandler
-//   });
-//   $dots.click(handleDotClick);
-// }
-
-// function eventsOff() {
-//   console.log('turning events off');
-
-//   $window.off({
-//     'DOMMouseScroll mousewheel': wheelHandler,
-//     keydown: keyHandler,
-//     touchstart: touchHandler
-//   });
-//   $dots.off({click: handleDotClick});
-// }
-
-
-// // Event Handlers
-// // - Scroll, touch, nav, and arrow-keys
-// //----------------------
-// function wheelHandler(ev) {
-//   var delta = (ev.type == 'DOMMouseScroll' ? // Mozilla calculates scroll differently, with this event
-//       ev.originalEvent.detail * -40 :
-//       ev.originalEvent.wheelDelta);
-
-//   var up = delta > 20;
-//   var down = delta < -20;
-
-//   var prevent = function() {
-//     ev.stopPropagation();
-//     ev.preventDefault();
-//     ev.returnValue = false;
-//     return false;
-//   }
-
-//   if (up) {
-//     prevSlide();
-//   } else if (down) {
-//     nextSlide();
-//   }
-
-//   return prevent();
-// }
-
-
-// function handleDotClick(ev) {
-//   var index = $dots.index(this);
-
-//   setSlide(index);
-// }
-
-
-// function touchHandler(ev) {
-//   ev.preventDefault();
-//   // watch for direction of touchmove event after touchdown.  If up, prevSlide(), if down, nextSlide()
-//   var event = ev.originalEvent.changedTouches[0];
-//   var startX = event.clientX;
-//   var startY = event.clientY;
-
-//   $featureEl.on({
-//     touchmove: touchMoveHandler,
-//     touchend: touchEndHandler
-//   });
-
-//   function touchMoveHandler(ev) {
-//     ev.preventDefault(); // only using preventDefault() here to allow click() event to occur on dots
-//   }
-//   function touchEndHandler(ev) {
-//     ev.preventDefault();
-//     var event = ev.originalEvent.changedTouches[0];
-//     var newX = event.clientX;
-//     var newY = event.clientY;
-
-//     var deltaY = newY - startY;
-//     var up = (deltaY > 50);
-//     var down = (deltaY < -50);
-
-//     if (up) {
-//       prevSlide();
-//     } else if (down) {
-//       nextSlide();
-//     }
-
-
-//     $featureEl.off({
-//       touchmove: touchMoveHandler,
-//       touchend: touchEndHandler
-//     });
-//   }
-// }
-
-
-// function keyHandler(ev) {
-//   // if up or left arrow...
-//   if (ev.keyCode === 37 || ev.keyCode === 38) {
-//     prevSlide();
-
-//   // or if down or right arrow...
-//   } else if (ev.keyCode === 39 || ev.keyCode === 40) {
-//     nextSlide();
-//   }
-// }
-
-
-// // Allow natural scrolling on last slide
-// //------------------------------------------
-// function allowScrolling() {
-//   // If on last slide...
-//   // - turn off events
-//   // - watch scroll position of last slide for top
-//   // - if at top, move to previous slide
-
-//   var $lastSlide = $slides.filter('.slide3');
-//   var lastScrollPos = null;
-
-//   function watchScrollHandler(ev) {
-//     var topPos = $lastSlide.scrollTop();    
-//     console.log('TopPos: '+ topPos);
-
-//     // If topPos == 0, and going up, go back to previous slide and turn events on
-//     if (!topPos && topPos < lastScrollPos) {
-//       eventsOn();
-//       prevSlide();
-//       turnOffScrollWatch();
-//     } else {
-//       pauseScrollWatch();
-//       lastScrollPos = topPos;
-//     }
-
-//   }
-
-//   // On/off/pause functions
-//   function turnOffScrollWatch() {
-//     $window.off('DOMMouseScroll mousewheel', watchScrollHandler);
-//   }
-//   function turnOnScrollWatch() {
-//     $window.on('DOMMouseScroll mousewheel', watchScrollHandler);
-//   }
-
-//   function pauseScrollWatch() {
-//     // Turn off scroll watch, wait 100ms, turn back on
-//     turnOffScrollWatch();
-
-//     window.setTimeout(function(){
-//       turnOnScrollWatch();
-//     }, 500) // NOTE: Increase timeout to make less sensitive
-//   }
-
-//   // Turn events off
-//   eventsOff();
-
-//   // Bind watching function
-//   turnOnScrollWatch();
-// }
-
-
-// // Navigation functions
-// // - Prev slide, next slide, setSlide (for the dot nav)
-// // - On last slide (job postings), allow normal scroll until scrolling up when already at top
-// //-------------------------
-// function prevSlide() {
-
-//   // remove 'active' class from current slide
-//   if (currentSlide) { // ensure not 0, If 0, do nothing
-
-//     if (currentSlide == 1) { // change state on first slide
-//       var $target = $slides.eq(0);
-//       var removedClass = 'active2';
-
-//       // Close the sorting panel, and leaderboard panel
-//       ScaleeSorter.closePanel();
-//       ScaleeSorter.closeLeaders();
-//       ScaleeBios.off();
-//     } else {
-//       var $target = $slides.eq(currentSlide-1);
-//       var removedClass = 'active';
-//     }
-
-//     // Remove 'active'
-//     $target.removeClass(removedClass);
-
-//     // Set other states
-//     currentSlide--;
-//     setDots(currentSlide);
-
-//     // Wait for animation
-//     wait();
-//   }
-// }
-
-// function nextSlide() {
-
-//   // Add 'active' class to next slide
-//   if (currentSlide !== $slides.length) { // ensure not last slide. If so, do nothing
-    
-//     var $target = $slides.eq(currentSlide);
-
-//     // If currentSlide == 0, add 'active2' class
-//     var addedClass = (currentSlide) ? 'active' : 'active2';
-
-//     // Add 'active'
-//     $target.addClass(addedClass);
-
-//     if (currentSlide == 1) {
-//       // Close leaderboard and sorting panel
-//       ScaleeSorter.closePanel();
-//       ScaleeSorter.closeLeaders();
-//     } else if (!currentSlide) {
-//       ScaleeBios.on();
-//     }
-
-//     // Remember state
-//     currentSlide++;
-//     setDots(currentSlide);
-
-//     // If moved to last slide, turn scroll-control off
-//     if (currentSlide == $slides.length) {
-//       allowScrolling();
-//     } else {
-//       // Wait for animation
-//       wait();
-//     }
-
-//   }
-// }
-// function setSlide(index) {
-//   // Close leaderboard and sorting panel if leaving scalee-sorter
-//   if (currentSlide == 1) {
-//     ScaleeSorter.closePanel();
-//     ScaleeSorter.closeLeaders();
-//   }
-
-//   var slideCount = $slides.length;
-
-//   // set 'active(2)' class on slides <= index
-//   for (var i = 0; i <= slideCount; i++) {
-//     var $target = (i == 0) ? $slides.eq(i) : $slides.eq( i-1 );
-//     var targetClass = (i == 1) ? 'active2' : 'active';
-
-//     // if over clicked index, then remove the class
-//     $target.toggleClass(targetClass, (i <= index));
-//   }
-
-//   // Set dots
-//   setDots(index);
-
-//   // If last slide, allow scrolling, else wait for animation
-//   if (index == slideCount) {
-//     allowScrolling();
-//   } else {
-//     wait();
-//   }
-
-//   // Remember state
-//   currentSlide = index;
-// }
-
-// function wait() {
-//   // allow for transition animation before sliding again
-//   eventsOff();
-//   window.setTimeout(function(){
-//     eventsOn();
-//   }, slideTimeout);
-// }
-
-// function setDots(num) {
-//   var $targetDot = $dots.eq(num);
-//   $targetDot.addClass('current').siblings().removeClass('current');
-// }
-
-
-// // Initailize
-// //--------------
-// function init() {
-//   eventsOn();
-// }
-
-
-
-// module.exports.init = init;
-// module.exports.eventsOff = eventsOff;
-// module.exports.eventsOn = eventsOn;
-},{}],8:[function(require,module,exports){
 'use strict';
 
 var $ = require('jquery');
@@ -13096,7 +12956,7 @@ function initGame() {
 
 module.exports.init = initGame;
 module.exports.endGame = endGame;
-},{"./scalee-sorter.js":5,"jquery":1}],9:[function(require,module,exports){
+},{"./scalee-sorter.js":5,"jquery":1}],8:[function(require,module,exports){
 
 // ----------------
 // Utilities 

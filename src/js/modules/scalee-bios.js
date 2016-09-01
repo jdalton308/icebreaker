@@ -1,7 +1,6 @@
 'use strict';
 
 var $ = require('jquery');
-var ScrollNav = require('./scroll-nav.js');
 var TwoTruths = require('./two-truths.js');
 var Util = require('./util.js');
 

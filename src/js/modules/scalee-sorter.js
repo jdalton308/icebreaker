@@ -2,7 +2,6 @@
 
 var $ = require('jquery');
 var LeaderData = require('./leaderboard-data.js');
-// var ScrollNav = require('./scroll-nav.js');
 var Util = require('./util.js');
 
 
@@ -212,8 +211,6 @@ function sort() {
       $this.addClass('show');
     }
 
-    console.log('checked another scalee for show/hide');
-
   });
 
 
@@ -277,7 +274,6 @@ function initLeaderboard() {
 
       // Bind click event to show leaderboard
       $newBtn.click(function(){
-        // console.log('Switching leaderboard to '+ eventId);
         switchLeaderboard( eventId );
       });
     };
