@@ -204,8 +204,8 @@ button,
   border: 2px solid #363545;
   box-shadow: none;
   background-color: transparent;
-  -webkit-transition: all 0.3s;
-  transition: all 0.3s;
+  -webkit-transition: all 0.5s;
+  transition: all 0.5s;
   cursor: pointer;
   font-family: "Letter Gothic Std", "Lucida Console", Monaco, monospace; }
   button:focus,
@@ -228,6 +228,15 @@ button,
     button.red-solid:hover,
     .button.red-solid:hover {
       background-color: #b70118; }
+  button.grey-solid,
+  .button.grey-solid {
+    padding: 14px 30px 8px;
+    border: none;
+    background-color: #363545;
+    color: #ffffff; }
+    button.grey-solid:hover,
+    .button.grey-solid:hover {
+      background-color: #2b2a37; }
   button.white,
   .button.white {
     border-color: #f3f3f7;
@@ -282,16 +291,19 @@ button,
   -webkit-transform: translateY(-50%);
   transform: translateY(-50%);
   position: fixed;
-  z-index: 10;
-  left: 50px;
+  z-index: 2;
+  left: 0;
   display: inline-block;
-  height: 70vh; }
+  height: 70vh;
+  padding-left: 50px; }
   .scrolling .progress-bar .progress-bar-track {
     opacity: 1;
     -webkit-transition-delay: 0s;
     transition-delay: 0s; }
   .scrolling .progress-bar .sections {
-    opacity: 0.5; }
+    left: 100%;
+    -webkit-transition-delay: 0s;
+    transition-delay: 0s; }
   .progress-bar .progress-bar-track {
     opacity: 0;
     position: relative;
@@ -318,16 +330,18 @@ button,
   .progress-bar .sections {
     position: absolute;
     top: 0;
-    left: 10px;
+    left: -150px;
     height: 100%;
     width: 140px;
-    opacity: 0;
     overflow: hidden;
     -webkit-transition: all 0.5s;
-    transition: all 0.5s; }
+    transition: all 0.5s;
+    -webkit-transition-delay: 0.3s;
+    transition-delay: 0.3s; }
     .progress-bar .sections .progress-nav-item {
       position: absolute;
-      right: 110%;
+      right: 20px;
+      opacity: 0.4;
       display: inline-block;
       width: 100px;
       padding: 8px 13px 5px;
@@ -342,8 +356,8 @@ button,
       .progress-bar .sections .progress-nav-item:hover {
         box-shadow: 3px 4px 20px -1px #363545; }
       .progress-bar .sections .progress-nav-item.active {
-        background-color: #363545;
-        right: 20px; }
+        opacity: 0.8;
+        background-color: #363545; }
       .progress-bar .sections .progress-nav-item.meet {
         top: 0; }
       .progress-bar .sections .progress-nav-item.hello {
@@ -353,6 +367,7 @@ button,
   .progress-bar:hover .progress-bar-track {
     opacity: 1; }
   .progress-bar:hover .sections {
+    left: 100%;
     opacity: 1; }
     .progress-bar:hover .sections .progress-nav-item {
       opacity: 1;
@@ -429,12 +444,12 @@ button,
     -ms-transform: translateY(-50%);
     -webkit-transform: translateY(-50%);
     transform: translateY(-50%);
-    z-index: 2;
+    z-index: 5;
     height: 45px;
     width: 45px;
     padding: 0;
     font-size: 1.5rem;
-    background-color: #D0011B;
+    background-color: #363545;
     color: #ffffff;
     box-shadow: 2px 2px 15px -2px #000;
     border: none; }
@@ -445,8 +460,6 @@ button,
       border-color: #ffffff; }
     .slide1 .scalee-scroll:active {
       box-shadow: 2px 2px 15px -6px #000; }
-    .slide1 .scalee-scroll:hover {
-      background-color: #b70118; }
     .slide1 .scalee-scroll.prev {
       left: -100px; }
       .slide1 .scalee-scroll.prev:before {
@@ -459,6 +472,11 @@ button,
         -ms-transform: translate(-70%, -50%) rotate(45deg);
         -webkit-transform: translate(-70%, -50%) rotate(45deg);
         transform: translate(-70%, -50%) rotate(45deg); }
+    @media (min-width: 768px) {
+      .slide1 .scalee-scroll {
+        opacity: 0.5; }
+        .slide1 .scalee-scroll:hover {
+          opacity: 1; } }
   .slide1 .scalee-cont {
     position: absolute;
     right: 50%;
@@ -531,7 +549,7 @@ button,
         z-index: 3;
         bottom: 0;
         left: 0;
-        padding-bottom: 5px; } }
+        max-height: 0; } }
     .slide1 .control-panel .open-panel {
       position: absolute;
       right: 50%;
@@ -550,6 +568,8 @@ button,
           -webkit-transform: rotate(135deg) translateY(6px) translateX(-2px);
           transform: rotate(135deg) translateY(6px) translateX(-2px); }
       @media (min-width: 768px) {
+        .slide1 .control-panel .open-panel:hover {
+          box-shadow: 3px 3px 19px -2px #000; }
         .slide1 .control-panel .open-panel .arrow-icon:before {
           -ms-transform: rotate(-45deg) translateY(0) translateX(-2px);
           -webkit-transform: rotate(-45deg) translateY(0) translateX(-2px);
@@ -581,7 +601,7 @@ button,
           overflow-x: auto; }
           .slide1 .control-panel .selectors .selector .wheel-shadow-holder .shadow-frame {
             position: absolute;
-            z-index: 3;
+            z-index: 5;
             top: 0;
             left: 0;
             width: 100%;
@@ -590,6 +610,9 @@ button,
             -webkit-transition: all 0.5s;
             transition: all 0.5s;
             box-shadow: inset 1px 0 25px #498FE1; }
+            .slide1 .control-panel .selectors .selector .wheel-shadow-holder .shadow-frame.dark-frame {
+              z-index: 4;
+              box-shadow: inset 0 0 25px 2px #363545; }
         .slide1 .control-panel .selectors .selector .wheel-selector {
           position: relative;
           max-width: 2000px;
@@ -604,8 +627,10 @@ button,
           -webkit-transition: all 0.5s;
           transition: all 0.5s; }
           .slide1 .control-panel .selectors .selector .wheel-selector .item {
+            position: relative;
             display: inline-block;
             width: auto;
+            overflow: hidden;
             padding: 15px 20px;
             text-align: center;
             font-size: 1.7rem;
@@ -613,12 +638,36 @@ button,
             border-right: 3px solid #498FE1;
             -webkit-transition: all 0.3s;
             transition: all 0.3s; }
+            .slide1 .control-panel .selectors .selector .wheel-selector .item:before, .slide1 .control-panel .selectors .selector .wheel-selector .item:after {
+              content: '';
+              position: absolute;
+              top: 50%;
+              -ms-transform: translateY(-50%);
+              -webkit-transform: translateY(-50%);
+              transform: translateY(-50%);
+              display: inline-block;
+              width: 0;
+              height: 0;
+              border-top: 10px solid transparent;
+              border-bottom: 10px solid transparent;
+              -webkit-transition: all 0.5s;
+              transition: all 0.5s; }
+            .slide1 .control-panel .selectors .selector .wheel-selector .item:before {
+              left: -20px;
+              border-left: 15px solid #D0011B; }
+            .slide1 .control-panel .selectors .selector .wheel-selector .item:after {
+              right: -20px;
+              border-right: 15px solid #D0011B; }
             .slide1 .control-panel .selectors .selector .wheel-selector .item:last-child {
               border-right: none; }
             .slide1 .control-panel .selectors .selector .wheel-selector .item.selected {
               background-color: #ffffff;
               font-weight: 700;
               color: #e72b2d; }
+              .slide1 .control-panel .selectors .selector .wheel-selector .item.selected:before {
+                left: 0; }
+              .slide1 .control-panel .selectors .selector .wheel-selector .item.selected:after {
+                right: 0; }
       @media (min-width: 768px) {
         .slide1 .control-panel .selectors {
           display: flex;
@@ -632,12 +681,16 @@ button,
               .slide1 .control-panel .selectors .selector .wheel-shadow-holder .shadow-frame {
                 width: 104%;
                 left: -2%; }
+                .slide1 .control-panel .selectors .selector .wheel-shadow-holder .shadow-frame.dark-frame {
+                  width: calc(100% - 8px);
+                  left: 4px; }
             .slide1 .control-panel .selectors .selector .wheel-selector {
               overflow: hidden;
               width: 100%;
               max-width: none;
               white-space: normal;
-              overflow-x: auto; }
+              overflow-x: auto;
+              height: 200px; }
               .slide1 .control-panel .selectors .selector .wheel-selector .item {
                 display: block;
                 width: 100%;
@@ -687,6 +740,9 @@ button,
     -webkit-transform: rotate(315deg);
     transform: rotate(315deg); }
   @media (min-width: 768px) {
+    .slide1.edit-mode .control-panel {
+      max-height: 250px;
+      padding-bottom: 10px; }
     .slide1.edit-mode .open-panel .arrow-icon:before {
       -ms-transform: rotate(135deg) translateY(6px) translateX(-2px);
       -webkit-transform: rotate(135deg) translateY(6px) translateX(-2px);

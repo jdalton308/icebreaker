@@ -11654,7 +11654,7 @@ var Util = require('./util.js');
 // Elements
 //------------
 var $window = $(window);
-var $page = $('body');
+var $body = $('body');
 var $header = $('header');
 var $slide1 = $('.slide1');
 
@@ -11725,7 +11725,8 @@ function clickHandler() {
   $infoSlide.addClass('show');
   $infoBg.addClass('show');
 
-  // - finally, disable scalee click events while open
+  // - lock scroll
+  $body.addClass('fixed');
 
 
   // Function to place a new scalee right on top of the clicked scalee
@@ -11792,7 +11793,7 @@ function mobileClickHandler() {
   }
 
   // - Prevent scrolling on rest of page, so that .info-slide can scroll
-  $page.addClass('fixed');
+  $body.addClass('fixed');
 
   // - Show .info-slide
   $infoSlide.addClass('show');
@@ -11807,8 +11808,7 @@ function closeBio(){
     $infoSlide.removeClass('show');
 
     // - let body scroll again
-    $page.removeClass('fixed');
-
+    $body.removeClass('fixed');
 
   } else {
     // - move newScalee to original position
@@ -11817,6 +11817,7 @@ function closeBio(){
       top: initialPos.top,
       height: initialHeight
     }, 400).addClass('fly-away');
+
     // - remove scalee and reset view
     window.setTimeout(function(){
       $scaleeInFocus.removeClass('invisible');
@@ -11827,6 +11828,11 @@ function closeBio(){
     // - and hide info slide
     $infoSlide.removeClass('show');
     $infoBg.removeClass('show');
+
+    // - if not sorting, let page scroll again
+    if ( !$slide1.hasClass('edit-mode') ) {
+      $body.removeClass('fixed');
+    } 
   }
 
   // Either way, close the two-truths game
@@ -11870,7 +11876,7 @@ var Util = require('./util.js');
 // Elements
 //------------
 var $window = $(window);
-var $page = $('body');
+var $body = $('body');
 var $header = $('header');
 var $slide1 = $('.slide1');
 
@@ -11955,20 +11961,27 @@ function eventsOn() {
 //------------
 function openPanel() {
 
-  // - change height of 'wheel-selector'
-  function openFilters() {
-    var openHeight = itemHeight * 4; // arbitrary
-    $wheelSelectors.css('height', openHeight+'px');
-  }
+  // // - change height of 'wheel-selector'
+  // function openFilters() {
+  //   var openHeight = itemHeight * 4; // arbitrary
+  //   $wheelSelectors.css('height', openHeight+'px');
+  // }
+  // 
+  // if (!isMobile) {
+  //   openFilters();
+  // }
 
-  if (!isMobile) {
-    // - turn off scroll-triggered nav when open
-    // ScrollNav.eventsOff();
-    openFilters();
-  }
+  // - scroll to position
+  var offset = $slide1.offset().top;
+  $body.animate({
+    scrollTop: offset
+  }, 800);
 
   // - change styles
   $slide1.addClass('edit-mode');
+
+  // -lock scroll
+  $body.addClass('fixed');
 
   // - save state
   panelOpen = true;
@@ -11979,49 +11992,50 @@ function openPanel() {
 // Collapse Filter Bar
 //---------------
 // Change height of 'wheel-selector' to only show one item
-function setClosedHeight() {
-  $wheelSelectors.css('height', itemHeight+'px');
-}
+// function setClosedHeight() {
+//   $wheelSelectors.css('height', itemHeight+'px');
+// }
 
 function closePanel() {
 
-  function setFilterPos() {
+  // function setFilterPos() {
 
-    // - get selected elements
-    var $selectedFilters = $wheelSelectors.find('.selected');
+  //   // - get selected elements
+  //   var $selectedFilters = $wheelSelectors.find('.selected');
 
-    // - for each selection, slide up, and save value
-    $selectedFilters.each(function(){
-      // - get index, multiplying height, then scrolling to that
-      var $this = $(this);
-      var itemIndex = $this.index();
-      var scrollAmt = itemIndex * (itemHeight + 3); // Not sure why need to add the extra 3 px
+  //   // - for each selection, slide up, and save value
+  //   $selectedFilters.each(function(){
+  //     // - get index, multiplying height, then scrolling to that
+  //     var $this = $(this);
+  //     var itemIndex = $this.index();
+  //     var scrollAmt = itemIndex * (itemHeight + 3); // Not sure why need to add the extra 3 px
 
-      $this.parents('.wheel-selector').animate({
-        scrollTop: scrollAmt
-      }, 300);
-    });
+  //     $this.parents('.wheel-selector').animate({
+  //       scrollTop: scrollAmt
+  //     }, 300);
+  //   });
 
-    // - wait for animation, then remove scroll ability
-    window.setTimeout(function(){
-      $slide1.removeClass('edit-mode');
-    }, 500);
+  //   // - wait for animation, then remove scroll ability
+  //   window.setTimeout(function(){
+  //     $slide1.removeClass('edit-mode');
+  //   }, 500);
 
-  }
+  // }
 
 
-  // On mobile, just remove the class and collapse control panel...
-  if (isMobile) {
+  // // On mobile, just remove the class and collapse control panel...
+  // if (isMobile) {
     $slide1.removeClass('edit-mode');
 
-  // Else collapse the wheels and show the selected...
-  } else {
-    setClosedHeight();
-    setFilterPos();
+    $body.removeClass('fixed');
+  // // Else collapse the wheels and show the selected...
+  // } else {
+  //   setClosedHeight();
+  //   setFilterPos();
 
-    // - turn back on scroll-triggered nav
-    // ScrollNav.eventsOn();
-  }
+  //   // - turn back on scroll-triggered nav
+  //   // ScrollNav.eventsOn();
+  // }
 
   // - save state
   panelOpen = false;
@@ -12234,6 +12248,7 @@ function init() {
 module.exports.init = init;
 module.exports.closePanel = closePanel;
 module.exports.sort = sort;
+module.exports.reset = resetFilters;
 module.exports.closeLeaders = hideLeaderboard;
 module.exports.center = centerScalees;
 
@@ -12241,6 +12256,7 @@ module.exports.center = centerScalees;
 'use strict';
 
 var $ = require('jquery');
+var ScaleeSorter = require('./scalee-sorter.js');
 
 // NOTE: All GSAP and Scrollmagic dependencies do not work with Browserify, so they have their own gulp task, and are loaded on the page in their own file
 
@@ -12420,11 +12436,14 @@ function scrollAnimate() {
 			.on('start', function(e){
 
 				if (e.scrollDirection == 'FORWARD') {
-					// jump down to position
+					// - jump down to position
 					$body.animate({
 						scrollTop: scrollRef['#hello'].pxOffset
 					}, 800);
 					// taperScrolling();
+
+					// - also reset the scalee sorter
+					ScaleeSorter.reset();
 				}
 			});
 
@@ -12457,7 +12476,8 @@ function scrollAnimate() {
 		//------------------------------
 		new ScrollMagic.Scene({
 				triggerElement: sorterSlide,
-				triggerHook: 1
+				triggerHook: 0.95,
+				duration: 50
 			})
 			.addTo(controller)
 			.on('start', function(e){
@@ -12468,7 +12488,7 @@ function scrollAnimate() {
 					// jump down to position
 					$body.animate({
 						scrollTop: scrollRef['#meet'].pxOffset
-					}, 1200, function(){
+					}, 1000, function(){
 						$body.removeClass('fixed');
 					});
 				}
@@ -12874,7 +12894,7 @@ function scrollAnimate() {
 
 
 module.exports = scrollAnimate;
-},{"jquery":1}],7:[function(require,module,exports){
+},{"./scalee-sorter.js":5,"jquery":1}],7:[function(require,module,exports){
 'use strict';
 
 var $ = require('jquery');

@@ -14,15 +14,16 @@
 		.title-cont {
 		}
 	}
-
+	
+	// L/R Scroll Buttons
 	.scalee-scroll {
 		@include centerY();
-		z-index: 2;
+		z-index: 5;
 		height: 45px;
 		width: 45px;
 		padding: 0;
 		font-size: 1.5rem;
-		background-color: $new-red;
+		background-color: $sketchup-gray;
 		color: $white;
 		box-shadow: $box-shadow;
 		border: none;
@@ -36,9 +37,6 @@
 
 		&:active {
 			box-shadow: $box-shadow-active;
-		}
-		&:hover {
-			background-color: darken($new-red, 5%);
 		}
 
 		&.prev {
@@ -55,6 +53,15 @@
 				@include transform( translate(-70%, -50%) rotate(45deg) );
 			}
 		}
+
+		@media (min-width: $mobile) {
+			opacity: 0.5;
+
+			&:hover {
+				opacity: 1;
+				// background-color: darken($sketchup-medgray, 5%);
+			}
+		}
 	}
 	.scalee-cont {
 		@include centerX();
@@ -62,7 +69,6 @@
 
 		height: 40vh;
 		width: auto;
-		// min-width: 100%;
 		margin-bottom: 30px;
 		text-align: center;
 		white-space: nowrap;
@@ -136,7 +142,9 @@
 			z-index: 3;
 			bottom: 0;
 			left: 0;
-			padding-bottom: 5px;
+			// padding-bottom: 10px;
+			max-height: 0;
+			// overflow: hidden;
 		}
 
 		.open-panel {
@@ -158,9 +166,9 @@
 			}
 
 			@media (min-width: $mobile) {
-				// &:hover {
-				// 	background-color: $white;
-				// }
+				&:hover {
+					box-shadow: 3px 3px 19px -2px $black;
+				}
 
 				.arrow-icon {
 					&:before {
@@ -201,7 +209,7 @@
 					// Element just to add inset box shadow
 					.shadow-frame {
 						position: absolute;
-						z-index: 3;
+						z-index: 5;
 						top: 0;
 						left: 0;
 						width: 100%;
@@ -209,7 +217,13 @@
 						pointer-events: none;
 						@include transition();
 						box-shadow: inset 1px 0 25px $new-blue;
+
+						&.dark-frame {
+							z-index: 4;
+							box-shadow: inset 0 0 25px 2px $sketchup-gray;
+						}
 					}
+
 				}
 				.wheel-selector {
 					position: relative;
@@ -226,14 +240,36 @@
 					@include transition();
 
 					.item {
+						position: relative;
 						display: inline-block;
 						width: auto;
+						overflow: hidden;
 						padding: 15px 20px;
 						text-align: center;
 						font-size: 1.7rem;
 						background-color: $sketchup-ltgray;
 						border-right: 3px solid $new-blue;
 						@include transition(0.3s);
+
+						&:before,
+						&:after {
+							content: '';
+							@include centerY();
+							display: inline-block;
+							width: 0;
+							height: 0;
+							border-top: 10px solid transparent;
+							border-bottom: 10px solid transparent;
+							@include transition;
+						}
+						&:before {
+							left: -20px;
+							border-left: 15px solid $new-red;
+						}
+						&:after {
+							right: -20px;
+							border-right: 15px solid $new-red;
+						}
 
 						&:last-child {
 							border-right: none;
@@ -243,6 +279,13 @@
 							background-color: $white;
 							font-weight: 700;
 							color: $sketchup-red;
+
+							&:before {
+								left: 0;
+							}
+							&:after {
+								right: 0;
+							}
 						}
 					}
 				}
@@ -264,6 +307,11 @@
 							width: 104%;
 							left: -2%;
 							// box-shadow: inset 1px 0 10px 8px $new-blue;
+
+							&.dark-frame {
+								width: calc(100% - 8px);
+								left: 4px;
+							}
 						}
 					}
 
@@ -273,6 +321,7 @@
 						max-width: none;
 						white-space: normal;
 						overflow-x: auto;
+						height: 200px; // arbitrary	
 
 						.item {
 							display: block;
@@ -379,6 +428,10 @@
 		}
 
 		@media (min-width: $mobile) {
+			.control-panel {
+				max-height: 250px;
+				padding-bottom: 10px;
+			}
 			.open-panel {
 				.arrow-icon {
 					&:before {
@@ -393,7 +446,6 @@
 
 				.selector {
 					.wheel-selector {
-
 						overflow-y: auto;
 						width: 100%;
 

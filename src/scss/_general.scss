@@ -176,7 +176,7 @@ button,
 	border: 2px solid $sketchup-gray;
 	box-shadow: none;
 	background-color: transparent;
-	@include transition(0.3s);
+	@include transition(0.5s);
 	cursor: pointer;
 	font-family: $new-body-fonts;
 
@@ -201,6 +201,16 @@ button,
 
 		&:hover {
 			background-color: darken($new-red, 5%);
+		}
+	}
+	&.grey-solid {
+		padding: 14px 30px 8px;
+		border: none;
+		background-color: $sketchup-gray;
+		color: $white;
+
+		&:hover {
+			background-color: darken($sketchup-gray, 5%);
 		}
 	}
 	&.white {
@@ -266,10 +276,12 @@ button,
 .progress-bar {
 	@include centerY();
 	position: fixed;
-	z-index: 10;
-	left: 50px;
+	z-index: 2;
+	// left: 50px;
+	left: 0;
 	display: inline-block;
 	height: 70vh;
+	padding-left: 50px; // space for hover
 
 	@at-root .scrolling & {
 		.progress-bar-track {
@@ -278,16 +290,22 @@ button,
 			transition-delay: 0s;
 		}
 		.sections {
-			opacity: 0.5;
+			left: 100%;
+			-webkit-transition-delay: 0s;
+			transition-delay: 0s;
 
-			.progress-nav-item {
-				// opacity: 0.5;
-			}
+			// .progress-nav-item {
+			// 	opacity: 0.4;
+
+			// 	&.active {
+			// 		opacity: 0.8;
+			// 	}
+			// }
 		}
 	}
 
 	.progress-bar-track {
-		opacity: 0; // shown during scroll
+		opacity: 0; // shown during scroll & hover
 		position: relative;
 		height: 100%;
 		width: 10px;
@@ -314,17 +332,20 @@ button,
 	.sections {
 		position: absolute;
 		top: 0;
-		left: 10px;
+		// left: 10px;
+		left: -150px;
 		height: 100%;
 		width: 140px;
-		opacity: 0;
 		overflow: hidden;
 		@include transition();
+		-webkit-transition-delay: 0.3s;
+		transition-delay: 0.3s;		
+
 
 		.progress-nav-item {
 			position: absolute;
-			right: 110%;
-			// opacity: 0.5;
+			right: 20px;
+			opacity: 0.4;
 			
 			display: inline-block;
 			width: 100px;
@@ -341,9 +362,8 @@ button,
 				box-shadow: 3px 4px 20px -1px $sketchup-gray;
 			}
 			&.active {
-				// opacity: 0.5;
+				opacity: 0.8;
 				background-color: $sketchup-gray;
-				right: 20px;
 			}
 
 			&.meet {
@@ -363,6 +383,7 @@ button,
 			opacity: 1;
 		}
 		.sections {
+			left: 100%;
 			opacity: 1;
 
 			.progress-nav-item {

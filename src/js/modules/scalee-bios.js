@@ -20,7 +20,7 @@ var Util = require('./util.js');
 // Elements
 //------------
 var $window = $(window);
-var $page = $('body');
+var $body = $('body');
 var $header = $('header');
 var $slide1 = $('.slide1');
 
@@ -91,7 +91,8 @@ function clickHandler() {
   $infoSlide.addClass('show');
   $infoBg.addClass('show');
 
-  // - finally, disable scalee click events while open
+  // - lock scroll
+  $body.addClass('fixed');
 
 
   // Function to place a new scalee right on top of the clicked scalee
@@ -158,7 +159,7 @@ function mobileClickHandler() {
   }
 
   // - Prevent scrolling on rest of page, so that .info-slide can scroll
-  $page.addClass('fixed');
+  $body.addClass('fixed');
 
   // - Show .info-slide
   $infoSlide.addClass('show');
@@ -173,8 +174,7 @@ function closeBio(){
     $infoSlide.removeClass('show');
 
     // - let body scroll again
-    $page.removeClass('fixed');
-
+    $body.removeClass('fixed');
 
   } else {
     // - move newScalee to original position
@@ -183,6 +183,7 @@ function closeBio(){
       top: initialPos.top,
       height: initialHeight
     }, 400).addClass('fly-away');
+
     // - remove scalee and reset view
     window.setTimeout(function(){
       $scaleeInFocus.removeClass('invisible');
@@ -193,6 +194,11 @@ function closeBio(){
     // - and hide info slide
     $infoSlide.removeClass('show');
     $infoBg.removeClass('show');
+
+    // - if not sorting, let page scroll again
+    if ( !$slide1.hasClass('edit-mode') ) {
+      $body.removeClass('fixed');
+    } 
   }
 
   // Either way, close the two-truths game

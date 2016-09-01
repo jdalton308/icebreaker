@@ -12,7 +12,7 @@ var Util = require('./util.js');
 // Elements
 //------------
 var $window = $(window);
-var $page = $('body');
+var $body = $('body');
 var $header = $('header');
 var $slide1 = $('.slide1');
 
@@ -97,20 +97,27 @@ function eventsOn() {
 //------------
 function openPanel() {
 
-  // - change height of 'wheel-selector'
-  function openFilters() {
-    var openHeight = itemHeight * 4; // arbitrary
-    $wheelSelectors.css('height', openHeight+'px');
-  }
+  // // - change height of 'wheel-selector'
+  // function openFilters() {
+  //   var openHeight = itemHeight * 4; // arbitrary
+  //   $wheelSelectors.css('height', openHeight+'px');
+  // }
+  // 
+  // if (!isMobile) {
+  //   openFilters();
+  // }
 
-  if (!isMobile) {
-    // - turn off scroll-triggered nav when open
-    // ScrollNav.eventsOff();
-    openFilters();
-  }
+  // - scroll to position
+  var offset = $slide1.offset().top;
+  $body.animate({
+    scrollTop: offset
+  }, 800);
 
   // - change styles
   $slide1.addClass('edit-mode');
+
+  // -lock scroll
+  $body.addClass('fixed');
 
   // - save state
   panelOpen = true;
@@ -121,49 +128,50 @@ function openPanel() {
 // Collapse Filter Bar
 //---------------
 // Change height of 'wheel-selector' to only show one item
-function setClosedHeight() {
-  $wheelSelectors.css('height', itemHeight+'px');
-}
+// function setClosedHeight() {
+//   $wheelSelectors.css('height', itemHeight+'px');
+// }
 
 function closePanel() {
 
-  function setFilterPos() {
+  // function setFilterPos() {
 
-    // - get selected elements
-    var $selectedFilters = $wheelSelectors.find('.selected');
+  //   // - get selected elements
+  //   var $selectedFilters = $wheelSelectors.find('.selected');
 
-    // - for each selection, slide up, and save value
-    $selectedFilters.each(function(){
-      // - get index, multiplying height, then scrolling to that
-      var $this = $(this);
-      var itemIndex = $this.index();
-      var scrollAmt = itemIndex * (itemHeight + 3); // Not sure why need to add the extra 3 px
+  //   // - for each selection, slide up, and save value
+  //   $selectedFilters.each(function(){
+  //     // - get index, multiplying height, then scrolling to that
+  //     var $this = $(this);
+  //     var itemIndex = $this.index();
+  //     var scrollAmt = itemIndex * (itemHeight + 3); // Not sure why need to add the extra 3 px
 
-      $this.parents('.wheel-selector').animate({
-        scrollTop: scrollAmt
-      }, 300);
-    });
+  //     $this.parents('.wheel-selector').animate({
+  //       scrollTop: scrollAmt
+  //     }, 300);
+  //   });
 
-    // - wait for animation, then remove scroll ability
-    window.setTimeout(function(){
-      $slide1.removeClass('edit-mode');
-    }, 500);
+  //   // - wait for animation, then remove scroll ability
+  //   window.setTimeout(function(){
+  //     $slide1.removeClass('edit-mode');
+  //   }, 500);
 
-  }
+  // }
 
 
-  // On mobile, just remove the class and collapse control panel...
-  if (isMobile) {
+  // // On mobile, just remove the class and collapse control panel...
+  // if (isMobile) {
     $slide1.removeClass('edit-mode');
 
-  // Else collapse the wheels and show the selected...
-  } else {
-    setClosedHeight();
-    setFilterPos();
+    $body.removeClass('fixed');
+  // // Else collapse the wheels and show the selected...
+  // } else {
+  //   setClosedHeight();
+  //   setFilterPos();
 
-    // - turn back on scroll-triggered nav
-    // ScrollNav.eventsOn();
-  }
+  //   // - turn back on scroll-triggered nav
+  //   // ScrollNav.eventsOn();
+  // }
 
   // - save state
   panelOpen = false;
@@ -376,5 +384,6 @@ function init() {
 module.exports.init = init;
 module.exports.closePanel = closePanel;
 module.exports.sort = sort;
+module.exports.reset = resetFilters;
 module.exports.closeLeaders = hideLeaderboard;
 module.exports.center = centerScalees;

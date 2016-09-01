@@ -1,6 +1,7 @@
 'use strict';
 
 var $ = require('jquery');
+var ScaleeSorter = require('./scalee-sorter.js');
 
 // NOTE: All GSAP and Scrollmagic dependencies do not work with Browserify, so they have their own gulp task, and are loaded on the page in their own file
 
@@ -180,11 +181,14 @@ function scrollAnimate() {
 			.on('start', function(e){
 
 				if (e.scrollDirection == 'FORWARD') {
-					// jump down to position
+					// - jump down to position
 					$body.animate({
 						scrollTop: scrollRef['#hello'].pxOffset
 					}, 800);
 					// taperScrolling();
+
+					// - also reset the scalee sorter
+					ScaleeSorter.reset();
 				}
 			});
 
@@ -217,7 +221,8 @@ function scrollAnimate() {
 		//------------------------------
 		new ScrollMagic.Scene({
 				triggerElement: sorterSlide,
-				triggerHook: 1
+				triggerHook: 0.95,
+				duration: 50
 			})
 			.addTo(controller)
 			.on('start', function(e){
@@ -228,7 +233,7 @@ function scrollAnimate() {
 					// jump down to position
 					$body.animate({
 						scrollTop: scrollRef['#meet'].pxOffset
-					}, 1200, function(){
+					}, 1000, function(){
 						$body.removeClass('fixed');
 					});
 				}
