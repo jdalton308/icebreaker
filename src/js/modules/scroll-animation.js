@@ -44,6 +44,15 @@ function scrollAnimate() {
 	var jobsHeight = $jobsSlide.innerHeight();
 	var jobsSlide = $jobsSlide.get(0);
 
+	var $toTopBtn = $('.to-top-btn');
+
+
+
+	// Init Scroll Magic controller
+	//-------------------------------
+	var controller = new ScrollMagic.Controller();
+
+
 
 	// Create measurement reference
 	//--------------------------------
@@ -76,11 +85,6 @@ function scrollAnimate() {
 
 		return ref;
 	}
-
-
-	// Init Scroll Magic controller
-	//-------------------------------
-	var controller = new ScrollMagic.Controller();
 
 
 
@@ -176,9 +180,8 @@ function scrollAnimate() {
 
 				if (e.scrollDirection == 'FORWARD') {
 					// - jump down to position
-					$body.animate({
-						scrollTop: scrollRef['#hello'].pxOffset
-					}, 800);
+					TweenMax.to(window, 1.2, {scrollTo:scrollRef['#hello'].pxOffset});
+
 					// taperScrolling();
 
 					// - also reset the scalee sorter
@@ -202,9 +205,7 @@ function scrollAnimate() {
 
 				if (e.scrollDirection == 'FORWARD') {
 					// jump down to position
-					$body.animate({
-						scrollTop: scrollRef['#jobs'].pxOffset
-					}, 800);
+					TweenMax.to(window, 1.2, {scrollTo:scrollRef['#jobs'].pxOffset});
 					// taperScrolling();
 				}
 
@@ -225,11 +226,11 @@ function scrollAnimate() {
 					$body.addClass('fixed');
 
 					// jump down to position
-					$body.animate({
-						scrollTop: scrollRef['#meet'].pxOffset
-					}, 1000, function(){
+					TweenMax.to(window, 1.5, {scrollTo:scrollRef['#meet'].pxOffset});
+
+					window.setTimeout(function(){
 						$body.removeClass('fixed');
-					});
+					}, 1500);
 				}
 			});
 
@@ -248,9 +249,7 @@ function scrollAnimate() {
 			var offset = scrollRef[$target].pxOffset;
 
 			// - animate scroll to section
-			$body.animate({
-				scrollTop: offset
-			}, 400);
+			TweenMax.to(window, 2, {scrollTo:offset, ease: Elastic.easeOut.config(1, 0.4) });
 
 		});
 	})();
@@ -629,6 +628,17 @@ function scrollAnimate() {
 	$('.slide3 .job-posting').each(function(){
 		newJobPostingScene( $(this) );
 	});
+
+
+
+	// Scroll-to-top button
+	//-----------------------------
+	$toTopBtn.click(function(){
+		TweenMax.to(window, 2, {scrollTo: 0});
+	});
+
+
+
 }
 
 

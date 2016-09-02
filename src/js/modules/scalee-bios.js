@@ -61,8 +61,6 @@ function eventsOff() {
 // Main Click Logic
 //------------------------
 function clickHandler() {
-  console.log('--scalee click--');
-
   // TODO: Insert scalee's data into .info-slide
 
   $scaleeInFocus = $(this);
@@ -81,17 +79,20 @@ function clickHandler() {
   var windowWidth = window.innerWidth;
   var newLeftPos = windowWidth * targetLeft;
 
-  $newScalee.animate({
-    left: newLeftPos,
-    top: 50,
-    height: (initialHeight * 3)
-  }, 300);
+  // $newScalee.animate({
+  //   left: newLeftPos,
+  //   top: 50,
+  //   height: (initialHeight * 3)
+  // }, 300);
+
+  TweenMax.to($newScalee, 0.4, {left:'25%', x:'-50%', top:50, height:(initialHeight*3)} );
 
   // - show info slide with bio and left-side overlay
   $infoSlide.addClass('show');
   $infoBg.addClass('show');
 
-  // - lock scroll
+  // - scroll to top then lock scroll
+  TweenMax.to(window, 1, {scrollTo:'#meet'});
   $body.addClass('fixed');
 
 
@@ -100,14 +101,10 @@ function clickHandler() {
 
     var $newEl = $el.clone().removeClass('show').addClass('bio-scalee');
 
-
     var elPos = {
       top: $el.position().top,
       left: $el.offset().left
     };
-
-    console.log('elPos:');
-    console.log(elPos);
 
     // Calculate top position in element
     var scaleeContTop = $scaleeCont.position().top;
@@ -178,11 +175,14 @@ function closeBio(){
 
   } else {
     // - move newScalee to original position
-    $newScalee.animate({
-      left: initialPos.left,
-      top: initialPos.top,
-      height: initialHeight
-    }, 400).addClass('fly-away');
+    // $newScalee.animate({
+    //   left: initialPos.left,
+    //   top: initialPos.top,
+    //   height: initialHeight
+    // }, 400).addClass('fly-away');
+
+    TweenMax.to($newScalee, 0.4, {left:initialPos.left, top:initialPos.top, height:initialHeight} );
+    $newScalee.addClass('fly-away');
 
     // - remove scalee and reset view
     window.setTimeout(function(){

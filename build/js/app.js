@@ -11023,17 +11023,16 @@ Loading.show();
 
 // Wait for images to load, then run scripts and show page
 $(window).on('load', function(){
-	console.log('window loaded');
 
+	ScrollAnimate();
 	ScaleeSorter.init();
 	ScaleeBios.init();
 	TwoTruths.init();
-	ScrollAnimate();
+	ScaleeSorter.center();
 
 	window.setTimeout(function(){
-		ScaleeSorter.center();
 		Loading.hide();
-	}, 1500);
+	}, 2000);
 
 });
 },{"./modules/loading.js":4,"./modules/scalee-bios.js":5,"./modules/scalee-sorter.js":6,"./modules/scroll-animation.js":7,"./modules/two-truths.js":8,"jquery":1}],3:[function(require,module,exports){
@@ -11729,8 +11728,6 @@ function eventsOff() {
 // Main Click Logic
 //------------------------
 function clickHandler() {
-  console.log('--scalee click--');
-
   // TODO: Insert scalee's data into .info-slide
 
   $scaleeInFocus = $(this);
@@ -11749,17 +11746,20 @@ function clickHandler() {
   var windowWidth = window.innerWidth;
   var newLeftPos = windowWidth * targetLeft;
 
-  $newScalee.animate({
-    left: newLeftPos,
-    top: 50,
-    height: (initialHeight * 3)
-  }, 300);
+  // $newScalee.animate({
+  //   left: newLeftPos,
+  //   top: 50,
+  //   height: (initialHeight * 3)
+  // }, 300);
+
+  TweenMax.to($newScalee, 0.4, {left:'25%', x:'-50%', top:50, height:(initialHeight*3)} );
 
   // - show info slide with bio and left-side overlay
   $infoSlide.addClass('show');
   $infoBg.addClass('show');
 
-  // - lock scroll
+  // - scroll to top then lock scroll
+  TweenMax.to(window, 1, {scrollTo:'#meet'});
   $body.addClass('fixed');
 
 
@@ -11768,14 +11768,10 @@ function clickHandler() {
 
     var $newEl = $el.clone().removeClass('show').addClass('bio-scalee');
 
-
     var elPos = {
       top: $el.position().top,
       left: $el.offset().left
     };
-
-    console.log('elPos:');
-    console.log(elPos);
 
     // Calculate top position in element
     var scaleeContTop = $scaleeCont.position().top;
@@ -11846,11 +11842,14 @@ function closeBio(){
 
   } else {
     // - move newScalee to original position
-    $newScalee.animate({
-      left: initialPos.left,
-      top: initialPos.top,
-      height: initialHeight
-    }, 400).addClass('fly-away');
+    // $newScalee.animate({
+    //   left: initialPos.left,
+    //   top: initialPos.top,
+    //   height: initialHeight
+    // }, 400).addClass('fly-away');
+
+    TweenMax.to($newScalee, 0.4, {left:initialPos.left, top:initialPos.top, height:initialHeight} );
+    $newScalee.addClass('fly-away');
 
     // - remove scalee and reset view
     window.setTimeout(function(){
@@ -12348,6 +12347,15 @@ function scrollAnimate() {
 	var jobsHeight = $jobsSlide.innerHeight();
 	var jobsSlide = $jobsSlide.get(0);
 
+	var $toTopBtn = $('.to-top-btn');
+
+
+
+	// Init Scroll Magic controller
+	//-------------------------------
+	var controller = new ScrollMagic.Controller();
+
+
 
 	// Create measurement reference
 	//--------------------------------
@@ -12380,11 +12388,6 @@ function scrollAnimate() {
 
 		return ref;
 	}
-
-
-	// Init Scroll Magic controller
-	//-------------------------------
-	var controller = new ScrollMagic.Controller();
 
 
 
@@ -12480,9 +12483,8 @@ function scrollAnimate() {
 
 				if (e.scrollDirection == 'FORWARD') {
 					// - jump down to position
-					$body.animate({
-						scrollTop: scrollRef['#hello'].pxOffset
-					}, 800);
+					TweenMax.to(window, 1.2, {scrollTo:scrollRef['#hello'].pxOffset});
+
 					// taperScrolling();
 
 					// - also reset the scalee sorter
@@ -12506,9 +12508,7 @@ function scrollAnimate() {
 
 				if (e.scrollDirection == 'FORWARD') {
 					// jump down to position
-					$body.animate({
-						scrollTop: scrollRef['#jobs'].pxOffset
-					}, 800);
+					TweenMax.to(window, 1.2, {scrollTo:scrollRef['#jobs'].pxOffset});
 					// taperScrolling();
 				}
 
@@ -12529,11 +12529,11 @@ function scrollAnimate() {
 					$body.addClass('fixed');
 
 					// jump down to position
-					$body.animate({
-						scrollTop: scrollRef['#meet'].pxOffset
-					}, 1000, function(){
+					TweenMax.to(window, 1.5, {scrollTo:scrollRef['#meet'].pxOffset});
+
+					window.setTimeout(function(){
 						$body.removeClass('fixed');
-					});
+					}, 1500);
 				}
 			});
 
@@ -12552,9 +12552,7 @@ function scrollAnimate() {
 			var offset = scrollRef[$target].pxOffset;
 
 			// - animate scroll to section
-			$body.animate({
-				scrollTop: offset
-			}, 400);
+			TweenMax.to(window, 2, {scrollTo:offset, ease: Elastic.easeOut.config(1, 0.4) });
 
 		});
 	})();
@@ -12933,6 +12931,17 @@ function scrollAnimate() {
 	$('.slide3 .job-posting').each(function(){
 		newJobPostingScene( $(this) );
 	});
+
+
+
+	// Scroll-to-top button
+	//-----------------------------
+	$toTopBtn.click(function(){
+		TweenMax.to(window, 2, {scrollTo: 0});
+	});
+
+
+
 }
 
 

@@ -12,16 +12,15 @@ Loading.show();
 
 // Wait for images to load, then run scripts and show page
 $(window).on('load', function(){
-	console.log('window loaded');
 
+	ScrollAnimate();
 	ScaleeSorter.init();
 	ScaleeBios.init();
 	TwoTruths.init();
-	ScrollAnimate();
+	ScaleeSorter.center();
 
 	window.setTimeout(function(){
-		ScaleeSorter.center();
 		Loading.hide();
-	}, 1500);
+	}, 2000);
 
 });

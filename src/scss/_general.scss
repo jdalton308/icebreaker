@@ -398,6 +398,83 @@ button,
 }
 
 
+// Footer
+//--------------
+footer {
+	position: relative;
+	width: 100%;
+	padding: 30px 0 40px;
+	background-color: $sketchup-gray;
+
+	.to-top-btn {
+		@include centerX();
+		top: -80px;
+		display: inline-block;
+		padding: 15px 15px 10px;
+		text-align: center;
+		background-color: $new-blue;
+		color: $white;
+		cursor: pointer;
+		box-shadow: $box-shadow;
+		@include transition(0.3s);
+
+		&:active {
+			box-shadow: $box-shadow-active;
+		}
+
+		.arrow-icon {
+			margin-bottom: 5px;
+
+			&:before {
+				border-color: $white;
+				@include transform( rotate(-45deg) );
+			}
+		}
+		p {
+			margin: 0;
+			line-height: 1em;
+		}
+	}
+
+	.logo {
+		display: inline-block;
+
+		img {
+			height: 40px;
+			width: auto;
+		}
+	}
+	.utility-links {
+		display: inline-block;
+		float: right;
+		padding-top: 12px;
+
+		a {
+			display: inline-block;
+			padding: 3px 5px;
+			margin-left: 5px;
+			color: $white;
+			@include transition(0.3s);
+		}
+	}
+
+	@media (min-width: $mobile) {
+		.to-top-btn {
+			&:hover {
+				background-color: darken($new-blue, 5%);
+			}
+		}
+		a {
+			border-bottom: 1px solid transparent;
+
+			&:hover {
+				border-color: $white;
+			}
+		}
+	}
+}
+
+
 // Keyframes
 //--------------
 // Hide scalee: Fade out, then collapse
