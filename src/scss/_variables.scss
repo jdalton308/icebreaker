@@ -65,6 +65,12 @@ $curve3: cubic-bezier(.21,.05,.07,.99);
   @include transform( translateY(-50%) );
 }
 
+@mixin linear-gradient($start, $end) {
+  background: $start;
+  background: -webkit-linear-gradient($start, $end);
+  background: linear-gradient($start, $end);
+}
+
 // Filters
 @mixin filter($props) {
   -webkit-filter: $props;

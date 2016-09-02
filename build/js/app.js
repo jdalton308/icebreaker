@@ -11888,6 +11888,8 @@ var $filterItems = $wheelSelectors.children('.item');
 // var $sortTrigger = $('#sort-me');
 var $scaleeCont = $('.scalee-cont');
 var $scalees = $scaleeCont.find('img');
+var $nullScalee = $scalees.filter('#null-person');
+
 var $infoSlide = $('.info-slide');
 var $infoClose = $infoSlide.find('.close-btn');
 var $scaleeLeftBtn = $('.scalee-scroll.prev');
@@ -11910,7 +11912,6 @@ var filters = [];
 var panelOpen = $slide1.hasClass('edit-mode');
 var $scaleeInFocus;
 var isMobile = Util.isMobile();
-
 
 // Bind events
 //------------
@@ -12047,12 +12048,22 @@ function closePanel() {
 //---------------
 function sort() {
 
-  // 1. Get filters
-  // - Get selected elements
-  var $selectedFilters = $wheelSelectors.find('.selected');
+  // - Get filters
+  setCurrentFilters();
 
+  // - Loop through all scalees and see if 'data-tag' attributes match all filters
+  hideFilteredScalees();
+
+  // - Center scalees
+  centerScalees();
+}
+
+function setCurrentFilters() {
   // - reset filters
   filters = [];
+
+  // - Get selected elements
+  var $selectedFilters = $wheelSelectors.find('.selected');
 
   // - For each selection, slide up, and save value
   $selectedFilters.each(function(){
@@ -12062,9 +12073,12 @@ function sort() {
     var filterValue = $this.text();
     filters.push(filterValue);
   });
+}
 
+function hideFilteredScalees() {
+  // - reset null state
+  var areScalees = false;
 
-  // 2. Loop through all scalees and see if 'data-tag' attributes match all filters
   $scalees.each(function(){
     var $this = $(this);
     $this.removeClass('hide show'); // reset each sort
@@ -12078,20 +12092,21 @@ function sort() {
       }
     });
 
-    // - if no 'hide' class, add 'show' class, for animation
+    // - if no 'hide' class, add 'show' class, for animation, and set null-state var
     if ( !$this.hasClass('hide') ) {
       $this.addClass('show');
+      areScalees = true;
     }
 
   });
 
-
-  // 3. Center scalees
-  centerScalees();
-
-
-  // Todo: Create "nobody found" message
+  // - if no scalees, show null dude
+  if (!areScalees) {
+    console.log('no scalees--');
+    $nullScalee.removeClass('hide').addClass('show');
+  }
 }
+
 function resetFilters() {
   // Remove '.seleccted' tag
   $wheelSelectors.find('.selected').removeClass('selected');

@@ -415,6 +415,126 @@ button,
     opacity: 1;
     height: 100%; } }
 
+@-webkit-keyframes logoFlying {
+  0% {
+    top: 10%;
+    left: 10%; }
+  20% {
+    top: 15%;
+    left: 12%; }
+  40% {
+    top: 13%;
+    left: 14%; }
+  60% {
+    top: 17%;
+    left: 15%; }
+  80% {
+    top: 20%;
+    left: 18%; }
+  100% {
+    top: 18%;
+    left: 20%; } }
+
+@keyframes logoFlying {
+  0% {
+    top: 10%;
+    left: 10%; }
+  20% {
+    top: 15%;
+    left: 12%; }
+  40% {
+    top: 13%;
+    left: 14%; }
+  60% {
+    top: 17%;
+    left: 15%; }
+  80% {
+    top: 20%;
+    left: 18%; }
+  100% {
+    top: 18%;
+    left: 20%; } }
+
+@-webkit-keyframes logoFlying-two {
+  0% {
+    top: 16%;
+    left: 80%; }
+  20% {
+    top: 13%;
+    left: 75%; }
+  40% {
+    top: 9%;
+    left: 73%; }
+  60% {
+    top: 12%;
+    left: 71%; }
+  80% {
+    top: 16%;
+    left: 74%; }
+  100% {
+    top: 20%;
+    left: 77%; } }
+
+@keyframes logoFlying-two {
+  0% {
+    top: 16%;
+    left: 80%; }
+  20% {
+    top: 13%;
+    left: 75%; }
+  40% {
+    top: 9%;
+    left: 73%; }
+  60% {
+    top: 12%;
+    left: 71%; }
+  80% {
+    top: 16%;
+    left: 74%; }
+  100% {
+    top: 20%;
+    left: 77%; } }
+
+@-webkit-keyframes logoFlying-three {
+  0% {
+    top: 3%;
+    left: 26%; }
+  20% {
+    top: 6%;
+    left: 29%; }
+  40% {
+    top: 10%;
+    left: 31%; }
+  60% {
+    top: 12%;
+    left: 25%; }
+  80% {
+    top: 10%;
+    left: 22%; }
+  100% {
+    top: 15%;
+    left: 18%; } }
+
+@keyframes logoFlying-three {
+  0% {
+    top: 3%;
+    left: 26%; }
+  20% {
+    top: 6%;
+    left: 29%; }
+  40% {
+    top: 10%;
+    left: 31%; }
+  60% {
+    top: 12%;
+    left: 25%; }
+  80% {
+    top: 10%;
+    left: 22%; }
+  100% {
+    top: 15%;
+    left: 18%; } }
+
 .slide0 {
   z-index: 20;
   height: 100vh;
@@ -501,9 +621,9 @@ button,
       margin-right: -20px; }
       .slide1 .scalee-cont img:nth-child(3n) {
         z-index: 0;
-        -ms-transform: perspective(100px) scale(0.8) translateY(-45px);
-        -webkit-transform: perspective(100px) scale(0.8) translateY(-45px);
-        transform: perspective(100px) scale(0.8) translateY(-45px); }
+        -ms-transform: perspective(100px) scale(0.65) translateY(-65px);
+        -webkit-transform: perspective(100px) scale(0.65) translateY(-65px);
+        transform: perspective(100px) scale(0.65) translateY(-65px); }
       .slide1 .scalee-cont img:nth-child(4n) {
         left: 5px;
         -ms-transform: perspective(100px) translateZ(1px);
@@ -512,9 +632,9 @@ button,
       .slide1 .scalee-cont img:nth-child(5n+1) {
         right: 5px;
         z-index: 0;
-        -ms-transform: perspective(100px) scale(0.8) translateY(-45px);
-        -webkit-transform: perspective(100px) scale(0.8) translateY(-45px);
-        transform: perspective(100px) scale(0.8) translateY(-45px); }
+        -ms-transform: perspective(100px) scale(0.65) translateY(-65px);
+        -webkit-transform: perspective(100px) scale(0.65) translateY(-65px);
+        transform: perspective(100px) scale(0.65) translateY(-65px); }
       .slide1 .scalee-cont img.hide {
         -webkit-animation: hideScalee 1s cubic-bezier(0.22, 0.07, 0.23, 0.99) 0s 1 normal forwards;
         animation: hideScalee 1s cubic-bezier(0.22, 0.07, 0.23, 0.99) 0s 1 normal forwards; }
@@ -533,9 +653,33 @@ button,
     left: 0;
     z-index: -1;
     width: 100%;
-    height: 90%;
+    height: 100%;
     background-color: #E2E2E7;
     box-shadow: 2px 2px 15px -2px #000; }
+  .slide1 .scalee-background-sky {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -2;
+    width: 100%;
+    height: 70%;
+    background: #ffffff;
+    background: -webkit-linear-gradient(#ffffff, #498FE1);
+    background: linear-gradient(#ffffff, #498FE1); }
+  .slide1 .logo {
+    position: absolute;
+    display: inline-block;
+    height: 40px;
+    width: auto; }
+    .slide1 .logo.su-logo {
+      -webkit-animation: logoFlying 60s linear 0s infinite alternate forwards;
+      animation: logoFlying 60s linear 0s infinite alternate forwards; }
+    .slide1 .logo.trimble-logo {
+      -webkit-animation: logoFlying-two 60s linear 0s infinite alternate forwards;
+      animation: logoFlying-two 60s linear 0s infinite alternate forwards; }
+    .slide1 .logo.sefaira-logo {
+      -webkit-animation: logoFlying-three 60s linear 0s infinite alternate forwards;
+      animation: logoFlying-three 60s linear 0s infinite alternate forwards; }
   .slide1 .control-panel {
     position: relative;
     width: 100%;
