@@ -535,6 +535,29 @@ button,
     top: 15%;
     left: 18%; } }
 
+.loading-screen {
+  display: none;
+  position: fixed;
+  z-index: 50;
+  top: 0;
+  left: 0;
+  background-color: #498FE1; }
+  .loading-screen.show {
+    display: block;
+    -webkit-transition: opacity 1s;
+    transition: opacity 1s; }
+  .loading-screen.hide {
+    opacity: 0; }
+  .loading-screen .copy-cont {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    max-width: 80%;
+    color: #ffffff; }
+
 .slide0 {
   z-index: 20;
   height: 100vh;

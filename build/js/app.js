@@ -11015,10 +11015,16 @@ var $ = require('jquery');
 var ScaleeSorter = require('./modules/scalee-sorter.js');
 var ScaleeBios = require('./modules/scalee-bios.js');
 var TwoTruths = require('./modules/two-truths.js');
-var ScrollAnimate = require('./modules/scroll-animation');
+var ScrollAnimate = require('./modules/scroll-animation.js');
+var Loading = require('./modules/loading.js');
 
+// Show loading slide until pageload event
+Loading.show();
 
-$(function(){
+// Wait for images to load, then run scripts and show page
+$(window).on('load', function(){
+	console.log('window loaded');
+
 	ScaleeSorter.init();
 	ScaleeBios.init();
 	TwoTruths.init();
@@ -11026,10 +11032,11 @@ $(function(){
 
 	window.setTimeout(function(){
 		ScaleeSorter.center();
+		Loading.hide();
 	}, 1500);
 
 });
-},{"./modules/scalee-bios.js":4,"./modules/scalee-sorter.js":5,"./modules/scroll-animation":6,"./modules/two-truths.js":7,"jquery":1}],3:[function(require,module,exports){
+},{"./modules/loading.js":4,"./modules/scalee-bios.js":5,"./modules/scalee-sorter.js":6,"./modules/scroll-animation.js":7,"./modules/two-truths.js":8,"jquery":1}],3:[function(require,module,exports){
 
 var leaders = {
 	"discgolf": {
@@ -11632,6 +11639,33 @@ var scalees = [
 
 module.exports = leaders;
 },{}],4:[function(require,module,exports){
+
+var $ = require('jquery');
+
+var $window = $(window);
+var $body = $('body');
+var $loadingSlide = $('.loading-screen');
+
+// Show loading screen
+function showLoading() {
+	$body.addClass('fixed');
+	$loadingSlide.addClass('show');
+}
+
+// Hide loading screen
+function hideLoading() {
+	$loadingSlide.addClass('hide');
+	window.setTimeout(function(){
+		$body.removeClass('fixed');
+		$loadingSlide.removeClass('show hide');
+	}, 1100);
+}
+
+
+
+module.exports.show = showLoading;
+module.exports.hide = hideLoading;
+},{"jquery":1}],5:[function(require,module,exports){
 'use strict';
 
 var $ = require('jquery');
@@ -11861,7 +11895,7 @@ function init() {
 module.exports.init = init;
 module.exports.on = eventsOn;
 module.exports.off = eventsOff;
-},{"./two-truths.js":7,"./util.js":8,"jquery":1}],5:[function(require,module,exports){
+},{"./two-truths.js":8,"./util.js":9,"jquery":1}],6:[function(require,module,exports){
 'use strict';
 
 var $ = require('jquery');
@@ -12267,7 +12301,7 @@ module.exports.reset = resetFilters;
 module.exports.closeLeaders = hideLeaderboard;
 module.exports.center = centerScalees;
 
-},{"./leaderboard-data.js":3,"./util.js":8,"jquery":1}],6:[function(require,module,exports){
+},{"./leaderboard-data.js":3,"./util.js":9,"jquery":1}],7:[function(require,module,exports){
 'use strict';
 
 var $ = require('jquery');
@@ -12346,12 +12380,6 @@ function scrollAnimate() {
 
 		return ref;
 	}
-
-
-	// Test //
-	$window.on('load', function(){
-		console.log('window loaded');
-	});
 
 
 	// Init Scroll Magic controller
@@ -12909,7 +12937,7 @@ function scrollAnimate() {
 
 
 module.exports = scrollAnimate;
-},{"./scalee-sorter.js":5,"jquery":1}],7:[function(require,module,exports){
+},{"./scalee-sorter.js":6,"jquery":1}],8:[function(require,module,exports){
 'use strict';
 
 var $ = require('jquery');
@@ -12991,7 +13019,7 @@ function initGame() {
 
 module.exports.init = initGame;
 module.exports.endGame = endGame;
-},{"./scalee-sorter.js":5,"jquery":1}],8:[function(require,module,exports){
+},{"./scalee-sorter.js":6,"jquery":1}],9:[function(require,module,exports){
 
 // ----------------
 // Utilities 

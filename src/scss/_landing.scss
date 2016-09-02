@@ -1,4 +1,27 @@
 
+.loading-screen {
+	display: none;
+	position: fixed;
+	z-index: 50;
+	top: 0;
+	left: 0;
+	background-color: $new-blue;
+
+	&.show {
+		display: block;
+		-webkit-transition: opacity 1s;
+		transition: opacity 1s;
+	}
+	&.hide {
+		opacity: 0;
+	}
+
+	.copy-cont {
+		@include centerMe();
+		max-width: 80%;
+		color: $white;
+	}
+}
 .slide0 {
 	z-index: 20; // put in front of progress bar
 	height: 100vh;

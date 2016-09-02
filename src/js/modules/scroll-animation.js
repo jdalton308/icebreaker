@@ -78,12 +78,6 @@ function scrollAnimate() {
 	}
 
 
-	// Test //
-	$window.on('load', function(){
-		console.log('window loaded');
-	});
-
-
 	// Init Scroll Magic controller
 	//-------------------------------
 	var controller = new ScrollMagic.Controller();
