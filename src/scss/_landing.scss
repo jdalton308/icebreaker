@@ -28,10 +28,64 @@
 	min-height: 0;
 	padding: 0;
 	background-color: $new-blue;
+	overflow: hidden;
 	// @include animation(landingSlide, 1.2s, $curve3, 2.6s);
+
+	&.bounce-up {
+		@include animation(bounceUp, 1.3s);
+
+		.scroll-indicator {
+			bottom: 20px;
+			@include animation(blink, 2s, $curve1, 0s, infinite);
+		}
+	}
 
 	.container {
 		@include centerMe();
 		text-align: right;
+	}
+	.scroll-indicator {
+		@include centerX();
+		bottom: -100px;
+		padding: 20px;
+		font-size: 3em;
+		color: $white;
+		@include transition();
+		-webkit-transition-delay: 1.3s;
+		transition-delay: 1.3s;
+	}
+}
+
+
+$travelDist: 20vh;
+$bounceDist: 5vh;
+
+@include keyframes(bounceUp) {
+	0% {
+		height: 100vh;
+	}
+	15% {
+		height: 100vh - ($travelDist + $bounceDist);
+	}
+	40% {
+		height: 100vh - ($travelDist - ($bounceDist/2));
+	}
+	75% {
+		height: 100vh - ($travelDist);
+	}
+	100% {
+		height: 100vh - $travelDist;
+	}
+}
+
+@include keyframes(blink) {
+	0% {
+		opacity: 1;
+	}
+	75% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
 	}
 }

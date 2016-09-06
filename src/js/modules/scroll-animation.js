@@ -10,12 +10,14 @@ var ScaleeSorter = require('./scalee-sorter.js');
 // Scroll-controlled Animations
 // -------------------------------
 
-function scrollAnimate() {
 
-	var $window = $(window);
-	var $body = $('body');
-	var pageHeight = Math.max($(document).height(), $window.height());
-	// pageHeight -= window.innerHeight; // adjust to let bar hit bottom
+var $window = $(window);
+var $body = $('body');
+var pageHeight = Math.max($(document).height(), $window.height());
+
+
+
+function scrollAnimate() {
 
 	var $progressBar = $('.progress-bar');
 	var $progressIndicator = $progressBar.find('.progress-bar-indicator');
@@ -54,40 +56,6 @@ function scrollAnimate() {
 
 
 
-	// Create measurement reference
-	//--------------------------------
-	var scrollRef = createPositionReference();
-
-	function createPositionReference() {
-		// for each slide
-		// - height in px
-		// - height as percentage of page height
-		// - page offset, in px
-		// - page offset, in %
-
-		var ref = {};
-		ref.pageHeight = pageHeight - window.innerHeight;
-
-		function measureSection($slide) {
-			var slideRef = {};
-			slideRef.pxHeight = $slide.innerHeight();
-			slideRef.percHeight = slideRef.pxHeight / ref.pageHeight;
-			slideRef.pxOffset = $slide.offset().top;
-			slideRef.percOffset = slideRef.pxOffset / ref.pageHeight;
-
-			return slideRef;
-		}
-
-		var sectionIds = ['#meet', '#hello', '#jobs'];
-		sectionIds.forEach(function(val, i){
-			ref[val] = measureSection( $(val) );
-		});
-
-		return ref;
-	}
-
-
-
 	// Hide Progress Bar when scrolling
 	//----------------------------------
 	(function(){
@@ -108,6 +76,37 @@ function scrollAnimate() {
 	//-----------------------------------------
 	(function(){
 		var progressHeight = $progressBar.height();
+
+		// - create measurement reference, only for placing buttons initially
+		var scrollRef = createScrollRef();
+
+		function createScrollRef() {
+			// for each slide
+			// - height in px
+			// - height as percentage of page height
+			// - page offset, in px
+			// - page offset, in %
+
+			var ref = {};
+			ref.pageHeight = pageHeight - window.innerHeight;
+
+			function measureSection($slide) {
+				var slideRef = {};
+				slideRef.pxHeight = $slide.innerHeight();
+				slideRef.percHeight = slideRef.pxHeight / ref.pageHeight;
+				slideRef.pxOffset = $slide.offset().top;
+				slideRef.percOffset = slideRef.pxOffset / ref.pageHeight;
+
+				return slideRef;
+			}
+
+			var sectionIds = ['#meet', '#hello', '#jobs'];
+			sectionIds.forEach(function(val, i){
+				ref[val] = measureSection( $(val) );
+			});
+
+			return ref;
+		}
 
 		function setBtnPos($btn, sectId) {
 			// var offsetPerc = (height + extra)/pageHeight;
@@ -180,7 +179,7 @@ function scrollAnimate() {
 
 				if (e.scrollDirection == 'FORWARD') {
 					// - jump down to position
-					TweenMax.to(window, 1.2, {scrollTo:scrollRef['#hello'].pxOffset});
+					TweenMax.to(window, 1.2, {scrollTo:'#hello'});
 
 					// taperScrolling();
 
@@ -205,7 +204,7 @@ function scrollAnimate() {
 
 				if (e.scrollDirection == 'FORWARD') {
 					// jump down to position
-					TweenMax.to(window, 1.2, {scrollTo:scrollRef['#jobs'].pxOffset});
+					TweenMax.to(window, 1.2, {scrollTo:'#jobs'});
 					// taperScrolling();
 				}
 
@@ -214,25 +213,12 @@ function scrollAnimate() {
 
 		// - Jump from landing slide to sorter with one scroll
 		//------------------------------
-		new ScrollMagic.Scene({
-				triggerElement: sorterSlide,
-				triggerHook: 0.95,
-				duration: 50
-			})
-			.addTo(controller)
-			.on('start', function(e){
-
-				if (e.scrollDirection == 'FORWARD') {
-					$body.addClass('fixed');
-
-					// jump down to position
-					TweenMax.to(window, 1.5, {scrollTo:scrollRef['#meet'].pxOffset});
-
-					window.setTimeout(function(){
-						$body.removeClass('fixed');
-					}, 1500);
-				}
-			});
+		// new ScrollMagic.Scene({
+		// 		triggerElement: landingSlide, // HERE <<<<<<
+		// 		triggerHook: 0.99,
+		// 		duration: 50
+		// 	})
+		// 	.addTo(controller);
 
 
 
@@ -242,14 +228,13 @@ function scrollAnimate() {
 			var $this = $(this);
 
 			// -get target
-			var target = $this.attr('data-target');
-			var $target = '#'+ target;
+			var target = '#' + $this.attr('data-target');
 
 			// - get offset
-			var offset = scrollRef[$target].pxOffset;
+			// var offset = scrollRef[target].pxOffset;
 
 			// - animate scroll to section
-			TweenMax.to(window, 2, {scrollTo:offset, ease: Elastic.easeOut.config(1, 0.4) });
+			TweenMax.to(window, 2, {scrollTo:target});
 
 		});
 	})();
@@ -336,8 +321,8 @@ function scrollAnimate() {
 
 	var scaleeScene = new ScrollMagic.Scene({
 			triggerElement: sorterSlide,
-			triggerHook: '0.5',
-			duration: '100%'
+			triggerHook: '0.7',
+			duration: '90%'
 		})
 		.setTween(sorter_tween)
 		.addTo(controller);
@@ -355,10 +340,27 @@ function scrollAnimate() {
 		var landingPolyScene = new ScrollMagic.Scene({
 				triggerElement: landingSlide,
 				triggerHook: 'onLeave',
-				duration: '120%'
+				duration: '120%',
+				offset: 10
 			})
 			.setTween(smallPolyTween)
-			.addTo(controller);
+			.addTo(controller)
+			.on('start', function(e){
+
+				// if going down...
+				if (e.scrollDirection == 'FORWARD') {
+
+					$body.addClass('fixed');
+					// var newOffset = scrollRef['#meet'].pxOffset;
+
+					// - jump down to position
+					TweenMax.to(window, 1.5, {scrollTo:'#meet'});
+
+					window.setTimeout(function(){
+						$body.removeClass('fixed');
+					}, 2200);
+				}
+			});
 	})();
 
 
@@ -634,7 +636,7 @@ function scrollAnimate() {
 	// Scroll-to-top button
 	//-----------------------------
 	$toTopBtn.click(function(){
-		TweenMax.to(window, 2, {scrollTo: 0});
+		TweenMax.to(window, 1, {scrollTo: 0});
 	});
 
 
@@ -642,4 +644,5 @@ function scrollAnimate() {
 }
 
 
-module.exports = scrollAnimate;
+module.exports.init = scrollAnimate;
+// module.exports.newRef = createScrollRef;

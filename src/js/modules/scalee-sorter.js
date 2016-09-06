@@ -108,14 +108,16 @@ function openPanel() {
   //   openFilters();
   // }
 
-  // - scroll to position
-  var offset = $slide1.offset().top;
-  $body.animate({
-    scrollTop: offset
-  }, 800);
-
   // - change styles
   $slide1.addClass('edit-mode');
+
+  // - scroll to position
+  // var offset = $slide1.offset().top;
+  // $body.animate({
+  //   scrollTop: offset
+  // }, 800);
+
+  TweenMax.to(window, 800, {scrollTo:'#meet'});
 
   // -lock scroll
   $body.addClass('fixed');

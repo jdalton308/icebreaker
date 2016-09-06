@@ -11017,6 +11017,7 @@ var ScaleeBios = require('./modules/scalee-bios.js');
 var TwoTruths = require('./modules/two-truths.js');
 var ScrollAnimate = require('./modules/scroll-animation.js');
 var Loading = require('./modules/loading.js');
+var Landing = require('./modules/landing.js');
 
 // Show loading slide until pageload event
 Loading.show();
@@ -11024,7 +11025,7 @@ Loading.show();
 // Wait for images to load, then run scripts and show page
 $(window).on('load', function(){
 
-	ScrollAnimate();
+	ScrollAnimate.init();
 	ScaleeSorter.init();
 	ScaleeBios.init();
 	TwoTruths.init();
@@ -11032,10 +11033,63 @@ $(window).on('load', function(){
 
 	window.setTimeout(function(){
 		Loading.hide();
+
+		window.setTimeout(function(){
+			Landing();
+		}, 1000)
 	}, 2000);
 
 });
-},{"./modules/loading.js":4,"./modules/scalee-bios.js":5,"./modules/scalee-sorter.js":6,"./modules/scroll-animation.js":7,"./modules/two-truths.js":8,"jquery":1}],3:[function(require,module,exports){
+},{"./modules/landing.js":3,"./modules/loading.js":5,"./modules/scalee-bios.js":6,"./modules/scalee-sorter.js":7,"./modules/scroll-animation.js":8,"./modules/two-truths.js":9,"jquery":1}],3:[function(require,module,exports){
+
+var $ = require('jquery');
+var ScrollAnimate = require('./scroll-animation.js');
+
+var $window = $(window);
+var $body = $('body');
+var $landingSlide = $('.slide0');
+
+// if at top, animate the scroll pop-up and arrow,
+// else, trigger event when at top to do so
+
+function checkTop(){
+	return $body.scrollTop();
+}
+
+function triggerFold(){
+	// $body.addClass('fixed');
+	$landingSlide.addClass('bounce-up');
+
+	// // allow time for animation, then reset reference to scrolling positions
+	// window.setTimeout(function(){
+	// 	// $body.removeClass('fixed');
+	// }, 1500);
+}
+
+
+// every 500ms, check position until at the top, instead of watching scroll	
+function watchForTop() {
+	var topWatcher = window.setInterval(function(){
+		if ( !checkTop() ){
+			triggerFold();
+			window.clearInterval(topWatcher);
+		}
+	}, 500);
+}
+
+function init() {
+	var initialPos = checkTop();
+
+	if (!initialPos) {
+		triggerFold();
+	} else {
+		watchForTop();
+	}
+}
+
+
+module.exports = init;
+},{"./scroll-animation.js":8,"jquery":1}],4:[function(require,module,exports){
 
 var leaders = {
 	"discgolf": {
@@ -11637,7 +11691,7 @@ var scalees = [
 
 
 module.exports = leaders;
-},{}],4:[function(require,module,exports){
+},{}],5:[function(require,module,exports){
 
 var $ = require('jquery');
 
@@ -11654,6 +11708,8 @@ function showLoading() {
 // Hide loading screen
 function hideLoading() {
 	$loadingSlide.addClass('hide');
+
+	// After animation, remove cover and let scrolling resume
 	window.setTimeout(function(){
 		$body.removeClass('fixed');
 		$loadingSlide.removeClass('show hide');
@@ -11664,7 +11720,7 @@ function hideLoading() {
 
 module.exports.show = showLoading;
 module.exports.hide = hideLoading;
-},{"jquery":1}],5:[function(require,module,exports){
+},{"jquery":1}],6:[function(require,module,exports){
 'use strict';
 
 var $ = require('jquery');
@@ -11894,7 +11950,7 @@ function init() {
 module.exports.init = init;
 module.exports.on = eventsOn;
 module.exports.off = eventsOff;
-},{"./two-truths.js":8,"./util.js":9,"jquery":1}],6:[function(require,module,exports){
+},{"./two-truths.js":9,"./util.js":10,"jquery":1}],7:[function(require,module,exports){
 'use strict';
 
 var $ = require('jquery');
@@ -12005,14 +12061,16 @@ function openPanel() {
   //   openFilters();
   // }
 
-  // - scroll to position
-  var offset = $slide1.offset().top;
-  $body.animate({
-    scrollTop: offset
-  }, 800);
-
   // - change styles
   $slide1.addClass('edit-mode');
+
+  // - scroll to position
+  // var offset = $slide1.offset().top;
+  // $body.animate({
+  //   scrollTop: offset
+  // }, 800);
+
+  TweenMax.to(window, 800, {scrollTo:'#meet'});
 
   // -lock scroll
   $body.addClass('fixed');
@@ -12300,7 +12358,7 @@ module.exports.reset = resetFilters;
 module.exports.closeLeaders = hideLeaderboard;
 module.exports.center = centerScalees;
 
-},{"./leaderboard-data.js":3,"./util.js":9,"jquery":1}],7:[function(require,module,exports){
+},{"./leaderboard-data.js":4,"./util.js":10,"jquery":1}],8:[function(require,module,exports){
 'use strict';
 
 var $ = require('jquery');
@@ -12313,12 +12371,14 @@ var ScaleeSorter = require('./scalee-sorter.js');
 // Scroll-controlled Animations
 // -------------------------------
 
-function scrollAnimate() {
 
-	var $window = $(window);
-	var $body = $('body');
-	var pageHeight = Math.max($(document).height(), $window.height());
-	// pageHeight -= window.innerHeight; // adjust to let bar hit bottom
+var $window = $(window);
+var $body = $('body');
+var pageHeight = Math.max($(document).height(), $window.height());
+
+
+
+function scrollAnimate() {
 
 	var $progressBar = $('.progress-bar');
 	var $progressIndicator = $progressBar.find('.progress-bar-indicator');
@@ -12357,40 +12417,6 @@ function scrollAnimate() {
 
 
 
-	// Create measurement reference
-	//--------------------------------
-	var scrollRef = createPositionReference();
-
-	function createPositionReference() {
-		// for each slide
-		// - height in px
-		// - height as percentage of page height
-		// - page offset, in px
-		// - page offset, in %
-
-		var ref = {};
-		ref.pageHeight = pageHeight - window.innerHeight;
-
-		function measureSection($slide) {
-			var slideRef = {};
-			slideRef.pxHeight = $slide.innerHeight();
-			slideRef.percHeight = slideRef.pxHeight / ref.pageHeight;
-			slideRef.pxOffset = $slide.offset().top;
-			slideRef.percOffset = slideRef.pxOffset / ref.pageHeight;
-
-			return slideRef;
-		}
-
-		var sectionIds = ['#meet', '#hello', '#jobs'];
-		sectionIds.forEach(function(val, i){
-			ref[val] = measureSection( $(val) );
-		});
-
-		return ref;
-	}
-
-
-
 	// Hide Progress Bar when scrolling
 	//----------------------------------
 	(function(){
@@ -12411,6 +12437,37 @@ function scrollAnimate() {
 	//-----------------------------------------
 	(function(){
 		var progressHeight = $progressBar.height();
+
+		// - create measurement reference, only for placing buttons initially
+		var scrollRef = createScrollRef();
+
+		function createScrollRef() {
+			// for each slide
+			// - height in px
+			// - height as percentage of page height
+			// - page offset, in px
+			// - page offset, in %
+
+			var ref = {};
+			ref.pageHeight = pageHeight - window.innerHeight;
+
+			function measureSection($slide) {
+				var slideRef = {};
+				slideRef.pxHeight = $slide.innerHeight();
+				slideRef.percHeight = slideRef.pxHeight / ref.pageHeight;
+				slideRef.pxOffset = $slide.offset().top;
+				slideRef.percOffset = slideRef.pxOffset / ref.pageHeight;
+
+				return slideRef;
+			}
+
+			var sectionIds = ['#meet', '#hello', '#jobs'];
+			sectionIds.forEach(function(val, i){
+				ref[val] = measureSection( $(val) );
+			});
+
+			return ref;
+		}
 
 		function setBtnPos($btn, sectId) {
 			// var offsetPerc = (height + extra)/pageHeight;
@@ -12483,7 +12540,7 @@ function scrollAnimate() {
 
 				if (e.scrollDirection == 'FORWARD') {
 					// - jump down to position
-					TweenMax.to(window, 1.2, {scrollTo:scrollRef['#hello'].pxOffset});
+					TweenMax.to(window, 1.2, {scrollTo:'#hello'});
 
 					// taperScrolling();
 
@@ -12508,7 +12565,7 @@ function scrollAnimate() {
 
 				if (e.scrollDirection == 'FORWARD') {
 					// jump down to position
-					TweenMax.to(window, 1.2, {scrollTo:scrollRef['#jobs'].pxOffset});
+					TweenMax.to(window, 1.2, {scrollTo:'#jobs'});
 					// taperScrolling();
 				}
 
@@ -12517,25 +12574,12 @@ function scrollAnimate() {
 
 		// - Jump from landing slide to sorter with one scroll
 		//------------------------------
-		new ScrollMagic.Scene({
-				triggerElement: sorterSlide,
-				triggerHook: 0.95,
-				duration: 50
-			})
-			.addTo(controller)
-			.on('start', function(e){
-
-				if (e.scrollDirection == 'FORWARD') {
-					$body.addClass('fixed');
-
-					// jump down to position
-					TweenMax.to(window, 1.5, {scrollTo:scrollRef['#meet'].pxOffset});
-
-					window.setTimeout(function(){
-						$body.removeClass('fixed');
-					}, 1500);
-				}
-			});
+		// new ScrollMagic.Scene({
+		// 		triggerElement: landingSlide, // HERE <<<<<<
+		// 		triggerHook: 0.99,
+		// 		duration: 50
+		// 	})
+		// 	.addTo(controller);
 
 
 
@@ -12545,14 +12589,13 @@ function scrollAnimate() {
 			var $this = $(this);
 
 			// -get target
-			var target = $this.attr('data-target');
-			var $target = '#'+ target;
+			var target = '#' + $this.attr('data-target');
 
 			// - get offset
-			var offset = scrollRef[$target].pxOffset;
+			// var offset = scrollRef[target].pxOffset;
 
 			// - animate scroll to section
-			TweenMax.to(window, 2, {scrollTo:offset, ease: Elastic.easeOut.config(1, 0.4) });
+			TweenMax.to(window, 2, {scrollTo:target});
 
 		});
 	})();
@@ -12639,8 +12682,8 @@ function scrollAnimate() {
 
 	var scaleeScene = new ScrollMagic.Scene({
 			triggerElement: sorterSlide,
-			triggerHook: '0.5',
-			duration: '100%'
+			triggerHook: '0.7',
+			duration: '90%'
 		})
 		.setTween(sorter_tween)
 		.addTo(controller);
@@ -12658,10 +12701,27 @@ function scrollAnimate() {
 		var landingPolyScene = new ScrollMagic.Scene({
 				triggerElement: landingSlide,
 				triggerHook: 'onLeave',
-				duration: '120%'
+				duration: '120%',
+				offset: 10
 			})
 			.setTween(smallPolyTween)
-			.addTo(controller);
+			.addTo(controller)
+			.on('start', function(e){
+
+				// if going down...
+				if (e.scrollDirection == 'FORWARD') {
+
+					$body.addClass('fixed');
+					// var newOffset = scrollRef['#meet'].pxOffset;
+
+					// - jump down to position
+					TweenMax.to(window, 1.5, {scrollTo:'#meet'});
+
+					window.setTimeout(function(){
+						$body.removeClass('fixed');
+					}, 2200);
+				}
+			});
 	})();
 
 
@@ -12937,7 +12997,7 @@ function scrollAnimate() {
 	// Scroll-to-top button
 	//-----------------------------
 	$toTopBtn.click(function(){
-		TweenMax.to(window, 2, {scrollTo: 0});
+		TweenMax.to(window, 1, {scrollTo: 0});
 	});
 
 
@@ -12945,8 +13005,9 @@ function scrollAnimate() {
 }
 
 
-module.exports = scrollAnimate;
-},{"./scalee-sorter.js":6,"jquery":1}],8:[function(require,module,exports){
+module.exports.init = scrollAnimate;
+// module.exports.newRef = createScrollRef;
+},{"./scalee-sorter.js":7,"jquery":1}],9:[function(require,module,exports){
 'use strict';
 
 var $ = require('jquery');
@@ -13028,7 +13089,7 @@ function initGame() {
 
 module.exports.init = initGame;
 module.exports.endGame = endGame;
-},{"./scalee-sorter.js":6,"jquery":1}],9:[function(require,module,exports){
+},{"./scalee-sorter.js":7,"jquery":1}],10:[function(require,module,exports){
 
 // ----------------
 // Utilities 

@@ -620,7 +620,15 @@ footer {
   height: 100vh;
   min-height: 0;
   padding: 0;
-  background-color: #498FE1; }
+  background-color: #498FE1;
+  overflow: hidden; }
+  .slide0.bounce-up {
+    -webkit-animation: bounceUp 1.3s cubic-bezier(0.22, 0.07, 0.23, 0.99) 0s 1 normal forwards;
+    animation: bounceUp 1.3s cubic-bezier(0.22, 0.07, 0.23, 0.99) 0s 1 normal forwards; }
+    .slide0.bounce-up .scroll-indicator {
+      bottom: 20px;
+      -webkit-animation: blink 2s cubic-bezier(0.22, 0.07, 0.23, 0.99) 0s infinite normal forwards;
+      animation: blink 2s cubic-bezier(0.22, 0.07, 0.23, 0.99) 0s infinite normal forwards; }
   .slide0 .container {
     position: absolute;
     top: 50%;
@@ -629,6 +637,60 @@ footer {
     -webkit-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
     text-align: right; }
+  .slide0 .scroll-indicator {
+    position: absolute;
+    right: 50%;
+    -ms-transform: translateX(50%);
+    -webkit-transform: translateX(50%);
+    transform: translateX(50%);
+    bottom: -100px;
+    padding: 20px;
+    font-size: 3em;
+    color: #ffffff;
+    -webkit-transition: all 0.5s;
+    transition: all 0.5s;
+    -webkit-transition-delay: 1.3s;
+    transition-delay: 1.3s; }
+
+@-webkit-keyframes bounceUp {
+  0% {
+    height: 100vh; }
+  15% {
+    height: 75vh; }
+  40% {
+    height: 82.5vh; }
+  75% {
+    height: 80vh; }
+  100% {
+    height: 80vh; } }
+
+@keyframes bounceUp {
+  0% {
+    height: 100vh; }
+  15% {
+    height: 75vh; }
+  40% {
+    height: 82.5vh; }
+  75% {
+    height: 80vh; }
+  100% {
+    height: 80vh; } }
+
+@-webkit-keyframes blink {
+  0% {
+    opacity: 1; }
+  75% {
+    opacity: 0; }
+  100% {
+    opacity: 1; } }
+
+@keyframes blink {
+  0% {
+    opacity: 1; }
+  75% {
+    opacity: 0; }
+  100% {
+    opacity: 1; } }
 
 .slide1 {
   position: relative;

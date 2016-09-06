@@ -14,6 +14,8 @@ function showLoading() {
 // Hide loading screen
 function hideLoading() {
 	$loadingSlide.addClass('hide');
+
+	// After animation, remove cover and let scrolling resume
 	window.setTimeout(function(){
 		$body.removeClass('fixed');
 		$loadingSlide.removeClass('show hide');
