@@ -117,7 +117,7 @@ function openPanel() {
   //   scrollTop: offset
   // }, 800);
 
-  TweenMax.to(window, 800, {scrollTo:'#meet'});
+  TweenMax.to(window, 0.7, {scrollTo:'#meet'});
 
   // -lock scroll
   $body.addClass('fixed');

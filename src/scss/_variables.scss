@@ -39,6 +39,8 @@ $curve3: cubic-bezier(.21,.05,.07,.99);
 
 //// MIXINS ////
 //-------------
+
+// Positioning ////
 @mixin transition($time: 0.5s) {
 	-webkit-transition: all $time;
 	transition: all $time;
@@ -65,19 +67,28 @@ $curve3: cubic-bezier(.21,.05,.07,.99);
   @include transform( translateY(-50%) );
 }
 
+// Formating ////
 @mixin linear-gradient($start, $end) {
   background: $start;
   background: -webkit-linear-gradient($start, $end);
   background: linear-gradient($start, $end);
 }
-
-// Filters
+// @mixin correctAnswer() {
+//   .fact-radio {
+//     border-color: $trimble-green;
+//     background-color: $trimble-green;
+//     box-shadow: 0 0 5px $trimble-green;
+//   }
+//   p {
+//     text-shadow: 0 0 3px $sketchup-gray;
+//   }
+// }
 @mixin filter($props) {
   -webkit-filter: $props;
   filter: $props;
 }
 
-// Animations
+// Animations ////
 @mixin keyframes($animationName) {
   @-webkit-keyframes #{$animationName} {
     @content;

@@ -47,29 +47,30 @@
 			height: 50px;
 			margin-bottom: 12px;
 			padding: 10px;
-			@include transition(0.8s);
-			@include transform( rotate(45deg) );
-			cursor: pointer;
+			@include closeIcon;
+			// @include transition(0.8s);
+			// @include transform( rotate(45deg) );
+			// cursor: pointer;
 
-			&:before,
-			&:after {
-				content: '';
-				display: inline-block;
-				@include centerMe();
-				background-color: $new-blue;
-			}
-			&:before {
-				width: 60%;
-				height: 3px;
-			}
-			&:after {
-				width: 3px;
-				height: 60%;
-			}
+			// &:before,
+			// &:after {
+			// 	content: '';
+			// 	display: inline-block;
+			// 	@include centerMe();
+			// 	background-color: $new-blue;
+			// }
+			// &:before {
+			// 	width: 60%;
+			// 	height: 3px;
+			// }
+			// &:after {
+			// 	width: 3px;
+			// 	height: 60%;
+			// }
 
-			&:hover {
-				// @include transform( rotate(90deg) );
-			}
+			// &:hover {
+			// 	// @include transform( rotate(90deg) );
+			// }
 		}
 
 		.content-cont {
@@ -120,9 +121,16 @@
 				}
 			}
 			.game-cont {
-				h4 {
+				.game-title {
 					display: inline-block;
 					margin-bottom: 20px;
+
+					&.red {
+						color: $new-red;
+					}
+					&.green {
+						color: $trimble-green;
+					}
 				}
 				.fact-item {
 					margin-bottom: 20px;
@@ -130,6 +138,7 @@
 					@include transition(0.3s);
 					
 					.fact-radio {
+						position: relative;
 						display: inline-block;
 						vertical-align: top;
 						width: 20px;
@@ -139,6 +148,15 @@
 						background-color: $sketchup-ltgray;
 						border-radius: 50%;
 						@include transition(0.5s);
+
+						.radio-icon {
+							position: relative;
+							opacity: 0;
+							display: inline-block;
+							@include centerMe();
+							width: 130%;
+							height: 130%;
+						}
 					}
 					p {
 						display: inline-block;
@@ -150,39 +168,106 @@
 					}
 
 					&.truth {
-						// .answer {
-						// 	color: $trimble-green;
-						// }
+						.fact-radio {
+							.radio-icon {
+								@include transform( translate(-35%, -90%) rotate(-45deg) );
+								height: 90%;
+								width: 150%;
+								border-left: 6px solid $trimble-green;
+								border-bottom: 6px solid $trimble-green;
+							}
+						}
 					}
 					&.lie {
-						// .answer {
-						// 	color: $sketchup-red;
-						// }
-					}
-				}
-				// Show answers
-				&.reveal {
-					.fact-item {
-						&.truth {
-							// @include transform( scale(0.95) );
+						.fact-radio {
+							.radio-icon {
+								@include closeIcon;
+								@include transform( translate(-50%, -50%) rotate(-45deg) );
+								cursor: auto;
 
-							.fact-radio {
-								border-color: $trimble-green;
-								background-color: $trimble-green;
-								box-shadow: 0 0 5px $trimble-green;
-							}
-							p {
-								text-shadow: 0 0 3px $sketchup-gray;
+								&:before,
+								&:after {
+									background-color: $new-red;
+								}
+								&:before {
+									width: 150%;
+									height: 5px;
+								}
+								&:after {
+									height: 150%;
+									width: 5px;
+								}
 							}
 						}
-						&.lie {
+					}
+
+					&.reveal {
+						cursor: auto;
+
+						.fact-radio {
+							border-color: $white;
+							// background-color: $trimble-green;
+							box-shadow: 0 0 10px $sketchup-gray;
+							background-color: $white;
+
+							.radio-icon {
+								opacity: 1;
+							}
+						}
+
+						&.truth {
+							// .fact-radio {
+							// 	border-color: $sketchup-medgray;
+							// 	// background-color: $trimble-green;
+							// 	box-shadow: 0 0 10px $sketchup-gray;
+							// }
+							p {
+								color: rgba(0,0,0, 0.8);
+								text-shadow: 0 0 2px $sketchup-gray;
+							}
+						}
+						// &.lie {
+						// 	.fact-radio {
+						// 		// border-color: $new-red;
+						// 		// background-color: $new-red;
+
+						// 		.radio-icon {
+						// 			opacity: 1;
+						// 		}
+						// 	}
+						// }
+
+						&:hover {
 							.fact-radio {
-								border-color: $new-red;
-								background-color: $new-red;
+								background-color: $white;
 							}
 						}
 					}
 				}
+				// Show all answers
+				// &.reveal {
+				// 	.fact-item {
+				// 		&.truth {
+				// 			// @include transform( scale(0.95) );
+
+				// 			.fact-radio {
+				// 				border-color: $trimble-green;
+				// 				background-color: $trimble-green;
+				// 				box-shadow: 0 0 5px $trimble-green;
+				// 			}
+				// 			p {
+				// 				color: rgba(0,0,0, 0.5);
+				// 				text-shadow: 0 0 3px $sketchup-gray;
+				// 			}
+				// 		}
+				// 		&.lie {
+				// 			.fact-radio {
+				// 				border-color: $new-red;
+				// 				background-color: $new-red;
+				// 			}
+				// 		}
+				// 	}
+				// }
 
 			} // end .game-cont
 
@@ -220,18 +305,18 @@
 						}
 					}
 					// Show answers
-					&.reveal {
-						.fact-item {
-							cursor: auto;
+					// &.reveal {
+					// 	.fact-item {
+					// 		cursor: auto;
 
-							&:hover {
-								// Reset so no hover state
-								p {
-									font-weight: 400;
-								}
-							}
-						}
-					}
+					// 		&:hover {
+					// 			// Reset so no hover state
+					// 			p {
+					// 				font-weight: 400;
+					// 			}
+					// 		}
+					// 	}
+					// }
 				}
 			}
 		} // end media()

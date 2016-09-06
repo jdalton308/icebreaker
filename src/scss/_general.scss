@@ -235,7 +235,7 @@ button,
 }
 .arrow-icon {
 	display: inline-block;
-		
+
 	&:before {
 		content: '';
 		display: inline-block;
@@ -246,6 +246,27 @@ button,
 		border-top: 3px solid $new-blue;
 		border-right: 3px solid $new-blue;
 		@include transition();
+	}
+}
+@mixin closeIcon() {
+	// @include transition(0.8s);
+	@include transform( rotate(45deg) );
+	cursor: pointer;
+
+	&:before,
+	&:after {
+		content: '';
+		display: inline-block;
+		@include centerMe();
+		background-color: $new-blue;
+	}
+	&:before {
+		width: 60%;
+		height: 3px;
+	}
+	&:after {
+		width: 3px;
+		height: 60%;
 	}
 }
 

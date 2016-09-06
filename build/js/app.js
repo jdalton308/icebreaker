@@ -12070,7 +12070,7 @@ function openPanel() {
   //   scrollTop: offset
   // }, 800);
 
-  TweenMax.to(window, 800, {scrollTo:'#meet'});
+  TweenMax.to(window, 0.7, {scrollTo:'#meet'});
 
   // -lock scroll
   $body.addClass('fixed');
@@ -13041,51 +13041,71 @@ var questionData = {
 // Elements
 //------------
 var $infoSlide = $('.info-slide');
-var $contentCont = $infoSlide.find('.content-cont');
-var $gameTrigger = $infoSlide.find('.truths');
-var $gameCont = $contentCont.find('.game-cont');
+var $gameCont = $infoSlide.find('.game-cont');
+var $gameTitle = $gameCont.find('.game-title');
 var $facts = $gameCont.find('.fact-item');
-var $closeBtn = $gameCont.find('.close-game-btn');
+
+
+// State variables
+//------------------
+var answered = 0;
+var originalText = $gameTitle.text();
+
 
 function bindEvents() {
-
-	// Start game
-	$gameTrigger.click(startGame);
-
 	// Reveal answers
 	$facts.click(function(){
-		$gameCont.addClass('reveal');
+		// $gameCont.addClass('reveal');
+		checkQuestion( $(this) );
 	});
-
-	// Back to bio
-	$closeBtn.click(endGame);
 }
-
-function startGame() {
-	// Show game-cont, hide description
-	$contentCont.addClass('question-mode');
-}
-
 function setQuestions() {
 	// For prototype, pick person at random...
 	// Create three elements, bind click event, and insert in random order
 }
-function endGame() {
-	console.log('ending game');
-	$contentCont.removeClass('question-mode');
-
-	window.setTimeout(function(){
-		$gameCont.removeClass('reveal');
-	}, 1000);
+function checkQuestion($fact) {
+	if ( $fact.hasClass('lie') ) {
+		// incorrect guess, so mark all answers
+		showAnswers($fact);
+		$gameTitle.text("Oops, that's the lie.").addClass('red');
+	} else {
+		// correct
+			// - check if first or second guess
+		if (!answered) {
+			$fact.addClass('reveal');
+			answered++;
+		} else {
+			// - if second, show all answers
+			showAnswers($fact);
+			$gameTitle.text("Nice! You got them both.").addClass('green');
+		}
+	}
 }
+function showAnswers($fact) {
+	return $facts.addClass('reveal');
+}
+function hideAnswers() {
+	return $facts.removeClass('reveal');
+}
+function endGame() {
+	// Reset state
+	answered = 0;
+
+	// - let transition occur, then reset formatting
+	window.setTimeout(function(){
+		hideAnswers();
+		$gameTitle.text(originalText).removeClass('red green');
+	}, 1000)
+}
+
 
 function initGame() {
-	// Bind events
-	bindEvents();
-
 	// Populate and mix-up the questions
 
+	// Bind events
+	bindEvents();
 }
+
 
 module.exports.init = initGame;
 module.exports.endGame = endGame;
