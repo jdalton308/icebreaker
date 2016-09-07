@@ -11984,7 +11984,7 @@ module.exports.init = init;
 module.exports.on = eventsOn;
 module.exports.off = eventsOff;
 },{"./two-truths.js":10,"./util.js":11,"jquery":1}],8:[function(require,module,exports){
-'use strict';
+// 'use strict';
 
 var $ = require('jquery');
 var LeaderData = require('./leaderboard-data.js');
@@ -12743,7 +12743,7 @@ function scrollAnimate() {
 	var sorter_tl = new TimelineMax();
 		sorter_tl.to(scalee_bgel, 1, {y:'60%', ease:Power0.easeNone}, 0);
 		sorter_tl.to($suLogo, 1, {y:'80px', ease:Power0.easeNone}, 0);
-		sorter_tl.to($trimLogo, 1, {y:'150px', ease:Power0.easeNone}, 0);
+		sorter_tl.to($trimLogo, 1, {y:'90px', ease:Power0.easeNone}, 0);
 		sorter_tl.to($sefLogo, 1, {y:'120px', ease:Power0.easeNone}, 0);
 
 	var scaleeScene = new ScrollMagic.Scene({

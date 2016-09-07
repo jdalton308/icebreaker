@@ -295,7 +295,7 @@ function scrollAnimate() {
 	var sorter_tl = new TimelineMax();
 		sorter_tl.to(scalee_bgel, 1, {y:'60%', ease:Power0.easeNone}, 0);
 		sorter_tl.to($suLogo, 1, {y:'80px', ease:Power0.easeNone}, 0);
-		sorter_tl.to($trimLogo, 1, {y:'150px', ease:Power0.easeNone}, 0);
+		sorter_tl.to($trimLogo, 1, {y:'90px', ease:Power0.easeNone}, 0);
 		sorter_tl.to($sefLogo, 1, {y:'120px', ease:Power0.easeNone}, 0);
 
 	var scaleeScene = new ScrollMagic.Scene({
