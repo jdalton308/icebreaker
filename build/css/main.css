@@ -1079,7 +1079,10 @@ footer {
         position: static;
         margin-bottom: 20px;
         color: #363545;
-        text-shadow: none; }
+        text-shadow: none;
+        -ms-transform: none;
+        -webkit-transform: none;
+        transform: none; }
       .slide1 .info-slide .content-cont .title-box .underline {
         opacity: 1;
         box-shadow: none; }
@@ -1219,10 +1222,6 @@ footer {
         max-height: none; }
         .slide1 .info-slide .content-cont .title-box {
           padding-right: 0; }
-          .slide1 .info-slide .content-cont .title-box h1 {
-            -ms-transform: none;
-            -webkit-transform: none;
-            transform: none; }
         .slide1 .info-slide .content-cont .description-cont .button-row .social-btn-cont {
           display: inline-block;
           float: right;

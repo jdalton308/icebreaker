@@ -84,6 +84,7 @@
 					margin-bottom: 20px;
 					color: $sketchup-gray;
 					text-shadow: none;
+					@include transform( none );
 				}
 				.underline {
 					opacity: 1;
@@ -296,10 +297,6 @@
 
 				.title-box {
 					padding-right: 0;
-
-					h1 {
-						@include transform( none );
-					}
 				}
 				.description-cont {
 					.button-row {
