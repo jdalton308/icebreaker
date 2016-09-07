@@ -85,6 +85,11 @@ p {
 	width: 100%;
 	max-width: 1170px;
 	margin: 0 auto;
+	padding: 0 20px;
+
+	@media (min-width: $mobile) {
+		padding: 0;
+	}
 }
 .slide {
 	position: relative;
@@ -188,9 +193,11 @@ button,
 		border-color: $sketchup-red;
 		color: $sketchup-red;
 
-		&:hover {
-			border-color: darken($sketchup-red, 10%);
-			color: darken($sketchup-red, 10%);
+		@media (min-width:$mobile) {
+			&:hover {
+				border-color: darken($sketchup-red, 10%);
+				color: darken($sketchup-red, 10%);
+			}
 		}
 	}
 	&.red-solid {
@@ -199,27 +206,36 @@ button,
 		background-color: $new-red;
 		color: $white;
 
-		&:hover {
-			background-color: darken($new-red, 5%);
+		@media (min-width: $mobile) {
+			&:hover {
+				background-color: darken($new-red, 5%);
+			}
 		}
 	}
 	&.grey-solid {
-		padding: 14px 30px 8px;
+		padding: 14px 20px 8px;
 		border: none;
 		background-color: $sketchup-gray;
 		color: $white;
 
-		&:hover {
-			background-color: darken($sketchup-gray, 5%);
+		@media (min-width:$mobile) {
+			padding: 14px 30px 8px;
+			
+			&:hover {
+				background-color: darken($sketchup-gray, 5%);
+			}
 		}
+
 	}
 	&.white {
 		border-color: $sketchup-ltgray;
 		color: $sketchup-ltgray;
 
-		&:hover {
-			border-color: $white;
-			color: $white;
+		@media (min-width: $mobile) {
+			&:hover {
+				border-color: $white;
+				color: $white;
+			}
 		}
 	}
 	&.blue {
@@ -228,8 +244,10 @@ button,
 		background-color: $new-blue;
 		color: $white;
 
-		&:hover {
-			background-color: darken($new-blue, 10%);
+		@media (min-width: $mobile) {
+			&:hover {
+				background-color: darken($new-blue, 10%);
+			}
 		}
 	}
 }
@@ -295,127 +313,131 @@ button,
 // Side scrollbar
 //------------------
 .progress-bar {
-	@include centerY();
-	position: fixed;
-	z-index: 5;
-	// left: 50px;
-	left: 0;
-	display: inline-block;
-	height: 70vh;
-	padding-left: 50px; // space for hover
+	display: none;
 
-	@at-root .scrolling & {
-		.progress-bar-track {
-			opacity: 1;
-			-webkit-transition-delay: 0s;
-			transition-delay: 0s;
-		}
-		.sections {
-			opacity: 1;
-			-webkit-transition-delay: 0s;
-			transition-delay: 0s;
+	@media (min-width: $mobile) {
+		@include centerY();
+		position: fixed;
+		z-index: 5;
+		// left: 50px;
+		left: 0;
+		display: inline-block;
+		height: 70vh;
+		padding-left: 50px; // space for hover
 
-			.progress-nav-item {
+		@at-root .scrolling & {
+			.progress-bar-track {
+				opacity: 1;
 				-webkit-transition-delay: 0s;
-				transition-delay: 0s;	
+				transition-delay: 0s;
+			}
+			.sections {
+				opacity: 1;
+				-webkit-transition-delay: 0s;
+				transition-delay: 0s;
+
+				.progress-nav-item {
+					-webkit-transition-delay: 0s;
+					transition-delay: 0s;	
+				}
 			}
 		}
-	}
 
-	.progress-bar-track {
-		opacity: 0; // shown during scroll & hover
-		position: relative;
-		height: 100%;
-		width: 10px;
-		background-color: $white;
-		border-radius: 10px;
-		box-shadow: 3px 1px 12px -2px $sketchup-gray;
-		overflow: hidden;
-		@include transition();
-		-webkit-transition-delay: 0.2s;
-		transition-delay: 0.2s;
+		.progress-bar-track {
+			opacity: 0; // shown during scroll & hover
+			position: relative;
+			height: 100%;
+			width: 10px;
+			background-color: $white;
+			border-radius: 10px;
+			box-shadow: 3px 1px 12px -2px $sketchup-gray;
+			overflow: hidden;
+			@include transition();
+			-webkit-transition-delay: 0.2s;
+			transition-delay: 0.2s;
 
-		.progress-bar-indicator {
+			.progress-bar-indicator {
+				position: absolute;
+				top: 0;
+				left: 0;
+				z-index: 0;
+				height: 10px;
+				width: 100%;
+				border-radius: 10px;
+				background-color: $gray-5;
+				box-shadow: 3px 2px 15px -1px $sketchup-gray;
+			}
+		}
+		.sections {
 			position: absolute;
 			top: 0;
-			left: 0;
-			z-index: 0;
-			height: 10px;
-			width: 100%;
-			border-radius: 10px;
-			background-color: $gray-5;
-			box-shadow: 3px 2px 15px -1px $sketchup-gray;
-		}
-	}
-	.sections {
-		position: absolute;
-		top: 0;
-		// left: 10px;
-		left: -150px;
-		height: 100%;
-		width: 140px;
-		// overflow: hidden;
-		@include transition();
-		opacity: 0;
-		-webkit-transition-delay: 0.3s;
-		transition-delay: 0.3s;		
-
-
-		.progress-nav-item {
-			position: absolute;
-			right: 20px;
-			opacity: 0.4;
-			
-			display: inline-block;
-			width: 100px;
-			padding: 8px 13px 5px;
-			text-align: center;
-			font-size: 1.5rem;
-			color: $white;
-			background-color: $new-blue;
-			cursor: pointer;
+			// left: 10px;
+			left: -150px;
+			height: 100%;
+			width: 140px;
+			// overflow: hidden;
 			@include transition();
+			opacity: 0;
 			-webkit-transition-delay: 0.3s;
-			transition-delay: 0.3s;	
-			box-shadow: 3px 2px 20px -3px $sketchup-gray;
+			transition-delay: 0.3s;		
 
-			&:hover {
-				box-shadow: 3px 4px 20px -1px $sketchup-gray;
-			}
-			&.active {
-				right: -190px;
-				opacity: 0.8;
-				background-color: $sketchup-gray;
-			}
-
-			&.meet {
-				top: 0;
-			}
-			&.hello {
-				top: 30%;
-			}
-			&.jobs {
-				top: 60%;
-			}
-		}
-	}
-
-	&:hover {
-		.progress-bar-track {
-			opacity: 1;
-		}
-		.sections {
-			left: 100%;
-			opacity: 1;
 
 			.progress-nav-item {
-				opacity: 1;
+				position: absolute;
 				right: 20px;
-				-webkit-transition-delay: 0s;
-				transition-delay: 0s;	
+				opacity: 0.4;
+				
+				display: inline-block;
+				width: 100px;
+				padding: 8px 13px 5px;
+				text-align: center;
+				font-size: 1.5rem;
+				color: $white;
+				background-color: $new-blue;
+				cursor: pointer;
+				@include transition();
+				-webkit-transition-delay: 0.3s;
+				transition-delay: 0.3s;	
+				box-shadow: 3px 2px 20px -3px $sketchup-gray;
 
+				&:hover {
+					box-shadow: 3px 4px 20px -1px $sketchup-gray;
+				}
 				&.active {
+					right: -190px;
+					opacity: 0.8;
+					background-color: $sketchup-gray;
+				}
+
+				&.meet {
+					top: 0;
+				}
+				&.hello {
+					top: 30%;
+				}
+				&.jobs {
+					top: 60%;
+				}
+			}
+		}
+
+		&:hover {
+			.progress-bar-track {
+				opacity: 1;
+			}
+			.sections {
+				left: 100%;
+				opacity: 1;
+
+				.progress-nav-item {
+					opacity: 1;
 					right: 20px;
+					-webkit-transition-delay: 0s;
+					transition-delay: 0s;	
+
+					&.active {
+						right: 20px;
+					}
 				}
 			}
 		}

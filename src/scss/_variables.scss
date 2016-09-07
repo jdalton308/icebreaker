@@ -41,10 +41,6 @@ $curve3: cubic-bezier(.21,.05,.07,.99);
 //-------------
 
 // Positioning ////
-@mixin transition($time: 0.5s) {
-	-webkit-transition: all $time;
-	transition: all $time;
-}
 @mixin transform($props) {
   -ms-transform: $props;
   -webkit-transform: $props;
@@ -68,6 +64,10 @@ $curve3: cubic-bezier(.21,.05,.07,.99);
 }
 
 // Formating ////
+@mixin transition($time: 0.5s) {
+  -webkit-transition: all $time;
+  transition: all $time;
+}
 @mixin linear-gradient($start, $end) {
   background: $start;
   background: -webkit-linear-gradient($start, $end);

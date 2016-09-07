@@ -12210,15 +12210,24 @@ function resetFilters() {
 function setPointer($el, showing) {
   var $parentWheel = $el.closest('.wheel-selector');
   var $wheelPointer = $el.siblings('.pointer');
-
-  var elHeight = $el.innerHeight();
   var elOffset = $el.position();
-  var wheelScroll = $parentWheel.scrollTop();
-  // var wheelHeight = $parentWheel.height();
 
-  var newTop = elOffset.top + (elHeight/2) + wheelScroll;
+  if (isMobile) {
+    var elWidth = $el.innerWidth();
+    var wheelScroll = $parentWheel.scrollLeft();
 
-  $wheelPointer.css('top', newTop).toggleClass('show', $el.hasClass('selected') );
+    var newLeft = elOffset.left + (elWidth/2) + wheelScroll;
+    $wheelPointer.css('left', newLeft);
+
+  } else {
+    var elHeight = $el.innerHeight();
+    var wheelScroll = $parentWheel.scrollTop();
+
+    var newTop = elOffset.top + (elHeight/2) + wheelScroll;
+    $wheelPointer.css('top', newTop);
+  }
+
+  $wheelPointer.toggleClass('show', $el.hasClass('selected') );
 }
 
 // Toggle logos in Background

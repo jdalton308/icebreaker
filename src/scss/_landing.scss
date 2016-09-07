@@ -24,35 +24,46 @@
 }
 .slide0 {
 	z-index: 20; // put in front of progress bar
-	height: 100vh;
+	min-height: 100vh;
 	min-height: 0;
-	padding: 0;
+	padding: 20vh 0;
 	background-color: $new-blue;
 	overflow: hidden;
 	// @include animation(landingSlide, 1.2s, $curve3, 2.6s);
 
-	&.bounce-up {
-		@include animation(bounceUp, 1.3s);
-
-		.scroll-indicator {
-			bottom: 20px;
-			@include animation(blink, 2s, $curve1, 0s, infinite);
-		}
-	}
-
 	.container {
-		@include centerMe();
 		text-align: right;
 	}
 	.scroll-indicator {
 		@include centerX();
-		bottom: -100px;
+		bottom: 20px;
 		padding: 20px;
 		font-size: 3em;
 		color: $white;
 		@include transition();
 		-webkit-transition-delay: 1.3s;
 		transition-delay: 1.3s;
+	}
+
+	@media (min-width: $mobile) {
+		height: 100vh;
+		padding: 0;
+
+		&.bounce-up {
+			@include animation(bounceUp, 1.3s);
+
+			.scroll-indicator {
+				bottom: 20px;
+				@include animation(blink, 2s, $curve1, 0s, infinite);
+			}
+		}
+
+		.container {
+			@include centerMe();
+		}
+		.scroll-indicator {
+			bottom: -100px;
+		}
 	}
 }
 
