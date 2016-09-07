@@ -28,33 +28,15 @@
 		}
 		.back-btn {
 			position: absolute;
-			top: 80px;
-			left: 10px;
-			font-size: 1.5rem;
-			padding: 10px 8px 10px 13px;
-			font-size: 0;
-			color: $sketchup-gray;
-			// background-color: transparent;
+			top: -50px;
+			right: 10px;
+			width: 100px;
+			height: 100px;
+			@include closeIcon();
 
-			&:before {
-				content: '';
-				display: inline-block;
-				width: 12px;
-				height: 12px;
-				// margin-right: 7px;
-				border-top: 2px solid $sketchup-gray;
-				border-left: 2px solid $sketchup-gray;
-				@include transform( rotate(-45deg) );
-				@include transition();
-			}
-
-			&:hover {
-				border-color: $black;
-				color: $black;
-
-				&:before {
-					@include transform( rotate(315deg) );
-				}
+			&:before,
+			&:after {
+				background-color: $sketchup-gray;
 			}
 		}
 		.position-boxes {
@@ -67,12 +49,9 @@
 			vertical-align: top;
 			min-width: 100px;
 			max-width: 150px;
-			padding: 0 0 20px;
+			// padding: 0 0 20px;
 			margin-right: 30px;
 
-			// background-color: $sketchup-medgray;
-			border: 5px solid $sketchup-medgray;
-			box-shadow: 1px 1px 15px -2px $sketchup-gray;
 			border-radius: 3px;
 			@include transition();
 
@@ -82,41 +61,45 @@
 
 			&.first {
 				// background-color: $error-yellow;
-				border-color: $gold;
-				box-shadow: 1px 1px 15px $gold;
+				// border-color: $gold;
+				// box-shadow: 1px 1px 15px $gold;
 
 				.box-title {
-					border-color: $gold;
+					// border-color: $gold;
 				}
 			}
 			&.second {
+				@include transform( scale(0.9) );
 				// background-color: $silver;
-				border-color: $silver;
-				box-shadow: 1px 1px 15px 1px $silver;
+				// border-color: $silver;
+				// box-shadow: 1px 1px 15px 1px $silver;
 
 				.box-title {
-					border-color: $silver;
+					// border-color: $silver;
 				}
 			}
 			&.third {
+				@include transform( scale(0.8) );
 				// background-color: $sketchup-red;
-				border-color: $bronze;
-				box-shadow: 1px 1px 15px -1px $bronze;
+				// border-color: $bronze;
+				// box-shadow: 1px 1px 15px -1px $bronze;
 
 				.box-title {
-					border-color: $bronze;
+					// border-color: $bronze;
 				}
 			}
 
 			.box-title {
 				width: 100%;
-				margin: 0 0 20px;
+				margin: 5px 0 0;
 				padding: 8px 12px;
 				text-align: center;
-				border-bottom: 5px solid $sketchup-medgray;
+				background-color: $sketchup-gray;
+				color: $white;
+				box-shadow: $box-shadow;			
 			}
 			img {
-				height: 25vh;
+				height: 35vh;
 				width: auto;
 				// max-width: 100%;
 				@include transition(0.3s);
@@ -129,31 +112,35 @@
 
 		@media (min-width: $mobile) {
 			background-color: transparent;
+			padding-top: 0;
 			
 			.leaderboard-title {
 				padding: 0;
+
+				h1 {
+					margin-bottom: 50px;
+				}
 			}
 			.position-boxes {
-				padding: 0;
+				padding: 0 0 10px;
 			}
 			.position-box {
 				min-width: 12%;
 				max-width: 18%;
-				padding: 0 0 30px;
+				// padding: 0 0 30px;
 				margin-right: 50px;
 
-				.box-title {
-					margin: 0 0 30px;
+				// .box-title {
+				// 	margin: 30px 0 0;
+				// }
+				img {
+					height: 40vh;
 				}
 			}
 			.back-btn {
-				top: 0;
-				left: 30px;
-				font-size: 1.8rem;
-				padding: 8px 16px 6px;
+				right: 30px;
 
-				&:before {
-					margin-right: 7px;
+				&:hover {
 				}
 			}
 		}
@@ -178,14 +165,14 @@
 			&.show {
 				top: 0;
 			}
-			.leaderboard-buttons {
-				white-space: nowrap;
-				overflow-x: auto;
-			}
 			.leader-title {
 				width: 100%;
 				text-align: center;
 				color: $white;
+			}
+			.leaderboard-buttons {
+				white-space: nowrap;
+				overflow-x: auto;
 			}
 			button {
 				margin: 0 10px 10px 0;
@@ -194,6 +181,10 @@
 
 				&:last-child {
 					margin: 0;
+				}
+				&.active {
+					background-color: $white;
+					color: $sketchup-gray;
 				}
 			}
 		}
@@ -229,6 +220,9 @@
 			visibility: visible;
 			bottom: -2px;
 		}
+		> .logo {
+			opacity: 0;
+		}
 		.control-panel {
 			bottom: -150px;
 			background-color: $sketchup-medgray;
@@ -241,10 +235,21 @@
 			opacity: 0;
 			visibility: hidden;
 		}
+		.scalee-background {
+			opacity: 0;
+		}
+		.scalee-scroll {
+			&.prev {
+				left: -100px;
+			}
+			&.next {
+				right: -100px;
+			}
+		}
 
 		@media (min-width: $mobile) {
 			.leader-cont {
-				top: 100px;
+				top: 50px;
 			}
 			.leaderboard-control-panel {
 				visibility: visible;

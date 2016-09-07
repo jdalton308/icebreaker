@@ -12218,11 +12218,6 @@ function setPointer($el, showing) {
 
   var newTop = elOffset.top + (elHeight/2) + wheelScroll;
 
-  console.log('wheel scroll:');
-  console.log(wheelScroll);
-
-  console.log('newTop: '+ newTop);
-
   $wheelPointer.css('top', newTop).toggleClass('show', $el.hasClass('selected') );
 }
 
@@ -12238,7 +12233,6 @@ function showLogo($el) {
   var team = $el.attr('data-logo');
 
   if (team) {
-    console.log('team: '+ team);
     logos[team].removeClass('hide');
   }
 }
@@ -12248,6 +12242,10 @@ function showLogo($el) {
 // Enter 'Leaderboard Mode'
 //--------------------------
 function showLeaderboard() {
+
+  // - trigger click on first btn
+  var $btn = $leaderBtnCont.children('.leader');
+  $btn.eq(0).trigger('click');
 
   // - trigger most changes through CSS
   $slide1.addClass('leader-mode');
@@ -12259,8 +12257,10 @@ function showLeaderboard() {
 
   // - reset filters and close sorting panel
   resetFilters();
-
   closePanel();
+
+  // - lock scroll
+  $body.addClass('fixed');
 }
 
 // Exit 'Leaderboard Mode'
@@ -12269,6 +12269,7 @@ function hideLeaderboard() {
   // Undo everything above
   $slide1.removeClass('leader-mode');
   $leaderboardControls.removeClass('show');
+  $body.removeClass('fixed');
 }
 
 // Initialize leaderboard: Make buttons, bind events
@@ -12290,7 +12291,7 @@ function initLeaderboard() {
 
       // Bind click event to show leaderboard
       $newBtn.click(function(){
-        switchLeaderboard( eventId );
+        switchLeaderboard( eventId, $(this) );
       });
     };
 
@@ -12301,7 +12302,7 @@ function initLeaderboard() {
 
 // Switch between rankings
 //----------------------------
-function switchLeaderboard(eventName) {
+function switchLeaderboard(eventName, $btn) {
   // Switch src attribute to those of the top 5 poeple's scalee
 
   var eventObj = LeaderData[eventName];
@@ -12334,6 +12335,9 @@ function switchLeaderboard(eventName) {
 
   // Finally, switch title
   switchLeaderTitle(eventObj.name);
+
+  // Show active state on btn
+  $btn.addClass('active').siblings('.active').removeClass('active');
 }
 
 function switchLeaderTitle(newTitle) {
