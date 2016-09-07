@@ -874,7 +874,8 @@ footer {
           .slide1 .control-panel .selectors .selector {
             flex: 1 0 auto;
             width: auto;
-            margin: 0; }
+            margin: 0;
+            overflow: hidden; }
             .slide1 .control-panel .selectors .selector .wheel-shadow-holder {
               overflow-x: hidden; }
               .slide1 .control-panel .selectors .selector .wheel-shadow-holder .shadow-frame {
@@ -963,7 +964,7 @@ footer {
     -webkit-transform: rotate(315deg);
     transform: rotate(315deg); }
   .slide1.edit-mode .selectors {
-    max-height: 100vh;
+    max-height: 400px;
     overflow-y: auto;
     padding-top: 20px;
     padding-bottom: 20px; }
@@ -976,7 +977,7 @@ footer {
       -webkit-transform: rotate(135deg) translateY(6px) translateX(-2px);
       transform: rotate(135deg) translateY(6px) translateX(-2px); }
     .slide1.edit-mode .selectors {
-      max-height: none;
+      max-height: 250px;
       overflow-y: visible;
       padding: 0; }
       .slide1.edit-mode .selectors .selector .wheel-selector {
@@ -1177,7 +1178,8 @@ footer {
           height: 150%;
           width: 5px; }
       .slide1 .info-slide .content-cont .game-cont .fact-item.reveal {
-        cursor: auto; }
+        cursor: auto;
+        pointer-events: none; }
         .slide1 .info-slide .content-cont .game-cont .fact-item.reveal .fact-radio {
           border-color: #ffffff;
           box-shadow: 0 0 10px #363545;
@@ -1210,9 +1212,14 @@ footer {
         max-height: none; }
         .slide1 .info-slide .content-cont .title-box {
           padding-right: 0; }
+          .slide1 .info-slide .content-cont .title-box h1 {
+            -ms-transform: none;
+            -webkit-transform: none;
+            transform: none; }
         .slide1 .info-slide .content-cont .description-cont .button-row .social-btn-cont {
           display: inline-block;
           float: right;
+          margin: 0;
           text-align: right; }
         .slide1 .info-slide .content-cont .description-cont .button-row .social-icon {
           margin: 0 0 0 3px; }

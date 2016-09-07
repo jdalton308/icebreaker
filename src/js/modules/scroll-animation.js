@@ -293,10 +293,10 @@ function scrollAnimate() {
 	// Adjust background height and show buttons with 'active' class
 	//---------------------------------------
 	var sorter_tl = new TimelineMax();
-		sorter_tl.to(scalee_bgel, 1, {height:'40%', ease:Power0.easeNone}, 0);
-		sorter_tl.to($suLogo, 1, {y:'80px'}, 0);
-		sorter_tl.to($trimLogo, 1, {y:'150px'}, 0);
-		sorter_tl.to($sefLogo, 1, {y:'120px'}, 0);
+		sorter_tl.to(scalee_bgel, 1, {y:'60%', ease:Power0.easeNone}, 0);
+		sorter_tl.to($suLogo, 1, {y:'80px', ease:Power0.easeNone}, 0);
+		sorter_tl.to($trimLogo, 1, {y:'150px', ease:Power0.easeNone}, 0);
+		sorter_tl.to($sefLogo, 1, {y:'120px', ease:Power0.easeNone}, 0);
 
 	var scaleeScene = new ScrollMagic.Scene({
 			triggerElement: sorterSlide,
@@ -325,27 +325,27 @@ function scrollAnimate() {
 		var landingPolyScene = new ScrollMagic.Scene({
 				triggerElement: landingSlide,
 				triggerHook: 'onLeave',
-				duration: '120%',
-				offset: 10
+				duration: '100%',
+				offset: 1
 			})
 			.setTween(smallPolyTween)
-			.addTo(controller);
-			// .on('start', function(e){
+			.addTo(controller)
+			.on('start', function(e){
 
-			// 	// if going down...
-			// 	if (e.scrollDirection == 'FORWARD') {
+				// if going down...
+				if (e.scrollDirection == 'FORWARD') {
 
-			// 		$body.addClass('fixed');
-			// 		// var newOffset = scrollRef['#meet'].pxOffset;
+					$body.addClass('fixed');
+					// var newOffset = scrollRef['#meet'].pxOffset;
 
-			// 		// - jump down to position
-			// 		TweenMax.to(window, 0.5, {scrollTo:'#meet'});
+					// - jump down to position
+					TweenMax.to(window, 1.5, {scrollTo:'#meet', ease:Power2.easeInOut});
 
-			// 		window.setTimeout(function(){
-			// 			$body.removeClass('fixed');
-			// 		}, 2200);
-			// 	}
-			// });
+					window.setTimeout(function(){
+						$body.removeClass('fixed');
+					}, 1500);
+				}
+			});
 	})();
 
 

@@ -10,22 +10,22 @@ var ScaleeSorter = require('./scalee-sorter.js');
 
 // Fake Data
 //-------------
-var questionData = {
-	"person1": {
-		"truths": [
-			"I have flown acrobatic maneuvers in a small aircraft.",
-			"My uncle Vincent created the font Comic Sans by tracing my handwriting from a Christmas card."
-		],
-		"lie": "I ranked first in an Air Training Corps rifle competition. The same week, I topped the world leaderboard for an online F.P.S."
-	},
-	"person2": {
-		"truths": [
-			"I won a medal in the summer X-Games.",
-			"For my 18th birthday, my grandpa bought me a trip to see every continent."
-		],
-		"lie": "My first car was a 2007 Ferrari."
-	}
-}
+// var questionData = {
+// 	"person1": {
+// 		"truths": [
+// 			"I have flown acrobatic maneuvers in a small aircraft.",
+// 			"My uncle Vincent created the font Comic Sans by tracing my handwriting from a Christmas card."
+// 		],
+// 		"lie": "I ranked first in an Air Training Corps rifle competition. The same week, I topped the world leaderboard for an online F.P.S."
+// 	},
+// 	"person2": {
+// 		"truths": [
+// 			"I won a medal in the summer X-Games.",
+// 			"For my 18th birthday, my grandpa bought me a trip to see every continent."
+// 		],
+// 		"lie": "My first car was a 2007 Ferrari."
+// 	}
+// }
 
 
 // Elements
@@ -44,16 +44,15 @@ var originalText = $gameTitle.text();
 
 function bindEvents() {
 	// Reveal answers
-	$facts.click(function(){
-		// $gameCont.addClass('reveal');
-		checkQuestion( $(this) );
-	});
+	$facts.click(checkQuestion);
 }
 function setQuestions() {
 	// For prototype, pick person at random...
 	// Create three elements, bind click event, and insert in random order
 }
-function checkQuestion($fact) {
+function checkQuestion() {
+	var $fact = $(this);
+
 	if ( $fact.hasClass('lie') ) {
 		// incorrect guess, so mark all answers
 		showAnswers($fact);

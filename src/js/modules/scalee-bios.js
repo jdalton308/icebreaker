@@ -175,13 +175,11 @@ function closeBio(){
 
   } else {
     // - move newScalee to original position
-    // $newScalee.animate({
-    //   left: initialPos.left,
-    //   top: initialPos.top,
-    //   height: initialHeight
-    // }, 400).addClass('fly-away');
-
-    TweenMax.to($newScalee, 0.4, {left:initialPos.left, top:initialPos.top, height:initialHeight} );
+    TweenMax.to($newScalee, 0.4, {
+        left:initialPos.left,
+        top:initialPos.top,
+        height:initialHeight
+      } );
     $newScalee.addClass('fly-away');
 
     // - remove scalee and reset view

@@ -196,6 +196,7 @@
 
 					&.reveal {
 						cursor: auto;
+						pointer-events: none;
 
 						.fact-radio {
 							border-color: $white;
@@ -295,12 +296,17 @@
 
 				.title-box {
 					padding-right: 0;
+
+					h1 {
+						@include transform( none );
+					}
 				}
 				.description-cont {
 					.button-row {
 						.social-btn-cont {
 							display: inline-block;
 							float: right;
+							margin: 0;
 							text-align: right;
 						}
 						.social-icon {

@@ -11933,13 +11933,11 @@ function closeBio(){
 
   } else {
     // - move newScalee to original position
-    // $newScalee.animate({
-    //   left: initialPos.left,
-    //   top: initialPos.top,
-    //   height: initialHeight
-    // }, 400).addClass('fly-away');
-
-    TweenMax.to($newScalee, 0.4, {left:initialPos.left, top:initialPos.top, height:initialHeight} );
+    TweenMax.to($newScalee, 0.4, {
+        left:initialPos.left,
+        top:initialPos.top,
+        height:initialHeight
+      } );
     $newScalee.addClass('fly-away');
 
     // - remove scalee and reset view
@@ -12743,10 +12741,10 @@ function scrollAnimate() {
 	// Adjust background height and show buttons with 'active' class
 	//---------------------------------------
 	var sorter_tl = new TimelineMax();
-		sorter_tl.to(scalee_bgel, 1, {height:'40%', ease:Power0.easeNone}, 0);
-		sorter_tl.to($suLogo, 1, {y:'80px'}, 0);
-		sorter_tl.to($trimLogo, 1, {y:'150px'}, 0);
-		sorter_tl.to($sefLogo, 1, {y:'120px'}, 0);
+		sorter_tl.to(scalee_bgel, 1, {y:'60%', ease:Power0.easeNone}, 0);
+		sorter_tl.to($suLogo, 1, {y:'80px', ease:Power0.easeNone}, 0);
+		sorter_tl.to($trimLogo, 1, {y:'150px', ease:Power0.easeNone}, 0);
+		sorter_tl.to($sefLogo, 1, {y:'120px', ease:Power0.easeNone}, 0);
 
 	var scaleeScene = new ScrollMagic.Scene({
 			triggerElement: sorterSlide,
@@ -12775,27 +12773,27 @@ function scrollAnimate() {
 		var landingPolyScene = new ScrollMagic.Scene({
 				triggerElement: landingSlide,
 				triggerHook: 'onLeave',
-				duration: '120%',
-				offset: 10
+				duration: '100%',
+				offset: 1
 			})
 			.setTween(smallPolyTween)
-			.addTo(controller);
-			// .on('start', function(e){
+			.addTo(controller)
+			.on('start', function(e){
 
-			// 	// if going down...
-			// 	if (e.scrollDirection == 'FORWARD') {
+				// if going down...
+				if (e.scrollDirection == 'FORWARD') {
 
-			// 		$body.addClass('fixed');
-			// 		// var newOffset = scrollRef['#meet'].pxOffset;
+					$body.addClass('fixed');
+					// var newOffset = scrollRef['#meet'].pxOffset;
 
-			// 		// - jump down to position
-			// 		TweenMax.to(window, 0.5, {scrollTo:'#meet'});
+					// - jump down to position
+					TweenMax.to(window, 1.5, {scrollTo:'#meet', ease:Power2.easeInOut});
 
-			// 		window.setTimeout(function(){
-			// 			$body.removeClass('fixed');
-			// 		}, 2200);
-			// 	}
-			// });
+					window.setTimeout(function(){
+						$body.removeClass('fixed');
+					}, 1500);
+				}
+			});
 	})();
 
 
@@ -13091,22 +13089,22 @@ var ScaleeSorter = require('./scalee-sorter.js');
 
 // Fake Data
 //-------------
-var questionData = {
-	"person1": {
-		"truths": [
-			"I have flown acrobatic maneuvers in a small aircraft.",
-			"My uncle Vincent created the font Comic Sans by tracing my handwriting from a Christmas card."
-		],
-		"lie": "I ranked first in an Air Training Corps rifle competition. The same week, I topped the world leaderboard for an online F.P.S."
-	},
-	"person2": {
-		"truths": [
-			"I won a medal in the summer X-Games.",
-			"For my 18th birthday, my grandpa bought me a trip to see every continent."
-		],
-		"lie": "My first car was a 2007 Ferrari."
-	}
-}
+// var questionData = {
+// 	"person1": {
+// 		"truths": [
+// 			"I have flown acrobatic maneuvers in a small aircraft.",
+// 			"My uncle Vincent created the font Comic Sans by tracing my handwriting from a Christmas card."
+// 		],
+// 		"lie": "I ranked first in an Air Training Corps rifle competition. The same week, I topped the world leaderboard for an online F.P.S."
+// 	},
+// 	"person2": {
+// 		"truths": [
+// 			"I won a medal in the summer X-Games.",
+// 			"For my 18th birthday, my grandpa bought me a trip to see every continent."
+// 		],
+// 		"lie": "My first car was a 2007 Ferrari."
+// 	}
+// }
 
 
 // Elements
@@ -13125,16 +13123,15 @@ var originalText = $gameTitle.text();
 
 function bindEvents() {
 	// Reveal answers
-	$facts.click(function(){
-		// $gameCont.addClass('reveal');
-		checkQuestion( $(this) );
-	});
+	$facts.click(checkQuestion);
 }
 function setQuestions() {
 	// For prototype, pick person at random...
 	// Create three elements, bind click event, and insert in random order
 }
-function checkQuestion($fact) {
+function checkQuestion() {
+	var $fact = $(this);
+
 	if ( $fact.hasClass('lie') ) {
 		// incorrect guess, so mark all answers
 		showAnswers($fact);

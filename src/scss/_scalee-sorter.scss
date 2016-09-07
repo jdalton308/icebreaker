@@ -336,6 +336,7 @@
 					flex: 1 0 auto;
 					width: auto;
 					margin: 0;
+					overflow: hidden;
 
 					.wheel-shadow-holder {
 						overflow-x: hidden;
@@ -486,7 +487,7 @@
 			}
 		}
 		.selectors {
-			max-height: 100vh;
+			max-height: 400px;
 			overflow-y: auto;
 			padding-top: 20px;
 			padding-bottom: 20px;
@@ -505,7 +506,7 @@
 				}
 			}
 			.selectors {
-				max-height: none;
+				max-height: 250px;
 				overflow-y: visible;
 				padding: 0;
 
