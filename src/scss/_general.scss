@@ -311,17 +311,14 @@ button,
 			transition-delay: 0s;
 		}
 		.sections {
-			left: 100%;
+			opacity: 1;
 			-webkit-transition-delay: 0s;
 			transition-delay: 0s;
 
-			// .progress-nav-item {
-			// 	opacity: 0.4;
-
-			// 	&.active {
-			// 		opacity: 0.8;
-			// 	}
-			// }
+			.progress-nav-item {
+				-webkit-transition-delay: 0s;
+				transition-delay: 0s;	
+			}
 		}
 	}
 
@@ -357,8 +354,9 @@ button,
 		left: -150px;
 		height: 100%;
 		width: 140px;
-		overflow: hidden;
+		// overflow: hidden;
 		@include transition();
+		opacity: 0;
 		-webkit-transition-delay: 0.3s;
 		transition-delay: 0.3s;		
 
@@ -377,12 +375,15 @@ button,
 			background-color: $new-blue;
 			cursor: pointer;
 			@include transition();
+			-webkit-transition-delay: 0.3s;
+			transition-delay: 0.3s;	
 			box-shadow: 3px 2px 20px -3px $sketchup-gray;
 
 			&:hover {
 				box-shadow: 3px 4px 20px -1px $sketchup-gray;
 			}
 			&.active {
+				right: -190px;
 				opacity: 0.8;
 				background-color: $sketchup-gray;
 			}
@@ -410,8 +411,11 @@ button,
 			.progress-nav-item {
 				opacity: 1;
 				right: 20px;
+				-webkit-transition-delay: 0s;
+				transition-delay: 0s;	
 
 				&.active {
+					right: 20px;
 				}
 			}
 		}
@@ -524,84 +528,5 @@ footer {
 	100% {
 		opacity: 1;
 		height: 100%;
-	}
-}
-
-@include keyframes(logoFlying) {
-	0% {
-		top: 10%;
-		left: 10%;
-	}
-	20% {
-		top: 15%;
-		left: 12%;
-	}
-	40% {
-		top: 13%;
-		left: 14%;
-	}
-	60% {
-		top: 17%;
-		left: 15%;
-	}
-	80% {
-		top: 20%;
-		left: 18%;
-	}
-	100% {
-		top: 18%;
-		left: 20%;
-	}
-}
-@include keyframes(logoFlying-two) {
-	0% {
-		top: 16%;
-		left: 80%;
-	}
-	20% {
-		top: 13%;
-		left: 75%;
-	}
-	40% {
-		top: 9%;
-		left: 73%;
-	}
-	60% {
-		top: 12%;
-		left: 71%;
-	}
-	80% {
-		top: 16%;
-		left: 74%;
-	}
-	100% {
-		top: 20%;
-		left: 77%;
-	}
-}
-@include keyframes(logoFlying-three) {
-	0% {
-		top: 3%;
-		left: 26%;
-	}
-	20% {
-		top: 6%;
-		left: 29%;
-	}
-	40% {
-		top: 10%;
-		left: 31%;
-	}
-	60% {
-		top: 12%;
-		left: 25%;
-	}
-	80% {
-		top: 10%;
-		left: 22%;
-	}
-	100% {
-		top: 15%;
-		left: 18%;
 	}
 }

@@ -147,6 +147,7 @@
 		height: 40px;
 		width: auto;
 		@include transition(1s);
+		opacity: 0.7;
 
 		&.su-logo {
 			left: 50%;
