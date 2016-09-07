@@ -10,6 +10,7 @@
 		right: 80%;
 		top: -200px;
 		@include transform( rotate(40deg) scale(0.7));
+		cursor: pointer;
 	}
 	#hello-large-poly {
 		position: absolute;
@@ -33,7 +34,8 @@
 			display: inline-block;
 			position: absolute;
 			z-index: 2;
-			top: 70%; // animated
+			top: 50%;
+			@include transform( translateY(40px) );
 			right: -15px;
 			height: 60px;
 			width: 60px;
@@ -106,8 +108,8 @@
 			}
 
 			.icon {
-				-webkit-transition: box-shadow 0.4s, transform 0.8s;
-				transition: box-shadow 0.4s, transform 0.8s;
+				-webkit-transition: box-shadow 0.4s; //, transform 0.8s;
+				transition: box-shadow 0.4s; //, transform 0.8s;
 			}
 
 			&:hover {

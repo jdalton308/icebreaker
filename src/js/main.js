@@ -7,6 +7,8 @@ var TwoTruths = require('./modules/two-truths.js');
 var ScrollAnimate = require('./modules/scroll-animation.js');
 var Loading = require('./modules/loading.js');
 var Landing = require('./modules/landing.js');
+var EasterEggs = require('./modules/easter-eggs.js');
+
 
 // Show loading slide until pageload event
 Loading.show();
@@ -19,6 +21,7 @@ $(window).on('load', function(){
 	ScaleeBios.init();
 	TwoTruths.init();
 	ScaleeSorter.center();
+	EasterEggs();
 
 	window.setTimeout(function(){
 		Loading.hide();

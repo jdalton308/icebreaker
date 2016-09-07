@@ -148,7 +148,7 @@ function scrollAnimate() {
 		setBtnPos($helloBtn, '#hello');
 		setBtnPos($jobsBtn, '#jobs');
 
-		// - trigger class changes when in each section.
+		// - trigger class changes when in each section, and adjust marker height
 		//-----------------------
 		new ScrollMagic.Scene({
 				triggerElement: sorterSlide,
@@ -174,19 +174,20 @@ function scrollAnimate() {
 			})
 			.on('enter', function(e){
 				setMarkerOffset('#hello');
-			})
-			.on('start', function(e){
-
-				if (e.scrollDirection == 'FORWARD') {
-					// - jump down to position
-					TweenMax.to(window, 0.5, {scrollTo:'#hello'});
-
-					// taperScrolling();
-
-					// - also reset the scalee sorter
-					ScaleeSorter.reset();
-				}
+				ScaleeSorter.reset();
 			});
+			// .on('start', function(e){
+
+			// 	if (e.scrollDirection == 'FORWARD') {
+			// 		// - jump down to position
+			// 		TweenMax.to(window, 0.5, {scrollTo:'#hello'});
+
+			// 		// taperScrolling();
+
+			// 		// - also reset the scalee sorter
+			// 		ScaleeSorter.reset();
+			// 	}
+			// });
 
 		new ScrollMagic.Scene({
 				triggerElement: $jobsSlide.get(0),
@@ -199,16 +200,16 @@ function scrollAnimate() {
 			})
 			.on('enter', function(e){
 				setMarkerOffset('#jobs');
-			})
-			.on('start', function(e){
-
-				if (e.scrollDirection == 'FORWARD') {
-					// jump down to position
-					TweenMax.to(window, 0.5, {scrollTo:'#jobs'});
-					// taperScrolling();
-				}
-
 			});
+			// .on('start', function(e){
+
+			// 	if (e.scrollDirection == 'FORWARD') {
+			// 		// jump down to position
+			// 		TweenMax.to(window, 0.5, {scrollTo:'#jobs'});
+			// 		// taperScrolling();
+			// 	}
+
+			// });
 
 
 
@@ -292,10 +293,10 @@ function scrollAnimate() {
 	// Adjust background height and show buttons with 'active' class
 	//---------------------------------------
 	var sorter_tl = new TimelineMax();
-		sorter_tl.to(scalee_bgel, 1, {height:'40%'}, 0);
-		sorter_tl.to($suLogo, 1, {top:'80px'}, 0);
-		sorter_tl.to($trimLogo, 1, {top:'150px'}, 0);
-		sorter_tl.to($sefLogo, 1, {top:'120px'}, 0);
+		sorter_tl.to(scalee_bgel, 1, {height:'40%', ease:Power0.easeNone}, 0);
+		sorter_tl.to($suLogo, 1, {y:'80px'}, 0);
+		sorter_tl.to($trimLogo, 1, {y:'150px'}, 0);
+		sorter_tl.to($sefLogo, 1, {y:'120px'}, 0);
 
 	var scaleeScene = new ScrollMagic.Scene({
 			triggerElement: sorterSlide,
@@ -314,7 +315,12 @@ function scrollAnimate() {
 	(function(){
 		var landingPoly = document.getElementById('landing-poly');
 
-		var smallPolyTween = TweenMax.to(landingPoly, 1, {right:'75%', top:'-500px', scale:0.7, rotation:'50deg'});
+		var smallPolyTween = TweenMax.to(landingPoly, 1, {
+				y: '-250px', 
+				x: '-250px',
+				scale:0.7, 
+				rotation:'50deg'
+			});
 
 		var landingPolyScene = new ScrollMagic.Scene({
 				triggerElement: landingSlide,
@@ -323,23 +329,23 @@ function scrollAnimate() {
 				offset: 10
 			})
 			.setTween(smallPolyTween)
-			.addTo(controller)
-			.on('start', function(e){
+			.addTo(controller);
+			// .on('start', function(e){
 
-				// if going down...
-				if (e.scrollDirection == 'FORWARD') {
+			// 	// if going down...
+			// 	if (e.scrollDirection == 'FORWARD') {
 
-					$body.addClass('fixed');
-					// var newOffset = scrollRef['#meet'].pxOffset;
+			// 		$body.addClass('fixed');
+			// 		// var newOffset = scrollRef['#meet'].pxOffset;
 
-					// - jump down to position
-					TweenMax.to(window, 1.5, {scrollTo:'#meet'});
+			// 		// - jump down to position
+			// 		TweenMax.to(window, 0.5, {scrollTo:'#meet'});
 
-					window.setTimeout(function(){
-						$body.removeClass('fixed');
-					}, 2200);
-				}
-			});
+			// 		window.setTimeout(function(){
+			// 			$body.removeClass('fixed');
+			// 		}, 2200);
+			// 	}
+			// });
 	})();
 
 
@@ -361,14 +367,14 @@ function scrollAnimate() {
 		var helloPoly_tl = new TimelineMax();
 			// - outward animation
 			helloPoly_tl.to(helloSmallPoly, 1, {
-					right:'86%', 
-					top:'400px',
+					y: '400px',
+					x: '-150px',
 					rotation:'54deg',
 					ease: Power0.easeNone
 				}, 0);
 			helloPoly_tl.to(helloLargePoly, 1, {
-					top:'0px', 
-					right:'72%', 
+					y: '900px',
+					x: '-40px',
 					rotation:'6deg', 
 					ease: Power0.easeNone
 				}, 0);
@@ -376,17 +382,17 @@ function scrollAnimate() {
 
 		var jobsPoly_tl = new TimelineMax();
 			// - outward animation
-			jobsPoly_tl.to(jobsSmallPoly, 1, {
-					left:'70%', 
-					top:'60%',
-					rotation:'-5deg',
+			jobsPoly_tl.to(jobsSmallPoly, 1, { 
+					y: '1000px',
+					x: '-120px',
+					rotation:'195deg',
 					scale: 0.6,
 					ease: Power0.easeNone
 				}, 0);
 			jobsPoly_tl.to(jobsLargePoly, 1, {
-					top:'1000px', 
-					left:'53%', 
-					rotation:'-45deg', 
+					y: '1500px',
+					x: '-40px',
+					rotation:'15deg', 
 					ease: Power0.easeNone
 				}, 0);
 
@@ -416,23 +422,23 @@ function scrollAnimate() {
 	//-----------------------
 	// - title number: position and box-shadow
 	var titleNumMid = {
-		top: 0,
+		y: 0,
 		boxShadow: '4px 4px 14px -1px #363545'
 	};
 	var titleNumPast = {
-		top: '-30px',
+		y: '-30px',
 		boxShadow: '4px -22px 14px -1px #363545'
 	}
 	// - text blur/focus objects
 	var textFocusObj = {
 		color: 'rgba(54, 53, 69, 1)',
 		textShadow: '0px 0px 0px rgba(0,0,0,0)',
-		top: 0
+		y: 0
 	};
 	var textBlurObj = {
 		color: 'rgba(54, 53, 69, 0)',
 		textShadow: '0 0 15px rgba(54, 53, 69, 1)',
-		top: '50px'
+		y: '50px'
 	}
 	// - box shadow for underline
 	var lineShadowMid = {
@@ -444,7 +450,7 @@ function scrollAnimate() {
 
 	// Constructor function
 	function newTitleBoxScene($titleBox) {
-		// Summary:
+		// Summartop:
 		// - Blur in the text
 		// - Move text in parallax-type way, with the underline being the reference
 		// - Number is most forward, and moves slowest, then text, then underline
@@ -527,15 +533,13 @@ function scrollAnimate() {
 		// - timeline
 		var hello_tl = new TimelineMax();
 			// - inward animations
-			hello_tl.to(icon_el, step1_dur, {top:'50%'}, 0);
+			hello_tl.to(icon_el, step1_dur, {y:'0px'}, 0);
 			hello_tl.to(h5_el, step1_dur, whiteTextFocus, 0);
 			hello_tl.to(p_el, step1_dur, whiteTextFocus, 0);
-			// hello_tl.to(poly1_line1, step1_dur, {attr:{points: '1400 891.5 1433 784.5 1592 821'}});
 			// - outward animations
-			hello_tl.to(icon_el, step2_dur, {top:'30%'}, step1_dur);
+			hello_tl.to(icon_el, step2_dur, {y:'-40px'}, step1_dur);
 			hello_tl.to(h5_el, step2_dur, whiteTextBlur, step1_dur);
 			hello_tl.to(p_el, step2_dur, whiteTextBlur, step1_dur);
-			// hello_tl.to(poly1_line1, step2_dur, {attr:{points: '1433 886.5 1433 784.5 1592 821'}});
 
 		// - create scene
 		var boxScene = new ScrollMagic.Scene({
@@ -589,7 +593,7 @@ function scrollAnimate() {
 					color:'#FFF', 
 					boxShadow:'0 0 20px 10px rgba(73,143,225, 0)', 
 				}, 0);
-			job_tl.to(button_el, (in_duration*3), {top:'-30px', boxShadow:'2px 4px 15px -2px #363545'}, 0);
+			job_tl.to(button_el, (in_duration*3), {y:'-30px', boxShadow:'2px 4px 15px -2px #363545'}, 0);
 
 		// Create Scene
 		var jobScene = new ScrollMagic.Scene({

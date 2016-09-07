@@ -31,6 +31,14 @@
 	overflow: hidden;
 	// @include animation(landingSlide, 1.2s, $curve3, 2.6s);
 
+	// Small airplane-like .svg
+	#landing-poly {
+		position: fixed;
+		z-index: 2;
+		top: -250px;
+		right: 60%;
+		@include transform( rotate(40deg) );
+	}
 	.container {
 		text-align: right;
 	}

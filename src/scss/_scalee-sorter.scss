@@ -145,16 +145,19 @@
 		z-index: -2;
 		top: -20px;
 		display: inline-block;
-		height: 40px;
+		height: 30px;
 		width: auto;
-		@include transition(1s);
-		opacity: 0.7;
+		// @include transition(1s);
+		// opacity: 0.7;
+		pointer-events: none;
 
 		&.su-logo {
 			left: 50%;
 		}
 		&.trimble-logo {
-			left: 25%;
+			height: 200px;
+			left: 0%;
+			top: -100px;
 		}
 		&.sefaira-logo {
 			right: 20%;
@@ -162,6 +165,14 @@
 
 		&.hide {
 			opacity: 0;
+		}
+
+		@media (min-width: $mobile) {
+			height: 40px;
+
+			&.trimble-logo {
+				left: 20%;
+			}
 		}
 	}
 
@@ -319,7 +330,7 @@
 
 			@media (min-width: $mobile) {
 				display: flex;
-				max-height: none;
+				max-height: 0;
 
 				.selector {
 					flex: 1 0 auto;
@@ -358,7 +369,7 @@
 							border-top: 10px solid transparent;
 							border-bottom: 10px solid transparent;
 							border-left: 15px solid $new-red;
-							border-top: none;
+							border-right: none;
 
 							&.show {
 								top: auto;
