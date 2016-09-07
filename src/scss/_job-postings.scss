@@ -31,17 +31,18 @@
 	.job-posting {
 		position: relative;
 		z-index: 5;
-		max-height: 250px;
+		// max-height: 250px;
 		margin: 0 0 100px;
-		padding: 0 0 0 100px;
+		// padding: 0 0 0 100px;
 		text-align: left;
 
 		.job-title-box {
-			display: inline-block;
-			width: 200px;
-			height: 200px;
-			padding: 30px 20px;
-			text-align: left;
+			// display: inline-block;
+			// width: 200px;
+			// height: 200px;
+			width: 100%;
+			padding: 20px;
+			text-align: center;
 			background-color: $new-blue;
 
 			// animate in from blur
@@ -57,16 +58,17 @@
 			}
 		}
 		.posting-content {
-			display: inline-block;
-			width: calc(100% - 230px);
-			vertical-align: top;
-			@include transition();
+			// display: inline-block;
+			// width: calc(100% - 230px);
+			// vertical-align: top;
+			// @include transition();
 
 			.posting-description {
-				max-height: 140px;
-				overflow: hidden;
+				// max-height: 140px;
+				// overflow: hidden;
 				margin-bottom: 10px;
-				padding-top: 10px;
+				// padding-top: 10px;
+				padding: 10px 0 0 10px;
 
 				// animate in from blur
 				color: transparent;
@@ -75,12 +77,11 @@
 				p {
 					font-size: 1.5rem;
 					line-height: 1.1em;
-					padding-left: 20px;
 				}
 			}
 			.button-row {
-				text-align: right;
-				margin: 0;
+				text-align: center;
+				margin: 50px 0 0;
 			}
 			a.button {
 				position: relative;
@@ -94,12 +95,34 @@
 		}
 
 		@media (min-width: $mobile) {
-			// width: 30%;
-			// min-height: 300px; // arbitrary
+			max-height: 250px;
+			margin: 0 0 100px;
+			padding: 0 0 0 100px;
 
-			&:hover {
-				.icon {
-					border-color: $sketchup-ltgray;
+			.job-title-box {
+				display: inline-block;
+				width: 200px;
+				height: 200px;
+				padding: 30px 20px;
+				text-align: left;
+			}
+			.posting-content {
+				display: inline-block;
+				width: calc(100% - 230px);
+
+				.posting-description {
+					max-height: 140px;
+					overflow: hidden;
+					margin-bottom: 10px;
+					padding: 10px 0 0;
+
+					p {
+						padding-left: 20px;
+					}
+				}
+				.button-row {
+					text-align: right;
+					margin: 0;
 				}
 			}
 
