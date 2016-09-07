@@ -12029,8 +12029,11 @@ function eventsOn() {
 
   // Select filters -----
   $filterItems.click(function(){
+    var $this = $(this);
+
     // Show selected state
-    $(this).toggleClass('selected').siblings().removeClass('selected');
+    $this.toggleClass('selected').siblings('.selected').removeClass('selected');
+    setPointer($this);
 
     // Trigger sorting
     sort();
@@ -12203,6 +12206,28 @@ function resetFilters() {
   // Re-sort scalees
   sort();
 }
+
+function setPointer($el, showing) {
+  var $parentWheel = $el.closest('.wheel-selector');
+  var $wheelPointer = $el.siblings('.pointer');
+
+  var elHeight = $el.innerHeight();
+  var elOffset = $el.position();
+  var wheelScroll = $parentWheel.scrollTop();
+  // var wheelHeight = $parentWheel.height();
+
+  var newTop = elOffset.top + (elHeight/2) + wheelScroll;
+
+  console.log('wheel scroll:');
+  console.log(wheelScroll);
+
+  console.log('newTop: '+ newTop);
+
+  $wheelPointer.css('top', newTop).toggleClass('show', $el.hasClass('selected') );
+}
+
+// Toggle logos in Background
+//----------------------------
 function hideLogos() {
   for (var logo in logos) {
     var logoEl = logos[logo];
@@ -12668,7 +12693,6 @@ function scrollAnimate() {
 
 	// Adjust background height and show buttons with 'active' class
 	//---------------------------------------
-	var sorter_tween = TweenMax.to(scalee_bgel, 1, {height:'40%'});
 	var sorter_tl = new TimelineMax();
 		sorter_tl.to(scalee_bgel, 1, {height:'40%'}, 0);
 		sorter_tl.to($suLogo, 1, {top:'80px'}, 0);

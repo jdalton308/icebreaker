@@ -96,7 +96,7 @@ p {
 
 	&.slide2,
 	&.slide3 {
-		padding-top: 20vh;
+		padding-top: 15vh;
 		padding-bottom: 20vh;
 	}
 
@@ -297,7 +297,7 @@ button,
 .progress-bar {
 	@include centerY();
 	position: fixed;
-	z-index: 2;
+	z-index: 5;
 	// left: 50px;
 	left: 0;
 	display: inline-block;

@@ -146,6 +146,7 @@
 		display: inline-block;
 		height: 40px;
 		width: auto;
+		@include transition(1s);
 
 		&.su-logo {
 			left: 50%;
@@ -269,6 +270,23 @@
 					background-color: $sketchup-gray;
 					@include transition();
 
+					.pointer {
+						@include centerY();
+						z-index: 3;
+						left: -20px;
+						display: inline-block;
+						width: 0;
+						height: 0;
+						border-top: 10px solid transparent;
+						border-bottom: 10px solid transparent;
+						border-left: 15px solid $new-red;
+						@include transition;
+
+						&.show {
+							left: 0;
+						}
+					}
+
 					.item {
 						position: relative;
 						display: inline-block;
@@ -281,26 +299,6 @@
 						border-right: 3px solid $new-blue;
 						@include transition(0.3s);
 
-						&:before,
-						&:after {
-							content: '';
-							@include centerY();
-							display: inline-block;
-							width: 0;
-							height: 0;
-							border-top: 10px solid transparent;
-							border-bottom: 10px solid transparent;
-							@include transition;
-						}
-						&:before {
-							left: -20px;
-							border-left: 15px solid $new-red;
-						}
-						&:after {
-							right: -20px;
-							border-right: 15px solid $new-red;
-						}
-
 						&:last-child {
 							border-right: none;
 						}
@@ -309,13 +307,6 @@
 							background-color: $white;
 							font-weight: 700;
 							color: $sketchup-red;
-
-							&:before {
-								left: 0;
-							}
-							&:after {
-								right: 0;
-							}
 						}
 					}
 				}

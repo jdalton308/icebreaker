@@ -152,7 +152,7 @@ p {
   padding: 50px 20px;
   box-shadow: 2px 2px 15px -2px #000; }
   .slide.slide2, .slide.slide3 {
-    padding-top: 20vh;
+    padding-top: 15vh;
     padding-bottom: 20vh; }
 
 .title-box {
@@ -291,7 +291,7 @@ button,
   -webkit-transform: translateY(-50%);
   transform: translateY(-50%);
   position: fixed;
-  z-index: 2;
+  z-index: 5;
   left: 0;
   display: inline-block;
   height: 70vh;
@@ -812,7 +812,9 @@ footer {
     top: -20px;
     display: inline-block;
     height: 40px;
-    width: auto; }
+    width: auto;
+    -webkit-transition: all 1s;
+    transition: all 1s; }
     .slide1 .logo.su-logo {
       left: 50%; }
     .slide1 .logo.trimble-logo {
@@ -911,6 +913,24 @@ footer {
           background-color: #363545;
           -webkit-transition: all 0.5s;
           transition: all 0.5s; }
+          .slide1 .control-panel .selectors .selector .wheel-selector .pointer {
+            position: absolute;
+            top: 50%;
+            -ms-transform: translateY(-50%);
+            -webkit-transform: translateY(-50%);
+            transform: translateY(-50%);
+            z-index: 3;
+            left: -20px;
+            display: inline-block;
+            width: 0;
+            height: 0;
+            border-top: 10px solid transparent;
+            border-bottom: 10px solid transparent;
+            border-left: 15px solid #D0011B;
+            -webkit-transition: all 0.5s;
+            transition: all 0.5s; }
+            .slide1 .control-panel .selectors .selector .wheel-selector .pointer.show {
+              left: 0; }
           .slide1 .control-panel .selectors .selector .wheel-selector .item {
             position: relative;
             display: inline-block;
@@ -923,36 +943,12 @@ footer {
             border-right: 3px solid #498FE1;
             -webkit-transition: all 0.3s;
             transition: all 0.3s; }
-            .slide1 .control-panel .selectors .selector .wheel-selector .item:before, .slide1 .control-panel .selectors .selector .wheel-selector .item:after {
-              content: '';
-              position: absolute;
-              top: 50%;
-              -ms-transform: translateY(-50%);
-              -webkit-transform: translateY(-50%);
-              transform: translateY(-50%);
-              display: inline-block;
-              width: 0;
-              height: 0;
-              border-top: 10px solid transparent;
-              border-bottom: 10px solid transparent;
-              -webkit-transition: all 0.5s;
-              transition: all 0.5s; }
-            .slide1 .control-panel .selectors .selector .wheel-selector .item:before {
-              left: -20px;
-              border-left: 15px solid #D0011B; }
-            .slide1 .control-panel .selectors .selector .wheel-selector .item:after {
-              right: -20px;
-              border-right: 15px solid #D0011B; }
             .slide1 .control-panel .selectors .selector .wheel-selector .item:last-child {
               border-right: none; }
             .slide1 .control-panel .selectors .selector .wheel-selector .item.selected {
               background-color: #ffffff;
               font-weight: 700;
               color: #e72b2d; }
-              .slide1 .control-panel .selectors .selector .wheel-selector .item.selected:before {
-                left: 0; }
-              .slide1 .control-panel .selectors .selector .wheel-selector .item.selected:after {
-                right: 0; }
       @media (min-width: 768px) {
         .slide1 .control-panel .selectors {
           display: flex;
@@ -1492,7 +1488,7 @@ footer {
     right: 70%;
     top: -900px; }
   .slide.slide2 .title-box {
-    margin: 0 0 20vh; }
+    margin: 0 0 120px; }
   .slide.slide2 a.nav-box {
     position: relative;
     display: block;
@@ -1575,7 +1571,7 @@ footer {
     -webkit-transform: rotate(-41deg);
     transform: rotate(-41deg); }
   .slide.slide3 .title-box {
-    margin-bottom: 200px; }
+    margin-bottom: 120px; }
   .slide.slide3 .job-postings {
     position: relative;
     text-align: center;

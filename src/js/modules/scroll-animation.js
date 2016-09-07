@@ -291,7 +291,6 @@ function scrollAnimate() {
 
 	// Adjust background height and show buttons with 'active' class
 	//---------------------------------------
-	var sorter_tween = TweenMax.to(scalee_bgel, 1, {height:'40%'});
 	var sorter_tl = new TimelineMax();
 		sorter_tl.to(scalee_bgel, 1, {height:'40%'}, 0);
 		sorter_tl.to($suLogo, 1, {top:'80px'}, 0);

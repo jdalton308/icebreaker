@@ -76,8 +76,11 @@ function eventsOn() {
 
   // Select filters -----
   $filterItems.click(function(){
+    var $this = $(this);
+
     // Show selected state
-    $(this).toggleClass('selected').siblings().removeClass('selected');
+    $this.toggleClass('selected').siblings('.selected').removeClass('selected');
+    setPointer($this);
 
     // Trigger sorting
     sort();
@@ -250,6 +253,23 @@ function resetFilters() {
   // Re-sort scalees
   sort();
 }
+
+function setPointer($el, showing) {
+  var $parentWheel = $el.closest('.wheel-selector');
+  var $wheelPointer = $el.siblings('.pointer');
+
+  var elHeight = $el.innerHeight();
+  var elOffset = $el.position();
+  var wheelScroll = $parentWheel.scrollTop();
+  // var wheelHeight = $parentWheel.height();
+
+  var newTop = elOffset.top + (elHeight/2) + wheelScroll;
+
+  $wheelPointer.css('top', newTop).toggleClass('show', $el.hasClass('selected') );
+}
+
+// Toggle logos in Background
+//----------------------------
 function hideLogos() {
   for (var logo in logos) {
     var logoEl = logos[logo];
