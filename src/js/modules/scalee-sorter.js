@@ -16,6 +16,10 @@ var $body = $('body');
 var $header = $('header');
 var $slide1 = $('.slide1');
 
+var $suLogo = $slide1.find('.su-logo');
+var $trimLogo = $slide1.find('.trimble-logo');
+var $sefLogo = $slide1.find('.sefaira-logo');
+
 var $openFilter = $('.open-panel');
 var $filterControls = $('.container.selectors');
 var $wheelSelectors = $filterControls.find('.wheel-selector');
@@ -45,9 +49,15 @@ var itemHeight = $filterItems.outerHeight();
 // State Variables
 //-----------------
 var filters = [];
+var logos = {
+  sketchup: $suLogo,
+  trimble: $trimLogo,
+  sefaira: $sefLogo
+};
 var panelOpen = $slide1.hasClass('edit-mode');
 var $scaleeInFocus;
 var isMobile = Util.isMobile();
+
 
 // Bind events
 //------------
@@ -97,26 +107,10 @@ function eventsOn() {
 // Open Filter Bar
 //------------
 function openPanel() {
-
-  // // - change height of 'wheel-selector'
-  // function openFilters() {
-  //   var openHeight = itemHeight * 4; // arbitrary
-  //   $wheelSelectors.css('height', openHeight+'px');
-  // }
-  // 
-  // if (!isMobile) {
-  //   openFilters();
-  // }
-
   // - change styles
   $slide1.addClass('edit-mode');
 
   // - scroll to position
-  // var offset = $slide1.offset().top;
-  // $body.animate({
-  //   scrollTop: offset
-  // }, 800);
-
   TweenMax.to(window, 0.7, {scrollTo:'#meet'});
 
   // -lock scroll
@@ -124,7 +118,6 @@ function openPanel() {
 
   // - save state
   panelOpen = true;
-
 }
 
 
@@ -182,9 +175,14 @@ function closePanel() {
 } // end closePanel();
 
 
+
+//-----------------
 // Sort Scalees
 //---------------
 function sort() {
+
+  // - Hide all logos, then show correct ones after scalees are sorted
+  hideLogos();
 
   // - Get filters
   setCurrentFilters();
@@ -233,14 +231,14 @@ function hideFilteredScalees() {
     // - if no 'hide' class, add 'show' class, for animation, and set null-state var
     if ( !$this.hasClass('hide') ) {
       $this.addClass('show');
-      areScalees = true;
+      areScalees = true; // prevent null scalee
+      showLogo($this); // show attached logo
     }
 
   });
 
   // - if no scalees, show null dude
   if (!areScalees) {
-    console.log('no scalees--');
     $nullScalee.removeClass('hide').addClass('show');
   }
 }
@@ -252,8 +250,23 @@ function resetFilters() {
   // Re-sort scalees
   sort();
 }
+function hideLogos() {
+  for (var logo in logos) {
+    var logoEl = logos[logo];
+    logoEl.addClass('hide');
+  }
+}
+function showLogo($el) {
+  var team = $el.attr('data-logo');
+
+  if (team) {
+    console.log('team: '+ team);
+    logos[team].removeClass('hide');
+  }
+}
 
 
+//--------------------------
 // Enter 'Leaderboard Mode'
 //--------------------------
 function showLeaderboard() {
@@ -386,6 +399,8 @@ function setTranslate() {
 }
 
 
+
+//--------------------
 // Initialize sorter
 //------------------
 function init() {
@@ -394,6 +409,7 @@ function init() {
   sort();
   initLeaderboard();
 }
+
 
 
 // Exports

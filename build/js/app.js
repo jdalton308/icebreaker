@@ -11969,6 +11969,10 @@ var $body = $('body');
 var $header = $('header');
 var $slide1 = $('.slide1');
 
+var $suLogo = $slide1.find('.su-logo');
+var $trimLogo = $slide1.find('.trimble-logo');
+var $sefLogo = $slide1.find('.sefaira-logo');
+
 var $openFilter = $('.open-panel');
 var $filterControls = $('.container.selectors');
 var $wheelSelectors = $filterControls.find('.wheel-selector');
@@ -11998,9 +12002,15 @@ var itemHeight = $filterItems.outerHeight();
 // State Variables
 //-----------------
 var filters = [];
+var logos = {
+  sketchup: $suLogo,
+  trimble: $trimLogo,
+  sefaira: $sefLogo
+};
 var panelOpen = $slide1.hasClass('edit-mode');
 var $scaleeInFocus;
 var isMobile = Util.isMobile();
+
 
 // Bind events
 //------------
@@ -12050,26 +12060,10 @@ function eventsOn() {
 // Open Filter Bar
 //------------
 function openPanel() {
-
-  // // - change height of 'wheel-selector'
-  // function openFilters() {
-  //   var openHeight = itemHeight * 4; // arbitrary
-  //   $wheelSelectors.css('height', openHeight+'px');
-  // }
-  // 
-  // if (!isMobile) {
-  //   openFilters();
-  // }
-
   // - change styles
   $slide1.addClass('edit-mode');
 
   // - scroll to position
-  // var offset = $slide1.offset().top;
-  // $body.animate({
-  //   scrollTop: offset
-  // }, 800);
-
   TweenMax.to(window, 0.7, {scrollTo:'#meet'});
 
   // -lock scroll
@@ -12077,7 +12071,6 @@ function openPanel() {
 
   // - save state
   panelOpen = true;
-
 }
 
 
@@ -12135,9 +12128,14 @@ function closePanel() {
 } // end closePanel();
 
 
+
+//-----------------
 // Sort Scalees
 //---------------
 function sort() {
+
+  // - Hide all logos, then show correct ones after scalees are sorted
+  hideLogos();
 
   // - Get filters
   setCurrentFilters();
@@ -12186,14 +12184,14 @@ function hideFilteredScalees() {
     // - if no 'hide' class, add 'show' class, for animation, and set null-state var
     if ( !$this.hasClass('hide') ) {
       $this.addClass('show');
-      areScalees = true;
+      areScalees = true; // prevent null scalee
+      showLogo($this); // show attached logo
     }
 
   });
 
   // - if no scalees, show null dude
   if (!areScalees) {
-    console.log('no scalees--');
     $nullScalee.removeClass('hide').addClass('show');
   }
 }
@@ -12205,8 +12203,23 @@ function resetFilters() {
   // Re-sort scalees
   sort();
 }
+function hideLogos() {
+  for (var logo in logos) {
+    var logoEl = logos[logo];
+    logoEl.addClass('hide');
+  }
+}
+function showLogo($el) {
+  var team = $el.attr('data-logo');
+
+  if (team) {
+    console.log('team: '+ team);
+    logos[team].removeClass('hide');
+  }
+}
 
 
+//--------------------------
 // Enter 'Leaderboard Mode'
 //--------------------------
 function showLeaderboard() {
@@ -12339,6 +12352,8 @@ function setTranslate() {
 }
 
 
+
+//--------------------
 // Initialize sorter
 //------------------
 function init() {
@@ -12347,6 +12362,7 @@ function init() {
   sort();
   initLeaderboard();
 }
+
 
 
 // Exports
@@ -12380,6 +12396,7 @@ var pageHeight = Math.max($(document).height(), $window.height());
 
 function scrollAnimate() {
 
+	// Progress bar elements
 	var $progressBar = $('.progress-bar');
 	var $progressIndicator = $progressBar.find('.progress-bar-indicator');
 	var navTriggers = $progressBar.find('.progress-nav-item');
@@ -12391,22 +12408,31 @@ function scrollAnimate() {
 	var $jobsBtn = $('[data-target="jobs"]');
 	var jobsBtn = $jobsBtn.get(0);
 
+	// Landing slide
 	var landingSlide = $('.slide0').get(0);
 
+	// Scalee slide
 	var $sorterSlide = $('#meet');
 	var sorterSlide = $sorterSlide.get(0);
 	var $scaleeBg = $('.scalee-background');
 	var scalee_bgel = $scaleeBg.get(0);
 	var scaleeCont_el = $sorterSlide.find('.scalee-cont').get(0);
 
+	var $suLogo = $sorterSlide.find('.su-logo');
+	var $trimLogo = $sorterSlide.find('.trimble-logo');
+	var $sefLogo = $sorterSlide.find('.sefaira-logo');
+
+	// Say Hello slide
 	var $helloSlide = $('#hello');
 	var helloHeight = $helloSlide.innerHeight();
 	var helloSlide = $helloSlide.get(0);
 
+	// Jobs slide
 	var $jobsSlide = $('#jobs');
 	var jobsHeight = $jobsSlide.innerHeight();
 	var jobsSlide = $jobsSlide.get(0);
 
+	// Other elements
 	var $toTopBtn = $('.to-top-btn');
 
 
@@ -12513,16 +12539,6 @@ function scrollAnimate() {
 			.on('enter', function(e){
 				setMarkerOffset('#meet');
 			});
-			// .on('start', function(e){
-
-			// 	if (e.scrollDirection == 'FORWARD') {
-			// 		// jump down to position
-			// 		$body.animate({
-			// 			scrollTop: scrollRef['#meet'].pxOffset
-			// 		}, 800);
-			// 		// taperScrolling();
-			// 	}
-			// });
 
 		new ScrollMagic.Scene({
 				triggerElement: $helloSlide.get(0),
@@ -12540,7 +12556,7 @@ function scrollAnimate() {
 
 				if (e.scrollDirection == 'FORWARD') {
 					// - jump down to position
-					TweenMax.to(window, 1.2, {scrollTo:'#hello'});
+					TweenMax.to(window, 0.5, {scrollTo:'#hello'});
 
 					// taperScrolling();
 
@@ -12565,34 +12581,19 @@ function scrollAnimate() {
 
 				if (e.scrollDirection == 'FORWARD') {
 					// jump down to position
-					TweenMax.to(window, 1.2, {scrollTo:'#jobs'});
+					TweenMax.to(window, 0.5, {scrollTo:'#jobs'});
 					// taperScrolling();
 				}
 
 			});
 
 
-		// - Jump from landing slide to sorter with one scroll
-		//------------------------------
-		// new ScrollMagic.Scene({
-		// 		triggerElement: landingSlide, // HERE <<<<<<
-		// 		triggerHook: 0.99,
-		// 		duration: 50
-		// 	})
-		// 	.addTo(controller);
-
-
 
 		// - Navigate page with button clicks
 		//---------------------------------
 		navTriggers.click(function(){
-			var $this = $(this);
-
 			// -get target
-			var target = '#' + $this.attr('data-target');
-
-			// - get offset
-			// var offset = scrollRef[target].pxOffset;
+			var target = '#' + $(this).attr('data-target');
 
 			// - animate scroll to section
 			TweenMax.to(window, 2, {scrollTo:target});
@@ -12664,28 +12665,23 @@ function scrollAnimate() {
 	//------------------
 	// Scalee Sorter
 	//-----------------------
-	// - Adjust background height
-	// - Adjust scalee-cont size
 
-	// Toggle active class
-	//----------------------
-	var scaleeClassScene = new ScrollMagic.Scene({
-			triggerElement: sorterSlide,
-			triggerHook: '0.15'
-		})
-		.setClassToggle(sorterSlide, 'active')
-		.addTo(controller);
-
-	// Adjust background height
-	//--------------------------
+	// Adjust background height and show buttons with 'active' class
+	//---------------------------------------
 	var sorter_tween = TweenMax.to(scalee_bgel, 1, {height:'40%'});
+	var sorter_tl = new TimelineMax();
+		sorter_tl.to(scalee_bgel, 1, {height:'40%'}, 0);
+		sorter_tl.to($suLogo, 1, {top:'80px'}, 0);
+		sorter_tl.to($trimLogo, 1, {top:'150px'}, 0);
+		sorter_tl.to($sefLogo, 1, {top:'120px'}, 0);
 
 	var scaleeScene = new ScrollMagic.Scene({
 			triggerElement: sorterSlide,
 			triggerHook: '0.7',
 			duration: '90%'
 		})
-		.setTween(sorter_tween)
+		.setClassToggle(sorterSlide, 'active')
+		.setTween(sorter_tl)
 		.addTo(controller);
 
 
@@ -12696,7 +12692,7 @@ function scrollAnimate() {
 	(function(){
 		var landingPoly = document.getElementById('landing-poly');
 
-		var smallPolyTween = TweenMax.to(landingPoly, 1, {right:'75%', top:'-500px', scale:0.7, rotation:'50deg', zIndex:-1});
+		var smallPolyTween = TweenMax.to(landingPoly, 1, {right:'75%', top:'-500px', scale:0.7, rotation:'50deg'});
 
 		var landingPolyScene = new ScrollMagic.Scene({
 				triggerElement: landingSlide,
@@ -12796,6 +12792,33 @@ function scrollAnimate() {
 	//------------------
 	// Title-boxes
 	//-----------------------
+	// - title number: position and box-shadow
+	var titleNumMid = {
+		top: 0,
+		boxShadow: '4px 4px 14px -1px #363545'
+	};
+	var titleNumPast = {
+		top: '-30px',
+		boxShadow: '4px -22px 14px -1px #363545'
+	}
+	// - text blur/focus objects
+	var textFocusObj = {
+		color: 'rgba(54, 53, 69, 1)',
+		textShadow: '0px 0px 0px rgba(0,0,0,0)',
+		top: 0
+	};
+	var textBlurObj = {
+		color: 'rgba(54, 53, 69, 0)',
+		textShadow: '0 0 15px rgba(54, 53, 69, 1)',
+		top: '50px'
+	}
+	// - box shadow for underline
+	var lineShadowMid = {
+		boxShadow: '4px 5px 9px #363545'
+	};
+	var lineShadowPast = {
+		boxShadow: '4px -5px 9px #363545'
+	};
 
 	// Constructor function
 	function newTitleBoxScene($titleBox) {
@@ -12804,34 +12827,6 @@ function scrollAnimate() {
 		// - Move text in parallax-type way, with the underline being the reference
 		// - Number is most forward, and moves slowest, then text, then underline
 		// - Underline and number have box shadows move
-
-		// - title number: position and box-shadow
-		var titleNumMid = {
-			top: 0,
-			boxShadow: '4px 4px 14px -1px #363545'
-		};
-		var titleNumPast = {
-			top: '-30px',
-			boxShadow: '4px -22px 14px -1px #363545'
-		}
-		// - text blur/focus objects
-		var textFocusObj = {
-			color: 'rgba(54, 53, 69, 1)',
-			textShadow: '0px 0px 0px rgba(0,0,0,0)',
-			top: 0
-		};
-		var textBlurObj = {
-			color: 'rgba(54, 53, 69, 0)',
-			textShadow: '0 0 15px rgba(54, 53, 69, 1)',
-			top: '50px'
-		}
-		// - box shadow for underline
-		var lineShadowMid = {
-			boxShadow: '4px 5px 9px #363545'
-		};
-		var lineShadowPast = {
-			boxShadow: '4px -5px 9px #363545'
-		};
 
 		// - define elements
 		var title_el = $titleBox.get(0);

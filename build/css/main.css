@@ -152,8 +152,8 @@ p {
   padding: 50px 20px;
   box-shadow: 2px 2px 15px -2px #000; }
   .slide.slide2, .slide.slide3 {
-    padding-top: 30vh;
-    padding-bottom: 40vh; }
+    padding-top: 20vh;
+    padding-bottom: 20vh; }
 
 .title-box {
   position: relative;
@@ -759,34 +759,32 @@ footer {
       display: inline-block;
       height: 100%;
       -webkit-transition: all 0.7s;
-      transition: all 0.7s;
-      margin-right: -20px; }
-      .slide1 .scalee-cont img:nth-child(3n) {
+      transition: all 0.7s; }
+      .slide1 .scalee-cont img:nth-child(3n), .slide1 .scalee-cont img:nth-child(5n+1) {
         z-index: 0;
         -ms-transform: perspective(100px) scale(0.65) translateY(-65px);
         -webkit-transform: perspective(100px) scale(0.65) translateY(-65px);
         transform: perspective(100px) scale(0.65) translateY(-65px); }
       .slide1 .scalee-cont img:nth-child(4n) {
         left: 5px;
-        -ms-transform: perspective(100px) translateZ(1px);
-        -webkit-transform: perspective(100px) translateZ(1px);
-        transform: perspective(100px) translateZ(1px); }
+        -ms-transform: perspective(100px);
+        -webkit-transform: perspective(100px);
+        transform: perspective(100px); }
       .slide1 .scalee-cont img:nth-child(5n+1) {
-        right: 5px;
-        z-index: 0;
-        -ms-transform: perspective(100px) scale(0.65) translateY(-65px);
-        -webkit-transform: perspective(100px) scale(0.65) translateY(-65px);
-        transform: perspective(100px) scale(0.65) translateY(-65px); }
+        right: 5px; }
       .slide1 .scalee-cont img.hide {
         -webkit-animation: hideScalee 1s cubic-bezier(0.22, 0.07, 0.23, 0.99) 0s 1 normal forwards;
-        animation: hideScalee 1s cubic-bezier(0.22, 0.07, 0.23, 0.99) 0s 1 normal forwards; }
+        animation: hideScalee 1s cubic-bezier(0.22, 0.07, 0.23, 0.99) 0s 1 normal forwards;
+        right: 0;
+        left: 0; }
       .slide1 .scalee-cont img.show {
         -webkit-animation: showScalee 1s cubic-bezier(0.22, 0.07, 0.23, 0.99) 0s 1 normal forwards;
-        animation: showScalee 1s cubic-bezier(0.22, 0.07, 0.23, 0.99) 0s 1 normal forwards; }
+        animation: showScalee 1s cubic-bezier(0.22, 0.07, 0.23, 0.99) 0s 1 normal forwards;
+        margin-right: -30px; }
     @media (min-width: 768px) {
       .slide1 .scalee-cont {
         top: 15vh;
-        height: 85vh;
+        height: 77vh;
         margin: 0;
         padding: 20px 0; } }
   .slide1 .scalee-background {
@@ -797,7 +795,7 @@ footer {
     width: 100%;
     height: 100%;
     background-color: #E2E2E7;
-    box-shadow: 2px 2px 15px -2px #000; }
+    box-shadow: 0 8px 20px #363545; }
   .slide1 .scalee-background-sky {
     position: absolute;
     top: 0;
@@ -805,23 +803,24 @@ footer {
     z-index: -2;
     width: 100%;
     height: 70%;
-    background: #ffffff;
-    background: -webkit-linear-gradient(#ffffff, #498FE1);
-    background: linear-gradient(#ffffff, #498FE1); }
+    background: #498FE1;
+    background: -webkit-linear-gradient(#498FE1, #ffffff);
+    background: linear-gradient(#498FE1, #ffffff); }
   .slide1 .logo {
     position: absolute;
+    z-index: -2;
+    top: -20px;
     display: inline-block;
     height: 40px;
     width: auto; }
     .slide1 .logo.su-logo {
-      -webkit-animation: logoFlying 60s linear 0s infinite alternate forwards;
-      animation: logoFlying 60s linear 0s infinite alternate forwards; }
+      left: 50%; }
     .slide1 .logo.trimble-logo {
-      -webkit-animation: logoFlying-two 60s linear 0s infinite alternate forwards;
-      animation: logoFlying-two 60s linear 0s infinite alternate forwards; }
+      left: 25%; }
     .slide1 .logo.sefaira-logo {
-      -webkit-animation: logoFlying-three 60s linear 0s infinite alternate forwards;
-      animation: logoFlying-three 60s linear 0s infinite alternate forwards; }
+      right: 20%; }
+    .slide1 .logo.hide {
+      opacity: 0; }
   .slide1 .control-panel {
     position: relative;
     width: 100%;
@@ -842,7 +841,7 @@ footer {
       -ms-transform: translateX(50%);
       -webkit-transform: translateX(50%);
       transform: translateX(50%);
-      top: -10px;
+      top: 10px;
       box-shadow: 2px 2px 15px -2px #000; }
       .slide1 .control-panel .open-panel:active {
         box-shadow: 2px 2px 15px -6px #000; }
@@ -998,12 +997,20 @@ footer {
     filter: blur(2px) grayscale(70%); }
   .slide1.active .scalee-cont img {
     cursor: pointer; }
+    .slide1.active .scalee-cont img:nth-child(3n):hover, .slide1.active .scalee-cont img:nth-child(5n+1):hover {
+      -ms-transform: perspective(100px) scale(0.75) translateY(-65px);
+      -webkit-transform: perspective(100px) scale(0.75) translateY(-65px);
+      transform: perspective(100px) scale(0.75) translateY(-65px); }
+    .slide1.active .scalee-cont img:nth-child(4n):hover {
+      -ms-transform: perspective(100px) scale(1.05);
+      -webkit-transform: perspective(100px) scale(1.05);
+      transform: perspective(100px) scale(1.05); }
     .slide1.active .scalee-cont img:hover {
       -webkit-filter: blur(0) grayscale(0%);
       filter: blur(0) grayscale(0%);
-      -ms-transform: scale(1.05);
-      -webkit-transform: scale(1.05);
-      transform: scale(1.05); }
+      -ms-transform: perspective(100px) scale(1.05);
+      -webkit-transform: perspective(100px) scale(1.05);
+      transform: perspective(100px) scale(1.05); }
     .slide1.active .scalee-cont img.invisible {
       -webkit-transition: all 0s;
       transition: all 0s;

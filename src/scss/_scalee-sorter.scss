@@ -64,7 +64,7 @@
 		}
 	}
 	.scalee-cont {
-		@include centerX();
+		@include centerX(); // Moving L/R just adjusts transform %
 		top: 5vh;
 
 		height: 40vh;
@@ -81,34 +81,37 @@
 			height: 100%;
 			@include transition(0.7s);
 
-			// Create stagger and overlap
-			margin-right: -20px;
-
-			&:nth-child(3n) {
+			&:nth-child(3n),
+			&:nth-child(5n+1) {
 				z-index: 0;
 				@include transform( perspective(100px) scale(0.65) translateY(-65px) );
 			}
 			&:nth-child(4n) {
 				left: 5px;
-				@include transform( perspective(100px) translateZ(1px) );
+				@include transform( perspective(100px) );
 			}
 			&:nth-child(5n+1) {
 				right: 5px;
-				z-index: 0;
-				@include transform( perspective(100px) scale(0.65) translateY(-65px) );
 			}
 	
 			&.hide {
 				@include animation(hideScalee, 1s);
+
+				// reset L/R positioning and negative margins to avoid compounding
+				right: 0;
+				left: 0;
 			}
 			&.show {
 				@include animation(showScalee, 1s);
+
+				// Create stagger and overlap
+				margin-right: -30px;
 			}
 		}
 
 		@media (min-width: $mobile) {
 			top: 15vh;
-			height: 85vh;
+			height: 77vh;
 			margin: 0;
 			padding: 20px 0;
 		}
@@ -121,9 +124,7 @@
 		width: 100%;
 		height: 100%; // animated on slide focus
 		background-color: $sketchup-medgray;
-		// border-top: 1px solid $sketchup-gray;
-		box-shadow: $box-shadow;
-		// @include transition();
+		box-shadow: 0 8px 20px $sketchup-gray;
 
 		@media(min-width: $mobile) {
 			
@@ -136,22 +137,28 @@
 		z-index: -2;
 		width: 100%;
 		height: 70%;
-		@include linear-gradient($white, $new-blue);
+		@include linear-gradient($new-blue, $white);
 	}
 	.logo {
 		position: absolute;
+		z-index: -2;
+		top: -20px;
 		display: inline-block;
 		height: 40px;
 		width: auto;
 
 		&.su-logo {
-			@include animation(logoFlying, 60s, linear, 0s, infinite, alternate);
+			left: 50%;
 		}
 		&.trimble-logo {
-			@include animation(logoFlying-two, 60s, linear, 0s, infinite, alternate);
+			left: 25%;
 		}
 		&.sefaira-logo {
-			@include animation(logoFlying-three, 60s, linear, 0s, infinite, alternate);
+			right: 20%;
+		}
+
+		&.hide {
+			opacity: 0;
 		}
 	}
 
@@ -172,7 +179,7 @@
 
 		.open-panel {
 			@include centerX();
-			top: -10px;
+			top: 10px;
 			box-shadow: $box-shadow;
 
 			&:active {
@@ -396,13 +403,23 @@
 			img {
 				cursor: pointer;
 
-				&:hover {
-					@include filter( blur(0) grayscale(0%) );
-					@include transform( scale(1.05) );
+				&:nth-child(3n),
+				&:nth-child(5n+1) {
+					&:hover {
+						@include transform( perspective(100px) scale(0.75) translateY(-65px) );
+					}
+				}
+				&:nth-child(4n) {
+					&:hover {
+						@include transform( perspective(100px) scale(1.05) );
+					}
 				}
 
-				&.bio-scalee {
+				&:hover {
+					@include filter( blur(0) grayscale(0%) );
+					@include transform( perspective(100px) scale(1.05) );
 				}
+
 				&.invisible {
 					@include transition( 0s );
 					visibility: hidden;
