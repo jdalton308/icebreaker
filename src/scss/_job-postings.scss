@@ -3,15 +3,12 @@
 	// padding-bottom: 40vh;
 	overflow: hidden;
 
-	@media (min-width: $mobile) {
-	}
-
 	#jobs-small-poly {
 		position: absolute;
-		z-index: 2;
-		top: 0px;
-		left: 80%;
-		@include transform( rotate(150deg) );
+		z-index: 1;
+		top: 13%;
+		left: 31%;
+		@include transform( rotate(300deg) );
 		cursor: pointer;
 	}
 	#jobs-large-poly {
@@ -19,6 +16,21 @@
 		top: -500px;
 		left: 60%;
 		@include transform( rotate(10deg) );
+	}
+
+	@media (min-width: $mobile) {
+		#jobs-small-poly {
+			z-index: 2;
+			top: 0px;
+			left: 80%;
+			@include transform( rotate(150deg) );
+			cursor: pointer;
+		}
+		#jobs-large-poly {
+			top: -500px;
+			left: 60%;
+			@include transform( rotate(10deg) );
+		}
 	}
 		
 	.title-box {
@@ -32,24 +44,15 @@
 	.job-posting {
 		position: relative;
 		z-index: 5;
-		// max-height: 250px;
 		margin: 0 0 100px;
-		// padding: 0 0 0 100px;
 		text-align: left;
 
 		.job-title-box {
-			// display: inline-block;
-			// width: 200px;
-			// height: 200px;
 			width: 100%;
 			padding: 20px;
 			text-align: center;
 			background-color: $new-blue;
-
-			// animate in from blur
-			color: rgba(255,255,255, 0); // -> white
-			text-shadow: 0 0 15px rgba(255,255,255, 1); // -> opacity:0
-			box-shadow: 0 0 20px 10px $new-blue-rgba;
+			color: $white;
 
 			h4 {
 				margin: 0 0 5px;
@@ -59,21 +62,10 @@
 			}
 		}
 		.posting-content {
-			// display: inline-block;
-			// width: calc(100% - 230px);
-			// vertical-align: top;
-			// @include transition();
 
 			.posting-description {
-				// max-height: 140px;
-				// overflow: hidden;
 				margin-bottom: 10px;
-				// padding-top: 10px;
-				padding: 10px 0 0 10px;
-
-				// animate in from blur
-				color: transparent;
-				text-shadow: 0 0 15px $su-gray-rgba; // $sketchup-gray		
+				padding: 10px 0 0 10px;		
 
 				p {
 					font-size: 1.5rem;
@@ -82,14 +74,13 @@
 			}
 			.button-row {
 				text-align: center;
-				margin: 50px 0 0;
+				margin: 20px 0 0;
 			}
 			a.button {
 				position: relative;
-				@include transform( translateY(100px) );
 				display: inline-block;
 				margin: 0;
-				box-shadow: 2px 12px 15px -2px $sketchup-gray; // animated
+				box-shadow: 2px 3px 15px -2px $sketchup-gray;
 				-webkit-transition: background-color 0.5s;
 				transition: background-color 0.5s;
 			}
@@ -106,6 +97,11 @@
 				height: 200px;
 				padding: 30px 20px;
 				text-align: left;
+
+				// animate in from blur
+				color: rgba(255,255,255, 0); // -> white
+				text-shadow: 0 0 15px rgba(255,255,255, 1); // -> opacity:0
+				box-shadow: 0 0 20px 10px $new-blue-rgba;
 			}
 			.posting-content {
 				display: inline-block;
@@ -118,6 +114,10 @@
 					margin-bottom: 10px;
 					padding: 10px 0 0;
 
+					// animate in from blur
+					color: transparent;
+					text-shadow: 0 0 15px $su-gray-rgba; // $sketchup-gray
+
 					p {
 						padding-left: 20px;
 					}
@@ -125,6 +125,11 @@
 				.button-row {
 					text-align: right;
 					margin: 0;
+
+					a.button {
+						@include transform( translateY(100px) );
+						box-shadow: 2px 12px 15px -2px $sketchup-gray; // animated
+					}
 				}
 			}
 

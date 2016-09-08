@@ -8,6 +8,7 @@ var ScrollAnimate = require('./modules/scroll-animation.js');
 var Loading = require('./modules/loading.js');
 var Landing = require('./modules/landing.js');
 var EasterEggs = require('./modules/easter-eggs.js');
+var Util = require('./modules/util.js');
 
 
 // Show loading slide until pageload event
@@ -16,19 +17,27 @@ Loading.show();
 // Wait for images to load, then run scripts and show page
 $(window).on('load', function(){
 
-	ScrollAnimate.init();
+	// - Init scroll animations only on mobile...
+	if ( !Util.isMobile() ) {
+		ScrollAnimate.init();
+	}
+
+	// - Init other interactions
 	ScaleeSorter.init();
 	ScaleeBios.init();
 	TwoTruths.init();
-	ScaleeSorter.center();
 	EasterEggs();
 
+	// - Center scalees
+	ScaleeSorter.center();
+
+	// - Then hide loader and animate landing page...
 	window.setTimeout(function(){
 		Loading.hide();
 
 		window.setTimeout(function(){
 			Landing();
 		}, 1000)
-	}, 2000);
+	}, 1000);
 
 });

@@ -40,14 +40,14 @@
 		}
 
 		&.prev {
-			left: -100px;
+			left: 20px;
 
 			&:before {
 				@include transform( translate(-30%, -50%) rotate(-135deg) );
 			}
 		}
 		&.next {
-			right: -100px;
+			right: 20px;
 
 			&:before {
 				@include transform( translate(-70%, -50%) rotate(45deg) );
@@ -56,6 +56,13 @@
 
 		@media (min-width: $mobile) {
 			opacity: 0.5;
+
+			&.prev {
+				left: -100px;
+			}
+			&.next {
+				right: -100px;
+			}
 
 			&:hover {
 				opacity: 1;
@@ -119,16 +126,16 @@
 	}
 	.scalee-background {
 		position: absolute;
-		bottom: 0;
-		left: 0;
 		z-index: -1;
+		top: 60%;
+		left: 0;
 		width: 100%;
 		height: 100%; // animated on slide focus
 		background-color: $sketchup-medgray;
 		box-shadow: 0 8px 20px $sketchup-gray;
 
 		@media(min-width: $mobile) {
-			
+			top: 0%;			
 		}
 	}
 	.scalee-background-sky {
@@ -143,7 +150,7 @@
 	.logo {
 		position: absolute;
 		z-index: -2;
-		top: -20px;
+		top: 20px;
 		display: inline-block;
 		height: 30px;
 		width: auto;
@@ -151,16 +158,17 @@
 		// opacity: 0.7;
 		pointer-events: none;
 
-		&.su-logo {
-			left: 50%;
-		}
 		&.trimble-logo {
+			top: 10px;
 			height: 200px;
 			left: 0%;
-			top: -100px;
+		}
+		&.su-logo {
+			left: 30%;
 		}
 		&.sefaira-logo {
-			right: 20%;
+			top: 60px;
+			left: 60%;
 		}
 
 		&.hide {
@@ -168,6 +176,7 @@
 		}
 
 		@media (min-width: $mobile) {
+			top: -20px;
 			height: 40px;
 
 			&.trimble-logo {
@@ -190,7 +199,7 @@
 
 		.open-panel {
 			@include centerX();
-			top: 10px;
+			top: -66px;
 			box-shadow: $box-shadow;
 
 			&:active {
@@ -207,6 +216,8 @@
 			}
 
 			@media (min-width: $mobile) {
+				top: 10px;
+
 				&:hover {
 					box-shadow: 3px 3px 19px -2px $black;
 				}
@@ -406,19 +417,10 @@
 
 		.scalee-scroll {
 			&.prev {
-				left: 20px;
+				left: 80px;
 			}
 			&.next {
-				right: 20px;
-			}
-
-			@media (min-width: $mobile) {
-				&.prev {
-					left: 80px;
-				}
-				&.next {
-					right: 80px;
-				}
+				right: 80px;
 			}
 		}
 		.control-panel {
@@ -427,32 +429,7 @@
 			}
 		}
 		.scalee-cont {
-
-			&:hover {
-				img {
-					@include filter( blur(2px) grayscale(70%) );
-				}
-			}
-
 			img {
-				cursor: pointer;
-
-				&:nth-child(3n),
-				&:nth-child(5n+1) {
-					&:hover {
-						@include transform( perspective(100px) scale(0.75) translateY(-65px) );
-					}
-				}
-				&:nth-child(4n) {
-					&:hover {
-						@include transform( perspective(100px) scale(1.05) );
-					}
-				}
-
-				&:hover {
-					@include filter( blur(0) grayscale(0%) );
-					@include transform( perspective(100px) scale(1.05) );
-				}
 
 				&.invisible {
 					@include transition( 0s );
@@ -473,7 +450,36 @@
 		}
 
 		@media (min-width: $mobile) {
+			.scalee-cont {
+				&:hover {
+					img {
+						@include filter( blur(2px) grayscale(70%) );
+					}
+				}
+
+				img {
+					cursor: pointer;
+
+					&:nth-child(3n),
+					&:nth-child(5n+1) {
+						&:hover {
+							@include transform( perspective(100px) scale(0.75) translateY(-65px) );
+						}
+					}
+					&:nth-child(4n) {
+						&:hover {
+							@include transform( perspective(100px) scale(1.05) );
+						}
+					}
+
+					&:hover {
+						@include filter( blur(0) grayscale(0%) );
+						@include transform( perspective(100px) scale(1.05) );
+					}
+				}
+			}
 		}
+
 	}
 
 	// 'control-panel' open

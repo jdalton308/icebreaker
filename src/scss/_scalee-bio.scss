@@ -37,10 +37,22 @@
 		box-shadow: 0 0 15px -3px $sketchup-gray;
 		@include transition(1s);
 
+		@media (min-width: $mobile) {
+			position: absolute;
+			overflow: hidden;
+			top: 0;
+			width: 50%;
+			height: 100%;
+		}
+
 		img.new-img {
 			display: block;
 			margin: 0 auto 3vh;
 			max-height: 30vh;
+
+			@media (min-width: $mobile) {
+				display: none;
+			}
 		}
 
 		.close-btn {
@@ -58,6 +70,17 @@
 			&:after {
 				background-color: $white;
 			}
+
+			@media (min-width: $mobile) {
+				position: relative;
+				top: 0;
+				right: 10px;
+
+				&:before,
+				&:after {
+					background-color: $new-blue;
+				}
+			}
 		}
 
 		.content-cont {
@@ -73,6 +96,13 @@
 			padding: 20px 30px;
 			text-align: left;
 			background-color: $white;
+			box-shadow: inset 1px 1px 20px -1px $sketchup-gray;
+
+			@media (min-width: $mobile) {
+				position: relative;
+				padding: 25px 40px;
+				max-height: none;
+			}
 
 			.title-box {
 				display: block;
@@ -89,6 +119,10 @@
 				.underline {
 					opacity: 1;
 					box-shadow: none;
+				}
+
+				@media (min-width: $mobile) {
+					padding-right: 0;
 				}
 			}
 			.description-cont {
@@ -111,6 +145,19 @@
 						padding: 2px 10px 10px;
 						font-size: 2rem;
 						color: $new-blue;
+					}
+				}
+				@media (min-width: $mobile) {
+					.button-row {
+						.social-btn-cont {
+							display: inline-block;
+							float: right;
+							margin: 0;
+							text-align: right;
+						}
+						.social-icon {
+							margin: 0 0 0 3px;
+						}
 					}
 				}
 			}
@@ -264,55 +311,7 @@
 				// 	}
 				// }
 
-			} // end .game-cont
-
-		}
-
-
-		@media (min-width: $mobile) {
-			position: absolute;
-			overflow: hidden;
-			top: 0;
-			width: 50%;
-			height: 100%;
-			// padding-top: 50px; // arbitrary
-
-			img.new-img {
-				display: none;
-			}
-			.close-btn {
-				position: relative;
-				top: 0;
-				right: 10px;
-
-				&:before,
-				&:after {
-					background-color: $new-blue;
-				}
-			}
-			.content-cont {
-				position: relative;
-				padding: 25px 40px;
-				max-height: none;
-
-				.title-box {
-					padding-right: 0;
-				}
-				.description-cont {
-					.button-row {
-						.social-btn-cont {
-							display: inline-block;
-							float: right;
-							margin: 0;
-							text-align: right;
-						}
-						.social-icon {
-							margin: 0 0 0 3px;
-						}
-					}
-				}
-
-				.game-cont {
+				@media (min-width: $mobile) {
 					.fact-item {
 						&:hover {
 							.fact-radio {
@@ -323,29 +322,17 @@
 							// }
 						}
 					}
-					// Show answers
-					// &.reveal {
-					// 	.fact-item {
-					// 		cursor: auto;
-
-					// 		&:hover {
-					// 			// Reset so no hover state
-					// 			p {
-					// 				font-weight: 400;
-					// 			}
-					// 		}
-					// 	}
-					// }
 				}
-			}
-		} // end media()
+
+			} // end .game-cont
+		}
 
 	} // end .info-slide
 
 
 	// Showing the bio...
 	//--------------------------------
-	&.active {
+	// &.active {
 
 		.info-slide {
 			&.show {
@@ -375,6 +362,6 @@
 				@include transform( scale(1) );
 			}
 		}
-	}
+	// }
 
 }

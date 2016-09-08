@@ -7,15 +7,25 @@
 	#hello-small-poly {
 		position: absolute;
 		z-index: 2;
-		right: 80%;
-		top: -200px;
+		right: 33%;
+		top: -300px;
 		@include transform( rotate(40deg) scale(0.7));
 		cursor: pointer;
 	}
 	#hello-large-poly {
 		position: absolute;
-		right: 70%;
-		top: -900px;
+		right: 43%;
+		top: -800px;
+	}
+	@media (min-width: $mobile) {
+		#hello-small-poly {
+			right: 80%;
+			top: -200px;
+		}
+		#hello-large-poly {
+			right: 70%;
+			top: -900px;
+		}
 	}
 
 
@@ -35,7 +45,6 @@
 			position: absolute;
 			z-index: 2;
 			top: 50%;
-			@include transform( translateY(40px) );
 			right: -15px;
 			height: 60px;
 			width: 60px;
@@ -74,9 +83,7 @@
 
 			h5,
 			p {
-				// animation starts
-				color: rgba(255,255,255, 0);
-				text-shadow: 0 0 15px rgba(255,255,255, 1);
+				color: $white;
 			}
 			h5 {
 				margin-bottom: 10px;
@@ -107,7 +114,17 @@
 				}
 			}
 
+			.copy-cont {
+				h5,
+				p {
+					// animation starts
+					color: rgba(255,255,255, 0);
+					text-shadow: 0 0 15px rgba(255,255,255, 1);
+				}
+			}
+
 			.icon {
+				@include transform( translateY(40px) );
 				-webkit-transition: box-shadow 0.4s; //, transform 0.8s;
 				transition: box-shadow 0.4s; //, transform 0.8s;
 			}
