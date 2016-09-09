@@ -224,7 +224,7 @@
 
 				&:before {
 					border-color: $white;
-					@include transform( rotate(135deg) translateY(6px) translateX(-2px) );
+					@include transform( rotate(-45deg) translateY(0) translateX(-2px) );
 				}
 			}
 
@@ -236,11 +236,11 @@
 					box-shadow: 3px 3px 19px -2px $black;
 				}
 
-				.arrow-icon {
-					&:before {
-						@include transform( rotate(-45deg) translateY(0) translateX(-2px) );
-					}
-				}
+				// .arrow-icon {
+				// 	&:before {
+				// 		@include transform( rotate(-45deg) translateY(0) translateX(-2px) );
+				// 	}
+				// }
 			}
 		}
 
@@ -282,35 +282,27 @@
 				}
 				.wheel-shadow-holder {
 					position: relative;
-					overflow-x: auto;
-					overflow-y: hidden;
+					overflow: hidden;
 
 					// Element just to add inset box shadow
 					.shadow-frame {
 						position: absolute;
 						z-index: 5;
-
-							top: 0;
-							left: -4%;
-							width: 108%;
-							height: 100%;
-
-						// top: -50%;
-						// left: 0;
-						// height: 200%;
-						// width: 100%;
+						top: 0;
+						left: -4%;
+						width: 108%;
+						height: 100%;
 						pointer-events: none;
 						@include transition();
 						box-shadow: inset 0 0 15px 12px $new-blue;
 
 						&.dark-frame {
 							z-index: 4;
-							height: 100%;
 							top: 0;
-							// box-shadow: inset 0 0 15px 2px $sketchup-gray;
-								width: calc(100% - 8px);
-								left: 4px;
-								box-shadow: inset 0 0 25px 2px $sketchup-gray;
+							left: 4px;
+							height: 100%;
+							width: calc(100% - 8px);
+							box-shadow: inset 0 0 25px 2px $sketchup-gray;
 						}
 					}
 
@@ -322,27 +314,15 @@
 							left: -2%;
 							width: 104%;
 							height: 100%;
-							// box-shadow: inset 1px 0 10px 8px $new-blue;
-
-							&.dark-frame {
-								width: calc(100% - 8px);
-								left: 4px;
-								box-shadow: inset 0 0 25px 2px $sketchup-gray;
-							}
 						}
 					}
 				}
 				.wheel-selector {
 					position: relative;
-					// max-width: 2000px; // arbitrary, to allow lateral scroll
-					// height: auto;
-					// white-space: nowrap;
-					overflow-x: auto;
-					pointer-events: auto;
-
 					width: 100%;
 					max-width: none;
 					height: 100px; // arbitrary	
+					overflow-y: auto;
 					padding: 15px 0;
 
 					color: $sketchup-gray;
@@ -352,57 +332,34 @@
 					@include transition();
 
 					.pointer {
-						// position: absolute;
-						// left: 50%;
-						// @include transform( translateX(-50%) );
+						@include centerY();
+						left: -20px;
 						z-index: 3;
-						// top: -20px;
 						display: inline-block;
 						width: 0;
 						height: 0;
-						// border-right: 10px solid transparent;
-						// border-left: 10px solid transparent;
-						// border-top: 9px solid $new-red;
+						border-top: 10px solid transparent;
+						border-bottom: 10px solid transparent;
+						border-left: 15px solid $new-red;
 						@include transition;
-						
-							@include centerY();
-							left: -20px;
-							border-top: 10px solid transparent;
-							border-bottom: 10px solid transparent;
-							border-left: 15px solid $new-red;
-							border-right: none;
 
-							&.show {
-								top: auto;
-								left: 0;
-							}
-
-						// &.show {
-						// 	top: 0;
-						// }
+						&.show {
+							top: auto;
+							left: 0;
+						}
 					}
 
 					.item {
-							display: block;
-							margin: 0;
-							width: 100%;
-							border-right: none;
-							border-bottom: 3px solid $new-blue;
-
 						position: relative;
-						// display: inline-block;
-						// width: auto;
-						// overflow: hidden;
-						// margin-bottom: -4px; // get rid of inline-block space :(
 						padding: 15px 20px;
 						text-align: center;
 						font-size: 1.7rem;
 						background-color: $sketchup-ltgray;
-						// border-right: 3px solid $new-blue;
+						border-bottom: 3px solid $new-blue;
 						@include transition(0.3s);
 
 						&:last-child {
-							border-right: none;
+							border-bottom: none;
 						}
 
 						&.selected {
@@ -413,39 +370,11 @@
 					}
 
 					@media (min-width: $mobile) {
-						overflow: hidden;
-						width: 100%;
-						max-width: none;
-						height: 200px; // arbitrary	
-						white-space: normal;
-						overflow-x: auto;
+						height: 200px; // arbitrary
 
-						.pointer {
-							@include centerY();
-							left: -20px;
-							border-top: 10px solid transparent;
-							border-bottom: 10px solid transparent;
-							border-left: 15px solid $new-red;
-							border-right: none;
-
-							&.show {
-								top: auto;
-								left: 0;
-							}
-						}
 						.item {
-							display: block;
-							margin: 0;
-							width: 100%;
-							border-right: none;
-							border-bottom: 3px solid $new-blue;
-
-							&:last-child {
-								border-bottom: none;
-							}
 							&:hover {
 								background-color: $white;
-								// font-weight: 700;
 							}
 						}
 					}
@@ -462,16 +391,11 @@
 		.scalee-scroll {
 			&.prev,
 			&.next {
-				// left: 80px;
 				@include transform( translateX(0) );
 			}
-			// &.next {
-			// 	right: 80px;
-			// }
 		}
 		.control-panel {
 			.open-panel {
-				// top: -66px;
 				@include transform( translate(50%, 0) );
 			}
 		}
@@ -537,7 +461,7 @@
 
 			.arrow-icon {
 				&:before {
-					@include transform( rotate(315deg) );
+					@include transform( rotate(135deg) translateY(6px) translateX(-2px) );
 				}
 			}
 		}
@@ -558,11 +482,11 @@
 			.open-panel {
 				top: -66px;
 
-				.arrow-icon {
-					&:before {
-						@include transform( rotate(135deg) translateY(6px) translateX(-2px) );
-					}
-				}
+				// .arrow-icon {
+				// 	&:before {
+				// 		@include transform( rotate(135deg) translateY(6px) translateX(-2px) );
+				// 	}
+				// }
 			}
 			.selectors {
 				max-height: 250px;
