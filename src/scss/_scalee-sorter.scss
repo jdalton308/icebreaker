@@ -58,10 +58,12 @@
 			opacity: 0.5;
 
 			&.prev {
-				left: -100px;
+				// left: -100px;
+				@include transform( translateX(-100px) );
 			}
 			&.next {
-				right: -100px;
+				// right: -100px;
+				@include transform( translateX(100px) );
 			}
 
 			&:hover {
@@ -226,7 +228,8 @@
 			}
 
 			@media (min-width: $mobile) {
-				top: 10px;
+				// top: 10px;
+				@include transform( translate(50%, 70px) );
 
 				&:hover {
 					box-shadow: 3px 3px 19px -2px $black;
@@ -427,16 +430,19 @@
 	&.active {
 
 		.scalee-scroll {
-			&.prev {
-				left: 80px;
-			}
+			&.prev,
 			&.next {
-				right: 80px;
+				// left: 80px;
+				@include transform( translateX(0) );
 			}
+			// &.next {
+			// 	right: 80px;
+			// }
 		}
 		.control-panel {
 			.open-panel {
-				top: -66px;
+				// top: -66px;
+				@include transform( translate(50%, 0) );
 			}
 		}
 		.scalee-cont {

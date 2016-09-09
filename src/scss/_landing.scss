@@ -46,18 +46,33 @@
 	.container {
 		text-align: right;
 	}
-	.scroll-indicator {
+	.arrows {
 		@include centerX();
 		bottom: 20px;
-		padding: 20px;
-		font-size: 3em;
-		@include animation(blink, 2s, $curve1, 0s, infinite);
+		width: 40px;
+		height: 50px;
+		
+		path {
+			stroke: $white;
+			fill: transparent;
+			stroke-width: 2px;	
+			stroke-dasharray: 200;
+			stroke-dashoffset: 300;
+			-webkit-animation: draw 2s linear alternate infinite; 
+			animation: draw 2s linear alternate infinite; 
 
-		&:before {
-			width: 20px;
-			height: 20px;
-			@include transform( rotate(135deg) );
-			border-color: $white;
+			&.a1 {
+				-webkit-animation-delay: 1s;
+				animation-delay: 1s;
+			}
+			&.a2 {
+				-webkit-animation-delay: 1.5s;
+				animation-delay: 1.5s;
+			}
+			&.a3 {
+				-webkit-animation-delay: 2s;
+				animation-delay: 2s;
+			}
 		}
 	}
 
@@ -72,35 +87,44 @@
 }
 
 
-$travelDist: 20vh;
-$bounceDist: 5vh;
-
-@include keyframes(bounceUp) {
+@include keyframes(draw) {
 	0% {
-		height: 100vh;
-	}
-	15% {
-		height: 100vh - ($travelDist + $bounceDist);
-	}
-	40% {
-		height: 100vh - ($travelDist - ($bounceDist/2));
-	}
-	75% {
-		height: 100vh - ($travelDist);
+		stroke-dashoffset: 300;
 	}
 	100% {
-		height: 100vh - $travelDist;
+		stroke-dashoffset: 0;
 	}
 }
 
-@include keyframes(blink) {
-	0% {
-		opacity: 1;
-	}
-	75% {
-		opacity: 0;
-	}
-	100% {
-		opacity: 1;
-	}
-}
+// $travelDist: 20vh;
+// $bounceDist: 5vh;
+
+// @include keyframes(bounceUp) {
+// 	0% {
+// 		height: 100vh;
+// 	}
+// 	15% {
+// 		height: 100vh - ($travelDist + $bounceDist);
+// 	}
+// 	40% {
+// 		height: 100vh - ($travelDist - ($bounceDist/2));
+// 	}
+// 	75% {
+// 		height: 100vh - ($travelDist);
+// 	}
+// 	100% {
+// 		height: 100vh - $travelDist;
+// 	}
+// }
+
+// @include keyframes(blink) {
+// 	0% {
+// 		opacity: 1;
+// 	}
+// 	75% {
+// 		opacity: 0;
+// 	}
+// 	100% {
+// 		opacity: 1;
+// 	}
+// }

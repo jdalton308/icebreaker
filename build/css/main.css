@@ -539,24 +539,32 @@ footer {
         position: fixed; } }
   .slide0 .container {
     text-align: right; }
-  .slide0 .scroll-indicator {
+  .slide0 .arrows {
     position: absolute;
     right: 50%;
     -ms-transform: translateX(50%);
     -webkit-transform: translateX(50%);
     transform: translateX(50%);
     bottom: 20px;
-    padding: 20px;
-    font-size: 3em;
-    -webkit-animation: blink 2s cubic-bezier(0.22, 0.07, 0.23, 0.99) 0s infinite normal forwards;
-    animation: blink 2s cubic-bezier(0.22, 0.07, 0.23, 0.99) 0s infinite normal forwards; }
-    .slide0 .scroll-indicator:before {
-      width: 20px;
-      height: 20px;
-      -ms-transform: rotate(135deg);
-      -webkit-transform: rotate(135deg);
-      transform: rotate(135deg);
-      border-color: #ffffff; }
+    width: 40px;
+    height: 50px; }
+    .slide0 .arrows path {
+      stroke: #ffffff;
+      fill: transparent;
+      stroke-width: 2px;
+      stroke-dasharray: 200;
+      stroke-dashoffset: 300;
+      -webkit-animation: draw 2s linear alternate infinite;
+      animation: draw 2s linear alternate infinite; }
+      .slide0 .arrows path.a1 {
+        -webkit-animation-delay: 1s;
+        animation-delay: 1s; }
+      .slide0 .arrows path.a2 {
+        -webkit-animation-delay: 1.5s;
+        animation-delay: 1.5s; }
+      .slide0 .arrows path.a3 {
+        -webkit-animation-delay: 2s;
+        animation-delay: 2s; }
   @media (min-width: 768px) {
     .slide0 {
       height: 100vh;
@@ -569,45 +577,17 @@ footer {
         -webkit-transform: translate(-50%, -50%);
         transform: translate(-50%, -50%); } }
 
-@-webkit-keyframes bounceUp {
+@-webkit-keyframes draw {
   0% {
-    height: 100vh; }
-  15% {
-    height: 75vh; }
-  40% {
-    height: 82.5vh; }
-  75% {
-    height: 80vh; }
+    stroke-dashoffset: 300; }
   100% {
-    height: 80vh; } }
+    stroke-dashoffset: 0; } }
 
-@keyframes bounceUp {
+@keyframes draw {
   0% {
-    height: 100vh; }
-  15% {
-    height: 75vh; }
-  40% {
-    height: 82.5vh; }
-  75% {
-    height: 80vh; }
+    stroke-dashoffset: 300; }
   100% {
-    height: 80vh; } }
-
-@-webkit-keyframes blink {
-  0% {
-    opacity: 1; }
-  75% {
-    opacity: 0; }
-  100% {
-    opacity: 1; } }
-
-@keyframes blink {
-  0% {
-    opacity: 1; }
-  75% {
-    opacity: 0; }
-  100% {
-    opacity: 1; } }
+    stroke-dashoffset: 0; } }
 
 .slide1 {
   position: relative;
@@ -655,9 +635,13 @@ footer {
       .slide1 .scalee-scroll {
         opacity: 0.5; }
         .slide1 .scalee-scroll.prev {
-          left: -100px; }
+          -ms-transform: translateX(-100px);
+          -webkit-transform: translateX(-100px);
+          transform: translateX(-100px); }
         .slide1 .scalee-scroll.next {
-          right: -100px; }
+          -ms-transform: translateX(100px);
+          -webkit-transform: translateX(100px);
+          transform: translateX(100px); }
         .slide1 .scalee-scroll:hover {
           opacity: 1; } }
   .slide1 .scalee-cont {
@@ -793,7 +777,9 @@ footer {
           transform: rotate(135deg) translateY(6px) translateX(-2px); }
       @media (min-width: 768px) {
         .slide1 .control-panel .open-panel {
-          top: 10px; }
+          -ms-transform: translate(50%, 70px);
+          -webkit-transform: translate(50%, 70px);
+          transform: translate(50%, 70px); }
           .slide1 .control-panel .open-panel:hover {
             box-shadow: 3px 3px 19px -2px #000; }
           .slide1 .control-panel .open-panel .arrow-icon:before {
@@ -945,12 +931,14 @@ footer {
                   border-bottom: none; }
                 .slide1 .control-panel .selectors .selector .wheel-selector .item:hover {
                   background-color: #ffffff; } }
-  .slide1.active .scalee-scroll.prev {
-    left: 80px; }
-  .slide1.active .scalee-scroll.next {
-    right: 80px; }
+  .slide1.active .scalee-scroll.prev, .slide1.active .scalee-scroll.next {
+    -ms-transform: translateX(0);
+    -webkit-transform: translateX(0);
+    transform: translateX(0); }
   .slide1.active .control-panel .open-panel {
-    top: -66px; }
+    -ms-transform: translate(50%, 0);
+    -webkit-transform: translate(50%, 0);
+    transform: translate(50%, 0); }
   .slide1.active .scalee-cont img.invisible {
     -webkit-transition: all 0s;
     transition: all 0s;
