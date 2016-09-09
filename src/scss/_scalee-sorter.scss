@@ -150,9 +150,7 @@
 	.logo {
 		position: absolute;
 		z-index: -2;
-		top: 20px;
 		display: inline-block;
-		height: 30px;
 		width: auto;
 		// @include transition(1s);
 		// opacity: 0.7;
@@ -160,15 +158,18 @@
 
 		&.trimble-logo {
 			top: 10px;
-			height: 200px;
 			left: 0%;
+			height: 250px;
 		}
 		&.su-logo {
+			top: 20px;
 			left: 30%;
+			height: 29px;
 		}
 		&.sefaira-logo {
 			top: 60px;
 			left: 60%;
+			height: 25px;
 		}
 
 		&.hide {
@@ -176,11 +177,20 @@
 		}
 
 		@media (min-width: $mobile) {
-			top: -20px;
-			height: 40px;
+			opacity: 0; // animated in
 
 			&.trimble-logo {
+				top: -60px;
 				left: 20%;
+				height: 310px;
+			}
+			&.su-logo {
+				top: 31px;
+				left: 45%;
+				height: 40px;
+			}
+			&.sefaira-logo {
+				height: 36px;
 			}
 		}
 	}
@@ -291,7 +301,7 @@
 					color: $sketchup-gray;
 					border-left: 5px solid $new-blue;
 					border-right: 5px solid $new-blue;
-					background-color: $sketchup-gray;
+					background-color: $new-blue;
 					@include transition();
 
 					.pointer {
@@ -371,9 +381,10 @@
 						overflow: hidden;
 						width: 100%;
 						max-width: none;
+						height: 200px; // arbitrary	
 						white-space: normal;
 						overflow-x: auto;
-						height: 200px; // arbitrary	
+						padding: 15px 0;
 
 						.pointer {
 							@include centerY();

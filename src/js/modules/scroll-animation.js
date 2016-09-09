@@ -90,6 +90,9 @@ function scrollAnimate() {
 		// - create measurement reference, only for placing buttons initially
 		var scrollRef = createScrollRef();
 
+		console.log('Scroll Ref:');
+		console.log(scrollRef);
+
 		function createScrollRef() {
 			// for each slide
 			// - height in px
@@ -98,13 +101,13 @@ function scrollAnimate() {
 			// - page offset, in %
 
 			var ref = {};
-			ref.pageHeight = pageHeight - window.innerHeight;
+			ref.pageHeight = pageHeight - (window.innerHeight * 1.5);
 
 			function measureSection($slide) {
 				var slideRef = {};
 				slideRef.pxHeight = $slide.innerHeight();
 				slideRef.percHeight = slideRef.pxHeight / ref.pageHeight;
-				slideRef.pxOffset = $slide.offset().top;
+				slideRef.pxOffset = $slide.offset().top - window.innerHeight;
 				slideRef.percOffset = slideRef.pxOffset / ref.pageHeight;
 
 				return slideRef;
@@ -294,9 +297,9 @@ function scrollAnimate() {
 	//---------------------------------------
 	var sorter_tl = new TimelineMax();
 		sorter_tl.to(scalee_bgel, 1, {y:'60%', ease:Power0.easeNone}, 0);
-		sorter_tl.to($suLogo, 1, {y:'80px', ease:Power0.easeNone}, 0);
-		sorter_tl.to($trimLogo, 1, {y:'90px', ease:Power0.easeNone}, 0);
-		sorter_tl.to($sefLogo, 1, {y:'120px', ease:Power0.easeNone}, 0);
+		sorter_tl.to($suLogo, 1, {opacity:1, ease:Power0.easeNone}, 0);
+		sorter_tl.to($trimLogo, 1, {opacity:1, ease:Power0.easeNone}, 0);
+		sorter_tl.to($sefLogo, 1, {opacity:1, ease:Power0.easeNone}, 0);
 
 	var scaleeScene = new ScrollMagic.Scene({
 			triggerElement: sorterSlide,

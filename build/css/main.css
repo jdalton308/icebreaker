@@ -304,7 +304,7 @@ button,
       -webkit-transform: translateY(-50%);
       transform: translateY(-50%);
       position: fixed;
-      z-index: 5;
+      z-index: 10;
       left: 0;
       display: inline-block;
       height: 70vh;
@@ -411,7 +411,7 @@ footer {
     display: inline-block;
     padding: 15px 15px 10px;
     text-align: center;
-    background-color: #498FE1;
+    background-color: #363545;
     color: #ffffff;
     cursor: pointer;
     box-shadow: 2px 2px 15px -2px #000;
@@ -447,7 +447,7 @@ footer {
       transition: all 0.3s; }
   @media (min-width: 768px) {
     footer .to-top-btn:hover {
-      background-color: #3382dd; }
+      background-color: #2b2a37; }
     footer a {
       border-bottom: 1px solid transparent; }
       footer a:hover {
@@ -519,12 +519,13 @@ footer {
     color: #ffffff; }
 
 .slide0 {
-  z-index: 20;
+  z-index: 5;
   min-height: 100vh;
   min-height: 0;
   padding: 20vh 0;
   background-color: #498FE1;
-  overflow: hidden; }
+  overflow: hidden;
+  box-shadow: none; }
   .slide0 #landing-poly {
     position: absolute;
     z-index: 2;
@@ -547,38 +548,26 @@ footer {
     bottom: 20px;
     padding: 20px;
     font-size: 3em;
-    color: #ffffff;
-    -webkit-transition: all 0.5s;
-    transition: all 0.5s;
-    -webkit-transition-delay: 1s;
-    transition-delay: 1s; }
+    -webkit-animation: blink 2s cubic-bezier(0.22, 0.07, 0.23, 0.99) 0s infinite normal forwards;
+    animation: blink 2s cubic-bezier(0.22, 0.07, 0.23, 0.99) 0s infinite normal forwards; }
     .slide0 .scroll-indicator:before {
       width: 20px;
       height: 20px;
       -ms-transform: rotate(135deg);
       -webkit-transform: rotate(135deg);
       transform: rotate(135deg);
-      border-color: #363545; }
+      border-color: #ffffff; }
   @media (min-width: 768px) {
     .slide0 {
       height: 100vh;
       padding: 0; }
-      .slide0.bounce-up {
-        -webkit-animation: bounceUp 1.3s cubic-bezier(0.22, 0.07, 0.23, 0.99) 0s 1 normal forwards;
-        animation: bounceUp 1.3s cubic-bezier(0.22, 0.07, 0.23, 0.99) 0s 1 normal forwards; }
-        .slide0.bounce-up .scroll-indicator {
-          bottom: 20px;
-          -webkit-animation: blink 2s cubic-bezier(0.22, 0.07, 0.23, 0.99) 0s infinite normal forwards;
-          animation: blink 2s cubic-bezier(0.22, 0.07, 0.23, 0.99) 0s infinite normal forwards; }
       .slide0 .container {
         position: absolute;
         top: 50%;
         left: 50%;
         -ms-transform: translate(-50%, -50%);
         -webkit-transform: translate(-50%, -50%);
-        transform: translate(-50%, -50%); }
-      .slide0 .scroll-indicator {
-        bottom: -100px; } }
+        transform: translate(-50%, -50%); } }
 
 @-webkit-keyframes bounceUp {
   0% {
@@ -745,28 +734,36 @@ footer {
   .slide1 .logo {
     position: absolute;
     z-index: -2;
-    top: 20px;
     display: inline-block;
-    height: 30px;
     width: auto;
     pointer-events: none; }
     .slide1 .logo.trimble-logo {
       top: 10px;
-      height: 200px;
-      left: 0%; }
+      left: 0%;
+      height: 250px; }
     .slide1 .logo.su-logo {
-      left: 30%; }
+      top: 20px;
+      left: 30%;
+      height: 29px; }
     .slide1 .logo.sefaira-logo {
       top: 60px;
-      left: 60%; }
+      left: 60%;
+      height: 25px; }
     .slide1 .logo.hide {
       opacity: 0; }
     @media (min-width: 768px) {
       .slide1 .logo {
-        top: -20px;
-        height: 40px; }
+        opacity: 0; }
         .slide1 .logo.trimble-logo {
-          left: 20%; } }
+          top: -60px;
+          left: 20%;
+          height: 310px; }
+        .slide1 .logo.su-logo {
+          top: 31px;
+          left: 45%;
+          height: 40px; }
+        .slide1 .logo.sefaira-logo {
+          height: 36px; } }
   .slide1 .control-panel {
     position: absolute;
     z-index: 5;
@@ -855,7 +852,7 @@ footer {
           color: #363545;
           border-left: 5px solid #498FE1;
           border-right: 5px solid #498FE1;
-          background-color: #363545;
+          background-color: #498FE1;
           -webkit-transition: all 0.5s;
           transition: all 0.5s; }
           .slide1 .control-panel .selectors .selector .wheel-selector .pointer {
@@ -919,9 +916,10 @@ footer {
               overflow: hidden;
               width: 100%;
               max-width: none;
+              height: 200px;
               white-space: normal;
               overflow-x: auto;
-              height: 200px; }
+              padding: 15px 0; }
               .slide1 .control-panel .selectors .selector .wheel-selector .pointer {
                 position: absolute;
                 top: 50%;
@@ -1614,8 +1612,10 @@ footer {
     margin-bottom: 120px; }
   .slide.slide3 .job-postings {
     position: relative;
-    text-align: center;
-    padding-left: 4%; }
+    text-align: center; }
+    @media (min-width: 768px) {
+      .slide.slide3 .job-postings {
+        padding-right: 150px; } }
   .slide.slide3 .job-posting {
     position: relative;
     z-index: 5;
@@ -1650,8 +1650,7 @@ footer {
     @media (min-width: 768px) {
       .slide.slide3 .job-posting {
         max-height: 250px;
-        margin: 0 0 100px;
-        padding: 0 0 0 100px; }
+        margin: 0 0 100px; }
         .slide.slide3 .job-posting .job-title-box {
           display: inline-block;
           width: 200px;

@@ -6,7 +6,7 @@ var ScaleeBios = require('./modules/scalee-bios.js');
 var TwoTruths = require('./modules/two-truths.js');
 var ScrollAnimate = require('./modules/scroll-animation.js');
 var Loading = require('./modules/loading.js');
-var Landing = require('./modules/landing.js');
+// var Landing = require('./modules/landing.js');
 var EasterEggs = require('./modules/easter-eggs.js');
 var Util = require('./modules/util.js');
 
@@ -35,9 +35,9 @@ $(window).on('load', function(){
 	window.setTimeout(function(){
 		Loading.hide();
 
-		window.setTimeout(function(){
-			Landing();
-		}, 1000)
+		// window.setTimeout(function(){
+		// 	Landing();
+		// }, 1000)
 	}, 1000);
 
 });

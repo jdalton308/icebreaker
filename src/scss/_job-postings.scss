@@ -32,14 +32,17 @@
 			@include transform( rotate(10deg) );
 		}
 	}
-		
+
 	.title-box {
 		margin-bottom: 120px;
 	}
 	.job-postings {
 		position: relative;
 		text-align: center;
-		padding-left: 4%;
+
+		@media (min-width: $mobile) {
+			padding-right: 150px;
+		}
 	}
 	.job-posting {
 		position: relative;
@@ -89,7 +92,6 @@
 		@media (min-width: $mobile) {
 			max-height: 250px;
 			margin: 0 0 100px;
-			padding: 0 0 0 100px;
 
 			.job-title-box {
 				display: inline-block;

@@ -307,7 +307,7 @@ button,
 	@media (min-width: $mobile) {
 		@include centerY();
 		position: fixed;
-		z-index: 5;
+		z-index: 10;
 		// left: 50px;
 		left: 0;
 		display: inline-block;
@@ -448,7 +448,7 @@ footer {
 		display: inline-block;
 		padding: 15px 15px 10px;
 		text-align: center;
-		background-color: $new-blue;
+		background-color: $sketchup-gray;
 		color: $white;
 		cursor: pointer;
 		box-shadow: $box-shadow;
@@ -496,8 +496,11 @@ footer {
 
 	@media (min-width: $mobile) {
 		.to-top-btn {
+			// opacity: 0.5;
+
 			&:hover {
-				background-color: darken($new-blue, 5%);
+				// opacity: 1;
+				background-color: darken($sketchup-gray, 5%);
 			}
 		}
 		a {

@@ -23,13 +23,13 @@
 	}
 }
 .slide0 {
-	z-index: 20; // put in front of progress bar
+	z-index: 5;
 	min-height: 100vh;
 	min-height: 0;
 	padding: 20vh 0;
 	background-color: $new-blue;
 	overflow: hidden;
-	// @include animation(landingSlide, 1.2s, $curve3, 2.6s);
+	box-shadow: none;
 
 	// Small airplane-like .svg
 	#landing-poly {
@@ -51,16 +51,13 @@
 		bottom: 20px;
 		padding: 20px;
 		font-size: 3em;
-		color: $white;
-		@include transition();
-		-webkit-transition-delay: 1s;
-		transition-delay: 1s;
+		@include animation(blink, 2s, $curve1, 0s, infinite);
 
 		&:before {
 			width: 20px;
 			height: 20px;
 			@include transform( rotate(135deg) );
-			border-color: $sketchup-gray;
+			border-color: $white;
 		}
 	}
 
@@ -68,20 +65,8 @@
 		height: 100vh;
 		padding: 0;
 
-		&.bounce-up {
-			@include animation(bounceUp, 1.3s);
-
-			.scroll-indicator {
-				bottom: 20px;
-				@include animation(blink, 2s, $curve1, 0s, infinite);
-			}
-		}
-
 		.container {
 			@include centerMe();
-		}
-		.scroll-indicator {
-			bottom: -100px;
 		}
 	}
 }

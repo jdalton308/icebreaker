@@ -11017,7 +11017,7 @@ var ScaleeBios = require('./modules/scalee-bios.js');
 var TwoTruths = require('./modules/two-truths.js');
 var ScrollAnimate = require('./modules/scroll-animation.js');
 var Loading = require('./modules/loading.js');
-var Landing = require('./modules/landing.js');
+// var Landing = require('./modules/landing.js');
 var EasterEggs = require('./modules/easter-eggs.js');
 var Util = require('./modules/util.js');
 
@@ -11046,13 +11046,13 @@ $(window).on('load', function(){
 	window.setTimeout(function(){
 		Loading.hide();
 
-		window.setTimeout(function(){
-			Landing();
-		}, 1000)
+		// window.setTimeout(function(){
+		// 	Landing();
+		// }, 1000)
 	}, 1000);
 
 });
-},{"./modules/easter-eggs.js":3,"./modules/landing.js":4,"./modules/loading.js":6,"./modules/scalee-bios.js":7,"./modules/scalee-sorter.js":8,"./modules/scroll-animation.js":9,"./modules/two-truths.js":10,"./modules/util.js":11,"jquery":1}],3:[function(require,module,exports){
+},{"./modules/easter-eggs.js":3,"./modules/loading.js":5,"./modules/scalee-bios.js":6,"./modules/scalee-sorter.js":7,"./modules/scroll-animation.js":8,"./modules/two-truths.js":9,"./modules/util.js":10,"jquery":1}],3:[function(require,module,exports){
 
 var $ = require('jquery');
 
@@ -11085,55 +11085,6 @@ function init() {
 
 module.exports = init;
 },{"jquery":1}],4:[function(require,module,exports){
-
-var $ = require('jquery');
-var ScrollAnimate = require('./scroll-animation.js');
-
-var $window = $(window);
-var $body = $('body');
-var $landingSlide = $('.slide0');
-
-// if at top, animate the scroll pop-up and arrow,
-// else, trigger event when at top to do so
-
-function checkTop(){
-	return $body.scrollTop();
-}
-
-function triggerFold(){
-	// $body.addClass('fixed');
-	$landingSlide.addClass('bounce-up');
-
-	// // allow time for animation, then reset reference to scrolling positions
-	// window.setTimeout(function(){
-	// 	// $body.removeClass('fixed');
-	// }, 1500);
-}
-
-
-// every 500ms, check position until at the top, instead of watching scroll	
-function watchForTop() {
-	var topWatcher = window.setInterval(function(){
-		if ( !checkTop() ){
-			triggerFold();
-			window.clearInterval(topWatcher);
-		}
-	}, 500);
-}
-
-function init() {
-	var initialPos = checkTop();
-
-	if (!initialPos) {
-		triggerFold();
-	} else {
-		watchForTop();
-	}
-}
-
-
-module.exports = init;
-},{"./scroll-animation.js":9,"jquery":1}],5:[function(require,module,exports){
 
 var leaders = {
 	"discgolf": {
@@ -11735,7 +11686,7 @@ var scalees = [
 
 
 module.exports = leaders;
-},{}],6:[function(require,module,exports){
+},{}],5:[function(require,module,exports){
 
 var $ = require('jquery');
 
@@ -11764,7 +11715,7 @@ function hideLoading() {
 
 module.exports.show = showLoading;
 module.exports.hide = hideLoading;
-},{"jquery":1}],7:[function(require,module,exports){
+},{"jquery":1}],6:[function(require,module,exports){
 'use strict';
 
 var $ = require('jquery');
@@ -11992,7 +11943,7 @@ function init() {
 module.exports.init = init;
 module.exports.on = eventsOn;
 module.exports.off = eventsOff;
-},{"./two-truths.js":10,"./util.js":11,"jquery":1}],8:[function(require,module,exports){
+},{"./two-truths.js":9,"./util.js":10,"jquery":1}],7:[function(require,module,exports){
 // 'use strict';
 
 var $ = require('jquery');
@@ -12454,7 +12405,7 @@ module.exports.reset = resetFilters;
 module.exports.closeLeaders = hideLeaderboard;
 module.exports.center = centerScalees;
 
-},{"./leaderboard-data.js":5,"./util.js":11,"jquery":1}],9:[function(require,module,exports){
+},{"./leaderboard-data.js":4,"./util.js":10,"jquery":1}],8:[function(require,module,exports){
 'use strict';
 
 var $ = require('jquery');
@@ -12547,6 +12498,9 @@ function scrollAnimate() {
 		// - create measurement reference, only for placing buttons initially
 		var scrollRef = createScrollRef();
 
+		console.log('Scroll Ref:');
+		console.log(scrollRef);
+
 		function createScrollRef() {
 			// for each slide
 			// - height in px
@@ -12555,13 +12509,13 @@ function scrollAnimate() {
 			// - page offset, in %
 
 			var ref = {};
-			ref.pageHeight = pageHeight - window.innerHeight;
+			ref.pageHeight = pageHeight - (window.innerHeight * 1.5);
 
 			function measureSection($slide) {
 				var slideRef = {};
 				slideRef.pxHeight = $slide.innerHeight();
 				slideRef.percHeight = slideRef.pxHeight / ref.pageHeight;
-				slideRef.pxOffset = $slide.offset().top;
+				slideRef.pxOffset = $slide.offset().top - window.innerHeight;
 				slideRef.percOffset = slideRef.pxOffset / ref.pageHeight;
 
 				return slideRef;
@@ -12751,9 +12705,9 @@ function scrollAnimate() {
 	//---------------------------------------
 	var sorter_tl = new TimelineMax();
 		sorter_tl.to(scalee_bgel, 1, {y:'60%', ease:Power0.easeNone}, 0);
-		sorter_tl.to($suLogo, 1, {y:'80px', ease:Power0.easeNone}, 0);
-		sorter_tl.to($trimLogo, 1, {y:'90px', ease:Power0.easeNone}, 0);
-		sorter_tl.to($sefLogo, 1, {y:'120px', ease:Power0.easeNone}, 0);
+		sorter_tl.to($suLogo, 1, {opacity:1, ease:Power0.easeNone}, 0);
+		sorter_tl.to($trimLogo, 1, {opacity:1, ease:Power0.easeNone}, 0);
+		sorter_tl.to($sefLogo, 1, {opacity:1, ease:Power0.easeNone}, 0);
 
 	var scaleeScene = new ScrollMagic.Scene({
 			triggerElement: sorterSlide,
@@ -13085,7 +13039,7 @@ function scrollAnimate() {
 
 module.exports.init = scrollAnimate;
 // module.exports.newRef = createScrollRef;
-},{"./scalee-sorter.js":8,"jquery":1}],10:[function(require,module,exports){
+},{"./scalee-sorter.js":7,"jquery":1}],9:[function(require,module,exports){
 'use strict';
 
 var $ = require('jquery');
@@ -13186,7 +13140,7 @@ function initGame() {
 
 module.exports.init = initGame;
 module.exports.endGame = endGame;
-},{"./scalee-sorter.js":8,"jquery":1}],11:[function(require,module,exports){
+},{"./scalee-sorter.js":7,"jquery":1}],10:[function(require,module,exports){
 
 // ----------------
 // Utilities 
