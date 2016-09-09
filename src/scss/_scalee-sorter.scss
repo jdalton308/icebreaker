@@ -211,6 +211,7 @@
 
 		.open-panel {
 			@include centerX();
+			z-index: 2;
 			top: -66px;
 			box-shadow: $box-shadow;
 
@@ -250,12 +251,24 @@
 			overflow: hidden;
 			@include transition();
 
+			@media (min-width: $mobile) {
+				display: flex;
+				max-height: 0;
+
+				.selector {
+					flex: 1 0 auto;
+					width: auto;
+					margin: 0;
+					overflow: hidden;
+				}
+			}
+
 			.selector {
 				display: block;
 				position: relative;
 				overflow: auto;
 				width: 100%;
-				margin-bottom: 20px;
+				margin-bottom: 10px;
 				text-align: center;
 
 				.selector-title {
@@ -276,93 +289,32 @@
 					.shadow-frame {
 						position: absolute;
 						z-index: 5;
-						top: -50%;
-						left: 0;
-						height: 200%;
-						width: 100%;
+
+							top: 0;
+							left: -4%;
+							width: 108%;
+							height: 100%;
+
+						// top: -50%;
+						// left: 0;
+						// height: 200%;
+						// width: 100%;
 						pointer-events: none;
 						@include transition();
-						box-shadow: inset 0 0 15px 15px $new-blue;
+						box-shadow: inset 0 0 15px 12px $new-blue;
 
 						&.dark-frame {
 							z-index: 4;
 							height: 100%;
 							top: 0;
-							box-shadow: inset 0 0 15px 2px $sketchup-gray;
+							// box-shadow: inset 0 0 15px 2px $sketchup-gray;
+								width: calc(100% - 8px);
+								left: 4px;
+								box-shadow: inset 0 0 25px 2px $sketchup-gray;
 						}
 					}
 
-				}
-				.wheel-selector {
-					position: relative;
-					max-width: 2000px; // arbitrary, to allow lateral scroll
-					height: auto;
-					white-space: nowrap;
-					overflow-x: auto;
-					pointer-events: auto;
-
-					color: $sketchup-gray;
-					border-left: 5px solid $new-blue;
-					border-right: 5px solid $new-blue;
-					background-color: $new-blue;
-					@include transition();
-
-					.pointer {
-						position: absolute;
-						left: 50%;
-						@include transform( translateX(-50%) );
-						z-index: 3;
-						top: -20px;
-						display: inline-block;
-						width: 0;
-						height: 0;
-						border-right: 10px solid transparent;
-						border-left: 10px solid transparent;
-						border-top: 9px solid $new-red;
-						@include transition;
-
-						&.show {
-							top: 0;
-						}
-					}
-
-					.item {
-						position: relative;
-						display: inline-block;
-						width: auto;
-						overflow: hidden;
-						margin-bottom: -4px; // get rid of inline-block space :(
-						padding: 15px 20px;
-						text-align: center;
-						font-size: 1.7rem;
-						background-color: $sketchup-ltgray;
-						border-right: 3px solid $new-blue;
-						@include transition(0.3s);
-
-						&:last-child {
-							border-right: none;
-						}
-
-						&.selected {
-							background-color: $white;
-							font-weight: 700;
-							color: $sketchup-red;
-						}
-					}
-				}
-			} // end .selector
-
-			@media (min-width: $mobile) {
-				display: flex;
-				max-height: 0;
-
-				.selector {
-					flex: 1 0 auto;
-					width: auto;
-					margin: 0;
-					overflow: hidden;
-
-					.wheel-shadow-holder {
+					@media (min-width: $mobile) {
 						overflow-x: hidden;
 
 						.shadow-frame {
@@ -379,15 +331,94 @@
 							}
 						}
 					}
+				}
+				.wheel-selector {
+					position: relative;
+					// max-width: 2000px; // arbitrary, to allow lateral scroll
+					// height: auto;
+					// white-space: nowrap;
+					overflow-x: auto;
+					pointer-events: auto;
 
-					.wheel-selector {
+					width: 100%;
+					max-width: none;
+					height: 100px; // arbitrary	
+					padding: 15px 0;
+
+					color: $sketchup-gray;
+					border-left: 5px solid $new-blue;
+					border-right: 5px solid $new-blue;
+					background-color: $new-blue;
+					@include transition();
+
+					.pointer {
+						// position: absolute;
+						// left: 50%;
+						// @include transform( translateX(-50%) );
+						z-index: 3;
+						// top: -20px;
+						display: inline-block;
+						width: 0;
+						height: 0;
+						// border-right: 10px solid transparent;
+						// border-left: 10px solid transparent;
+						// border-top: 9px solid $new-red;
+						@include transition;
+						
+							@include centerY();
+							left: -20px;
+							border-top: 10px solid transparent;
+							border-bottom: 10px solid transparent;
+							border-left: 15px solid $new-red;
+							border-right: none;
+
+							&.show {
+								top: auto;
+								left: 0;
+							}
+
+						// &.show {
+						// 	top: 0;
+						// }
+					}
+
+					.item {
+							display: block;
+							margin: 0;
+							width: 100%;
+							border-right: none;
+							border-bottom: 3px solid $new-blue;
+
+						position: relative;
+						// display: inline-block;
+						// width: auto;
+						// overflow: hidden;
+						// margin-bottom: -4px; // get rid of inline-block space :(
+						padding: 15px 20px;
+						text-align: center;
+						font-size: 1.7rem;
+						background-color: $sketchup-ltgray;
+						// border-right: 3px solid $new-blue;
+						@include transition(0.3s);
+
+						&:last-child {
+							border-right: none;
+						}
+
+						&.selected {
+							background-color: $white;
+							font-weight: 700;
+							color: $sketchup-red;
+						}
+					}
+
+					@media (min-width: $mobile) {
 						overflow: hidden;
 						width: 100%;
 						max-width: none;
 						height: 200px; // arbitrary	
 						white-space: normal;
 						overflow-x: auto;
-						padding: 15px 0;
 
 						.pointer {
 							@include centerY();
@@ -408,7 +439,6 @@
 							width: 100%;
 							border-right: none;
 							border-bottom: 3px solid $new-blue;
-							pointer-events: none;
 
 							&:last-child {
 								border-bottom: none;
@@ -419,8 +449,8 @@
 							}
 						}
 					}
-				}
-			} // end media
+				} /// end .wheel-selector
+			} // end .selector
 
 		} // end .selectors
 	} // end .control-panel
@@ -503,6 +533,8 @@
 	&.edit-mode {
 
 		.open-panel {
+			top: 20px;
+
 			.arrow-icon {
 				&:before {
 					@include transform( rotate(315deg) );
@@ -510,9 +542,11 @@
 			}
 		}
 		.selectors {
-			max-height: 400px;
+			// max-height: 400px;
+			max-height: 100vh;
+			height: 100vh;
 			overflow-y: auto;
-			padding-top: 20px;
+			padding-top: 100px;
 			padding-bottom: 20px;
 		}
 
@@ -522,6 +556,8 @@
 				padding-bottom: 10px;
 			}
 			.open-panel {
+				top: -66px;
+
 				.arrow-icon {
 					&:before {
 						@include transform( rotate(135deg) translateY(6px) translateX(-2px) );

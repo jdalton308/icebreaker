@@ -12205,20 +12205,20 @@ function setPointer($el, showing) {
   var $wheelPointer = $el.siblings('.pointer');
   var elOffset = $el.position();
 
-  if (isMobile) {
-    var elWidth = $el.innerWidth();
-    var wheelScroll = $parentWheel.scrollLeft();
+  // if (isMobile) {
+  //   var elWidth = $el.innerWidth();
+  //   var wheelScroll = $parentWheel.scrollLeft();
 
-    var newLeft = elOffset.left + (elWidth/2) + wheelScroll;
-    $wheelPointer.css('left', newLeft);
+  //   var newLeft = elOffset.left + (elWidth/2) + wheelScroll;
+  //   $wheelPointer.css('left', newLeft);
 
-  } else {
+  // } else {
     var elHeight = $el.innerHeight();
     var wheelScroll = $parentWheel.scrollTop();
 
     var newTop = elOffset.top + (elHeight/2) + wheelScroll;
     $wheelPointer.css('top', newTop);
-  }
+  // }
 
   $wheelPointer.toggleClass('show', $el.hasClass('selected') );
 }

@@ -764,6 +764,7 @@ footer {
       -ms-transform: translateX(50%);
       -webkit-transform: translateX(50%);
       transform: translateX(50%);
+      z-index: 2;
       top: -66px;
       box-shadow: 2px 2px 15px -2px #000; }
       .slide1 .control-panel .open-panel:active {
@@ -793,12 +794,21 @@ footer {
       overflow: hidden;
       -webkit-transition: all 0.5s;
       transition: all 0.5s; }
+      @media (min-width: 768px) {
+        .slide1 .control-panel .selectors {
+          display: flex;
+          max-height: 0; }
+          .slide1 .control-panel .selectors .selector {
+            flex: 1 0 auto;
+            width: auto;
+            margin: 0;
+            overflow: hidden; } }
       .slide1 .control-panel .selectors .selector {
         display: block;
         position: relative;
         overflow: auto;
         width: 100%;
-        margin-bottom: 20px;
+        margin-bottom: 10px;
         text-align: center; }
         .slide1 .control-panel .selectors .selector .selector-title {
           width: 100%;
@@ -815,78 +825,22 @@ footer {
           .slide1 .control-panel .selectors .selector .wheel-shadow-holder .shadow-frame {
             position: absolute;
             z-index: 5;
-            top: -50%;
-            left: 0;
-            height: 200%;
-            width: 100%;
+            top: 0;
+            left: -4%;
+            width: 108%;
+            height: 100%;
             pointer-events: none;
             -webkit-transition: all 0.5s;
             transition: all 0.5s;
-            box-shadow: inset 0 0 15px 15px #498FE1; }
+            box-shadow: inset 0 0 15px 12px #498FE1; }
             .slide1 .control-panel .selectors .selector .wheel-shadow-holder .shadow-frame.dark-frame {
               z-index: 4;
               height: 100%;
               top: 0;
-              box-shadow: inset 0 0 15px 2px #363545; }
-        .slide1 .control-panel .selectors .selector .wheel-selector {
-          position: relative;
-          max-width: 2000px;
-          height: auto;
-          white-space: nowrap;
-          overflow-x: auto;
-          pointer-events: auto;
-          color: #363545;
-          border-left: 5px solid #498FE1;
-          border-right: 5px solid #498FE1;
-          background-color: #498FE1;
-          -webkit-transition: all 0.5s;
-          transition: all 0.5s; }
-          .slide1 .control-panel .selectors .selector .wheel-selector .pointer {
-            position: absolute;
-            left: 50%;
-            -ms-transform: translateX(-50%);
-            -webkit-transform: translateX(-50%);
-            transform: translateX(-50%);
-            z-index: 3;
-            top: -20px;
-            display: inline-block;
-            width: 0;
-            height: 0;
-            border-right: 10px solid transparent;
-            border-left: 10px solid transparent;
-            border-top: 9px solid #D0011B;
-            -webkit-transition: all 0.5s;
-            transition: all 0.5s; }
-            .slide1 .control-panel .selectors .selector .wheel-selector .pointer.show {
-              top: 0; }
-          .slide1 .control-panel .selectors .selector .wheel-selector .item {
-            position: relative;
-            display: inline-block;
-            width: auto;
-            overflow: hidden;
-            margin-bottom: -4px;
-            padding: 15px 20px;
-            text-align: center;
-            font-size: 1.7rem;
-            background-color: #f3f3f7;
-            border-right: 3px solid #498FE1;
-            -webkit-transition: all 0.3s;
-            transition: all 0.3s; }
-            .slide1 .control-panel .selectors .selector .wheel-selector .item:last-child {
-              border-right: none; }
-            .slide1 .control-panel .selectors .selector .wheel-selector .item.selected {
-              background-color: #ffffff;
-              font-weight: 700;
-              color: #e72b2d; }
-      @media (min-width: 768px) {
-        .slide1 .control-panel .selectors {
-          display: flex;
-          max-height: 0; }
-          .slide1 .control-panel .selectors .selector {
-            flex: 1 0 auto;
-            width: auto;
-            margin: 0;
-            overflow: hidden; }
+              width: calc(100% - 8px);
+              left: 4px;
+              box-shadow: inset 0 0 25px 2px #363545; }
+          @media (min-width: 768px) {
             .slide1 .control-panel .selectors .selector .wheel-shadow-holder {
               overflow-x: hidden; }
               .slide1 .control-panel .selectors .selector .wheel-shadow-holder .shadow-frame {
@@ -897,15 +851,68 @@ footer {
                 .slide1 .control-panel .selectors .selector .wheel-shadow-holder .shadow-frame.dark-frame {
                   width: calc(100% - 8px);
                   left: 4px;
-                  box-shadow: inset 0 0 25px 2px #363545; }
+                  box-shadow: inset 0 0 25px 2px #363545; } }
+        .slide1 .control-panel .selectors .selector .wheel-selector {
+          position: relative;
+          overflow-x: auto;
+          pointer-events: auto;
+          width: 100%;
+          max-width: none;
+          height: 100px;
+          padding: 15px 0;
+          color: #363545;
+          border-left: 5px solid #498FE1;
+          border-right: 5px solid #498FE1;
+          background-color: #498FE1;
+          -webkit-transition: all 0.5s;
+          transition: all 0.5s; }
+          .slide1 .control-panel .selectors .selector .wheel-selector .pointer {
+            z-index: 3;
+            display: inline-block;
+            width: 0;
+            height: 0;
+            -webkit-transition: all 0.5s;
+            transition: all 0.5s;
+            position: absolute;
+            top: 50%;
+            -ms-transform: translateY(-50%);
+            -webkit-transform: translateY(-50%);
+            transform: translateY(-50%);
+            left: -20px;
+            border-top: 10px solid transparent;
+            border-bottom: 10px solid transparent;
+            border-left: 15px solid #D0011B;
+            border-right: none; }
+            .slide1 .control-panel .selectors .selector .wheel-selector .pointer.show {
+              top: auto;
+              left: 0; }
+          .slide1 .control-panel .selectors .selector .wheel-selector .item {
+            display: block;
+            margin: 0;
+            width: 100%;
+            border-right: none;
+            border-bottom: 3px solid #498FE1;
+            position: relative;
+            padding: 15px 20px;
+            text-align: center;
+            font-size: 1.7rem;
+            background-color: #f3f3f7;
+            -webkit-transition: all 0.3s;
+            transition: all 0.3s; }
+            .slide1 .control-panel .selectors .selector .wheel-selector .item:last-child {
+              border-right: none; }
+            .slide1 .control-panel .selectors .selector .wheel-selector .item.selected {
+              background-color: #ffffff;
+              font-weight: 700;
+              color: #e72b2d; }
+          @media (min-width: 768px) {
             .slide1 .control-panel .selectors .selector .wheel-selector {
               overflow: hidden;
               width: 100%;
               max-width: none;
               height: 200px;
               white-space: normal;
-              overflow-x: auto;
-              padding: 15px 0; }
+              overflow-x: auto; }
               .slide1 .control-panel .selectors .selector .wheel-selector .pointer {
                 position: absolute;
                 top: 50%;
@@ -925,8 +932,7 @@ footer {
                 margin: 0;
                 width: 100%;
                 border-right: none;
-                border-bottom: 3px solid #498FE1;
-                pointer-events: none; }
+                border-bottom: 3px solid #498FE1; }
                 .slide1 .control-panel .selectors .selector .wheel-selector .item:last-child {
                   border-bottom: none; }
                 .slide1 .control-panel .selectors .selector .wheel-selector .item:hover {
@@ -969,23 +975,28 @@ footer {
         -ms-transform: perspective(100px) scale(1.05);
         -webkit-transform: perspective(100px) scale(1.05);
         transform: perspective(100px) scale(1.05); } }
-  .slide1.edit-mode .open-panel .arrow-icon:before {
-    -ms-transform: rotate(315deg);
-    -webkit-transform: rotate(315deg);
-    transform: rotate(315deg); }
+  .slide1.edit-mode .open-panel {
+    top: 20px; }
+    .slide1.edit-mode .open-panel .arrow-icon:before {
+      -ms-transform: rotate(315deg);
+      -webkit-transform: rotate(315deg);
+      transform: rotate(315deg); }
   .slide1.edit-mode .selectors {
-    max-height: 400px;
+    max-height: 100vh;
+    height: 100vh;
     overflow-y: auto;
-    padding-top: 20px;
+    padding-top: 100px;
     padding-bottom: 20px; }
   @media (min-width: 768px) {
     .slide1.edit-mode .control-panel {
       max-height: 250px;
       padding-bottom: 10px; }
-    .slide1.edit-mode .open-panel .arrow-icon:before {
-      -ms-transform: rotate(135deg) translateY(6px) translateX(-2px);
-      -webkit-transform: rotate(135deg) translateY(6px) translateX(-2px);
-      transform: rotate(135deg) translateY(6px) translateX(-2px); }
+    .slide1.edit-mode .open-panel {
+      top: -66px; }
+      .slide1.edit-mode .open-panel .arrow-icon:before {
+        -ms-transform: rotate(135deg) translateY(6px) translateX(-2px);
+        -webkit-transform: rotate(135deg) translateY(6px) translateX(-2px);
+        transform: rotate(135deg) translateY(6px) translateX(-2px); }
     .slide1.edit-mode .selectors {
       max-height: 250px;
       overflow-y: visible;
