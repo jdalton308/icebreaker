@@ -187,6 +187,7 @@
 				height: 40px;
 			}
 			&.sefaira-logo {
+				left: 68%;
 				height: 36px;
 			}
 		}
@@ -240,13 +241,6 @@
 			@media (min-width: $mobile) {
 				display: flex;
 				max-height: 0;
-
-				.selector {
-					flex: 1 0 auto;
-					width: auto;
-					margin: 0;
-					overflow: hidden;
-				}
 			}
 
 			.selector {
@@ -256,6 +250,13 @@
 				width: 100%;
 				margin-bottom: 10px;
 				text-align: center;
+
+				@media (min-width: $mobile) {
+					flex: 1 0 33%;
+					width: auto;
+					margin: 0;
+					overflow: hidden;
+				}
 
 				.selector-title {
 					width: 100%;

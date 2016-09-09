@@ -9,13 +9,12 @@
 		top: -100vh;
 		width: 100%;
 		text-align: center;
-		padding-top: 75px;
+		padding: 45px 0 0;
 		@include transition();
-		background-color: $sketchup-ltgray;
 
 		.leaderboard-title {
 			width: 100%;
-			padding: 0 60px; // space for .back-btn
+			padding: 0 20px; // space for .back-btn
 			text-align: center;
 
 			h1 {
@@ -28,10 +27,10 @@
 		}
 		.back-btn {
 			position: absolute;
-			top: -50px;
+			top: 0;
 			right: 10px;
-			width: 100px;
-			height: 100px;
+			width: 50px;
+			height: 50px;
 			@include closeIcon();
 
 			&:before,
@@ -42,15 +41,14 @@
 		.position-boxes {
 			white-space: nowrap;
 			overflow-x: auto;
-			padding: 0 30px;
+			padding: 0 20px 10px;
 		}
 		.position-box {
 			display: inline-block;
 			vertical-align: top;
 			min-width: 100px;
 			max-width: 150px;
-			// padding: 0 0 20px;
-			margin-right: 30px;
+			margin-right: 10px;
 
 			border-radius: 3px;
 			@include transition();
@@ -60,32 +58,14 @@
 			}
 
 			&.first {
-				// background-color: $error-yellow;
-				// border-color: $gold;
-				// box-shadow: 1px 1px 15px $gold;
-
 				.box-title {
-					// border-color: $gold;
 				}
 			}
-			&.second {
-				@include transform( scale(0.9) );
-				// background-color: $silver;
-				// border-color: $silver;
-				// box-shadow: 1px 1px 15px 1px $silver;
-
-				.box-title {
-					// border-color: $silver;
-				}
-			}
+			&.second,
 			&.third {
-				@include transform( scale(0.8) );
-				// background-color: $sketchup-red;
-				// border-color: $bronze;
-				// box-shadow: 1px 1px 15px -1px $bronze;
+				@include transform( scale(0.9) );
 
 				.box-title {
-					// border-color: $bronze;
 				}
 			}
 
@@ -127,17 +107,16 @@
 			.position-box {
 				min-width: 12%;
 				max-width: 18%;
-				// padding: 0 0 30px;
 				margin-right: 50px;
 
-				// .box-title {
-				// 	margin: 30px 0 0;
-				// }
 				img {
 					height: 40vh;
 				}
 			}
 			.back-btn {
+				top: -50px;
+				width: 100px;
+				height: 100px;
 				right: 30px;
 
 				&:hover {
@@ -221,7 +200,7 @@
 			bottom: -2px;
 		}
 		> .logo {
-			opacity: 0;
+			opacity: 0 !important;
 		}
 		.control-panel {
 			bottom: -150px;
