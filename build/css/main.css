@@ -147,7 +147,7 @@ p {
   padding: 0 20px; }
   @media (min-width: 768px) {
     .container {
-      padding: 0; } }
+      padding: 0 40px; } }
 
 .slide {
   position: relative;
@@ -1572,26 +1572,28 @@ footer {
     -webkit-transform: rotate(10deg);
     transform: rotate(10deg); }
   @media (min-width: 768px) {
-    .slide.slide3 #jobs-small-poly {
-      z-index: 2;
-      top: 0px;
-      left: 80%;
-      -ms-transform: rotate(150deg);
-      -webkit-transform: rotate(150deg);
-      transform: rotate(150deg);
-      cursor: pointer; }
-    .slide.slide3 #jobs-large-poly {
-      top: -500px;
-      left: 60%;
-      -ms-transform: rotate(10deg);
-      -webkit-transform: rotate(10deg);
-      transform: rotate(10deg); } }
+    .slide.slide3 {
+      padding-left: 50px; }
+      .slide.slide3 #jobs-small-poly {
+        z-index: 2;
+        top: 0px;
+        left: 80%;
+        -ms-transform: rotate(150deg);
+        -webkit-transform: rotate(150deg);
+        transform: rotate(150deg);
+        cursor: pointer; }
+      .slide.slide3 #jobs-large-poly {
+        top: -500px;
+        left: 60%;
+        -ms-transform: rotate(10deg);
+        -webkit-transform: rotate(10deg);
+        transform: rotate(10deg); } }
   .slide.slide3 .title-box {
     margin-bottom: 120px; }
   .slide.slide3 .job-postings {
     position: relative;
     text-align: center; }
-    @media (min-width: 768px) {
+    @media (min-width: 1024px) {
       .slide.slide3 .job-postings {
         padding-right: 150px; } }
   .slide.slide3 .job-posting {

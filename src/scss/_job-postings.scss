@@ -19,6 +19,8 @@
 	}
 
 	@media (min-width: $mobile) {
+		padding-left: 50px;
+
 		#jobs-small-poly {
 			z-index: 2;
 			top: 0px;
@@ -40,7 +42,7 @@
 		position: relative;
 		text-align: center;
 
-		@media (min-width: $mobile) {
+		@media (min-width: $tablet) {
 			padding-right: 150px;
 		}
 	}
