@@ -19,7 +19,7 @@
 	}
 
 	@media (min-width: $mobile) {
-		padding-left: 50px;
+		padding-left: 80px;
 
 		#jobs-small-poly {
 			z-index: 2;
@@ -33,7 +33,7 @@
 			left: 60%;
 			@include transform( rotate(10deg) );
 		}
-	}
+	}	
 
 	.title-box {
 		margin-bottom: 120px;

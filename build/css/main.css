@@ -1573,7 +1573,7 @@ footer {
     transform: rotate(10deg); }
   @media (min-width: 768px) {
     .slide.slide3 {
-      padding-left: 50px; }
+      padding-left: 80px; }
       .slide.slide3 #jobs-small-poly {
         z-index: 2;
         top: 0px;
