@@ -11093,8 +11093,6 @@ var leaders = {
 			1: "person2",
 			2: "person5",
 			3: "person8",
-			4: "person7",
-			5: "person12"
 		}
 	},
 	"life": {
@@ -11103,8 +11101,6 @@ var leaders = {
 			1: "person6",
 			2: "person10",
 			3: "person9",
-			4: "person4",
-			5: "person1"
 		}
 	},
 	"socks": {
@@ -11113,8 +11109,6 @@ var leaders = {
 			1: "person8",
 			2: "person14",
 			3: "person13",
-			4: "person5",
-			5: "person6"
 		}
 	},
 	"coffee": {
@@ -11123,8 +11117,6 @@ var leaders = {
 			1: "person9",
 			2: "person1",
 			3: "person3",
-			4: "person11",
-			5: "person10"
 		}
 	},
 };
@@ -11135,7 +11127,10 @@ var scalees = [
 		"id": "person1",
 		"team": "Marketing",
 		"scalee": "Aaron_Dietzen.svg",
-		"tags": ["Boulder", "Marketing", "Alt-Milk"],
+		"location": ["Boulder"],
+		"team": ["Marketing"],
+		"quirks": ["Alt-Milk"],
+		"logo": ["sketchup"],
 		"bio": "Lorizzle izzle dolizzle doggy amizzle, consectetizzle adipiscing elit. Nullam sapizzle velizzle, stuff volutpat, suscipit quizzle, fo shizzle shit, arcu. Pellentesque egizzle doggy. Ass erizzle. Its fo rizzle izzle dolor dapibizzle turpis tempizzle gizzle. That's the shizzle pellentesque brizzle daahng dawg turpis. Vestibulum in tortor. Pellentesque eleifend rhoncizzle gangster. In break it down habitasse platea dictumst. Yippiyo dapibus. Curabitur gangster urna, pretizzle eu, mattis ac, gangster vitae, fo shizzle. You son of a bizzle dang. Integer sempizzle velit sizzle purus.",
 		"two-truths": {
 			"lie": [
@@ -11159,7 +11154,10 @@ var scalees = [
 		"id": "person2",
 		"team": "Marketing",
 		"scalee": "Allyson_McDuffie.svg",
-		"tags": ["Boulder", "Marketing", "Alt-Milk"],
+		"location": ["Boulder"],
+		"team": ["Engineering"],
+		"quirks": ["Alt-Milk"],
+		"logo": ["trimble"],
 		"bio": "Lorizzle izzle dolizzle doggy amizzle, consectetizzle adipiscing elit. Nullam sapizzle velizzle, stuff volutpat, suscipit quizzle, fo shizzle shit, arcu. Pellentesque egizzle doggy. Ass erizzle. Its fo rizzle izzle dolor dapibizzle turpis tempizzle gizzle. That's the shizzle pellentesque brizzle daahng dawg turpis. Vestibulum in tortor. Pellentesque eleifend rhoncizzle gangster. In break it down habitasse platea dictumst. Yippiyo dapibus. Curabitur gangster urna, pretizzle eu, mattis ac, gangster vitae, fo shizzle. You son of a bizzle dang. Integer sempizzle velit sizzle purus.",
 		"two-truths": {
 			"lie": [
@@ -11183,7 +11181,10 @@ var scalees = [
 		"id": "person3",
 		"team": "Marketing",
 		"scalee": "Bryce_Stout.svg",
-		"tags": ["Boulder", "Marketing", "Alt-Milk"],
+		"location": ["Boulder"],
+		"team": ["Design"],
+		"quirks": ["Cycling"],
+		"logo": ["sketchup"],
 		"bio": "Lorizzle izzle dolizzle doggy amizzle, consectetizzle adipiscing elit. Nullam sapizzle velizzle, stuff volutpat, suscipit quizzle, fo shizzle shit, arcu. Pellentesque egizzle doggy. Ass erizzle. Its fo rizzle izzle dolor dapibizzle turpis tempizzle gizzle. That's the shizzle pellentesque brizzle daahng dawg turpis. Vestibulum in tortor. Pellentesque eleifend rhoncizzle gangster. In break it down habitasse platea dictumst. Yippiyo dapibus. Curabitur gangster urna, pretizzle eu, mattis ac, gangster vitae, fo shizzle. You son of a bizzle dang. Integer sempizzle velit sizzle purus.",
 		"two-truths": {
 			"lie": [
@@ -11207,7 +11208,10 @@ var scalees = [
 		"id": "person4",
 		"team": "Marketing",
 		"scalee": "Bugra_Barin.svg",
-		"tags": ["Boulder", "Marketing", "Alt-Milk"],
+		"location": ["Boulder"],
+		"team": ["Project Management"],
+		"quirks": ["Disc Golf"],
+		"logo": ["sketchup"],
 		"bio": "Lorizzle izzle dolizzle doggy amizzle, consectetizzle adipiscing elit. Nullam sapizzle velizzle, stuff volutpat, suscipit quizzle, fo shizzle shit, arcu. Pellentesque egizzle doggy. Ass erizzle. Its fo rizzle izzle dolor dapibizzle turpis tempizzle gizzle. That's the shizzle pellentesque brizzle daahng dawg turpis. Vestibulum in tortor. Pellentesque eleifend rhoncizzle gangster. In break it down habitasse platea dictumst. Yippiyo dapibus. Curabitur gangster urna, pretizzle eu, mattis ac, gangster vitae, fo shizzle. You son of a bizzle dang. Integer sempizzle velit sizzle purus.",
 		"two-truths": {
 			"lie": [
@@ -11231,7 +11235,10 @@ var scalees = [
 		"id": "person5",
 		"team": "Marketing",
 		"scalee": "Chris_Brashar.svg",
-		"tags": ["Boulder", "Marketing", "Alt-Milk"],
+		"location": ["Boulder"],
+		"team": ["Executive"],
+		"quirks": ["Flatirons"],
+		"logo": ["sketchup"],
 		"bio": "Lorizzle izzle dolizzle doggy amizzle, consectetizzle adipiscing elit. Nullam sapizzle velizzle, stuff volutpat, suscipit quizzle, fo shizzle shit, arcu. Pellentesque egizzle doggy. Ass erizzle. Its fo rizzle izzle dolor dapibizzle turpis tempizzle gizzle. That's the shizzle pellentesque brizzle daahng dawg turpis. Vestibulum in tortor. Pellentesque eleifend rhoncizzle gangster. In break it down habitasse platea dictumst. Yippiyo dapibus. Curabitur gangster urna, pretizzle eu, mattis ac, gangster vitae, fo shizzle. You son of a bizzle dang. Integer sempizzle velit sizzle purus.",
 		"two-truths": {
 			"lie": [
@@ -11255,7 +11262,10 @@ var scalees = [
 		"id": "person6",
 		"team": "Marketing",
 		"scalee": "Chris_Cronin.svg",
-		"tags": ["Boulder", "Marketing", "Alt-Milk"],
+		"location": ["Boulder"],
+		"team": ["Knowledge"],
+		"quirks": ["Alt-Milk"],
+		"logo": ["sketchup"],
 		"bio": "Lorizzle izzle dolizzle doggy amizzle, consectetizzle adipiscing elit. Nullam sapizzle velizzle, stuff volutpat, suscipit quizzle, fo shizzle shit, arcu. Pellentesque egizzle doggy. Ass erizzle. Its fo rizzle izzle dolor dapibizzle turpis tempizzle gizzle. That's the shizzle pellentesque brizzle daahng dawg turpis. Vestibulum in tortor. Pellentesque eleifend rhoncizzle gangster. In break it down habitasse platea dictumst. Yippiyo dapibus. Curabitur gangster urna, pretizzle eu, mattis ac, gangster vitae, fo shizzle. You son of a bizzle dang. Integer sempizzle velit sizzle purus.",
 		"two-truths": {
 			"lie": [
@@ -11279,7 +11289,10 @@ var scalees = [
 		"id": "person7",
 		"team": "Marketing",
 		"scalee": "Chris_DeLuca.svg",
-		"tags": ["Boulder", "Marketing", "Alt-Milk"],
+		"location": ["Boulder"],
+		"team": ["Engineering"],
+		"quirks": ["Disc Golf"],
+		"logo": ["sketchup"],
 		"bio": "Lorizzle izzle dolizzle doggy amizzle, consectetizzle adipiscing elit. Nullam sapizzle velizzle, stuff volutpat, suscipit quizzle, fo shizzle shit, arcu. Pellentesque egizzle doggy. Ass erizzle. Its fo rizzle izzle dolor dapibizzle turpis tempizzle gizzle. That's the shizzle pellentesque brizzle daahng dawg turpis. Vestibulum in tortor. Pellentesque eleifend rhoncizzle gangster. In break it down habitasse platea dictumst. Yippiyo dapibus. Curabitur gangster urna, pretizzle eu, mattis ac, gangster vitae, fo shizzle. You son of a bizzle dang. Integer sempizzle velit sizzle purus.",
 		"two-truths": {
 			"lie": [
@@ -11303,7 +11316,10 @@ var scalees = [
 		"id": "person8",
 		"team": "Marketing",
 		"scalee": "Chris_Dizon.svg",
-		"tags": ["Boulder", "Marketing", "Alt-Milk"],
+		"location": ["Boulder"],
+		"team": ["Design"],
+		"quirks": ["Cycling"],
+		"logo": ["sketchup"],
 		"bio": "Lorizzle izzle dolizzle doggy amizzle, consectetizzle adipiscing elit. Nullam sapizzle velizzle, stuff volutpat, suscipit quizzle, fo shizzle shit, arcu. Pellentesque egizzle doggy. Ass erizzle. Its fo rizzle izzle dolor dapibizzle turpis tempizzle gizzle. That's the shizzle pellentesque brizzle daahng dawg turpis. Vestibulum in tortor. Pellentesque eleifend rhoncizzle gangster. In break it down habitasse platea dictumst. Yippiyo dapibus. Curabitur gangster urna, pretizzle eu, mattis ac, gangster vitae, fo shizzle. You son of a bizzle dang. Integer sempizzle velit sizzle purus.",
 		"two-truths": {
 			"lie": [
@@ -11327,7 +11343,10 @@ var scalees = [
 		"id": "person9",
 		"team": "Marketing",
 		"scalee": "Chris_Fullmer.svg",
-		"tags": ["Boulder", "Marketing", "Alt-Milk"],
+		"location": ["Boulder"],
+		"team": ["Knowledge"],
+		"quirks": ["Alt-Milk"],
+		"logo": ["trimble"],
 		"bio": "Lorizzle izzle dolizzle doggy amizzle, consectetizzle adipiscing elit. Nullam sapizzle velizzle, stuff volutpat, suscipit quizzle, fo shizzle shit, arcu. Pellentesque egizzle doggy. Ass erizzle. Its fo rizzle izzle dolor dapibizzle turpis tempizzle gizzle. That's the shizzle pellentesque brizzle daahng dawg turpis. Vestibulum in tortor. Pellentesque eleifend rhoncizzle gangster. In break it down habitasse platea dictumst. Yippiyo dapibus. Curabitur gangster urna, pretizzle eu, mattis ac, gangster vitae, fo shizzle. You son of a bizzle dang. Integer sempizzle velit sizzle purus.",
 		"two-truths": {
 			"lie": [
@@ -11351,7 +11370,10 @@ var scalees = [
 		"id": "person10",
 		"team": "Marketing",
 		"scalee": "Chris_Keating.svg",
-		"tags": ["Boulder", "Marketing", "Alt-Milk"],
+		"location": ["Boulder"],
+		"team": ["Marketing"],
+		"quirks": ["Flatirons"],
+		"logo": ["sefaira"],
 		"bio": "Lorizzle izzle dolizzle doggy amizzle, consectetizzle adipiscing elit. Nullam sapizzle velizzle, stuff volutpat, suscipit quizzle, fo shizzle shit, arcu. Pellentesque egizzle doggy. Ass erizzle. Its fo rizzle izzle dolor dapibizzle turpis tempizzle gizzle. That's the shizzle pellentesque brizzle daahng dawg turpis. Vestibulum in tortor. Pellentesque eleifend rhoncizzle gangster. In break it down habitasse platea dictumst. Yippiyo dapibus. Curabitur gangster urna, pretizzle eu, mattis ac, gangster vitae, fo shizzle. You son of a bizzle dang. Integer sempizzle velit sizzle purus.",
 		"two-truths": {
 			"lie": [
@@ -11375,7 +11397,10 @@ var scalees = [
 		"id": "person11",
 		"team": "Marketing",
 		"scalee": "Gabriel_Perry.svg",
-		"tags": ["Boulder", "Marketing", "Alt-Milk"],
+		"location": ["London"],
+		"team": ["Engineering"],
+		"quirks": ["Disc Golf"],
+		"logo": ["sketchup"],
 		"bio": "Lorizzle izzle dolizzle doggy amizzle, consectetizzle adipiscing elit. Nullam sapizzle velizzle, stuff volutpat, suscipit quizzle, fo shizzle shit, arcu. Pellentesque egizzle doggy. Ass erizzle. Its fo rizzle izzle dolor dapibizzle turpis tempizzle gizzle. That's the shizzle pellentesque brizzle daahng dawg turpis. Vestibulum in tortor. Pellentesque eleifend rhoncizzle gangster. In break it down habitasse platea dictumst. Yippiyo dapibus. Curabitur gangster urna, pretizzle eu, mattis ac, gangster vitae, fo shizzle. You son of a bizzle dang. Integer sempizzle velit sizzle purus.",
 		"two-truths": {
 			"lie": [
@@ -11399,7 +11424,10 @@ var scalees = [
 		"id": "person12",
 		"team": "Marketing",
 		"scalee": "Jeremy_Walker.svg",
-		"tags": ["Boulder", "Marketing", "Alt-Milk"],
+		"location": ["New York"],
+		"team": ["Design"],
+		"quirks": ["Cycling"],
+		"logo": ["sketchup"],
 		"bio": "Lorizzle izzle dolizzle doggy amizzle, consectetizzle adipiscing elit. Nullam sapizzle velizzle, stuff volutpat, suscipit quizzle, fo shizzle shit, arcu. Pellentesque egizzle doggy. Ass erizzle. Its fo rizzle izzle dolor dapibizzle turpis tempizzle gizzle. That's the shizzle pellentesque brizzle daahng dawg turpis. Vestibulum in tortor. Pellentesque eleifend rhoncizzle gangster. In break it down habitasse platea dictumst. Yippiyo dapibus. Curabitur gangster urna, pretizzle eu, mattis ac, gangster vitae, fo shizzle. You son of a bizzle dang. Integer sempizzle velit sizzle purus.",
 		"two-truths": {
 			"lie": [
@@ -11423,7 +11451,10 @@ var scalees = [
 		"id": "person13",
 		"team": "Marketing",
 		"scalee": "Jessica_Kubik.svg",
-		"tags": ["Boulder", "Marketing", "Alt-Milk"],
+		"location": ["Hong Kong"],
+		"team": ["Knowledge"],
+		"quirks": ["Flatirons"],
+		"logo": ["sketchup"],
 		"bio": "Lorizzle izzle dolizzle doggy amizzle, consectetizzle adipiscing elit. Nullam sapizzle velizzle, stuff volutpat, suscipit quizzle, fo shizzle shit, arcu. Pellentesque egizzle doggy. Ass erizzle. Its fo rizzle izzle dolor dapibizzle turpis tempizzle gizzle. That's the shizzle pellentesque brizzle daahng dawg turpis. Vestibulum in tortor. Pellentesque eleifend rhoncizzle gangster. In break it down habitasse platea dictumst. Yippiyo dapibus. Curabitur gangster urna, pretizzle eu, mattis ac, gangster vitae, fo shizzle. You son of a bizzle dang. Integer sempizzle velit sizzle purus.",
 		"two-truths": {
 			"lie": [
@@ -11447,7 +11478,10 @@ var scalees = [
 		"id": "person14",
 		"team": "Marketing",
 		"scalee": "Mark_Harrison.svg",
-		"tags": ["Boulder", "Marketing", "Alt-Milk"],
+		"location": ["Moon"],
+		"team": ["Marketing"],
+		"quirks": ["Flatirons"],
+		"logo": ["trimble"],
 		"bio": "Lorizzle izzle dolizzle doggy amizzle, consectetizzle adipiscing elit. Nullam sapizzle velizzle, stuff volutpat, suscipit quizzle, fo shizzle shit, arcu. Pellentesque egizzle doggy. Ass erizzle. Its fo rizzle izzle dolor dapibizzle turpis tempizzle gizzle. That's the shizzle pellentesque brizzle daahng dawg turpis. Vestibulum in tortor. Pellentesque eleifend rhoncizzle gangster. In break it down habitasse platea dictumst. Yippiyo dapibus. Curabitur gangster urna, pretizzle eu, mattis ac, gangster vitae, fo shizzle. You son of a bizzle dang. Integer sempizzle velit sizzle purus.",
 		"two-truths": {
 			"lie": [
@@ -11471,7 +11505,10 @@ var scalees = [
 		"id": "person15",
 		"team": "Marketing",
 		"scalee": "Mark_Lauricello.svg",
-		"tags": ["Boulder", "Marketing", "Alt-Milk"],
+		"location": ["Boulder"],
+		"team": ["Design"],
+		"quirks": ["Cycling"],
+		"logo": ["sketchup"],
 		"bio": "Lorizzle izzle dolizzle doggy amizzle, consectetizzle adipiscing elit. Nullam sapizzle velizzle, stuff volutpat, suscipit quizzle, fo shizzle shit, arcu. Pellentesque egizzle doggy. Ass erizzle. Its fo rizzle izzle dolor dapibizzle turpis tempizzle gizzle. That's the shizzle pellentesque brizzle daahng dawg turpis. Vestibulum in tortor. Pellentesque eleifend rhoncizzle gangster. In break it down habitasse platea dictumst. Yippiyo dapibus. Curabitur gangster urna, pretizzle eu, mattis ac, gangster vitae, fo shizzle. You son of a bizzle dang. Integer sempizzle velit sizzle purus.",
 		"two-truths": {
 			"lie": [
@@ -11495,7 +11532,10 @@ var scalees = [
 		"id": "person16",
 		"team": "Marketing",
 		"scalee": "Matt_Robison.svg",
-		"tags": ["Boulder", "Marketing", "Alt-Milk"],
+		"location": ["Boulder"],
+		"team": ["Knowledge"],
+		"quirks": ["Alt-Milk"],
+		"logo": ["sketchup"],
 		"bio": "Lorizzle izzle dolizzle doggy amizzle, consectetizzle adipiscing elit. Nullam sapizzle velizzle, stuff volutpat, suscipit quizzle, fo shizzle shit, arcu. Pellentesque egizzle doggy. Ass erizzle. Its fo rizzle izzle dolor dapibizzle turpis tempizzle gizzle. That's the shizzle pellentesque brizzle daahng dawg turpis. Vestibulum in tortor. Pellentesque eleifend rhoncizzle gangster. In break it down habitasse platea dictumst. Yippiyo dapibus. Curabitur gangster urna, pretizzle eu, mattis ac, gangster vitae, fo shizzle. You son of a bizzle dang. Integer sempizzle velit sizzle purus.",
 		"two-truths": {
 			"lie": [
@@ -11519,7 +11559,10 @@ var scalees = [
 		"id": "person17",
 		"team": "Marketing",
 		"scalee": "Mike_Tadros.svg",
-		"tags": ["Boulder", "Marketing", "Alt-Milk"],
+		"location": ["Boulder"],
+		"team": ["Executive"],
+		"quirks": ["Flatirons"],
+		"logo": ["sefaira"],
 		"bio": "Lorizzle izzle dolizzle doggy amizzle, consectetizzle adipiscing elit. Nullam sapizzle velizzle, stuff volutpat, suscipit quizzle, fo shizzle shit, arcu. Pellentesque egizzle doggy. Ass erizzle. Its fo rizzle izzle dolor dapibizzle turpis tempizzle gizzle. That's the shizzle pellentesque brizzle daahng dawg turpis. Vestibulum in tortor. Pellentesque eleifend rhoncizzle gangster. In break it down habitasse platea dictumst. Yippiyo dapibus. Curabitur gangster urna, pretizzle eu, mattis ac, gangster vitae, fo shizzle. You son of a bizzle dang. Integer sempizzle velit sizzle purus.",
 		"two-truths": {
 			"lie": [
@@ -11543,7 +11586,10 @@ var scalees = [
 		"id": "person18",
 		"team": "Marketing",
 		"scalee": "Omar_Soubra.svg",
-		"tags": ["Boulder", "Marketing", "Alt-Milk"],
+		"location": ["London"],
+		"team": ["Engineering"],
+		"quirks": ["Disc Golf"],
+		"logo": ["sketchup"],
 		"bio": "Lorizzle izzle dolizzle doggy amizzle, consectetizzle adipiscing elit. Nullam sapizzle velizzle, stuff volutpat, suscipit quizzle, fo shizzle shit, arcu. Pellentesque egizzle doggy. Ass erizzle. Its fo rizzle izzle dolor dapibizzle turpis tempizzle gizzle. That's the shizzle pellentesque brizzle daahng dawg turpis. Vestibulum in tortor. Pellentesque eleifend rhoncizzle gangster. In break it down habitasse platea dictumst. Yippiyo dapibus. Curabitur gangster urna, pretizzle eu, mattis ac, gangster vitae, fo shizzle. You son of a bizzle dang. Integer sempizzle velit sizzle purus.",
 		"two-truths": {
 			"lie": [
@@ -11567,7 +11613,10 @@ var scalees = [
 		"id": "person19",
 		"team": "Marketing",
 		"scalee": "Sandra_Winstead.svg",
-		"tags": ["Boulder", "Marketing", "Alt-Milk"],
+		"location": ["New York"],
+		"team": ["Design"],
+		"quirks": ["Cycling", "Disc Golf"],
+		"logo": ["trimble"],
 		"bio": "Lorizzle izzle dolizzle doggy amizzle, consectetizzle adipiscing elit. Nullam sapizzle velizzle, stuff volutpat, suscipit quizzle, fo shizzle shit, arcu. Pellentesque egizzle doggy. Ass erizzle. Its fo rizzle izzle dolor dapibizzle turpis tempizzle gizzle. That's the shizzle pellentesque brizzle daahng dawg turpis. Vestibulum in tortor. Pellentesque eleifend rhoncizzle gangster. In break it down habitasse platea dictumst. Yippiyo dapibus. Curabitur gangster urna, pretizzle eu, mattis ac, gangster vitae, fo shizzle. You son of a bizzle dang. Integer sempizzle velit sizzle purus.",
 		"two-truths": {
 			"lie": [
@@ -11591,7 +11640,10 @@ var scalees = [
 		"id": "person20",
 		"team": "Marketing",
 		"scalee": "Sarah_Pirila.svg",
-		"tags": ["Boulder", "Marketing", "Alt-Milk"],
+		"location": ["Hong Kong"],
+		"team": ["Knowledge"],
+		"quirks": ["Alt-Milk"],
+		"logo": ["sketchup"],
 		"bio": "Lorizzle izzle dolizzle doggy amizzle, consectetizzle adipiscing elit. Nullam sapizzle velizzle, stuff volutpat, suscipit quizzle, fo shizzle shit, arcu. Pellentesque egizzle doggy. Ass erizzle. Its fo rizzle izzle dolor dapibizzle turpis tempizzle gizzle. That's the shizzle pellentesque brizzle daahng dawg turpis. Vestibulum in tortor. Pellentesque eleifend rhoncizzle gangster. In break it down habitasse platea dictumst. Yippiyo dapibus. Curabitur gangster urna, pretizzle eu, mattis ac, gangster vitae, fo shizzle. You son of a bizzle dang. Integer sempizzle velit sizzle purus.",
 		"two-truths": {
 			"lie": [
@@ -11615,7 +11667,10 @@ var scalees = [
 		"id": "person21",
 		"team": "Marketing",
 		"scalee": "Trent_Cito.svg",
-		"tags": ["Boulder", "Marketing", "Alt-Milk"],
+		"location": ["Moon"],
+		"team": ["Marketing"],
+		"quirks": ["Coffee"],
+		"logo": ["sketchup"],
 		"bio": "Lorizzle izzle dolizzle doggy amizzle, consectetizzle adipiscing elit. Nullam sapizzle velizzle, stuff volutpat, suscipit quizzle, fo shizzle shit, arcu. Pellentesque egizzle doggy. Ass erizzle. Its fo rizzle izzle dolor dapibizzle turpis tempizzle gizzle. That's the shizzle pellentesque brizzle daahng dawg turpis. Vestibulum in tortor. Pellentesque eleifend rhoncizzle gangster. In break it down habitasse platea dictumst. Yippiyo dapibus. Curabitur gangster urna, pretizzle eu, mattis ac, gangster vitae, fo shizzle. You son of a bizzle dang. Integer sempizzle velit sizzle purus.",
 		"two-truths": {
 			"lie": [
@@ -11639,7 +11694,10 @@ var scalees = [
 		"id": "person22",
 		"team": "Marketing",
 		"scalee": "Tyler_Barnard.svg",
-		"tags": ["Boulder", "Marketing", "Alt-Milk"],
+		"location": ["New York"],
+		"team": ["Design"],
+		"quirks": ["Disc Golf"],
+		"logo": ["sketchup"],
 		"bio": "Lorizzle izzle dolizzle doggy amizzle, consectetizzle adipiscing elit. Nullam sapizzle velizzle, stuff volutpat, suscipit quizzle, fo shizzle shit, arcu. Pellentesque egizzle doggy. Ass erizzle. Its fo rizzle izzle dolor dapibizzle turpis tempizzle gizzle. That's the shizzle pellentesque brizzle daahng dawg turpis. Vestibulum in tortor. Pellentesque eleifend rhoncizzle gangster. In break it down habitasse platea dictumst. Yippiyo dapibus. Curabitur gangster urna, pretizzle eu, mattis ac, gangster vitae, fo shizzle. You son of a bizzle dang. Integer sempizzle velit sizzle purus.",
 		"two-truths": {
 			"lie": [
@@ -11663,7 +11721,10 @@ var scalees = [
 		"id": "person23",
 		"team": "Marketing",
 		"scalee": "Tyler_Miller.svg",
-		"tags": ["Boulder", "Marketing", "Alt-Milk"],
+		"location": ["Hong Kong"],
+		"team": ["Knowledge"],
+		"quirks": ["Alt-Milk"],
+		"logo": ["sefaira"],
 		"bio": "Lorizzle izzle dolizzle doggy amizzle, consectetizzle adipiscing elit. Nullam sapizzle velizzle, stuff volutpat, suscipit quizzle, fo shizzle shit, arcu. Pellentesque egizzle doggy. Ass erizzle. Its fo rizzle izzle dolor dapibizzle turpis tempizzle gizzle. That's the shizzle pellentesque brizzle daahng dawg turpis. Vestibulum in tortor. Pellentesque eleifend rhoncizzle gangster. In break it down habitasse platea dictumst. Yippiyo dapibus. Curabitur gangster urna, pretizzle eu, mattis ac, gangster vitae, fo shizzle. You son of a bizzle dang. Integer sempizzle velit sizzle purus.",
 		"two-truths": {
 			"lie": [

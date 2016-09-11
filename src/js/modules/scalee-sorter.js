@@ -1,8 +1,12 @@
 // 'use strict';
 
 var $ = require('jquery');
-var LeaderData = require('./leaderboard-data.js');
+var Data = require('./model-data.js');
 var Util = require('./util.js');
+
+// var ScaleeData = Data.rawData;
+// var TagData = Data.tagsData;
+// var LeaderData = Data.leaderData;
 
 
 // ------------------------
@@ -59,6 +63,7 @@ var $scaleeInFocus;
 var isMobile = Util.isMobile();
 
 
+
 // Bind events
 //------------
 function eventsOn() {
@@ -107,74 +112,25 @@ function eventsOn() {
   });
 }
 
+
 // Open Filter Bar
 //------------
 function openPanel() {
-  // - change styles
-  $slide1.addClass('edit-mode');
-
   // - scroll to position
   TweenMax.to(window, 0.7, {scrollTo:'#meet'});
 
-  // -lock scroll
+  // - change styles and lock scroll
+  $slide1.addClass('edit-mode');
   $body.addClass('fixed');
 
   // - save state
   panelOpen = true;
 }
 
-
-// Collapse Filter Bar
-//---------------
-// Change height of 'wheel-selector' to only show one item
-// function setClosedHeight() {
-//   $wheelSelectors.css('height', itemHeight+'px');
-// }
-
 function closePanel() {
-
-  // function setFilterPos() {
-
-  //   // - get selected elements
-  //   var $selectedFilters = $wheelSelectors.find('.selected');
-
-  //   // - for each selection, slide up, and save value
-  //   $selectedFilters.each(function(){
-  //     // - get index, multiplying height, then scrolling to that
-  //     var $this = $(this);
-  //     var itemIndex = $this.index();
-  //     var scrollAmt = itemIndex * (itemHeight + 3); // Not sure why need to add the extra 3 px
-
-  //     $this.parents('.wheel-selector').animate({
-  //       scrollTop: scrollAmt
-  //     }, 300);
-  //   });
-
-  //   // - wait for animation, then remove scroll ability
-  //   window.setTimeout(function(){
-  //     $slide1.removeClass('edit-mode');
-  //   }, 500);
-
-  // }
-
-
-  // // On mobile, just remove the class and collapse control panel...
-  // if (isMobile) {
-    $slide1.removeClass('edit-mode');
-
-    $body.removeClass('fixed');
-  // // Else collapse the wheels and show the selected...
-  // } else {
-  //   setClosedHeight();
-  //   setFilterPos();
-
-  //   // - turn back on scroll-triggered nav
-  //   // ScrollNav.eventsOn();
-  // }
-
-  // - save state
+  $slide1.removeClass('edit-mode');
+  $body.removeClass('fixed');
   panelOpen = false;
-
 } // end closePanel();
 
 
@@ -334,8 +290,8 @@ function initLeaderboard() {
   var $buttonTemplate = $('<button class="leader"></button>');
 
   // Create buttons for leaderboard switching
-  for (var event in LeaderData) {
-    var eventObj = LeaderData[event];
+  for (var event in Data) {
+    var eventObj = Data[event];
     var $newBtn = $buttonTemplate.clone().text( eventObj.name ).attr('data-leader-id', event);
 
     // Insert new btn
@@ -361,7 +317,7 @@ function initLeaderboard() {
 function switchLeaderboard(eventName, $btn) {
   // Switch src attribute to those of the top 5 poeple's scalee
 
-  var eventObj = LeaderData[eventName];
+  var eventObj = Data[eventName];
   var leaders = eventObj.leaders;
 
   // - loop through data, get img src attribute, then apply to 'leader-boxes'
