@@ -57,7 +57,8 @@ function addToLeaders(scaleeObj){
 			gameObj.leaders[rankObj.place] = scaleeObj.id;
 		});
 
-		console.log('Leaderboard Obj: %o', leaderObj);
+		console.log('New Leaderboard Obj: %o', leaderObj);
+		console.log('-----------------');
 	}
 }
 
@@ -129,6 +130,8 @@ function createScaless() {
 	tags.location.sort().reverse(); // Put 'Boulder' on top
 	tags.team.sort();
 	tags.quirks.sort();
+
+	console.log('Scalees created');
 }
 
 

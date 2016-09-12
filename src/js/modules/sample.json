@@ -1,0 +1,60 @@
+{
+	"scalees": [
+		{
+			"id": "person1",
+			"name": "Aaron Dietzen",
+			"src": "Aaron_Dietzen.svg",
+			"bio": "Lorizzle izzle dolizzle doggy amizzle, consectetizzle adipiscing elit. Nullam sapizzle velizzle, stuff volutpat, suscipit quizzle, fo shizzle shit, arcu. Pellentesque egizzle doggy. Ass erizzle. Its fo rizzle izzle dolor dapibizzle turpis tempizzle gizzle. That's the shizzle pellentesque brizzle daahng dawg turpis. Vestibulum in tortor. Pellentesque eleifend rhoncizzle gangster. In break it down habitasse platea dictumst. Yippiyo dapibus. Curabitur gangster urna, pretizzle eu, mattis ac, gangster vitae, fo shizzle. You son of a bizzle dang. Integer sempizzle velit sizzle purus.",
+			"twoTruths": {
+				"lie": [
+					"My uncle Vincent created the font Comic Sans by tracing my handwriting from a Christmas card."
+				],
+				"truths": [
+					"I ranked first in an Air Training Corps rifle competition. The same week, I topped the world leaderboard for an online F.P.S.",
+					"I have flown acrobatic maneuvers in a small aircraft."
+				]
+			},
+
+			// location, team, and quirks are optional, or can be null.
+			// - any values can be used here, and the filters will generate from what's present
+			"location": ["Boulder"],
+			"team": ["Marketing"],
+			"quirks": ["Alt-Milk"],
+
+			// logo property indicates which logos should show for scalee
+			// - current possible values: "sketchup", "sefaira", "trimble"
+			"logo": ["sketchup"],
+			
+			// Each link is optional, and if the property (eg links.posts or links.mail) is absent, the appopriate button will hide
+			"links": {
+				"posts": "//www.sketchup.com",
+				"mail": "mailto:trump@trump.com",
+				"linkedin": "//www.linkedin.com",
+				"twitter": "//www.twitter.com"
+			},
+
+			// Optional: this property can be absent, or have length 0,
+			// - any values are accepted, leaderboard and buttons will generate from what's provided
+			"leaderboard": [
+				{
+					"gameName": "Disc Golf",
+					"gameId": "discgolf",
+					"place": 1
+				},
+				{
+					"gameName": "LIFE",
+					"gameId": "life",
+					"place": 2
+				}
+			],
+		},
+	],
+	"jobs": [
+		{
+			"title": "Barista",
+			"team": "Knowledge",
+			"description": "Lorizzle izzle dolizzle doggy amizzle, consectetizzle adipiscing elit. Nullam sapizzle velizzle, stuff volutpat, suscipit quizzle, fo shizzle shit, arcu. Pellentesque egizzle doggy. Ass erizzle.",
+			"link": "//www.sketchup.com"
+		},
+	]
+}

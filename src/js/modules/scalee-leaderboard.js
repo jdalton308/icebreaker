@@ -67,14 +67,14 @@ function switchLeaderboard(eventName, $btn) {
 
 	function animateChange(id, position) {
 		var personImgSrc = getScaleeSrc(id);
-		var $targetImg = $leaderBoxes.eq( position-1 ).children('img');
+		var $targetImg = $leaderBoxes.filter('.box-'+ position).children('img');
 
 		// - hide img, wait for transition, then switch img and show
 		$targetImg.addClass('hide');
 
 		window.setTimeout(function(){
 			$targetImg.attr('src', personImgSrc).removeClass('hide');
-		}, 300);
+		}, 400);
 	}
 
 	function getScaleeSrc(scaleeId) {

@@ -63,8 +63,8 @@ var scalees = [
 		},
 		"leaderboard": [
 			{
-				"gameName": "Most Cups of Coffee",
-				"gameId": "coffee",
+				"gameName": "Disc Golf",
+				"gameId": "discgolf",
 				"place": 1
 			}
 		],
@@ -96,9 +96,9 @@ var scalees = [
 		},
 		"leaderboard": [
 			{
-				"gameName": "Most Cups of Coffee",
-				"gameId": "coffee",
-				"place": 1
+				"gameName": "Disc Golf",
+				"gameId": "discgolf",
+				"place": 2
 			}
 		],
 	},
@@ -129,9 +129,9 @@ var scalees = [
 		},
 		"leaderboard": [
 			{
-				"gameName": "Most Cups of Coffee",
-				"gameId": "coffee",
-				"place": 1
+				"gameName": "Disc Golf",
+				"gameId": "discgolf",
+				"place": 3
 			}
 		],
 	},
@@ -197,7 +197,7 @@ var scalees = [
 			{
 				"gameName": "Most Cups of Coffee",
 				"gameId": "coffee",
-				"place": 1
+				"place": 2
 			}
 		],
 	},
@@ -230,7 +230,7 @@ var scalees = [
 			{
 				"gameName": "Most Cups of Coffee",
 				"gameId": "coffee",
-				"place": 1
+				"place": 3
 			}
 		],
 	},
@@ -261,9 +261,9 @@ var scalees = [
 		},
 		"leaderboard": [
 			{
-				"gameName": "Most Cups of Coffee",
-				"gameId": "coffee",
-				"place": 1
+				"gameName": "Best Socks",
+				"gameId": "socks",
+				"place": 2
 			}
 		],
 	},
@@ -292,13 +292,13 @@ var scalees = [
 				"I have flown acrobatic maneuvers in a small aircraft."
 			]
 		},
-		"leaderboard": [
-			{
-				"gameName": "Most Cups of Coffee",
-				"gameId": "coffee",
-				"place": 1
-			}
-		],
+		// "leaderboard": [
+		// 	{
+		// 		"gameName": "Most Cups of Coffee",
+		// 		"gameId": "coffee",
+		// 		"place": 1
+		// 	}
+		// ],
 	},
 	{
 		"name": "Chris Fullmer",
@@ -327,9 +327,9 @@ var scalees = [
 		},
 		"leaderboard": [
 			{
-				"gameName": "Most Cups of Coffee",
-				"gameId": "coffee",
-				"place": 1
+				"gameName": "Best Socks",
+				"gameId": "socks",
+				"place": 3
 			}
 		],
 	},
@@ -393,8 +393,8 @@ var scalees = [
 		},
 		"leaderboard": [
 			{
-				"gameName": "Most Cups of Coffee",
-				"gameId": "coffee",
+				"gameName": "Cutest Dog",
+				"gameId": "dog",
 				"place": 1
 			}
 		],
@@ -426,9 +426,9 @@ var scalees = [
 		},
 		"leaderboard": [
 			{
-				"gameName": "Most Cups of Coffee",
-				"gameId": "coffee",
-				"place": 1
+				"gameName": "Cutest Dog",
+				"gameId": "dog",
+				"place": 2
 			}
 		],
 	},
@@ -459,9 +459,9 @@ var scalees = [
 		},
 		"leaderboard": [
 			{
-				"gameName": "Most Cups of Coffee",
-				"gameId": "coffee",
-				"place": 1
+				"gameName": "Cutest Dog",
+				"gameId": "dog",
+				"place": 3
 			}
 		],
 	},
@@ -491,11 +491,11 @@ var scalees = [
 			]
 		},
 		"leaderboard": [
-			{
-				"gameName": "Most Cups of Coffee",
-				"gameId": "coffee",
-				"place": 1
-			}
+			// {
+			// 	"gameName": "Most Cups of Coffee",
+			// 	"gameId": "coffee",
+			// 	"place": 1
+			// }
 		],
 	},
 	{
@@ -524,11 +524,11 @@ var scalees = [
 			]
 		},
 		"leaderboard": [
-			{
-				"gameName": "Most Cups of Coffee",
-				"gameId": "coffee",
-				"place": 1
-			}
+			// {
+			// 	"gameName": "Most Cups of Coffee",
+			// 	"gameId": "coffee",
+			// 	"place": 1
+			// }
 		],
 	},
 	{
@@ -557,11 +557,11 @@ var scalees = [
 			]
 		},
 		"leaderboard": [
-			{
-				"gameName": "Most Cups of Coffee",
-				"gameId": "coffee",
-				"place": 1
-			}
+			// {
+			// 	"gameName": "Most Cups of Coffee",
+			// 	"gameId": "coffee",
+			// 	"place": 1
+			// }
 		],
 	},
 	{
@@ -589,13 +589,13 @@ var scalees = [
 				"I have flown acrobatic maneuvers in a small aircraft."
 			]
 		},
-		"leaderboard": [
-			{
-				"gameName": "Most Cups of Coffee",
-				"gameId": "coffee",
-				"place": 1
-			}
-		],
+		// "leaderboard": [
+		// 	{
+		// 		"gameName": "Most Cups of Coffee",
+		// 		"gameId": "coffee",
+		// 		"place": 1
+		// 	}
+		// ],
 	},
 	{
 		"name": "Omar Soubra",
@@ -623,11 +623,11 @@ var scalees = [
 			]
 		},
 		"leaderboard": [
-			{
-				"gameName": "Most Cups of Coffee",
-				"gameId": "coffee",
-				"place": 1
-			}
+			// {
+			// 	"gameName": "Most Cups of Coffee",
+			// 	"gameId": "coffee",
+			// 	"place": 1
+			// }
 		],
 	},
 	{
@@ -656,11 +656,11 @@ var scalees = [
 			]
 		},
 		"leaderboard": [
-			{
-				"gameName": "Most Cups of Coffee",
-				"gameId": "coffee",
-				"place": 1
-			}
+			// {
+			// 	"gameName": "Most Cups of Coffee",
+			// 	"gameId": "coffee",
+			// 	"place": 1
+			// }
 		],
 	},
 	{
@@ -689,11 +689,11 @@ var scalees = [
 			]
 		},
 		"leaderboard": [
-			{
-				"gameName": "Most Cups of Coffee",
-				"gameId": "coffee",
-				"place": 1
-			}
+			// {
+			// 	"gameName": "Most Cups of Coffee",
+			// 	"gameId": "coffee",
+			// 	"place": 1
+			// }
 		],
 	},
 	{
@@ -723,9 +723,9 @@ var scalees = [
 		},
 		"leaderboard": [
 			{
-				"gameName": "Most Cups of Coffee",
-				"gameId": "coffee",
-				"place": 1
+				"gameName": "LIFE",
+				"gameId": "life",
+				"place": 3
 			}
 		],
 	},
@@ -756,8 +756,13 @@ var scalees = [
 		},
 		"leaderboard": [
 			{
-				"gameName": "Most Cups of Coffee",
-				"gameId": "coffee",
+				"gameName": "Best Socks",
+				"gameId": "socks",
+				"place": 1
+			},
+			{
+				"gameName": "LIFE",
+				"gameId": "life",
 				"place": 1
 			}
 		],
@@ -789,9 +794,9 @@ var scalees = [
 		},
 		"leaderboard": [
 			{
-				"gameName": "Most Cups of Coffee",
-				"gameId": "coffee",
-				"place": 1
+				"gameName": "LIFE",
+				"gameId": "life",
+				"place": 2
 			}
 		],
 	}

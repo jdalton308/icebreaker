@@ -11184,8 +11184,8 @@ var scalees = [
 		},
 		"leaderboard": [
 			{
-				"gameName": "Most Cups of Coffee",
-				"gameId": "coffee",
+				"gameName": "Disc Golf",
+				"gameId": "discgolf",
 				"place": 1
 			}
 		],
@@ -11217,9 +11217,9 @@ var scalees = [
 		},
 		"leaderboard": [
 			{
-				"gameName": "Most Cups of Coffee",
-				"gameId": "coffee",
-				"place": 1
+				"gameName": "Disc Golf",
+				"gameId": "discgolf",
+				"place": 2
 			}
 		],
 	},
@@ -11250,9 +11250,9 @@ var scalees = [
 		},
 		"leaderboard": [
 			{
-				"gameName": "Most Cups of Coffee",
-				"gameId": "coffee",
-				"place": 1
+				"gameName": "Disc Golf",
+				"gameId": "discgolf",
+				"place": 3
 			}
 		],
 	},
@@ -11318,7 +11318,7 @@ var scalees = [
 			{
 				"gameName": "Most Cups of Coffee",
 				"gameId": "coffee",
-				"place": 1
+				"place": 2
 			}
 		],
 	},
@@ -11351,7 +11351,7 @@ var scalees = [
 			{
 				"gameName": "Most Cups of Coffee",
 				"gameId": "coffee",
-				"place": 1
+				"place": 3
 			}
 		],
 	},
@@ -11382,9 +11382,9 @@ var scalees = [
 		},
 		"leaderboard": [
 			{
-				"gameName": "Most Cups of Coffee",
-				"gameId": "coffee",
-				"place": 1
+				"gameName": "Best Socks",
+				"gameId": "socks",
+				"place": 2
 			}
 		],
 	},
@@ -11413,13 +11413,13 @@ var scalees = [
 				"I have flown acrobatic maneuvers in a small aircraft."
 			]
 		},
-		"leaderboard": [
-			{
-				"gameName": "Most Cups of Coffee",
-				"gameId": "coffee",
-				"place": 1
-			}
-		],
+		// "leaderboard": [
+		// 	{
+		// 		"gameName": "Most Cups of Coffee",
+		// 		"gameId": "coffee",
+		// 		"place": 1
+		// 	}
+		// ],
 	},
 	{
 		"name": "Chris Fullmer",
@@ -11448,9 +11448,9 @@ var scalees = [
 		},
 		"leaderboard": [
 			{
-				"gameName": "Most Cups of Coffee",
-				"gameId": "coffee",
-				"place": 1
+				"gameName": "Best Socks",
+				"gameId": "socks",
+				"place": 3
 			}
 		],
 	},
@@ -11514,8 +11514,8 @@ var scalees = [
 		},
 		"leaderboard": [
 			{
-				"gameName": "Most Cups of Coffee",
-				"gameId": "coffee",
+				"gameName": "Cutest Dog",
+				"gameId": "dog",
 				"place": 1
 			}
 		],
@@ -11547,9 +11547,9 @@ var scalees = [
 		},
 		"leaderboard": [
 			{
-				"gameName": "Most Cups of Coffee",
-				"gameId": "coffee",
-				"place": 1
+				"gameName": "Cutest Dog",
+				"gameId": "dog",
+				"place": 2
 			}
 		],
 	},
@@ -11580,9 +11580,9 @@ var scalees = [
 		},
 		"leaderboard": [
 			{
-				"gameName": "Most Cups of Coffee",
-				"gameId": "coffee",
-				"place": 1
+				"gameName": "Cutest Dog",
+				"gameId": "dog",
+				"place": 3
 			}
 		],
 	},
@@ -11612,11 +11612,11 @@ var scalees = [
 			]
 		},
 		"leaderboard": [
-			{
-				"gameName": "Most Cups of Coffee",
-				"gameId": "coffee",
-				"place": 1
-			}
+			// {
+			// 	"gameName": "Most Cups of Coffee",
+			// 	"gameId": "coffee",
+			// 	"place": 1
+			// }
 		],
 	},
 	{
@@ -11645,11 +11645,11 @@ var scalees = [
 			]
 		},
 		"leaderboard": [
-			{
-				"gameName": "Most Cups of Coffee",
-				"gameId": "coffee",
-				"place": 1
-			}
+			// {
+			// 	"gameName": "Most Cups of Coffee",
+			// 	"gameId": "coffee",
+			// 	"place": 1
+			// }
 		],
 	},
 	{
@@ -11678,11 +11678,11 @@ var scalees = [
 			]
 		},
 		"leaderboard": [
-			{
-				"gameName": "Most Cups of Coffee",
-				"gameId": "coffee",
-				"place": 1
-			}
+			// {
+			// 	"gameName": "Most Cups of Coffee",
+			// 	"gameId": "coffee",
+			// 	"place": 1
+			// }
 		],
 	},
 	{
@@ -11710,13 +11710,13 @@ var scalees = [
 				"I have flown acrobatic maneuvers in a small aircraft."
 			]
 		},
-		"leaderboard": [
-			{
-				"gameName": "Most Cups of Coffee",
-				"gameId": "coffee",
-				"place": 1
-			}
-		],
+		// "leaderboard": [
+		// 	{
+		// 		"gameName": "Most Cups of Coffee",
+		// 		"gameId": "coffee",
+		// 		"place": 1
+		// 	}
+		// ],
 	},
 	{
 		"name": "Omar Soubra",
@@ -11744,11 +11744,11 @@ var scalees = [
 			]
 		},
 		"leaderboard": [
-			{
-				"gameName": "Most Cups of Coffee",
-				"gameId": "coffee",
-				"place": 1
-			}
+			// {
+			// 	"gameName": "Most Cups of Coffee",
+			// 	"gameId": "coffee",
+			// 	"place": 1
+			// }
 		],
 	},
 	{
@@ -11777,11 +11777,11 @@ var scalees = [
 			]
 		},
 		"leaderboard": [
-			{
-				"gameName": "Most Cups of Coffee",
-				"gameId": "coffee",
-				"place": 1
-			}
+			// {
+			// 	"gameName": "Most Cups of Coffee",
+			// 	"gameId": "coffee",
+			// 	"place": 1
+			// }
 		],
 	},
 	{
@@ -11810,11 +11810,11 @@ var scalees = [
 			]
 		},
 		"leaderboard": [
-			{
-				"gameName": "Most Cups of Coffee",
-				"gameId": "coffee",
-				"place": 1
-			}
+			// {
+			// 	"gameName": "Most Cups of Coffee",
+			// 	"gameId": "coffee",
+			// 	"place": 1
+			// }
 		],
 	},
 	{
@@ -11844,9 +11844,9 @@ var scalees = [
 		},
 		"leaderboard": [
 			{
-				"gameName": "Most Cups of Coffee",
-				"gameId": "coffee",
-				"place": 1
+				"gameName": "LIFE",
+				"gameId": "life",
+				"place": 3
 			}
 		],
 	},
@@ -11877,8 +11877,13 @@ var scalees = [
 		},
 		"leaderboard": [
 			{
-				"gameName": "Most Cups of Coffee",
-				"gameId": "coffee",
+				"gameName": "Best Socks",
+				"gameId": "socks",
+				"place": 1
+			},
+			{
+				"gameName": "LIFE",
+				"gameId": "life",
 				"place": 1
 			}
 		],
@@ -11910,9 +11915,9 @@ var scalees = [
 		},
 		"leaderboard": [
 			{
-				"gameName": "Most Cups of Coffee",
-				"gameId": "coffee",
-				"place": 1
+				"gameName": "LIFE",
+				"gameId": "life",
+				"place": 2
 			}
 		],
 	}
@@ -12253,7 +12258,8 @@ function addToLeaders(scaleeObj){
 			gameObj.leaders[rankObj.place] = scaleeObj.id;
 		});
 
-		console.log('Leaderboard Obj: %o', leaderObj);
+		console.log('New Leaderboard Obj: %o', leaderObj);
+		console.log('-----------------');
 	}
 }
 
@@ -12325,6 +12331,8 @@ function createScaless() {
 	tags.location.sort().reverse(); // Put 'Boulder' on top
 	tags.team.sort();
 	tags.quirks.sort();
+
+	console.log('Scalees created');
 }
 
 
@@ -12404,14 +12412,14 @@ function switchLeaderboard(eventName, $btn) {
 
 	function animateChange(id, position) {
 		var personImgSrc = getScaleeSrc(id);
-		var $targetImg = $leaderBoxes.eq( position-1 ).children('img');
+		var $targetImg = $leaderBoxes.filter('.box-'+ position).children('img');
 
 		// - hide img, wait for transition, then switch img and show
 		$targetImg.addClass('hide');
 
 		window.setTimeout(function(){
 			$targetImg.attr('src', personImgSrc).removeClass('hide');
-		}, 300);
+		}, 400);
 	}
 
 	function getScaleeSrc(scaleeId) {

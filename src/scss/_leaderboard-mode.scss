@@ -57,12 +57,12 @@
 				margin-right: 0;
 			}
 
-			&.first {
+			&.box-1 {
 				.box-title {
 				}
 			}
-			&.second,
-			&.third {
+			&.box-2,
+			&.box-3 {
 				@include transform( scale(0.9) );
 
 				.box-title {

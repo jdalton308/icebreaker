@@ -1326,7 +1326,7 @@ footer {
     transition: all 0.5s; }
     .slide1 .leader-cont .position-box:last-child {
       margin-right: 0; }
-    .slide1 .leader-cont .position-box.second, .slide1 .leader-cont .position-box.third {
+    .slide1 .leader-cont .position-box.box-2, .slide1 .leader-cont .position-box.box-3 {
       -ms-transform: scale(0.9);
       -webkit-transform: scale(0.9);
       transform: scale(0.9); }
