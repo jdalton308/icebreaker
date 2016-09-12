@@ -660,13 +660,15 @@ footer {
       .slide1 .scalee-scroll {
         opacity: 0.5; }
         .slide1 .scalee-scroll.prev {
-          -ms-transform: translateX(-100px);
-          -webkit-transform: translateX(-100px);
-          transform: translateX(-100px); }
+          left: 80px;
+          -ms-transform: translateX(-200px);
+          -webkit-transform: translateX(-200px);
+          transform: translateX(-200px); }
         .slide1 .scalee-scroll.next {
-          -ms-transform: translateX(100px);
-          -webkit-transform: translateX(100px);
-          transform: translateX(100px); }
+          right: 80px;
+          -ms-transform: translateX(200px);
+          -webkit-transform: translateX(200px);
+          transform: translateX(200px); }
         .slide1 .scalee-scroll:hover {
           opacity: 1; } }
   .slide1 .scalee-cont {

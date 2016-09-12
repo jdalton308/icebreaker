@@ -3,7 +3,7 @@
 var $ = require('jquery');
 var ScaleeSorter = require('./scalee-sorter.js');
 
-// NOTE: All GSAP and Scrollmagic dependencies do not work with Browserify, so they have their own gulp task, and are loaded on the page in their own file
+// NOTE: All GSAP and Scrollmagic dependencies do not work with Browserify, so they have their own gulp task, and are loaded on the page in their own file.
 
 
 // -------------------------------
@@ -90,8 +90,6 @@ function scrollAnimate() {
 		// - create measurement reference, only for placing buttons initially
 		var scrollRef = createScrollRef();
 
-		console.log('Scroll Ref:');
-		console.log(scrollRef);
 
 		function createScrollRef() {
 			// for each slide

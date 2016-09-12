@@ -1,38 +1,38 @@
 
-var leaders = {
-	"discgolf": {
-		"name": "Disc Golf",
-		"leaders": {
-			1: "person2",
-			2: "person5",
-			3: "person8",
-		}
-	},
-	"life": {
-		"name": "LIFE",
-		"leaders": {
-			1: "person6",
-			2: "person10",
-			3: "person9",
-		}
-	},
-	"socks": {
-		"name": "Best Socks",
-		"leaders": {
-			1: "person8",
-			2: "person14",
-			3: "person13",
-		}
-	},
-	"coffee": {
-		"name": "Most Cups of Coffee",
-		"leaders": {
-			1: "person9",
-			2: "person1",
-			3: "person3",
-		}
-	},
-};
+// var leaders = {
+// 	"discgolf": {
+// 		"name": "Disc Golf",
+// 		"leaders": {
+// 			1: "person2",
+// 			2: "person5",
+// 			3: "person8",
+// 		}
+// 	},
+// 	"life": {
+// 		"name": "LIFE",
+// 		"leaders": {
+// 			1: "person6",
+// 			2: "person10",
+// 			3: "person9",
+// 		}
+// 	},
+// 	"socks": {
+// 		"name": "Best Socks",
+// 		"leaders": {
+// 			1: "person8",
+// 			2: "person14",
+// 			3: "person13",
+// 		}
+// 	},
+// 	"coffee": {
+// 		"name": "Most Cups of Coffee",
+// 		"leaders": {
+// 			1: "person9",
+// 			2: "person1",
+// 			3: "person3",
+// 		}
+// 	},
+// };
 
 
 var scalees = [
@@ -46,7 +46,13 @@ var scalees = [
 		"quirks": ["Alt-Milk"],
 		"logo": ["sketchup"],
 		"bio": "Lorizzle izzle dolizzle doggy amizzle, consectetizzle adipiscing elit. Nullam sapizzle velizzle, stuff volutpat, suscipit quizzle, fo shizzle shit, arcu. Pellentesque egizzle doggy. Ass erizzle. Its fo rizzle izzle dolor dapibizzle turpis tempizzle gizzle. That's the shizzle pellentesque brizzle daahng dawg turpis. Vestibulum in tortor. Pellentesque eleifend rhoncizzle gangster. In break it down habitasse platea dictumst. Yippiyo dapibus. Curabitur gangster urna, pretizzle eu, mattis ac, gangster vitae, fo shizzle. You son of a bizzle dang. Integer sempizzle velit sizzle purus.",
-		"two-truths": {
+		"links": {
+			"posts": "//www.sketchup.com",
+			"mail": "mailto:trump@trump.com",
+			"linkedin": "//www.linkedin.com",
+			"twitter": "//www.twitter.com"
+		},
+		"twoTruths": {
 			"lie": [
 				"My uncle Vincent created the font Comic Sans by tracing my handwriting from a Christmas card."
 			],
@@ -73,7 +79,13 @@ var scalees = [
 		"quirks": ["Alt-Milk"],
 		"logo": ["trimble"],
 		"bio": "Lorizzle izzle dolizzle doggy amizzle, consectetizzle adipiscing elit. Nullam sapizzle velizzle, stuff volutpat, suscipit quizzle, fo shizzle shit, arcu. Pellentesque egizzle doggy. Ass erizzle. Its fo rizzle izzle dolor dapibizzle turpis tempizzle gizzle. That's the shizzle pellentesque brizzle daahng dawg turpis. Vestibulum in tortor. Pellentesque eleifend rhoncizzle gangster. In break it down habitasse platea dictumst. Yippiyo dapibus. Curabitur gangster urna, pretizzle eu, mattis ac, gangster vitae, fo shizzle. You son of a bizzle dang. Integer sempizzle velit sizzle purus.",
-		"two-truths": {
+		"links": {
+			"posts": "//www.sketchup.com",
+			"mail": "mailto:trump@trump.com",
+			"linkedin": "//www.linkedin.com",
+			"twitter": "//www.twitter.com"
+		},
+		"twoTruths": {
 			"lie": [
 				"My uncle Vincent created the font Comic Sans by tracing my handwriting from a Christmas card."
 			],
@@ -100,7 +112,13 @@ var scalees = [
 		"quirks": ["Cycling"],
 		"logo": ["sketchup"],
 		"bio": "Lorizzle izzle dolizzle doggy amizzle, consectetizzle adipiscing elit. Nullam sapizzle velizzle, stuff volutpat, suscipit quizzle, fo shizzle shit, arcu. Pellentesque egizzle doggy. Ass erizzle. Its fo rizzle izzle dolor dapibizzle turpis tempizzle gizzle. That's the shizzle pellentesque brizzle daahng dawg turpis. Vestibulum in tortor. Pellentesque eleifend rhoncizzle gangster. In break it down habitasse platea dictumst. Yippiyo dapibus. Curabitur gangster urna, pretizzle eu, mattis ac, gangster vitae, fo shizzle. You son of a bizzle dang. Integer sempizzle velit sizzle purus.",
-		"two-truths": {
+		"links": {
+			"posts": "//www.sketchup.com",
+			"mail": "mailto:trump@trump.com",
+			"linkedin": "//www.linkedin.com",
+			"twitter": "//www.twitter.com"
+		},
+		"twoTruths": {
 			"lie": [
 				"My uncle Vincent created the font Comic Sans by tracing my handwriting from a Christmas card."
 			],
@@ -127,7 +145,13 @@ var scalees = [
 		"quirks": ["Disc Golf"],
 		"logo": ["sketchup"],
 		"bio": "Lorizzle izzle dolizzle doggy amizzle, consectetizzle adipiscing elit. Nullam sapizzle velizzle, stuff volutpat, suscipit quizzle, fo shizzle shit, arcu. Pellentesque egizzle doggy. Ass erizzle. Its fo rizzle izzle dolor dapibizzle turpis tempizzle gizzle. That's the shizzle pellentesque brizzle daahng dawg turpis. Vestibulum in tortor. Pellentesque eleifend rhoncizzle gangster. In break it down habitasse platea dictumst. Yippiyo dapibus. Curabitur gangster urna, pretizzle eu, mattis ac, gangster vitae, fo shizzle. You son of a bizzle dang. Integer sempizzle velit sizzle purus.",
-		"two-truths": {
+		"links": {
+			"posts": "//www.sketchup.com",
+			"mail": "mailto:trump@trump.com",
+			"linkedin": "//www.linkedin.com",
+			"twitter": "//www.twitter.com"
+		},
+		"twoTruths": {
 			"lie": [
 				"My uncle Vincent created the font Comic Sans by tracing my handwriting from a Christmas card."
 			],
@@ -154,7 +178,13 @@ var scalees = [
 		"quirks": ["Flatirons"],
 		"logo": ["sketchup"],
 		"bio": "Lorizzle izzle dolizzle doggy amizzle, consectetizzle adipiscing elit. Nullam sapizzle velizzle, stuff volutpat, suscipit quizzle, fo shizzle shit, arcu. Pellentesque egizzle doggy. Ass erizzle. Its fo rizzle izzle dolor dapibizzle turpis tempizzle gizzle. That's the shizzle pellentesque brizzle daahng dawg turpis. Vestibulum in tortor. Pellentesque eleifend rhoncizzle gangster. In break it down habitasse platea dictumst. Yippiyo dapibus. Curabitur gangster urna, pretizzle eu, mattis ac, gangster vitae, fo shizzle. You son of a bizzle dang. Integer sempizzle velit sizzle purus.",
-		"two-truths": {
+		"links": {
+			"posts": "//www.sketchup.com",
+			"mail": "mailto:trump@trump.com",
+			"linkedin": "//www.linkedin.com",
+			"twitter": "//www.twitter.com"
+		},
+		"twoTruths": {
 			"lie": [
 				"My uncle Vincent created the font Comic Sans by tracing my handwriting from a Christmas card."
 			],
@@ -181,7 +211,13 @@ var scalees = [
 		"quirks": ["Alt-Milk"],
 		"logo": ["sketchup"],
 		"bio": "Lorizzle izzle dolizzle doggy amizzle, consectetizzle adipiscing elit. Nullam sapizzle velizzle, stuff volutpat, suscipit quizzle, fo shizzle shit, arcu. Pellentesque egizzle doggy. Ass erizzle. Its fo rizzle izzle dolor dapibizzle turpis tempizzle gizzle. That's the shizzle pellentesque brizzle daahng dawg turpis. Vestibulum in tortor. Pellentesque eleifend rhoncizzle gangster. In break it down habitasse platea dictumst. Yippiyo dapibus. Curabitur gangster urna, pretizzle eu, mattis ac, gangster vitae, fo shizzle. You son of a bizzle dang. Integer sempizzle velit sizzle purus.",
-		"two-truths": {
+		"links": {
+			"posts": "//www.sketchup.com",
+			"mail": "mailto:trump@trump.com",
+			"linkedin": "//www.linkedin.com",
+			"twitter": "//www.twitter.com"
+		},
+		"twoTruths": {
 			"lie": [
 				"My uncle Vincent created the font Comic Sans by tracing my handwriting from a Christmas card."
 			],
@@ -208,7 +244,13 @@ var scalees = [
 		"quirks": ["Disc Golf"],
 		"logo": ["sketchup"],
 		"bio": "Lorizzle izzle dolizzle doggy amizzle, consectetizzle adipiscing elit. Nullam sapizzle velizzle, stuff volutpat, suscipit quizzle, fo shizzle shit, arcu. Pellentesque egizzle doggy. Ass erizzle. Its fo rizzle izzle dolor dapibizzle turpis tempizzle gizzle. That's the shizzle pellentesque brizzle daahng dawg turpis. Vestibulum in tortor. Pellentesque eleifend rhoncizzle gangster. In break it down habitasse platea dictumst. Yippiyo dapibus. Curabitur gangster urna, pretizzle eu, mattis ac, gangster vitae, fo shizzle. You son of a bizzle dang. Integer sempizzle velit sizzle purus.",
-		"two-truths": {
+		"links": {
+			"posts": "//www.sketchup.com",
+			"mail": "mailto:trump@trump.com",
+			"linkedin": "//www.linkedin.com",
+			"twitter": "//www.twitter.com"
+		},
+		"twoTruths": {
 			"lie": [
 				"My uncle Vincent created the font Comic Sans by tracing my handwriting from a Christmas card."
 			],
@@ -235,7 +277,13 @@ var scalees = [
 		"quirks": ["Cycling"],
 		"logo": ["sketchup"],
 		"bio": "Lorizzle izzle dolizzle doggy amizzle, consectetizzle adipiscing elit. Nullam sapizzle velizzle, stuff volutpat, suscipit quizzle, fo shizzle shit, arcu. Pellentesque egizzle doggy. Ass erizzle. Its fo rizzle izzle dolor dapibizzle turpis tempizzle gizzle. That's the shizzle pellentesque brizzle daahng dawg turpis. Vestibulum in tortor. Pellentesque eleifend rhoncizzle gangster. In break it down habitasse platea dictumst. Yippiyo dapibus. Curabitur gangster urna, pretizzle eu, mattis ac, gangster vitae, fo shizzle. You son of a bizzle dang. Integer sempizzle velit sizzle purus.",
-		"two-truths": {
+		"links": {
+			"posts": "//www.sketchup.com",
+			"mail": "mailto:trump@trump.com",
+			"linkedin": "//www.linkedin.com",
+			"twitter": "//www.twitter.com"
+		},
+		"twoTruths": {
 			"lie": [
 				"My uncle Vincent created the font Comic Sans by tracing my handwriting from a Christmas card."
 			],
@@ -262,7 +310,13 @@ var scalees = [
 		"quirks": ["Alt-Milk"],
 		"logo": ["trimble"],
 		"bio": "Lorizzle izzle dolizzle doggy amizzle, consectetizzle adipiscing elit. Nullam sapizzle velizzle, stuff volutpat, suscipit quizzle, fo shizzle shit, arcu. Pellentesque egizzle doggy. Ass erizzle. Its fo rizzle izzle dolor dapibizzle turpis tempizzle gizzle. That's the shizzle pellentesque brizzle daahng dawg turpis. Vestibulum in tortor. Pellentesque eleifend rhoncizzle gangster. In break it down habitasse platea dictumst. Yippiyo dapibus. Curabitur gangster urna, pretizzle eu, mattis ac, gangster vitae, fo shizzle. You son of a bizzle dang. Integer sempizzle velit sizzle purus.",
-		"two-truths": {
+		"links": {
+			"posts": "//www.sketchup.com",
+			"mail": "mailto:trump@trump.com",
+			"linkedin": "//www.linkedin.com",
+			"twitter": "//www.twitter.com"
+		},
+		"twoTruths": {
 			"lie": [
 				"My uncle Vincent created the font Comic Sans by tracing my handwriting from a Christmas card."
 			],
@@ -289,7 +343,13 @@ var scalees = [
 		"quirks": ["Flatirons"],
 		"logo": ["sefaira"],
 		"bio": "Lorizzle izzle dolizzle doggy amizzle, consectetizzle adipiscing elit. Nullam sapizzle velizzle, stuff volutpat, suscipit quizzle, fo shizzle shit, arcu. Pellentesque egizzle doggy. Ass erizzle. Its fo rizzle izzle dolor dapibizzle turpis tempizzle gizzle. That's the shizzle pellentesque brizzle daahng dawg turpis. Vestibulum in tortor. Pellentesque eleifend rhoncizzle gangster. In break it down habitasse platea dictumst. Yippiyo dapibus. Curabitur gangster urna, pretizzle eu, mattis ac, gangster vitae, fo shizzle. You son of a bizzle dang. Integer sempizzle velit sizzle purus.",
-		"two-truths": {
+		"links": {
+			"posts": "//www.sketchup.com",
+			"mail": "mailto:trump@trump.com",
+			"linkedin": "//www.linkedin.com",
+			"twitter": "//www.twitter.com"
+		},
+		"twoTruths": {
 			"lie": [
 				"My uncle Vincent created the font Comic Sans by tracing my handwriting from a Christmas card."
 			],
@@ -316,7 +376,13 @@ var scalees = [
 		"quirks": ["Disc Golf"],
 		"logo": ["sketchup"],
 		"bio": "Lorizzle izzle dolizzle doggy amizzle, consectetizzle adipiscing elit. Nullam sapizzle velizzle, stuff volutpat, suscipit quizzle, fo shizzle shit, arcu. Pellentesque egizzle doggy. Ass erizzle. Its fo rizzle izzle dolor dapibizzle turpis tempizzle gizzle. That's the shizzle pellentesque brizzle daahng dawg turpis. Vestibulum in tortor. Pellentesque eleifend rhoncizzle gangster. In break it down habitasse platea dictumst. Yippiyo dapibus. Curabitur gangster urna, pretizzle eu, mattis ac, gangster vitae, fo shizzle. You son of a bizzle dang. Integer sempizzle velit sizzle purus.",
-		"two-truths": {
+		"links": {
+			"posts": "//www.sketchup.com",
+			"mail": "mailto:trump@trump.com",
+			"linkedin": "//www.linkedin.com",
+			"twitter": "//www.twitter.com"
+		},
+		"twoTruths": {
 			"lie": [
 				"My uncle Vincent created the font Comic Sans by tracing my handwriting from a Christmas card."
 			],
@@ -343,7 +409,13 @@ var scalees = [
 		"quirks": ["Cycling"],
 		"logo": ["sketchup"],
 		"bio": "Lorizzle izzle dolizzle doggy amizzle, consectetizzle adipiscing elit. Nullam sapizzle velizzle, stuff volutpat, suscipit quizzle, fo shizzle shit, arcu. Pellentesque egizzle doggy. Ass erizzle. Its fo rizzle izzle dolor dapibizzle turpis tempizzle gizzle. That's the shizzle pellentesque brizzle daahng dawg turpis. Vestibulum in tortor. Pellentesque eleifend rhoncizzle gangster. In break it down habitasse platea dictumst. Yippiyo dapibus. Curabitur gangster urna, pretizzle eu, mattis ac, gangster vitae, fo shizzle. You son of a bizzle dang. Integer sempizzle velit sizzle purus.",
-		"two-truths": {
+		"links": {
+			"posts": "//www.sketchup.com",
+			"mail": "mailto:trump@trump.com",
+			"linkedin": "//www.linkedin.com",
+			"twitter": "//www.twitter.com"
+		},
+		"twoTruths": {
 			"lie": [
 				"My uncle Vincent created the font Comic Sans by tracing my handwriting from a Christmas card."
 			],
@@ -370,7 +442,13 @@ var scalees = [
 		"quirks": ["Flatirons"],
 		"logo": ["sketchup"],
 		"bio": "Lorizzle izzle dolizzle doggy amizzle, consectetizzle adipiscing elit. Nullam sapizzle velizzle, stuff volutpat, suscipit quizzle, fo shizzle shit, arcu. Pellentesque egizzle doggy. Ass erizzle. Its fo rizzle izzle dolor dapibizzle turpis tempizzle gizzle. That's the shizzle pellentesque brizzle daahng dawg turpis. Vestibulum in tortor. Pellentesque eleifend rhoncizzle gangster. In break it down habitasse platea dictumst. Yippiyo dapibus. Curabitur gangster urna, pretizzle eu, mattis ac, gangster vitae, fo shizzle. You son of a bizzle dang. Integer sempizzle velit sizzle purus.",
-		"two-truths": {
+		"links": {
+			"posts": "//www.sketchup.com",
+			"mail": "mailto:trump@trump.com",
+			"linkedin": "//www.linkedin.com",
+			"twitter": "//www.twitter.com"
+		},
+		"twoTruths": {
 			"lie": [
 				"My uncle Vincent created the font Comic Sans by tracing my handwriting from a Christmas card."
 			],
@@ -397,7 +475,13 @@ var scalees = [
 		"quirks": ["Flatirons"],
 		"logo": ["trimble"],
 		"bio": "Lorizzle izzle dolizzle doggy amizzle, consectetizzle adipiscing elit. Nullam sapizzle velizzle, stuff volutpat, suscipit quizzle, fo shizzle shit, arcu. Pellentesque egizzle doggy. Ass erizzle. Its fo rizzle izzle dolor dapibizzle turpis tempizzle gizzle. That's the shizzle pellentesque brizzle daahng dawg turpis. Vestibulum in tortor. Pellentesque eleifend rhoncizzle gangster. In break it down habitasse platea dictumst. Yippiyo dapibus. Curabitur gangster urna, pretizzle eu, mattis ac, gangster vitae, fo shizzle. You son of a bizzle dang. Integer sempizzle velit sizzle purus.",
-		"two-truths": {
+		"links": {
+			"posts": "//www.sketchup.com",
+			"mail": "mailto:trump@trump.com",
+			"linkedin": "//www.linkedin.com",
+			"twitter": "//www.twitter.com"
+		},
+		"twoTruths": {
 			"lie": [
 				"My uncle Vincent created the font Comic Sans by tracing my handwriting from a Christmas card."
 			],
@@ -424,7 +508,13 @@ var scalees = [
 		"quirks": ["Cycling"],
 		"logo": ["sketchup"],
 		"bio": "Lorizzle izzle dolizzle doggy amizzle, consectetizzle adipiscing elit. Nullam sapizzle velizzle, stuff volutpat, suscipit quizzle, fo shizzle shit, arcu. Pellentesque egizzle doggy. Ass erizzle. Its fo rizzle izzle dolor dapibizzle turpis tempizzle gizzle. That's the shizzle pellentesque brizzle daahng dawg turpis. Vestibulum in tortor. Pellentesque eleifend rhoncizzle gangster. In break it down habitasse platea dictumst. Yippiyo dapibus. Curabitur gangster urna, pretizzle eu, mattis ac, gangster vitae, fo shizzle. You son of a bizzle dang. Integer sempizzle velit sizzle purus.",
-		"two-truths": {
+		"links": {
+			"posts": "//www.sketchup.com",
+			"mail": "mailto:trump@trump.com",
+			"linkedin": "//www.linkedin.com",
+			"twitter": "//www.twitter.com"
+		},
+		"twoTruths": {
 			"lie": [
 				"My uncle Vincent created the font Comic Sans by tracing my handwriting from a Christmas card."
 			],
@@ -451,7 +541,13 @@ var scalees = [
 		"quirks": ["Alt-Milk"],
 		"logo": ["sketchup"],
 		"bio": "Lorizzle izzle dolizzle doggy amizzle, consectetizzle adipiscing elit. Nullam sapizzle velizzle, stuff volutpat, suscipit quizzle, fo shizzle shit, arcu. Pellentesque egizzle doggy. Ass erizzle. Its fo rizzle izzle dolor dapibizzle turpis tempizzle gizzle. That's the shizzle pellentesque brizzle daahng dawg turpis. Vestibulum in tortor. Pellentesque eleifend rhoncizzle gangster. In break it down habitasse platea dictumst. Yippiyo dapibus. Curabitur gangster urna, pretizzle eu, mattis ac, gangster vitae, fo shizzle. You son of a bizzle dang. Integer sempizzle velit sizzle purus.",
-		"two-truths": {
+		"links": {
+			"posts": "//www.sketchup.com",
+			"mail": "mailto:trump@trump.com",
+			"linkedin": "//www.linkedin.com",
+			"twitter": "//www.twitter.com"
+		},
+		"twoTruths": {
 			"lie": [
 				"My uncle Vincent created the font Comic Sans by tracing my handwriting from a Christmas card."
 			],
@@ -478,7 +574,13 @@ var scalees = [
 		"quirks": ["Flatirons"],
 		"logo": ["sefaira"],
 		"bio": "Lorizzle izzle dolizzle doggy amizzle, consectetizzle adipiscing elit. Nullam sapizzle velizzle, stuff volutpat, suscipit quizzle, fo shizzle shit, arcu. Pellentesque egizzle doggy. Ass erizzle. Its fo rizzle izzle dolor dapibizzle turpis tempizzle gizzle. That's the shizzle pellentesque brizzle daahng dawg turpis. Vestibulum in tortor. Pellentesque eleifend rhoncizzle gangster. In break it down habitasse platea dictumst. Yippiyo dapibus. Curabitur gangster urna, pretizzle eu, mattis ac, gangster vitae, fo shizzle. You son of a bizzle dang. Integer sempizzle velit sizzle purus.",
-		"two-truths": {
+		"links": {
+			"posts": "//www.sketchup.com",
+			"mail": "mailto:trump@trump.com",
+			"linkedin": "//www.linkedin.com",
+			"twitter": "//www.twitter.com"
+		},
+		"twoTruths": {
 			"lie": [
 				"My uncle Vincent created the font Comic Sans by tracing my handwriting from a Christmas card."
 			],
@@ -505,7 +607,13 @@ var scalees = [
 		"quirks": ["Disc Golf"],
 		"logo": ["sketchup"],
 		"bio": "Lorizzle izzle dolizzle doggy amizzle, consectetizzle adipiscing elit. Nullam sapizzle velizzle, stuff volutpat, suscipit quizzle, fo shizzle shit, arcu. Pellentesque egizzle doggy. Ass erizzle. Its fo rizzle izzle dolor dapibizzle turpis tempizzle gizzle. That's the shizzle pellentesque brizzle daahng dawg turpis. Vestibulum in tortor. Pellentesque eleifend rhoncizzle gangster. In break it down habitasse platea dictumst. Yippiyo dapibus. Curabitur gangster urna, pretizzle eu, mattis ac, gangster vitae, fo shizzle. You son of a bizzle dang. Integer sempizzle velit sizzle purus.",
-		"two-truths": {
+		"links": {
+			"posts": "//www.sketchup.com",
+			"mail": "mailto:trump@trump.com",
+			"linkedin": "//www.linkedin.com",
+			"twitter": "//www.twitter.com"
+		},
+		"twoTruths": {
 			"lie": [
 				"My uncle Vincent created the font Comic Sans by tracing my handwriting from a Christmas card."
 			],
@@ -532,7 +640,13 @@ var scalees = [
 		"quirks": ["Cycling", "Disc Golf"],
 		"logo": ["trimble"],
 		"bio": "Lorizzle izzle dolizzle doggy amizzle, consectetizzle adipiscing elit. Nullam sapizzle velizzle, stuff volutpat, suscipit quizzle, fo shizzle shit, arcu. Pellentesque egizzle doggy. Ass erizzle. Its fo rizzle izzle dolor dapibizzle turpis tempizzle gizzle. That's the shizzle pellentesque brizzle daahng dawg turpis. Vestibulum in tortor. Pellentesque eleifend rhoncizzle gangster. In break it down habitasse platea dictumst. Yippiyo dapibus. Curabitur gangster urna, pretizzle eu, mattis ac, gangster vitae, fo shizzle. You son of a bizzle dang. Integer sempizzle velit sizzle purus.",
-		"two-truths": {
+		"links": {
+			"posts": "//www.sketchup.com",
+			"mail": "mailto:trump@trump.com",
+			"linkedin": "//www.linkedin.com",
+			"twitter": "//www.twitter.com"
+		},
+		"twoTruths": {
 			"lie": [
 				"My uncle Vincent created the font Comic Sans by tracing my handwriting from a Christmas card."
 			],
@@ -559,7 +673,13 @@ var scalees = [
 		"quirks": ["Alt-Milk"],
 		"logo": ["sketchup"],
 		"bio": "Lorizzle izzle dolizzle doggy amizzle, consectetizzle adipiscing elit. Nullam sapizzle velizzle, stuff volutpat, suscipit quizzle, fo shizzle shit, arcu. Pellentesque egizzle doggy. Ass erizzle. Its fo rizzle izzle dolor dapibizzle turpis tempizzle gizzle. That's the shizzle pellentesque brizzle daahng dawg turpis. Vestibulum in tortor. Pellentesque eleifend rhoncizzle gangster. In break it down habitasse platea dictumst. Yippiyo dapibus. Curabitur gangster urna, pretizzle eu, mattis ac, gangster vitae, fo shizzle. You son of a bizzle dang. Integer sempizzle velit sizzle purus.",
-		"two-truths": {
+		"links": {
+			"posts": "//www.sketchup.com",
+			"mail": "mailto:trump@trump.com",
+			"linkedin": "//www.linkedin.com",
+			"twitter": "//www.twitter.com"
+		},
+		"twoTruths": {
 			"lie": [
 				"My uncle Vincent created the font Comic Sans by tracing my handwriting from a Christmas card."
 			],
@@ -586,7 +706,13 @@ var scalees = [
 		"quirks": ["Coffee"],
 		"logo": ["sketchup"],
 		"bio": "Lorizzle izzle dolizzle doggy amizzle, consectetizzle adipiscing elit. Nullam sapizzle velizzle, stuff volutpat, suscipit quizzle, fo shizzle shit, arcu. Pellentesque egizzle doggy. Ass erizzle. Its fo rizzle izzle dolor dapibizzle turpis tempizzle gizzle. That's the shizzle pellentesque brizzle daahng dawg turpis. Vestibulum in tortor. Pellentesque eleifend rhoncizzle gangster. In break it down habitasse platea dictumst. Yippiyo dapibus. Curabitur gangster urna, pretizzle eu, mattis ac, gangster vitae, fo shizzle. You son of a bizzle dang. Integer sempizzle velit sizzle purus.",
-		"two-truths": {
+		"links": {
+			"posts": "//www.sketchup.com",
+			"mail": "mailto:trump@trump.com",
+			"linkedin": "//www.linkedin.com",
+			"twitter": "//www.twitter.com"
+		},
+		"twoTruths": {
 			"lie": [
 				"My uncle Vincent created the font Comic Sans by tracing my handwriting from a Christmas card."
 			],
@@ -613,7 +739,13 @@ var scalees = [
 		"quirks": ["Disc Golf"],
 		"logo": ["sketchup"],
 		"bio": "Lorizzle izzle dolizzle doggy amizzle, consectetizzle adipiscing elit. Nullam sapizzle velizzle, stuff volutpat, suscipit quizzle, fo shizzle shit, arcu. Pellentesque egizzle doggy. Ass erizzle. Its fo rizzle izzle dolor dapibizzle turpis tempizzle gizzle. That's the shizzle pellentesque brizzle daahng dawg turpis. Vestibulum in tortor. Pellentesque eleifend rhoncizzle gangster. In break it down habitasse platea dictumst. Yippiyo dapibus. Curabitur gangster urna, pretizzle eu, mattis ac, gangster vitae, fo shizzle. You son of a bizzle dang. Integer sempizzle velit sizzle purus.",
-		"two-truths": {
+		"links": {
+			"posts": "//www.sketchup.com",
+			"mail": "mailto:trump@trump.com",
+			"linkedin": "//www.linkedin.com",
+			"twitter": "//www.twitter.com"
+		},
+		"twoTruths": {
 			"lie": [
 				"My uncle Vincent created the font Comic Sans by tracing my handwriting from a Christmas card."
 			],
@@ -640,7 +772,13 @@ var scalees = [
 		"quirks": ["Alt-Milk"],
 		"logo": ["sefaira"],
 		"bio": "Lorizzle izzle dolizzle doggy amizzle, consectetizzle adipiscing elit. Nullam sapizzle velizzle, stuff volutpat, suscipit quizzle, fo shizzle shit, arcu. Pellentesque egizzle doggy. Ass erizzle. Its fo rizzle izzle dolor dapibizzle turpis tempizzle gizzle. That's the shizzle pellentesque brizzle daahng dawg turpis. Vestibulum in tortor. Pellentesque eleifend rhoncizzle gangster. In break it down habitasse platea dictumst. Yippiyo dapibus. Curabitur gangster urna, pretizzle eu, mattis ac, gangster vitae, fo shizzle. You son of a bizzle dang. Integer sempizzle velit sizzle purus.",
-		"two-truths": {
+		"links": {
+			"posts": "//www.sketchup.com",
+			"mail": "mailto:trump@trump.com",
+			"linkedin": "//www.linkedin.com",
+			"twitter": "//www.twitter.com"
+		},
+		"twoTruths": {
 			"lie": [
 				"My uncle Vincent created the font Comic Sans by tracing my handwriting from a Christmas card."
 			],
@@ -660,9 +798,20 @@ var scalees = [
 ];
 
 
+function getScalee(id) {
+	var src;
 
-// module.exports = leaders;
+	for (var i = 0; i < Data.length; i++) {
+		if (Data[i].id === scaleeId) {
+			src = Data[i].src;
+			break;
+		}
+	}
 
-module.exports = scalees;
-// module.exports.leaderData = leaderObj;
-// module.exports.tagsData = tagsObj;
+	return src;
+}
+
+
+
+module.exports.data = scalees;
+module.exports.getScalee = getScalee;

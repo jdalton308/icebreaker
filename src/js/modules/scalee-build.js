@@ -1,11 +1,17 @@
 
 var $ = require('jquery');
 var Data = require('./model-data.js');
+var Util = require('./util.js');
+var ScaleeBios = require('./scalee-bios.js');
+
+var ScaleeData = Data.data;
+var imgPath = '/img/';
 
 
 // Elements
 //-------------
 var $scaleeCont = $('.scalee-cont');
+var isMobile = Util.isMobile();
 
 
 // Sub-data
@@ -35,7 +41,7 @@ function addToLeaders(scaleeObj){
 			if (!gameObj) {
 				gameObj = {
 					name: rankObj.gameName,
-					leaders: {};
+					leaders: {}
 				};
 			}
 
@@ -48,15 +54,15 @@ function addToLeaders(scaleeObj){
 
 // Create Location, Team, and Quirks arrays
 //-----------------------
-function checkTag(tagString, scaleeObj) {
-	// Check if scalee even has the tag
-	if (scaleeObj[tagString] && scaleeObj[tagString].length) {
-		var trackingArray = tags[tagString];
+function checkTag(tagCategory, scaleeObj) {
+	// Check if scalee even has the tag (location/team/quirk)
+	if (scaleeObj[tagCategory] && scaleeObj[tagCategory].length) {
+		var trackingArray = tags[tagCategory];
 
 		// For each tag, check if already in tagsObj array, and if not, add
-		scaleeObj[tagString].forEach(function(spot){
-			if ( !trackingArray.indexOf(spot) ) {
-				trackingArray.push(spot);
+		scaleeObj[tagCategory].forEach(function(tag){
+			if ( trackingArray.indexOf(tag) == -1 ) {
+				trackingArray.push(tag);
 			}
 		});
 	}
@@ -77,7 +83,7 @@ function buildScalee(scaleeObj) {
 
 	// - add src, id, and data tags
 	$scalee.attr({
-		src: scaleeObj.src,
+		src: imgPath + scaleeObj.src,
 		id: scaleeObj.id,
 		'data-tags': tags,
 		'data-logo': scaleeObj.logo
@@ -87,18 +93,10 @@ function buildScalee(scaleeObj) {
 }
 
 
-// Click handler
-//--------------------
-function clickHandler(e) {
-	
-}
-
-
-
 // Do it
 //-------------
-function createScaless(data) {
-	data.forEach(function(scaleeObj, i){
+function createScaless() {
+	ScaleeData.forEach(function(scaleeObj, i){
 
 		// Add tags to tagsObj
 		checkTag('location', scaleeObj);
@@ -110,11 +108,27 @@ function createScaless(data) {
 
 		// Build scalee, add to page
 		var $scalee = buildScalee(scaleeObj);
-		$scaleeCont.append($scalee);
+		$scaleeCont.prepend($scalee);
 
 		// Bind click event
-		$scalee.click(function(){
-
-		})
+		$scalee.click(ScaleeBios.clickHandler);
 	});
+
+
+	// Alphabetize tag arrays
+	tags.location.sort().reverse(); // Put 'Boulder' on top
+	tags.team.sort();
+	tags.quirks.sort();
+
+	console.log('Done making scalees ----');
+	console.log('tagData: %O', tags);
+	console.log('leaderData: %o', leaderObj);
 }
+
+
+
+// Exports
+//-------------
+module.exports.build = createScaless;
+module.exports.leaderData = leaderObj;
+module.exports.tagData = tags;

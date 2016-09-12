@@ -58,10 +58,12 @@
 			opacity: 0.5;
 
 			&.prev {
-				@include transform( translateX(-100px) );
+				left: 80px;
+				@include transform( translateX(-200px) );
 			}
 			&.next {
-				@include transform( translateX(100px) );
+				right: 80px;
+				@include transform( translateX(200px) );
 			}
 
 			&:hover {

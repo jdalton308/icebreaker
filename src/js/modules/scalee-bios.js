@@ -2,7 +2,10 @@
 
 var $ = require('jquery');
 var TwoTruths = require('./two-truths.js');
+var Data = require('./model-data.js');
 var Util = require('./util.js');
+
+var ScaleeData = Data.data;
 
 
 // ------------------------
@@ -30,6 +33,14 @@ var $infoSlide = $('.info-slide');
 var $infoBg = $('.scalee-bio-background');
 var $infoClose = $infoSlide.find('.close-btn');
 
+// Fields to update
+var $name = $infoSlide.find('.title-box h1');
+var $bio = $infoSlide.find('.description-cont p');
+var $postsLink = $infoSlide.find('#posts-link');
+var $socialBtns = $infoSlide.find('.social-icon');
+var $factItems = $infoSlide.find('.fact-item');
+
+
 
 // State Vars
 //---------------
@@ -38,6 +49,7 @@ var $newScalee;
 var initialPos;
 var initialHeight;
 var isMobile = Util.isMobile();
+
 
 
 // Bind Events
@@ -51,21 +63,33 @@ function mobileEventsOn() {
 }
 
 
-// Unbind Events
-//-----------------
-function eventsOff() {
-  $scalees.off('click');
-}
-
 
 // Main Click Logic
 //------------------------
 function clickHandler() {
-  // TODO: Insert scalee's data into .info-slide
-
   $scaleeInFocus = $(this);
-  var scaleePos = $scaleeInFocus.position();
+  var scaleeId = $scaleeInFocus.attr('id');
 
+  // - Fill bio data
+  fillBio(scaleeId);
+
+  if (isMobile) {
+    mobileScaleeCopy();
+  } else {
+    desktopAnimation();
+  }
+
+  // - show info slide with bio and left-side overlay
+  $infoSlide.addClass('show');
+  $infoBg.addClass('show');
+
+  // - scroll to top then lock scroll
+  TweenMax.to(window, 1, {scrollTo:'#meet'});
+  $body.addClass('fixed');
+
+}
+
+function desktopAnimation() {
   // - copy scalee and set position on top of old one
   $newScalee = copyScalee($scaleeInFocus);
   $slide1.append($newScalee);
@@ -79,63 +103,42 @@ function clickHandler() {
   var windowWidth = window.innerWidth;
   var newLeftPos = windowWidth * targetLeft;
 
-  // $newScalee.animate({
-  //   left: newLeftPos,
-  //   top: 50,
-  //   height: (initialHeight * 3)
-  // }, 300);
-
   TweenMax.to($newScalee, 0.4, {left:'25%', x:'-50%', top:50, height:(initialHeight*3)} );
-
-  // - show info slide with bio and left-side overlay
-  $infoSlide.addClass('show');
-  $infoBg.addClass('show');
-
-  // - scroll to top then lock scroll
-  TweenMax.to(window, 1, {scrollTo:'#meet'});
-  $body.addClass('fixed');
-
-
-  // Function to place a new scalee right on top of the clicked scalee
-  function copyScalee($el) {
-
-    var $newEl = $el.clone().removeClass('show').addClass('bio-scalee');
-
-    var elPos = {
-      top: $el.position().top,
-      left: $el.offset().left
-    };
-
-    // Calculate top position in element
-    var scaleeContTop = $scaleeCont.position().top;
-    elPos.top += scaleeContTop;
-
-    // Tweaks...
-    elPos.top += 7; // not sure why the extra px are necessary
-    elPos.left += 5;
-    initialHeight = $el.height();
-
-    $newEl.css({
-      height: initialHeight,
-      top: elPos.top,
-      left: elPos.left
-    });
-
-    // Remember the initial placement
-    initialPos = elPos;
-
-    return $newEl;
-  }
-
-
-  // TODO: Bind closing actions
 }
-function mobileClickHandler() {
 
-  // TODO: Insert scalee's data into .info-slide  
+// Function to place a new scalee right on top of the clicked scalee
+function copyScalee($el) {
 
+  var $newEl = $el.clone().removeClass('show').addClass('bio-scalee');
+
+  var elPos = {
+    top: $el.position().top,
+    left: $el.offset().left
+  };
+
+  // Calculate top position in element
+  var scaleeContTop = $scaleeCont.position().top;
+  elPos.top += scaleeContTop;
+
+  // Tweaks...
+  elPos.top += 7; // not sure why the extra px are necessary
+  elPos.left += 5;
+  initialHeight = $el.height();
+
+  $newEl.css({
+    height: initialHeight,
+    top: elPos.top,
+    left: elPos.left
+  });
+
+  // Remember the initial placement
+  initialPos = elPos;
+
+  return $newEl;
+}
+
+function mobileScaleeCopy() {
   // - copy the clicked img src
-  $scaleeInFocus = $(this);
   var imgSrc = $scaleeInFocus.attr('src');
 
   // - insert new img into .info-card with new imgSrc
@@ -146,20 +149,6 @@ function mobileClickHandler() {
     var $newImg = $('<img src="'+ imgSrc +'" class="new-img">');
     $infoSlide.prepend( $newImg );
   }
-
-  // - ensure enough room for 2-truths game
-  var $swapCont = $infoSlide.find('.swap-cont');
-  var bioHeight = $swapCont.children('.description-cont').height();
-  var gameHeight = $swapCont.children('.game-cont').height();
-  if (gameHeight > bioHeight) {
-    $swapCont.css('height', gameHeight);
-  }
-
-  // - Prevent scrolling on rest of page, so that .info-slide can scroll
-  $body.addClass('fixed');
-
-  // - Show .info-slide
-  $infoSlide.addClass('show');
 }
 
 
@@ -205,23 +194,62 @@ function closeBio(){
 }
 
 
+// Fill Bio Data
+//------------------
+function fillBio(scaleeId) {
+  // - get scalee obj
+  var scaleeData = Data.getScalee(scaleeId);
+
+  updateText(scaleeData);
+  updateLinks(scaleeData);
+  updateGame(scaleeData);
+}
+
+function updateText(scaleeData) {
+  // Update text: Name, bio
+  $name.text(scaleeData.name);
+  $bio.text(scaleeData.bio);
+
+}
+function updateLinks(scaleeData) {
+  // - hide all links, then show if given for scalee
+  $socialBtns.addClass('hide');
+  $postsLink.addClass('hide');
+
+  for (var link in scaleeData.links) {
+    var url = scaleeData.links[link];
+    var $btn = (link === 'posts') ? $postsLink : $socialBtns.filter('.icon-'+ link);
+
+    $btn.attr('href', url).removeClass('hide');
+  }
+}
+function updateGame(scaleeData) {
+  // - remove 'lie' and 'truth' classes
+  $factItems.removeClass('truth lie');
+
+  // - get random number for lie. Fill in lie, then fill in truths
+  var lieIndex = Math.floor( Math.random() * 2 ); // either 0, 1, or 2
+  var $lieItem = $factItems.eq(lieIndex);
+  $lieItem.addClass('lie').find('p').text( scaleeData.twoTruths.lie[0] );
+
+  var $truthItems = $factItems.not('.lie');
+  $truthItems.addClass('truth').each(function(i){
+    $(this).find('p').text( scaleeData.twoTruths.truths[i] );
+  });
+}
+
+
+
 // General init
 //------------------
 function init() {
   // Close Bio Btn ------
   $infoClose.click(closeBio);
-
-  // On mobile, bind click event------
-  if ( isMobile ) {
-    mobileEventsOn();
-  } else {
-    eventsOn();
-  }
 }
+
 
 
 // Exports
 //-------------
 module.exports.init = init;
-module.exports.on = eventsOn;
-module.exports.off = eventsOff;
+module.exports.clickHandler = clickHandler;

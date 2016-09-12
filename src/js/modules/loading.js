@@ -5,11 +5,14 @@ var $window = $(window);
 var $body = $('body');
 var $loadingSlide = $('.loading-screen');
 
+
+
 // Show loading screen
 function showLoading() {
 	$body.addClass('fixed');
 	$loadingSlide.addClass('show');
 }
+
 
 // Hide loading screen
 function hideLoading() {

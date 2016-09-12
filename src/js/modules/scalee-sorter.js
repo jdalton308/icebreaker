@@ -1,11 +1,12 @@
 // 'use strict';
 
 var $ = require('jquery');
-var Data = require('./model-data.js');
+var ScaleeBuilder = require('./scalee-build.js');
 var Util = require('./util.js');
+var ScaleeScrolling = require('./scalee-scrolling.js');
 
 // var ScaleeData = Data.rawData;
-// var TagData = Data.tagsData;
+var TagData = ScaleeBuilder.tagData;
 // var LeaderData = Data.leaderData;
 
 
@@ -25,95 +26,56 @@ var $trimLogo = $slide1.find('.trimble-logo');
 var $sefLogo = $slide1.find('.sefaira-logo');
 
 var $openFilter = $('.open-panel');
-var $filterControls = $('.container.selectors');
-var $wheelSelectors = $filterControls.find('.wheel-selector');
+var $wheelContainers = $('.selector');
+var $wheelSelectors = $wheelContainers.find('.wheel-selector');
 var $filterItems = $wheelSelectors.children('.item');
 
-// var $sortTrigger = $('#sort-me');
 var $scaleeCont = $('.scalee-cont');
 var $scalees = $scaleeCont.find('img');
 var $nullScalee = $scalees.filter('#null-person');
 
 var $infoSlide = $('.info-slide');
 var $infoClose = $infoSlide.find('.close-btn');
-var $scaleeLeftBtn = $('.scalee-scroll.prev');
-var $scaleeRightBtn = $('.scalee-scroll.next');
-
-var $leaderTrigger = $('#leader-trigger');
-var $leaderCont = $('.leader-cont');
-var $leaderTitle = $leaderCont.find('.leaderboard-title h1');
-var $leaderBoxes = $leaderCont.find('.position-box');
-var $leaderboardControls = $('.container.leaderboard');
-var $leaderBtnCont = $leaderboardControls.children('.leaderboard-buttons');
-var $leaderClose = $leaderCont.find('.back-btn');
-
-var itemHeight = $filterItems.outerHeight();
 
 
 // State Variables
 //-----------------
 var filters = [];
+var panelOpen = $slide1.hasClass('edit-mode');
+var isMobile = Util.isMobile();
+
 var logos = {
   sketchup: $suLogo,
   trimble: $trimLogo,
   sefaira: $sefLogo
 };
-var panelOpen = $slide1.hasClass('edit-mode');
-var $scaleeInFocus;
-var isMobile = Util.isMobile();
 
 
+//-----------------------------
+// Build sorter from data
+//------------------------
+function buildSorterWheels(){
+  for (var category in TagData) {
+    var $wheelCont = $wheelContainers.filter('.'+ category);
+    var $wheel = $wheelCont.find('.wheel-selector');
 
-// Bind events
-//------------
-function eventsOn() {
+    // - Create new items
+    var tagArray = TagData[category];
+    var $itemTemplate = $('<div class="item"></div>');
+    tagArray.forEach(function(tag, i) {
+      var $newItem = $itemTemplate.clone().text(tag);
+      $wheel.prepend($newItem);
+    });
+  }
 
-  // Open/close filter panel -----
-  $openFilter.click(function(){
-    if (panelOpen) {
-      closePanel();
-    } else {
-      openPanel();
-    }
-
-  });
-
-
-  // Select filters -----
-  $filterItems.click(function(){
-    var $this = $(this);
-
-    // Show selected state
-    $this.toggleClass('selected').siblings('.selected').removeClass('selected');
-    setPointer($this);
-
-    // Trigger sorting
-    sort();
-  });
-
-
-  // Switch to Leaderboard-mode -----
-  $leaderTrigger.click(function(){
-    showLeaderboard();
-  });
-
-  // Exit Leaderboard mode -----
-  $leaderClose.click(function(){
-    hideLeaderboard();
-  });
-
-
-  // Scroll scalees ------
-  $scaleeLeftBtn.click(function(){
-    scrollScalees(0.1);
-  });
-  $scaleeRightBtn.click(function(){
-    scrollScalees(-0.1);
-  });
+  // Update variables
+  $filterItems = $wheelSelectors.children('.item');
 }
 
 
-// Open Filter Bar
+
+//-------------------
+// Open/Close the Sorting Wheels Bar
 //------------
 function openPanel() {
   // - scroll to position
@@ -131,44 +93,100 @@ function closePanel() {
   $slide1.removeClass('edit-mode');
   $body.removeClass('fixed');
   panelOpen = false;
-} // end closePanel();
+}
 
+function handlePanelOpen() {
+  if (panelOpen) {
+    closePanel();
+  } else {
+    openPanel();
+  }
+}
 
 
 //-----------------
 // Sort Scalees
 //---------------
+function handleFilterClick() {
+  var $this = $(this);
+
+  // - Show selected state
+  showSelectedState($this);
+
+  // - Update filters array
+  updateFilters($this);
+
+  // Trigger sorting
+  sort();
+}
+
+function showSelectedState($item) {
+  $item.toggleClass('selected').siblings('.selected').removeClass('selected');
+  setPointer($item);
+}
+
+function updateFilters($item) {
+  var newFilter = $item.text();
+  var filterIndex = filters.indexOf(newFilter);
+
+  // - If in array, remove, else...
+    // check what category this is,
+    // if another item from that category is preset, remove it
+
+  if (filterIndex != -1) {
+    filters.splice(filterIndex, 1);
+  } else {
+    // - Check if another filter is in same category. If yes, remove
+      // - but only if anything else is even present
+    if (filters.length) {
+      var thisCategory = getFilterCategory(newFilter);
+      for (var i = 0; i < filters.length; i++) {
+        var otherCategory = getFilterCategory(filters[i]);
+        if (thisCategory === otherCategory) {
+          // if filter in same category found, remove...
+          filters.splice(i, 1);
+          break;
+        }
+      }
+    }
+  
+    // Add new filter
+    filters.push(newFilter);
+  }
+
+  console.log('filters: %o', filters);
+}
+
+function getFilterCategory(filter) {
+  var theCategory;
+
+  for (var category in TagData) {
+    var catArray = TagData[category];
+    
+    for (var i = 0; i < catArray.length; i++) {
+      if ( filter === catArray[i] ) {
+        theCategory = category;
+        break;
+      }
+    }
+  }
+
+  return theCategory;
+}
+
+
 function sort() {
 
   // - Hide all logos, then show correct ones after scalees are sorted
   hideLogos();
 
-  // - Get filters
-  setCurrentFilters();
-
   // - Loop through all scalees and see if 'data-tag' attributes match all filters
   hideFilteredScalees();
 
   // - Center scalees
-  centerScalees();
+  ScaleeScrolling.center();
 }
 
-function setCurrentFilters() {
-  // - reset filters
-  filters = [];
-
-  // - Get selected elements
-  var $selectedFilters = $wheelSelectors.find('.selected');
-
-  // - For each selection, slide up, and save value
-  $selectedFilters.each(function(){
-    var $this = $(this);
-
-    // - Store text value
-    var filterValue = $this.text();
-    filters.push(filterValue);
-  });
-}
 
 function hideFilteredScalees() {
   // - reset null state
@@ -203,13 +221,17 @@ function hideFilteredScalees() {
 }
 
 function resetFilters() {
-  // Remove '.seleccted' tag
+  // Remove '.seleccted' tag and reset array
   $wheelSelectors.find('.selected').removeClass('selected');
+
+  filters = [];
 
   // Re-sort scalees
   sort();
 }
 
+// Set pointer position on wheel
+//--------------------------------
 function setPointer($el, showing) {
   var $parentWheel = $el.closest('.wheel-selector');
   var $wheelPointer = $el.siblings('.pointer');
@@ -250,146 +272,18 @@ function showLogo($el) {
 }
 
 
-//--------------------------
-// Enter 'Leaderboard Mode'
-//--------------------------
-function showLeaderboard() {
 
-  // - trigger click on first btn
-  var $btn = $leaderBtnCont.children('.leader');
-  $btn.eq(0).trigger('click');
+//-------------------
+// Bind events
+//------------
+function eventsOn() {
 
-  // - trigger most changes through CSS
-  $slide1.addClass('leader-mode');
+  // Open/close filter panel -----
+  $openFilter.click(handlePanelOpen);
 
-  // - wait 0.5s, then show new buttons
-  window.setTimeout(function(){
-    $leaderboardControls.addClass('show');
-  }, 500);
+  // Select filter items -----
+  $filterItems.click(handleFilterClick);
 
-  // - reset filters and close sorting panel
-  resetFilters();
-  closePanel();
-
-  // - lock scroll
-  $body.addClass('fixed');
-}
-
-// Exit 'Leaderboard Mode'
-//----------------------------
-function hideLeaderboard() {
-  // Undo everything above
-  $slide1.removeClass('leader-mode');
-  $leaderboardControls.removeClass('show');
-  $body.removeClass('fixed');
-}
-
-// Initialize leaderboard: Make buttons, bind events
-//-----------------------------
-function initLeaderboard() {
-  var $buttonTemplate = $('<button class="leader"></button>');
-
-  // Create buttons for leaderboard switching
-  for (var event in Data) {
-    var eventObj = Data[event];
-    var $newBtn = $buttonTemplate.clone().text( eventObj.name ).attr('data-leader-id', event);
-
-    // Insert new btn
-    $leaderBtnCont.append( $newBtn );
-
-    // Closure for eventId
-    function bindClick() {
-      var eventId = event;
-
-      // Bind click event to show leaderboard
-      $newBtn.click(function(){
-        switchLeaderboard( eventId, $(this) );
-      });
-    };
-
-    bindClick();
-  } // end for loop
-}
-
-
-// Switch between rankings
-//----------------------------
-function switchLeaderboard(eventName, $btn) {
-  // Switch src attribute to those of the top 5 poeple's scalee
-
-  var eventObj = Data[eventName];
-  var leaders = eventObj.leaders;
-
-  // - loop through data, get img src attribute, then apply to 'leader-boxes'
-  for (var position in leaders) {
-    var personId = leaders[position];
-
-    // - closure for setTimeout
-    function animateChange() {
-      var personImgSrc = getScaleeSrc(personId);
-      var $targetImg = $leaderBoxes.eq( position-1 ).children('img');
-      
-      // - hide img, wait for transition, then switch img and show
-      $targetImg.addClass('hide');
-
-      window.setTimeout(function(){
-        $targetImg.attr('src', personImgSrc).removeClass('hide');
-      }, 300);
-    }
-
-    animateChange();
-  } // end for loop
-
-  function getScaleeSrc(scaleeId) {
-    var $scalee = $scalees.filter('#'+scaleeId);
-    return $scalee.attr('src');
-  }
-
-  // Finally, switch title
-  switchLeaderTitle(eventObj.name);
-
-  // Show active state on btn
-  $btn.addClass('active').siblings('.active').removeClass('active');
-}
-
-function switchLeaderTitle(newTitle) {
-  // Animate title out of view
-  $leaderTitle.addClass('fade');
-
-  // Wait for animation, then change title and animate back in
-  window.setTimeout(function(){
-    $leaderTitle.text(newTitle).removeClass('fade');
-  }, 600);
-}
-
-
-// Scalee lateral scrolling
-//-----------------------------
-var scaleeOffset;
-
-function centerScalees() {
-  // Just reset the translateX CSS property to 50%;
-  scaleeOffset = 0.5;
-  setTranslate();
-}
-
-function scrollScalees(dist) {
-
-  if ( (scaleeOffset >= 0.95 && dist > 0) || 
-        (scaleeOffset <= 0.05 && dist < 0) ) {
-    return;
-  }
-
-  scaleeOffset += dist;
-  setTranslate()
-}
-
-function setTranslate() {
-  var offsetString = (100 * scaleeOffset) + '%';
-
-  $scaleeCont.css({
-    transform: 'translateX(' + offsetString +')'
-  });
 }
 
 
@@ -398,10 +292,10 @@ function setTranslate() {
 // Initialize sorter
 //------------------
 function init() {
-  eventsOn();
+  buildSorterWheels();
   closePanel();
   sort();
-  initLeaderboard();
+  eventsOn();
 }
 
 
@@ -412,5 +306,3 @@ module.exports.init = init;
 module.exports.closePanel = closePanel;
 module.exports.sort = sort;
 module.exports.reset = resetFilters;
-module.exports.closeLeaders = hideLeaderboard;
-module.exports.center = centerScalees;

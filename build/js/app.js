@@ -11012,18 +11012,22 @@ return jQuery;
 
 var $ = require('jquery');
 
+var ScaleeBuilder = require('./modules/scalee-build.js');
 var ScaleeSorter = require('./modules/scalee-sorter.js');
 var ScaleeBios = require('./modules/scalee-bios.js');
+var ScaleeScrolling = require('./modules/scalee-scrolling.js');
+var Leaderboard = require('./modules/scalee-leaderboard.js');
 var TwoTruths = require('./modules/two-truths.js');
+
 var ScrollAnimate = require('./modules/scroll-animation.js');
 var Loading = require('./modules/loading.js');
-// var Landing = require('./modules/landing.js');
 var EasterEggs = require('./modules/easter-eggs.js');
 var Util = require('./modules/util.js');
 
 
 // Show loading slide until pageload event
 Loading.show();
+ScaleeBuilder.build();
 
 // Wait for images to load, then run scripts and show page
 $(window).on('load', function(){
@@ -11036,23 +11040,21 @@ $(window).on('load', function(){
 	// - Init other interactions
 	ScaleeSorter.init();
 	ScaleeBios.init();
+	ScaleeScrolling.init();
+	Leaderboard.init();
 	TwoTruths.init();
 	EasterEggs();
 
 	// - Center scalees
-	ScaleeSorter.center();
+	ScaleeScrolling.center();
 
 	// - Then hide loader and animate landing page...
 	window.setTimeout(function(){
 		Loading.hide();
-
-		// window.setTimeout(function(){
-		// 	Landing();
-		// }, 1000)
 	}, 1000);
 
 });
-},{"./modules/easter-eggs.js":3,"./modules/loading.js":5,"./modules/scalee-bios.js":6,"./modules/scalee-sorter.js":7,"./modules/scroll-animation.js":8,"./modules/two-truths.js":9,"./modules/util.js":10,"jquery":1}],3:[function(require,module,exports){
+},{"./modules/easter-eggs.js":3,"./modules/loading.js":4,"./modules/scalee-bios.js":6,"./modules/scalee-build.js":7,"./modules/scalee-leaderboard.js":8,"./modules/scalee-scrolling.js":9,"./modules/scalee-sorter.js":10,"./modules/scroll-animation.js":11,"./modules/two-truths.js":12,"./modules/util.js":13,"jquery":1}],3:[function(require,module,exports){
 
 var $ = require('jquery');
 
@@ -11086,53 +11088,92 @@ function init() {
 module.exports = init;
 },{"jquery":1}],4:[function(require,module,exports){
 
-var leaders = {
-	"discgolf": {
-		"name": "Disc Golf",
-		"leaders": {
-			1: "person2",
-			2: "person5",
-			3: "person8",
-		}
-	},
-	"life": {
-		"name": "LIFE",
-		"leaders": {
-			1: "person6",
-			2: "person10",
-			3: "person9",
-		}
-	},
-	"socks": {
-		"name": "Best Socks",
-		"leaders": {
-			1: "person8",
-			2: "person14",
-			3: "person13",
-		}
-	},
-	"coffee": {
-		"name": "Most Cups of Coffee",
-		"leaders": {
-			1: "person9",
-			2: "person1",
-			3: "person3",
-		}
-	},
-};
+var $ = require('jquery');
+
+var $window = $(window);
+var $body = $('body');
+var $loadingSlide = $('.loading-screen');
+
+
+
+// Show loading screen
+function showLoading() {
+	$body.addClass('fixed');
+	$loadingSlide.addClass('show');
+}
+
+
+// Hide loading screen
+function hideLoading() {
+	$loadingSlide.addClass('hide');
+
+	// After animation, remove cover and let scrolling resume
+	window.setTimeout(function(){
+		$body.removeClass('fixed');
+		$loadingSlide.removeClass('show hide');
+	}, 1100);
+}
+
+
+
+module.exports.show = showLoading;
+module.exports.hide = hideLoading;
+},{"jquery":1}],5:[function(require,module,exports){
+
+// var leaders = {
+// 	"discgolf": {
+// 		"name": "Disc Golf",
+// 		"leaders": {
+// 			1: "person2",
+// 			2: "person5",
+// 			3: "person8",
+// 		}
+// 	},
+// 	"life": {
+// 		"name": "LIFE",
+// 		"leaders": {
+// 			1: "person6",
+// 			2: "person10",
+// 			3: "person9",
+// 		}
+// 	},
+// 	"socks": {
+// 		"name": "Best Socks",
+// 		"leaders": {
+// 			1: "person8",
+// 			2: "person14",
+// 			3: "person13",
+// 		}
+// 	},
+// 	"coffee": {
+// 		"name": "Most Cups of Coffee",
+// 		"leaders": {
+// 			1: "person9",
+// 			2: "person1",
+// 			3: "person3",
+// 		}
+// 	},
+// };
+
 
 var scalees = [
 	{
 		"name": "Aaron Dietzen",
 		"id": "person1",
 		"team": "Marketing",
-		"scalee": "Aaron_Dietzen.svg",
+		"src": "Aaron_Dietzen.svg",
 		"location": ["Boulder"],
 		"team": ["Marketing"],
 		"quirks": ["Alt-Milk"],
 		"logo": ["sketchup"],
 		"bio": "Lorizzle izzle dolizzle doggy amizzle, consectetizzle adipiscing elit. Nullam sapizzle velizzle, stuff volutpat, suscipit quizzle, fo shizzle shit, arcu. Pellentesque egizzle doggy. Ass erizzle. Its fo rizzle izzle dolor dapibizzle turpis tempizzle gizzle. That's the shizzle pellentesque brizzle daahng dawg turpis. Vestibulum in tortor. Pellentesque eleifend rhoncizzle gangster. In break it down habitasse platea dictumst. Yippiyo dapibus. Curabitur gangster urna, pretizzle eu, mattis ac, gangster vitae, fo shizzle. You son of a bizzle dang. Integer sempizzle velit sizzle purus.",
-		"two-truths": {
+		"links": {
+			"posts": "//www.sketchup.com",
+			"mail": "mailto:trump@trump.com",
+			"linkedin": "//www.linkedin.com",
+			"twitter": "//www.twitter.com"
+		},
+		"twoTruths": {
 			"lie": [
 				"My uncle Vincent created the font Comic Sans by tracing my handwriting from a Christmas card."
 			],
@@ -11153,13 +11194,19 @@ var scalees = [
 		"name": "Allyson McDuffie",
 		"id": "person2",
 		"team": "Marketing",
-		"scalee": "Allyson_McDuffie.svg",
+		"src": "Allyson_McDuffie.svg",
 		"location": ["Boulder"],
 		"team": ["Engineering"],
 		"quirks": ["Alt-Milk"],
 		"logo": ["trimble"],
 		"bio": "Lorizzle izzle dolizzle doggy amizzle, consectetizzle adipiscing elit. Nullam sapizzle velizzle, stuff volutpat, suscipit quizzle, fo shizzle shit, arcu. Pellentesque egizzle doggy. Ass erizzle. Its fo rizzle izzle dolor dapibizzle turpis tempizzle gizzle. That's the shizzle pellentesque brizzle daahng dawg turpis. Vestibulum in tortor. Pellentesque eleifend rhoncizzle gangster. In break it down habitasse platea dictumst. Yippiyo dapibus. Curabitur gangster urna, pretizzle eu, mattis ac, gangster vitae, fo shizzle. You son of a bizzle dang. Integer sempizzle velit sizzle purus.",
-		"two-truths": {
+		"links": {
+			"posts": "//www.sketchup.com",
+			"mail": "mailto:trump@trump.com",
+			"linkedin": "//www.linkedin.com",
+			"twitter": "//www.twitter.com"
+		},
+		"twoTruths": {
 			"lie": [
 				"My uncle Vincent created the font Comic Sans by tracing my handwriting from a Christmas card."
 			],
@@ -11180,13 +11227,19 @@ var scalees = [
 		"name": "Bryce Stout",
 		"id": "person3",
 		"team": "Marketing",
-		"scalee": "Bryce_Stout.svg",
+		"src": "Bryce_Stout.svg",
 		"location": ["Boulder"],
 		"team": ["Design"],
 		"quirks": ["Cycling"],
 		"logo": ["sketchup"],
 		"bio": "Lorizzle izzle dolizzle doggy amizzle, consectetizzle adipiscing elit. Nullam sapizzle velizzle, stuff volutpat, suscipit quizzle, fo shizzle shit, arcu. Pellentesque egizzle doggy. Ass erizzle. Its fo rizzle izzle dolor dapibizzle turpis tempizzle gizzle. That's the shizzle pellentesque brizzle daahng dawg turpis. Vestibulum in tortor. Pellentesque eleifend rhoncizzle gangster. In break it down habitasse platea dictumst. Yippiyo dapibus. Curabitur gangster urna, pretizzle eu, mattis ac, gangster vitae, fo shizzle. You son of a bizzle dang. Integer sempizzle velit sizzle purus.",
-		"two-truths": {
+		"links": {
+			"posts": "//www.sketchup.com",
+			"mail": "mailto:trump@trump.com",
+			"linkedin": "//www.linkedin.com",
+			"twitter": "//www.twitter.com"
+		},
+		"twoTruths": {
 			"lie": [
 				"My uncle Vincent created the font Comic Sans by tracing my handwriting from a Christmas card."
 			],
@@ -11207,13 +11260,19 @@ var scalees = [
 		"name": "Bugra Barin",
 		"id": "person4",
 		"team": "Marketing",
-		"scalee": "Bugra_Barin.svg",
+		"src": "Bugra_Barin.svg",
 		"location": ["Boulder"],
 		"team": ["Project Management"],
 		"quirks": ["Disc Golf"],
 		"logo": ["sketchup"],
 		"bio": "Lorizzle izzle dolizzle doggy amizzle, consectetizzle adipiscing elit. Nullam sapizzle velizzle, stuff volutpat, suscipit quizzle, fo shizzle shit, arcu. Pellentesque egizzle doggy. Ass erizzle. Its fo rizzle izzle dolor dapibizzle turpis tempizzle gizzle. That's the shizzle pellentesque brizzle daahng dawg turpis. Vestibulum in tortor. Pellentesque eleifend rhoncizzle gangster. In break it down habitasse platea dictumst. Yippiyo dapibus. Curabitur gangster urna, pretizzle eu, mattis ac, gangster vitae, fo shizzle. You son of a bizzle dang. Integer sempizzle velit sizzle purus.",
-		"two-truths": {
+		"links": {
+			"posts": "//www.sketchup.com",
+			"mail": "mailto:trump@trump.com",
+			"linkedin": "//www.linkedin.com",
+			"twitter": "//www.twitter.com"
+		},
+		"twoTruths": {
 			"lie": [
 				"My uncle Vincent created the font Comic Sans by tracing my handwriting from a Christmas card."
 			],
@@ -11234,13 +11293,19 @@ var scalees = [
 		"name": "Chris Brashar",
 		"id": "person5",
 		"team": "Marketing",
-		"scalee": "Chris_Brashar.svg",
+		"src": "Chris_Brashar.svg",
 		"location": ["Boulder"],
 		"team": ["Executive"],
 		"quirks": ["Flatirons"],
 		"logo": ["sketchup"],
 		"bio": "Lorizzle izzle dolizzle doggy amizzle, consectetizzle adipiscing elit. Nullam sapizzle velizzle, stuff volutpat, suscipit quizzle, fo shizzle shit, arcu. Pellentesque egizzle doggy. Ass erizzle. Its fo rizzle izzle dolor dapibizzle turpis tempizzle gizzle. That's the shizzle pellentesque brizzle daahng dawg turpis. Vestibulum in tortor. Pellentesque eleifend rhoncizzle gangster. In break it down habitasse platea dictumst. Yippiyo dapibus. Curabitur gangster urna, pretizzle eu, mattis ac, gangster vitae, fo shizzle. You son of a bizzle dang. Integer sempizzle velit sizzle purus.",
-		"two-truths": {
+		"links": {
+			"posts": "//www.sketchup.com",
+			"mail": "mailto:trump@trump.com",
+			"linkedin": "//www.linkedin.com",
+			"twitter": "//www.twitter.com"
+		},
+		"twoTruths": {
 			"lie": [
 				"My uncle Vincent created the font Comic Sans by tracing my handwriting from a Christmas card."
 			],
@@ -11261,13 +11326,19 @@ var scalees = [
 		"name": "Chris Cronin",
 		"id": "person6",
 		"team": "Marketing",
-		"scalee": "Chris_Cronin.svg",
+		"src": "Chris_Cronin.svg",
 		"location": ["Boulder"],
 		"team": ["Knowledge"],
 		"quirks": ["Alt-Milk"],
 		"logo": ["sketchup"],
 		"bio": "Lorizzle izzle dolizzle doggy amizzle, consectetizzle adipiscing elit. Nullam sapizzle velizzle, stuff volutpat, suscipit quizzle, fo shizzle shit, arcu. Pellentesque egizzle doggy. Ass erizzle. Its fo rizzle izzle dolor dapibizzle turpis tempizzle gizzle. That's the shizzle pellentesque brizzle daahng dawg turpis. Vestibulum in tortor. Pellentesque eleifend rhoncizzle gangster. In break it down habitasse platea dictumst. Yippiyo dapibus. Curabitur gangster urna, pretizzle eu, mattis ac, gangster vitae, fo shizzle. You son of a bizzle dang. Integer sempizzle velit sizzle purus.",
-		"two-truths": {
+		"links": {
+			"posts": "//www.sketchup.com",
+			"mail": "mailto:trump@trump.com",
+			"linkedin": "//www.linkedin.com",
+			"twitter": "//www.twitter.com"
+		},
+		"twoTruths": {
 			"lie": [
 				"My uncle Vincent created the font Comic Sans by tracing my handwriting from a Christmas card."
 			],
@@ -11288,13 +11359,19 @@ var scalees = [
 		"name": "Chris_DeLuca",
 		"id": "person7",
 		"team": "Marketing",
-		"scalee": "Chris_DeLuca.svg",
+		"src": "Chris_DeLuca.svg",
 		"location": ["Boulder"],
 		"team": ["Engineering"],
 		"quirks": ["Disc Golf"],
 		"logo": ["sketchup"],
 		"bio": "Lorizzle izzle dolizzle doggy amizzle, consectetizzle adipiscing elit. Nullam sapizzle velizzle, stuff volutpat, suscipit quizzle, fo shizzle shit, arcu. Pellentesque egizzle doggy. Ass erizzle. Its fo rizzle izzle dolor dapibizzle turpis tempizzle gizzle. That's the shizzle pellentesque brizzle daahng dawg turpis. Vestibulum in tortor. Pellentesque eleifend rhoncizzle gangster. In break it down habitasse platea dictumst. Yippiyo dapibus. Curabitur gangster urna, pretizzle eu, mattis ac, gangster vitae, fo shizzle. You son of a bizzle dang. Integer sempizzle velit sizzle purus.",
-		"two-truths": {
+		"links": {
+			"posts": "//www.sketchup.com",
+			"mail": "mailto:trump@trump.com",
+			"linkedin": "//www.linkedin.com",
+			"twitter": "//www.twitter.com"
+		},
+		"twoTruths": {
 			"lie": [
 				"My uncle Vincent created the font Comic Sans by tracing my handwriting from a Christmas card."
 			],
@@ -11315,13 +11392,19 @@ var scalees = [
 		"name": "Chris Dizon",
 		"id": "person8",
 		"team": "Marketing",
-		"scalee": "Chris_Dizon.svg",
+		"src": "Chris_Dizon.svg",
 		"location": ["Boulder"],
 		"team": ["Design"],
 		"quirks": ["Cycling"],
 		"logo": ["sketchup"],
 		"bio": "Lorizzle izzle dolizzle doggy amizzle, consectetizzle adipiscing elit. Nullam sapizzle velizzle, stuff volutpat, suscipit quizzle, fo shizzle shit, arcu. Pellentesque egizzle doggy. Ass erizzle. Its fo rizzle izzle dolor dapibizzle turpis tempizzle gizzle. That's the shizzle pellentesque brizzle daahng dawg turpis. Vestibulum in tortor. Pellentesque eleifend rhoncizzle gangster. In break it down habitasse platea dictumst. Yippiyo dapibus. Curabitur gangster urna, pretizzle eu, mattis ac, gangster vitae, fo shizzle. You son of a bizzle dang. Integer sempizzle velit sizzle purus.",
-		"two-truths": {
+		"links": {
+			"posts": "//www.sketchup.com",
+			"mail": "mailto:trump@trump.com",
+			"linkedin": "//www.linkedin.com",
+			"twitter": "//www.twitter.com"
+		},
+		"twoTruths": {
 			"lie": [
 				"My uncle Vincent created the font Comic Sans by tracing my handwriting from a Christmas card."
 			],
@@ -11342,13 +11425,19 @@ var scalees = [
 		"name": "Chris Fullmer",
 		"id": "person9",
 		"team": "Marketing",
-		"scalee": "Chris_Fullmer.svg",
+		"src": "Chris_Fullmer.svg",
 		"location": ["Boulder"],
 		"team": ["Knowledge"],
 		"quirks": ["Alt-Milk"],
 		"logo": ["trimble"],
 		"bio": "Lorizzle izzle dolizzle doggy amizzle, consectetizzle adipiscing elit. Nullam sapizzle velizzle, stuff volutpat, suscipit quizzle, fo shizzle shit, arcu. Pellentesque egizzle doggy. Ass erizzle. Its fo rizzle izzle dolor dapibizzle turpis tempizzle gizzle. That's the shizzle pellentesque brizzle daahng dawg turpis. Vestibulum in tortor. Pellentesque eleifend rhoncizzle gangster. In break it down habitasse platea dictumst. Yippiyo dapibus. Curabitur gangster urna, pretizzle eu, mattis ac, gangster vitae, fo shizzle. You son of a bizzle dang. Integer sempizzle velit sizzle purus.",
-		"two-truths": {
+		"links": {
+			"posts": "//www.sketchup.com",
+			"mail": "mailto:trump@trump.com",
+			"linkedin": "//www.linkedin.com",
+			"twitter": "//www.twitter.com"
+		},
+		"twoTruths": {
 			"lie": [
 				"My uncle Vincent created the font Comic Sans by tracing my handwriting from a Christmas card."
 			],
@@ -11369,13 +11458,19 @@ var scalees = [
 		"name": "Chris Keating",
 		"id": "person10",
 		"team": "Marketing",
-		"scalee": "Chris_Keating.svg",
+		"src": "Chris_Keating.svg",
 		"location": ["Boulder"],
 		"team": ["Marketing"],
 		"quirks": ["Flatirons"],
 		"logo": ["sefaira"],
 		"bio": "Lorizzle izzle dolizzle doggy amizzle, consectetizzle adipiscing elit. Nullam sapizzle velizzle, stuff volutpat, suscipit quizzle, fo shizzle shit, arcu. Pellentesque egizzle doggy. Ass erizzle. Its fo rizzle izzle dolor dapibizzle turpis tempizzle gizzle. That's the shizzle pellentesque brizzle daahng dawg turpis. Vestibulum in tortor. Pellentesque eleifend rhoncizzle gangster. In break it down habitasse platea dictumst. Yippiyo dapibus. Curabitur gangster urna, pretizzle eu, mattis ac, gangster vitae, fo shizzle. You son of a bizzle dang. Integer sempizzle velit sizzle purus.",
-		"two-truths": {
+		"links": {
+			"posts": "//www.sketchup.com",
+			"mail": "mailto:trump@trump.com",
+			"linkedin": "//www.linkedin.com",
+			"twitter": "//www.twitter.com"
+		},
+		"twoTruths": {
 			"lie": [
 				"My uncle Vincent created the font Comic Sans by tracing my handwriting from a Christmas card."
 			],
@@ -11396,13 +11491,19 @@ var scalees = [
 		"name": "Gabriel Perry",
 		"id": "person11",
 		"team": "Marketing",
-		"scalee": "Gabriel_Perry.svg",
+		"src": "Gabriel_Perry.svg",
 		"location": ["London"],
 		"team": ["Engineering"],
 		"quirks": ["Disc Golf"],
 		"logo": ["sketchup"],
 		"bio": "Lorizzle izzle dolizzle doggy amizzle, consectetizzle adipiscing elit. Nullam sapizzle velizzle, stuff volutpat, suscipit quizzle, fo shizzle shit, arcu. Pellentesque egizzle doggy. Ass erizzle. Its fo rizzle izzle dolor dapibizzle turpis tempizzle gizzle. That's the shizzle pellentesque brizzle daahng dawg turpis. Vestibulum in tortor. Pellentesque eleifend rhoncizzle gangster. In break it down habitasse platea dictumst. Yippiyo dapibus. Curabitur gangster urna, pretizzle eu, mattis ac, gangster vitae, fo shizzle. You son of a bizzle dang. Integer sempizzle velit sizzle purus.",
-		"two-truths": {
+		"links": {
+			"posts": "//www.sketchup.com",
+			"mail": "mailto:trump@trump.com",
+			"linkedin": "//www.linkedin.com",
+			"twitter": "//www.twitter.com"
+		},
+		"twoTruths": {
 			"lie": [
 				"My uncle Vincent created the font Comic Sans by tracing my handwriting from a Christmas card."
 			],
@@ -11423,13 +11524,19 @@ var scalees = [
 		"name": "Jeremy Walker",
 		"id": "person12",
 		"team": "Marketing",
-		"scalee": "Jeremy_Walker.svg",
+		"src": "Jeremy_Walker.svg",
 		"location": ["New York"],
 		"team": ["Design"],
 		"quirks": ["Cycling"],
 		"logo": ["sketchup"],
 		"bio": "Lorizzle izzle dolizzle doggy amizzle, consectetizzle adipiscing elit. Nullam sapizzle velizzle, stuff volutpat, suscipit quizzle, fo shizzle shit, arcu. Pellentesque egizzle doggy. Ass erizzle. Its fo rizzle izzle dolor dapibizzle turpis tempizzle gizzle. That's the shizzle pellentesque brizzle daahng dawg turpis. Vestibulum in tortor. Pellentesque eleifend rhoncizzle gangster. In break it down habitasse platea dictumst. Yippiyo dapibus. Curabitur gangster urna, pretizzle eu, mattis ac, gangster vitae, fo shizzle. You son of a bizzle dang. Integer sempizzle velit sizzle purus.",
-		"two-truths": {
+		"links": {
+			"posts": "//www.sketchup.com",
+			"mail": "mailto:trump@trump.com",
+			"linkedin": "//www.linkedin.com",
+			"twitter": "//www.twitter.com"
+		},
+		"twoTruths": {
 			"lie": [
 				"My uncle Vincent created the font Comic Sans by tracing my handwriting from a Christmas card."
 			],
@@ -11450,13 +11557,19 @@ var scalees = [
 		"name": "Jessica_Kubik",
 		"id": "person13",
 		"team": "Marketing",
-		"scalee": "Jessica_Kubik.svg",
+		"src": "Jessica_Kubik.svg",
 		"location": ["Hong Kong"],
 		"team": ["Knowledge"],
 		"quirks": ["Flatirons"],
 		"logo": ["sketchup"],
 		"bio": "Lorizzle izzle dolizzle doggy amizzle, consectetizzle adipiscing elit. Nullam sapizzle velizzle, stuff volutpat, suscipit quizzle, fo shizzle shit, arcu. Pellentesque egizzle doggy. Ass erizzle. Its fo rizzle izzle dolor dapibizzle turpis tempizzle gizzle. That's the shizzle pellentesque brizzle daahng dawg turpis. Vestibulum in tortor. Pellentesque eleifend rhoncizzle gangster. In break it down habitasse platea dictumst. Yippiyo dapibus. Curabitur gangster urna, pretizzle eu, mattis ac, gangster vitae, fo shizzle. You son of a bizzle dang. Integer sempizzle velit sizzle purus.",
-		"two-truths": {
+		"links": {
+			"posts": "//www.sketchup.com",
+			"mail": "mailto:trump@trump.com",
+			"linkedin": "//www.linkedin.com",
+			"twitter": "//www.twitter.com"
+		},
+		"twoTruths": {
 			"lie": [
 				"My uncle Vincent created the font Comic Sans by tracing my handwriting from a Christmas card."
 			],
@@ -11477,13 +11590,19 @@ var scalees = [
 		"name": "Mark Harrison",
 		"id": "person14",
 		"team": "Marketing",
-		"scalee": "Mark_Harrison.svg",
+		"src": "Mark_Harrison.svg",
 		"location": ["Moon"],
 		"team": ["Marketing"],
 		"quirks": ["Flatirons"],
 		"logo": ["trimble"],
 		"bio": "Lorizzle izzle dolizzle doggy amizzle, consectetizzle adipiscing elit. Nullam sapizzle velizzle, stuff volutpat, suscipit quizzle, fo shizzle shit, arcu. Pellentesque egizzle doggy. Ass erizzle. Its fo rizzle izzle dolor dapibizzle turpis tempizzle gizzle. That's the shizzle pellentesque brizzle daahng dawg turpis. Vestibulum in tortor. Pellentesque eleifend rhoncizzle gangster. In break it down habitasse platea dictumst. Yippiyo dapibus. Curabitur gangster urna, pretizzle eu, mattis ac, gangster vitae, fo shizzle. You son of a bizzle dang. Integer sempizzle velit sizzle purus.",
-		"two-truths": {
+		"links": {
+			"posts": "//www.sketchup.com",
+			"mail": "mailto:trump@trump.com",
+			"linkedin": "//www.linkedin.com",
+			"twitter": "//www.twitter.com"
+		},
+		"twoTruths": {
 			"lie": [
 				"My uncle Vincent created the font Comic Sans by tracing my handwriting from a Christmas card."
 			],
@@ -11504,13 +11623,19 @@ var scalees = [
 		"name": "Mark_Lauricello",
 		"id": "person15",
 		"team": "Marketing",
-		"scalee": "Mark_Lauricello.svg",
+		"src": "Mark_Lauricello.svg",
 		"location": ["Boulder"],
 		"team": ["Design"],
 		"quirks": ["Cycling"],
 		"logo": ["sketchup"],
 		"bio": "Lorizzle izzle dolizzle doggy amizzle, consectetizzle adipiscing elit. Nullam sapizzle velizzle, stuff volutpat, suscipit quizzle, fo shizzle shit, arcu. Pellentesque egizzle doggy. Ass erizzle. Its fo rizzle izzle dolor dapibizzle turpis tempizzle gizzle. That's the shizzle pellentesque brizzle daahng dawg turpis. Vestibulum in tortor. Pellentesque eleifend rhoncizzle gangster. In break it down habitasse platea dictumst. Yippiyo dapibus. Curabitur gangster urna, pretizzle eu, mattis ac, gangster vitae, fo shizzle. You son of a bizzle dang. Integer sempizzle velit sizzle purus.",
-		"two-truths": {
+		"links": {
+			"posts": "//www.sketchup.com",
+			"mail": "mailto:trump@trump.com",
+			"linkedin": "//www.linkedin.com",
+			"twitter": "//www.twitter.com"
+		},
+		"twoTruths": {
 			"lie": [
 				"My uncle Vincent created the font Comic Sans by tracing my handwriting from a Christmas card."
 			],
@@ -11531,13 +11656,19 @@ var scalees = [
 		"name": "Matt_Robison",
 		"id": "person16",
 		"team": "Marketing",
-		"scalee": "Matt_Robison.svg",
+		"src": "Matt_Robison.svg",
 		"location": ["Boulder"],
 		"team": ["Knowledge"],
 		"quirks": ["Alt-Milk"],
 		"logo": ["sketchup"],
 		"bio": "Lorizzle izzle dolizzle doggy amizzle, consectetizzle adipiscing elit. Nullam sapizzle velizzle, stuff volutpat, suscipit quizzle, fo shizzle shit, arcu. Pellentesque egizzle doggy. Ass erizzle. Its fo rizzle izzle dolor dapibizzle turpis tempizzle gizzle. That's the shizzle pellentesque brizzle daahng dawg turpis. Vestibulum in tortor. Pellentesque eleifend rhoncizzle gangster. In break it down habitasse platea dictumst. Yippiyo dapibus. Curabitur gangster urna, pretizzle eu, mattis ac, gangster vitae, fo shizzle. You son of a bizzle dang. Integer sempizzle velit sizzle purus.",
-		"two-truths": {
+		"links": {
+			"posts": "//www.sketchup.com",
+			"mail": "mailto:trump@trump.com",
+			"linkedin": "//www.linkedin.com",
+			"twitter": "//www.twitter.com"
+		},
+		"twoTruths": {
 			"lie": [
 				"My uncle Vincent created the font Comic Sans by tracing my handwriting from a Christmas card."
 			],
@@ -11558,13 +11689,19 @@ var scalees = [
 		"name": "Mike_Tadros",
 		"id": "person17",
 		"team": "Marketing",
-		"scalee": "Mike_Tadros.svg",
+		"src": "Mike_Tadros.svg",
 		"location": ["Boulder"],
 		"team": ["Executive"],
 		"quirks": ["Flatirons"],
 		"logo": ["sefaira"],
 		"bio": "Lorizzle izzle dolizzle doggy amizzle, consectetizzle adipiscing elit. Nullam sapizzle velizzle, stuff volutpat, suscipit quizzle, fo shizzle shit, arcu. Pellentesque egizzle doggy. Ass erizzle. Its fo rizzle izzle dolor dapibizzle turpis tempizzle gizzle. That's the shizzle pellentesque brizzle daahng dawg turpis. Vestibulum in tortor. Pellentesque eleifend rhoncizzle gangster. In break it down habitasse platea dictumst. Yippiyo dapibus. Curabitur gangster urna, pretizzle eu, mattis ac, gangster vitae, fo shizzle. You son of a bizzle dang. Integer sempizzle velit sizzle purus.",
-		"two-truths": {
+		"links": {
+			"posts": "//www.sketchup.com",
+			"mail": "mailto:trump@trump.com",
+			"linkedin": "//www.linkedin.com",
+			"twitter": "//www.twitter.com"
+		},
+		"twoTruths": {
 			"lie": [
 				"My uncle Vincent created the font Comic Sans by tracing my handwriting from a Christmas card."
 			],
@@ -11585,13 +11722,19 @@ var scalees = [
 		"name": "Omar Soubra",
 		"id": "person18",
 		"team": "Marketing",
-		"scalee": "Omar_Soubra.svg",
+		"src": "Omar_Soubra.svg",
 		"location": ["London"],
 		"team": ["Engineering"],
 		"quirks": ["Disc Golf"],
 		"logo": ["sketchup"],
 		"bio": "Lorizzle izzle dolizzle doggy amizzle, consectetizzle adipiscing elit. Nullam sapizzle velizzle, stuff volutpat, suscipit quizzle, fo shizzle shit, arcu. Pellentesque egizzle doggy. Ass erizzle. Its fo rizzle izzle dolor dapibizzle turpis tempizzle gizzle. That's the shizzle pellentesque brizzle daahng dawg turpis. Vestibulum in tortor. Pellentesque eleifend rhoncizzle gangster. In break it down habitasse platea dictumst. Yippiyo dapibus. Curabitur gangster urna, pretizzle eu, mattis ac, gangster vitae, fo shizzle. You son of a bizzle dang. Integer sempizzle velit sizzle purus.",
-		"two-truths": {
+		"links": {
+			"posts": "//www.sketchup.com",
+			"mail": "mailto:trump@trump.com",
+			"linkedin": "//www.linkedin.com",
+			"twitter": "//www.twitter.com"
+		},
+		"twoTruths": {
 			"lie": [
 				"My uncle Vincent created the font Comic Sans by tracing my handwriting from a Christmas card."
 			],
@@ -11612,13 +11755,19 @@ var scalees = [
 		"name": "Sandra_Winstead",
 		"id": "person19",
 		"team": "Marketing",
-		"scalee": "Sandra_Winstead.svg",
+		"src": "Sandra_Winstead.svg",
 		"location": ["New York"],
 		"team": ["Design"],
 		"quirks": ["Cycling", "Disc Golf"],
 		"logo": ["trimble"],
 		"bio": "Lorizzle izzle dolizzle doggy amizzle, consectetizzle adipiscing elit. Nullam sapizzle velizzle, stuff volutpat, suscipit quizzle, fo shizzle shit, arcu. Pellentesque egizzle doggy. Ass erizzle. Its fo rizzle izzle dolor dapibizzle turpis tempizzle gizzle. That's the shizzle pellentesque brizzle daahng dawg turpis. Vestibulum in tortor. Pellentesque eleifend rhoncizzle gangster. In break it down habitasse platea dictumst. Yippiyo dapibus. Curabitur gangster urna, pretizzle eu, mattis ac, gangster vitae, fo shizzle. You son of a bizzle dang. Integer sempizzle velit sizzle purus.",
-		"two-truths": {
+		"links": {
+			"posts": "//www.sketchup.com",
+			"mail": "mailto:trump@trump.com",
+			"linkedin": "//www.linkedin.com",
+			"twitter": "//www.twitter.com"
+		},
+		"twoTruths": {
 			"lie": [
 				"My uncle Vincent created the font Comic Sans by tracing my handwriting from a Christmas card."
 			],
@@ -11639,13 +11788,19 @@ var scalees = [
 		"name": "Sarah_Pirila",
 		"id": "person20",
 		"team": "Marketing",
-		"scalee": "Sarah_Pirila.svg",
+		"src": "Sarah_Pirila.svg",
 		"location": ["Hong Kong"],
 		"team": ["Knowledge"],
 		"quirks": ["Alt-Milk"],
 		"logo": ["sketchup"],
 		"bio": "Lorizzle izzle dolizzle doggy amizzle, consectetizzle adipiscing elit. Nullam sapizzle velizzle, stuff volutpat, suscipit quizzle, fo shizzle shit, arcu. Pellentesque egizzle doggy. Ass erizzle. Its fo rizzle izzle dolor dapibizzle turpis tempizzle gizzle. That's the shizzle pellentesque brizzle daahng dawg turpis. Vestibulum in tortor. Pellentesque eleifend rhoncizzle gangster. In break it down habitasse platea dictumst. Yippiyo dapibus. Curabitur gangster urna, pretizzle eu, mattis ac, gangster vitae, fo shizzle. You son of a bizzle dang. Integer sempizzle velit sizzle purus.",
-		"two-truths": {
+		"links": {
+			"posts": "//www.sketchup.com",
+			"mail": "mailto:trump@trump.com",
+			"linkedin": "//www.linkedin.com",
+			"twitter": "//www.twitter.com"
+		},
+		"twoTruths": {
 			"lie": [
 				"My uncle Vincent created the font Comic Sans by tracing my handwriting from a Christmas card."
 			],
@@ -11666,13 +11821,19 @@ var scalees = [
 		"name": "Trent Cito",
 		"id": "person21",
 		"team": "Marketing",
-		"scalee": "Trent_Cito.svg",
+		"src": "Trent_Cito.svg",
 		"location": ["Moon"],
 		"team": ["Marketing"],
 		"quirks": ["Coffee"],
 		"logo": ["sketchup"],
 		"bio": "Lorizzle izzle dolizzle doggy amizzle, consectetizzle adipiscing elit. Nullam sapizzle velizzle, stuff volutpat, suscipit quizzle, fo shizzle shit, arcu. Pellentesque egizzle doggy. Ass erizzle. Its fo rizzle izzle dolor dapibizzle turpis tempizzle gizzle. That's the shizzle pellentesque brizzle daahng dawg turpis. Vestibulum in tortor. Pellentesque eleifend rhoncizzle gangster. In break it down habitasse platea dictumst. Yippiyo dapibus. Curabitur gangster urna, pretizzle eu, mattis ac, gangster vitae, fo shizzle. You son of a bizzle dang. Integer sempizzle velit sizzle purus.",
-		"two-truths": {
+		"links": {
+			"posts": "//www.sketchup.com",
+			"mail": "mailto:trump@trump.com",
+			"linkedin": "//www.linkedin.com",
+			"twitter": "//www.twitter.com"
+		},
+		"twoTruths": {
 			"lie": [
 				"My uncle Vincent created the font Comic Sans by tracing my handwriting from a Christmas card."
 			],
@@ -11693,13 +11854,19 @@ var scalees = [
 		"name": "Tyler_Barnard",
 		"id": "person22",
 		"team": "Marketing",
-		"scalee": "Tyler_Barnard.svg",
+		"src": "Tyler_Barnard.svg",
 		"location": ["New York"],
 		"team": ["Design"],
 		"quirks": ["Disc Golf"],
 		"logo": ["sketchup"],
 		"bio": "Lorizzle izzle dolizzle doggy amizzle, consectetizzle adipiscing elit. Nullam sapizzle velizzle, stuff volutpat, suscipit quizzle, fo shizzle shit, arcu. Pellentesque egizzle doggy. Ass erizzle. Its fo rizzle izzle dolor dapibizzle turpis tempizzle gizzle. That's the shizzle pellentesque brizzle daahng dawg turpis. Vestibulum in tortor. Pellentesque eleifend rhoncizzle gangster. In break it down habitasse platea dictumst. Yippiyo dapibus. Curabitur gangster urna, pretizzle eu, mattis ac, gangster vitae, fo shizzle. You son of a bizzle dang. Integer sempizzle velit sizzle purus.",
-		"two-truths": {
+		"links": {
+			"posts": "//www.sketchup.com",
+			"mail": "mailto:trump@trump.com",
+			"linkedin": "//www.linkedin.com",
+			"twitter": "//www.twitter.com"
+		},
+		"twoTruths": {
 			"lie": [
 				"My uncle Vincent created the font Comic Sans by tracing my handwriting from a Christmas card."
 			],
@@ -11720,13 +11887,19 @@ var scalees = [
 		"name": "Tyler Miller",
 		"id": "person23",
 		"team": "Marketing",
-		"scalee": "Tyler_Miller.svg",
+		"src": "Tyler_Miller.svg",
 		"location": ["Hong Kong"],
 		"team": ["Knowledge"],
 		"quirks": ["Alt-Milk"],
 		"logo": ["sefaira"],
 		"bio": "Lorizzle izzle dolizzle doggy amizzle, consectetizzle adipiscing elit. Nullam sapizzle velizzle, stuff volutpat, suscipit quizzle, fo shizzle shit, arcu. Pellentesque egizzle doggy. Ass erizzle. Its fo rizzle izzle dolor dapibizzle turpis tempizzle gizzle. That's the shizzle pellentesque brizzle daahng dawg turpis. Vestibulum in tortor. Pellentesque eleifend rhoncizzle gangster. In break it down habitasse platea dictumst. Yippiyo dapibus. Curabitur gangster urna, pretizzle eu, mattis ac, gangster vitae, fo shizzle. You son of a bizzle dang. Integer sempizzle velit sizzle purus.",
-		"two-truths": {
+		"links": {
+			"posts": "//www.sketchup.com",
+			"mail": "mailto:trump@trump.com",
+			"linkedin": "//www.linkedin.com",
+			"twitter": "//www.twitter.com"
+		},
+		"twoTruths": {
 			"lie": [
 				"My uncle Vincent created the font Comic Sans by tracing my handwriting from a Christmas card."
 			],
@@ -11743,45 +11916,36 @@ var scalees = [
 			}
 		],
 	}
-]
+];
 
 
-module.exports = leaders;
-},{}],5:[function(require,module,exports){
+function getScalee(id) {
+	var src;
 
-var $ = require('jquery');
+	for (var i = 0; i < Data.length; i++) {
+		if (Data[i].id === scaleeId) {
+			src = Data[i].src;
+			break;
+		}
+	}
 
-var $window = $(window);
-var $body = $('body');
-var $loadingSlide = $('.loading-screen');
-
-// Show loading screen
-function showLoading() {
-	$body.addClass('fixed');
-	$loadingSlide.addClass('show');
-}
-
-// Hide loading screen
-function hideLoading() {
-	$loadingSlide.addClass('hide');
-
-	// After animation, remove cover and let scrolling resume
-	window.setTimeout(function(){
-		$body.removeClass('fixed');
-		$loadingSlide.removeClass('show hide');
-	}, 1100);
+	return src;
 }
 
 
 
-module.exports.show = showLoading;
-module.exports.hide = hideLoading;
-},{"jquery":1}],6:[function(require,module,exports){
+module.exports.data = scalees;
+module.exports.getScalee = getScalee;
+
+},{}],6:[function(require,module,exports){
 'use strict';
 
 var $ = require('jquery');
 var TwoTruths = require('./two-truths.js');
+var Data = require('./model-data.js');
 var Util = require('./util.js');
+
+var ScaleeData = Data.data;
 
 
 // ------------------------
@@ -11809,6 +11973,14 @@ var $infoSlide = $('.info-slide');
 var $infoBg = $('.scalee-bio-background');
 var $infoClose = $infoSlide.find('.close-btn');
 
+// Fields to update
+var $name = $infoSlide.find('.title-box h1');
+var $bio = $infoSlide.find('.description-cont p');
+var $postsLink = $infoSlide.find('#posts-link');
+var $socialBtns = $infoSlide.find('.social-icon');
+var $factItems = $infoSlide.find('.fact-item');
+
+
 
 // State Vars
 //---------------
@@ -11817,6 +11989,7 @@ var $newScalee;
 var initialPos;
 var initialHeight;
 var isMobile = Util.isMobile();
+
 
 
 // Bind Events
@@ -11830,21 +12003,33 @@ function mobileEventsOn() {
 }
 
 
-// Unbind Events
-//-----------------
-function eventsOff() {
-  $scalees.off('click');
-}
-
 
 // Main Click Logic
 //------------------------
 function clickHandler() {
-  // TODO: Insert scalee's data into .info-slide
-
   $scaleeInFocus = $(this);
-  var scaleePos = $scaleeInFocus.position();
+  var scaleeId = $scaleeInFocus.attr('id');
 
+  // - Fill bio data
+  fillBio(scaleeId);
+
+  if (isMobile) {
+    mobileScaleeCopy();
+  } else {
+    desktopAnimation();
+  }
+
+  // - show info slide with bio and left-side overlay
+  $infoSlide.addClass('show');
+  $infoBg.addClass('show');
+
+  // - scroll to top then lock scroll
+  TweenMax.to(window, 1, {scrollTo:'#meet'});
+  $body.addClass('fixed');
+
+}
+
+function desktopAnimation() {
   // - copy scalee and set position on top of old one
   $newScalee = copyScalee($scaleeInFocus);
   $slide1.append($newScalee);
@@ -11858,63 +12043,42 @@ function clickHandler() {
   var windowWidth = window.innerWidth;
   var newLeftPos = windowWidth * targetLeft;
 
-  // $newScalee.animate({
-  //   left: newLeftPos,
-  //   top: 50,
-  //   height: (initialHeight * 3)
-  // }, 300);
-
   TweenMax.to($newScalee, 0.4, {left:'25%', x:'-50%', top:50, height:(initialHeight*3)} );
-
-  // - show info slide with bio and left-side overlay
-  $infoSlide.addClass('show');
-  $infoBg.addClass('show');
-
-  // - scroll to top then lock scroll
-  TweenMax.to(window, 1, {scrollTo:'#meet'});
-  $body.addClass('fixed');
-
-
-  // Function to place a new scalee right on top of the clicked scalee
-  function copyScalee($el) {
-
-    var $newEl = $el.clone().removeClass('show').addClass('bio-scalee');
-
-    var elPos = {
-      top: $el.position().top,
-      left: $el.offset().left
-    };
-
-    // Calculate top position in element
-    var scaleeContTop = $scaleeCont.position().top;
-    elPos.top += scaleeContTop;
-
-    // Tweaks...
-    elPos.top += 7; // not sure why the extra px are necessary
-    elPos.left += 5;
-    initialHeight = $el.height();
-
-    $newEl.css({
-      height: initialHeight,
-      top: elPos.top,
-      left: elPos.left
-    });
-
-    // Remember the initial placement
-    initialPos = elPos;
-
-    return $newEl;
-  }
-
-
-  // TODO: Bind closing actions
 }
-function mobileClickHandler() {
 
-  // TODO: Insert scalee's data into .info-slide  
+// Function to place a new scalee right on top of the clicked scalee
+function copyScalee($el) {
 
+  var $newEl = $el.clone().removeClass('show').addClass('bio-scalee');
+
+  var elPos = {
+    top: $el.position().top,
+    left: $el.offset().left
+  };
+
+  // Calculate top position in element
+  var scaleeContTop = $scaleeCont.position().top;
+  elPos.top += scaleeContTop;
+
+  // Tweaks...
+  elPos.top += 7; // not sure why the extra px are necessary
+  elPos.left += 5;
+  initialHeight = $el.height();
+
+  $newEl.css({
+    height: initialHeight,
+    top: elPos.top,
+    left: elPos.left
+  });
+
+  // Remember the initial placement
+  initialPos = elPos;
+
+  return $newEl;
+}
+
+function mobileScaleeCopy() {
   // - copy the clicked img src
-  $scaleeInFocus = $(this);
   var imgSrc = $scaleeInFocus.attr('src');
 
   // - insert new img into .info-card with new imgSrc
@@ -11925,20 +12089,6 @@ function mobileClickHandler() {
     var $newImg = $('<img src="'+ imgSrc +'" class="new-img">');
     $infoSlide.prepend( $newImg );
   }
-
-  // - ensure enough room for 2-truths game
-  var $swapCont = $infoSlide.find('.swap-cont');
-  var bioHeight = $swapCont.children('.description-cont').height();
-  var gameHeight = $swapCont.children('.game-cont').height();
-  if (gameHeight > bioHeight) {
-    $swapCont.css('height', gameHeight);
-  }
-
-  // - Prevent scrolling on rest of page, so that .info-slide can scroll
-  $body.addClass('fixed');
-
-  // - Show .info-slide
-  $infoSlide.addClass('show');
 }
 
 
@@ -11984,32 +12134,444 @@ function closeBio(){
 }
 
 
+// Fill Bio Data
+//------------------
+function fillBio(scaleeId) {
+  // - get scalee obj
+  var scaleeData = Data.getScalee(scaleeId);
+
+  updateText(scaleeData);
+  updateLinks(scaleeData);
+  updateGame(scaleeData);
+}
+
+function updateText(scaleeData) {
+  // Update text: Name, bio
+  $name.text(scaleeData.name);
+  $bio.text(scaleeData.bio);
+
+}
+function updateLinks(scaleeData) {
+  // - hide all links, then show if given for scalee
+  $socialBtns.addClass('hide');
+  $postsLink.addClass('hide');
+
+  for (var link in scaleeData.links) {
+    var url = scaleeData.links[link];
+    var $btn = (link === 'posts') ? $postsLink : $socialBtns.filter('.icon-'+ link);
+
+    $btn.attr('href', url).removeClass('hide');
+  }
+}
+function updateGame(scaleeData) {
+  // - remove 'lie' and 'truth' classes
+  $factItems.removeClass('truth lie');
+
+  // - get random number for lie. Fill in lie, then fill in truths
+  var lieIndex = Math.floor( Math.random() * 2 ); // either 0, 1, or 2
+  var $lieItem = $factItems.eq(lieIndex);
+  $lieItem.addClass('lie').find('p').text( scaleeData.twoTruths.lie[0] );
+
+  var $truthItems = $factItems.not('.lie');
+  $truthItems.addClass('truth').each(function(i){
+    $(this).find('p').text( scaleeData.twoTruths.truths[i] );
+  });
+}
+
+
+
 // General init
 //------------------
 function init() {
   // Close Bio Btn ------
   $infoClose.click(closeBio);
-
-  // On mobile, bind click event------
-  if ( isMobile ) {
-    mobileEventsOn();
-  } else {
-    eventsOn();
-  }
 }
+
 
 
 // Exports
 //-------------
 module.exports.init = init;
-module.exports.on = eventsOn;
-module.exports.off = eventsOff;
-},{"./two-truths.js":9,"./util.js":10,"jquery":1}],7:[function(require,module,exports){
+module.exports.clickHandler = clickHandler;
+},{"./model-data.js":5,"./two-truths.js":12,"./util.js":13,"jquery":1}],7:[function(require,module,exports){
+
+var $ = require('jquery');
+var Data = require('./model-data.js');
+var Util = require('./util.js');
+var ScaleeBios = require('./scalee-bios.js');
+
+var ScaleeData = Data.data;
+var imgPath = '/img/';
+
+
+// Elements
+//-------------
+var $scaleeCont = $('.scalee-cont');
+var isMobile = Util.isMobile();
+
+
+// Sub-data
+// ---------------------
+var leaderObj = {};
+var tags = {
+	location: [],
+	team: [],
+	quirks: []
+};
+
+
+// Create Leaderboard Obj
+//-----------------------
+function addToLeaders(scaleeObj){
+
+	// - Check if scalee is on a leaderboard
+	if (scaleeObj.leaderboard && scaleeObj.leaderboard.length) {
+		var leaderboadArray = scaleeObj.leaderboard;
+
+		// - loop through leaderboad objs within scalee's data
+		leaderboadArray.forEach(function(rankObj, i){
+
+			var gameObj = leaderObj[rankObj.gameId];
+
+			// - if no object for this game in leaderObj, create new one
+			if (!gameObj) {
+				gameObj = {
+					name: rankObj.gameName,
+					leaders: {}
+				};
+			}
+
+			// - add reference to scalee in leaderObj
+			gameObj.leaders[rankObj.place] = scaleeObj.id;
+		});
+	}
+}
+
+
+// Create Location, Team, and Quirks arrays
+//-----------------------
+function checkTag(tagCategory, scaleeObj) {
+	// Check if scalee even has the tag (location/team/quirk)
+	if (scaleeObj[tagCategory] && scaleeObj[tagCategory].length) {
+		var trackingArray = tags[tagCategory];
+
+		// For each tag, check if already in tagsObj array, and if not, add
+		scaleeObj[tagCategory].forEach(function(tag){
+			if ( trackingArray.indexOf(tag) == -1 ) {
+				trackingArray.push(tag);
+			}
+		});
+	}
+}
+
+
+// Build Scalee html
+//-----------------------
+function buildScalee(scaleeObj) {
+	var $scalee = $('<img>');
+
+	// - create filter tags
+	var locations = scaleeObj.location.join(' ');
+	var teams = scaleeObj.team.join(' ');
+	var quirks = scaleeObj.quirks.join(' ');
+
+	var tags = locations + ' ' + teams + ' ' + quirks;
+
+	// - add src, id, and data tags
+	$scalee.attr({
+		src: imgPath + scaleeObj.src,
+		id: scaleeObj.id,
+		'data-tags': tags,
+		'data-logo': scaleeObj.logo
+	});
+
+	return $scalee;
+}
+
+
+// Do it
+//-------------
+function createScaless() {
+	ScaleeData.forEach(function(scaleeObj, i){
+
+		// Add tags to tagsObj
+		checkTag('location', scaleeObj);
+		checkTag('team', scaleeObj);
+		checkTag('quirks', scaleeObj);
+
+		// Add to leaderboard obj
+		addToLeaders(scaleeObj);
+
+		// Build scalee, add to page
+		var $scalee = buildScalee(scaleeObj);
+		$scaleeCont.prepend($scalee);
+
+		// Bind click event
+		$scalee.click(ScaleeBios.clickHandler);
+	});
+
+
+	// Alphabetize tag arrays
+	tags.location.sort().reverse(); // Put 'Boulder' on top
+	tags.team.sort();
+	tags.quirks.sort();
+
+	console.log('Done making scalees ----');
+	console.log('tagData: %O', tags);
+	console.log('leaderData: %o', leaderObj);
+}
+
+
+
+// Exports
+//-------------
+module.exports.build = createScaless;
+module.exports.leaderData = leaderObj;
+module.exports.tagData = tags;
+},{"./model-data.js":5,"./scalee-bios.js":6,"./util.js":13,"jquery":1}],8:[function(require,module,exports){
+
+var $ = require('jquery');
+var Data = require('./model-data.js');
+var Util = require('./util.js');
+var Sorter = require('./scalee-sorter.js');
+var Builder = require('./scalee-build.js');
+
+var LeaderData = Builder.leaderData;
+
+
+// Elements
+//------------
+var $window = $(window);
+var $body = $('body');
+var $header = $('header');
+var $slide1 = $('.slide1');
+
+var $leaderTrigger = $('#leader-trigger');
+var $leaderCont = $('.leader-cont');
+var $leaderTitle = $leaderCont.find('.leaderboard-title h1');
+var $leaderBoxes = $leaderCont.find('.position-box');
+var $leaderboardControls = $('.container.leaderboard');
+var $leaderBtnCont = $leaderboardControls.children('.leaderboard-buttons');
+var $leaderClose = $leaderCont.find('.back-btn');
+
+
+
+
+//--------------------------
+// Initialize leaderboard: Make buttons, bind events
+//-----------------------------
+function initLeaderboard() {
+  var $buttonTemplate = $('<button class="leader"></button>');
+
+  // Create buttons for leaderboard switching
+  for (var event in LeaderData) {
+    var eventObj = LeaderData[event];
+    var $newBtn = $buttonTemplate.clone().text( eventObj.name ).attr('data-leader-id', event);
+
+    // Insert new btn
+    $leaderBtnCont.append( $newBtn );
+
+    // Closure for eventId
+    function bindClick() {
+      var eventId = event;
+
+      // Bind click event to show leaderboard
+      $newBtn.click(function(){
+        switchLeaderboard( eventId, $(this) );
+      });
+    };
+
+    bindClick();
+  } // end for loop
+}
+
+
+
+// Switch between rankings
+//----------------------------
+function switchLeaderboard(eventName, $btn) {
+	// Switch src attribute to those of the top 5 poeple's scalee
+
+	var eventObj = LeaderData[eventName];
+	var leaders = eventObj.leaders;
+
+	function animateChange(id) {
+		var personImgSrc = getScaleeSrc(id);
+		var $targetImg = $leaderBoxes.eq( position-1 ).children('img');
+
+		// - hide img, wait for transition, then switch img and show
+		$targetImg.addClass('hide');
+
+		window.setTimeout(function(){
+			$targetImg.attr('src', personImgSrc).removeClass('hide');
+		}, 300);
+	}
+
+	function getScaleeSrc(scaleeId) {
+		var scaleeObj = Data.getScalee(scaleeId);
+
+		return scaleeObj.src;
+	}
+
+
+	// - loop through data, get img src attribute, then apply to 'leader-boxes'
+	for (var position in leaders) {
+		var personId = leaders[position];
+
+		// - closure for setTimeout
+		animateChange(personId);
+	} // end for loop
+
+	// Finally, switch title
+	switchLeaderTitle(eventObj.name);
+
+	// Show active state on btn
+	$btn.addClass('active').siblings('.active').removeClass('active');
+}
+
+function switchLeaderTitle(newTitle) {
+  // Animate title out of view
+  $leaderTitle.addClass('fade');
+
+  // Wait for animation, then change title and animate back in
+  window.setTimeout(function(){
+    $leaderTitle.text(newTitle).removeClass('fade');
+  }, 600);
+}
+
+
+// Enter 'Leaderboard Mode'
+//--------------------------
+function showLeaderboard() {
+
+  // - trigger click on first btn, just to show some people
+  var $btn = $leaderBtnCont.children('.leader');
+  $btn.eq(0).trigger('click');
+
+  // - trigger most style changes through CSS
+  $slide1.addClass('leader-mode');
+
+  // - wait 0.5s, then show new buttons
+  window.setTimeout(function(){
+    $leaderboardControls.addClass('show');
+  }, 500);
+
+  // - reset filters and close sorting panel
+  Sorter.reset();
+  Sorter.closePanel();
+
+  // - lock scroll
+  $body.addClass('fixed');
+}
+
+
+
+// Exit 'Leaderboard Mode'
+//----------------------------
+function hideLeaderboard() {
+  // Undo everything above
+  $slide1.removeClass('leader-mode');
+  $leaderboardControls.removeClass('show');
+  $body.removeClass('fixed');
+}
+
+
+
+//-------------------
+// Bind events
+//------------
+function eventsOn() {
+
+  // Switch to Leaderboard-mode -----
+  $leaderTrigger.click(function(){
+    showLeaderboard();
+  });
+
+  // Exit Leaderboard mode -----
+  $leaderClose.click(function(){
+    hideLeaderboard();
+  });
+
+}
+
+
+function init() {
+	initLeaderboard();
+	eventsOn();
+}
+
+
+
+module.exports.init = init;
+},{"./model-data.js":5,"./scalee-build.js":7,"./scalee-sorter.js":10,"./util.js":13,"jquery":1}],9:[function(require,module,exports){
+
+var $ = require('jquery');
+
+
+var $scaleeCont = $('.scalee-cont');
+var $scaleeLeftBtn = $('.scalee-scroll.prev');
+var $scaleeRightBtn = $('.scalee-scroll.next');
+
+
+
+// Scalee lateral scrolling
+//-----------------------------
+var scaleeOffset;
+
+function centerScalees() {
+  // Just reset the translateX CSS property to 50%;
+  scaleeOffset = 0.5;
+  setTranslate();
+}
+
+function scrollScalees(dist) {
+  // Dont's allow scrolling off screen
+  if ( (scaleeOffset >= 0.95 && dist > 0) || 
+        (scaleeOffset <= 0.05 && dist < 0) ) {
+    return;
+  }
+
+  scaleeOffset += dist;
+  setTranslate()
+}
+
+function setTranslate() {
+  var offsetString = (100 * scaleeOffset) + '%';
+
+  $scaleeCont.css({
+    transform: 'translateX(' + offsetString +')'
+  });
+}
+
+
+
+// Bind events
+//------------
+function eventsOn() {
+
+  // Scroll scalees ------
+  $scaleeLeftBtn.click(function(){
+    scrollScalees(0.1);
+  });
+  $scaleeRightBtn.click(function(){
+    scrollScalees(-0.1);
+  });
+}
+
+
+module.exports.init = eventsOn;
+module.exports.center = centerScalees;
+},{"jquery":1}],10:[function(require,module,exports){
 // 'use strict';
 
 var $ = require('jquery');
-var LeaderData = require('./leaderboard-data.js');
+var ScaleeBuilder = require('./scalee-build.js');
 var Util = require('./util.js');
+var ScaleeScrolling = require('./scalee-scrolling.js');
+
+// var ScaleeData = Data.rawData;
+var TagData = ScaleeBuilder.tagData;
+// var LeaderData = Data.leaderData;
 
 
 // ------------------------
@@ -12028,198 +12590,167 @@ var $trimLogo = $slide1.find('.trimble-logo');
 var $sefLogo = $slide1.find('.sefaira-logo');
 
 var $openFilter = $('.open-panel');
-var $filterControls = $('.container.selectors');
-var $wheelSelectors = $filterControls.find('.wheel-selector');
+var $wheelContainers = $('.selector');
+var $wheelSelectors = $wheelContainers.find('.wheel-selector');
 var $filterItems = $wheelSelectors.children('.item');
 
-// var $sortTrigger = $('#sort-me');
 var $scaleeCont = $('.scalee-cont');
 var $scalees = $scaleeCont.find('img');
 var $nullScalee = $scalees.filter('#null-person');
 
 var $infoSlide = $('.info-slide');
 var $infoClose = $infoSlide.find('.close-btn');
-var $scaleeLeftBtn = $('.scalee-scroll.prev');
-var $scaleeRightBtn = $('.scalee-scroll.next');
-
-var $leaderTrigger = $('#leader-trigger');
-var $leaderCont = $('.leader-cont');
-var $leaderTitle = $leaderCont.find('.leaderboard-title h1');
-var $leaderBoxes = $leaderCont.find('.position-box');
-var $leaderboardControls = $('.container.leaderboard');
-var $leaderBtnCont = $leaderboardControls.children('.leaderboard-buttons');
-var $leaderClose = $leaderCont.find('.back-btn');
-
-var itemHeight = $filterItems.outerHeight();
 
 
 // State Variables
 //-----------------
 var filters = [];
+var panelOpen = $slide1.hasClass('edit-mode');
+var isMobile = Util.isMobile();
+
 var logos = {
   sketchup: $suLogo,
   trimble: $trimLogo,
   sefaira: $sefLogo
 };
-var panelOpen = $slide1.hasClass('edit-mode');
-var $scaleeInFocus;
-var isMobile = Util.isMobile();
 
 
-// Bind events
-//------------
-function eventsOn() {
+//-----------------------------
+// Build sorter from data
+//------------------------
+function buildSorterWheels(){
+  for (var category in TagData) {
+    var $wheelCont = $wheelContainers.filter('.'+ category);
+    var $wheel = $wheelCont.find('.wheel-selector');
 
-  // Open/close filter panel -----
-  $openFilter.click(function(){
-    if (panelOpen) {
-      closePanel();
-    } else {
-      openPanel();
-    }
+    // - Create new items
+    var tagArray = TagData[category];
+    var $itemTemplate = $('<div class="item"></div>');
+    tagArray.forEach(function(tag, i) {
+      var $newItem = $itemTemplate.clone().text(tag);
+      $wheel.prepend($newItem);
+    });
+  }
 
-  });
-
-
-  // Select filters -----
-  $filterItems.click(function(){
-    var $this = $(this);
-
-    // Show selected state
-    $this.toggleClass('selected').siblings('.selected').removeClass('selected');
-    setPointer($this);
-
-    // Trigger sorting
-    sort();
-  });
-
-
-  // Switch to Leaderboard-mode -----
-  $leaderTrigger.click(function(){
-    showLeaderboard();
-  });
-
-  // Exit Leaderboard mode -----
-  $leaderClose.click(function(){
-    hideLeaderboard();
-  });
-
-
-  // Scroll scalees ------
-  $scaleeLeftBtn.click(function(){
-    scrollScalees(0.1);
-  });
-  $scaleeRightBtn.click(function(){
-    scrollScalees(-0.1);
-  });
+  // Update variables
+  $filterItems = $wheelSelectors.children('.item');
 }
 
-// Open Filter Bar
+
+
+//-------------------
+// Open/Close the Sorting Wheels Bar
 //------------
 function openPanel() {
-  // - change styles
-  $slide1.addClass('edit-mode');
-
   // - scroll to position
   TweenMax.to(window, 0.7, {scrollTo:'#meet'});
 
-  // -lock scroll
+  // - change styles and lock scroll
+  $slide1.addClass('edit-mode');
   $body.addClass('fixed');
 
   // - save state
   panelOpen = true;
 }
 
-
-// Collapse Filter Bar
-//---------------
-// Change height of 'wheel-selector' to only show one item
-// function setClosedHeight() {
-//   $wheelSelectors.css('height', itemHeight+'px');
-// }
-
 function closePanel() {
-
-  // function setFilterPos() {
-
-  //   // - get selected elements
-  //   var $selectedFilters = $wheelSelectors.find('.selected');
-
-  //   // - for each selection, slide up, and save value
-  //   $selectedFilters.each(function(){
-  //     // - get index, multiplying height, then scrolling to that
-  //     var $this = $(this);
-  //     var itemIndex = $this.index();
-  //     var scrollAmt = itemIndex * (itemHeight + 3); // Not sure why need to add the extra 3 px
-
-  //     $this.parents('.wheel-selector').animate({
-  //       scrollTop: scrollAmt
-  //     }, 300);
-  //   });
-
-  //   // - wait for animation, then remove scroll ability
-  //   window.setTimeout(function(){
-  //     $slide1.removeClass('edit-mode');
-  //   }, 500);
-
-  // }
-
-
-  // // On mobile, just remove the class and collapse control panel...
-  // if (isMobile) {
-    $slide1.removeClass('edit-mode');
-
-    $body.removeClass('fixed');
-  // // Else collapse the wheels and show the selected...
-  // } else {
-  //   setClosedHeight();
-  //   setFilterPos();
-
-  //   // - turn back on scroll-triggered nav
-  //   // ScrollNav.eventsOn();
-  // }
-
-  // - save state
+  $slide1.removeClass('edit-mode');
+  $body.removeClass('fixed');
   panelOpen = false;
+}
 
-} // end closePanel();
-
+function handlePanelOpen() {
+  if (panelOpen) {
+    closePanel();
+  } else {
+    openPanel();
+  }
+}
 
 
 //-----------------
 // Sort Scalees
 //---------------
+function handleFilterClick() {
+  var $this = $(this);
+
+  // - Show selected state
+  showSelectedState($this);
+
+  // - Update filters array
+  updateFilters($this);
+
+  // Trigger sorting
+  sort();
+}
+
+function showSelectedState($item) {
+  $item.toggleClass('selected').siblings('.selected').removeClass('selected');
+  setPointer($item);
+}
+
+function updateFilters($item) {
+  var newFilter = $item.text();
+  var filterIndex = filters.indexOf(newFilter);
+
+  // - If in array, remove, else...
+    // check what category this is,
+    // if another item from that category is preset, remove it
+
+  if (filterIndex != -1) {
+    filters.splice(filterIndex, 1);
+  } else {
+    // - Check if another filter is in same category. If yes, remove
+      // - but only if anything else is even present
+    if (filters.length) {
+      var thisCategory = getFilterCategory(newFilter);
+      for (var i = 0; i < filters.length; i++) {
+        var otherCategory = getFilterCategory(filters[i]);
+        if (thisCategory === otherCategory) {
+          // if filter in same category found, remove...
+          filters.splice(i, 1);
+          break;
+        }
+      }
+    }
+  
+    // Add new filter
+    filters.push(newFilter);
+  }
+
+  console.log('filters: %o', filters);
+}
+
+function getFilterCategory(filter) {
+  var theCategory;
+
+  for (var category in TagData) {
+    var catArray = TagData[category];
+    
+    for (var i = 0; i < catArray.length; i++) {
+      if ( filter === catArray[i] ) {
+        theCategory = category;
+        break;
+      }
+    }
+  }
+
+  return theCategory;
+}
+
+
 function sort() {
 
   // - Hide all logos, then show correct ones after scalees are sorted
   hideLogos();
 
-  // - Get filters
-  setCurrentFilters();
-
   // - Loop through all scalees and see if 'data-tag' attributes match all filters
   hideFilteredScalees();
 
   // - Center scalees
-  centerScalees();
+  ScaleeScrolling.center();
 }
 
-function setCurrentFilters() {
-  // - reset filters
-  filters = [];
-
-  // - Get selected elements
-  var $selectedFilters = $wheelSelectors.find('.selected');
-
-  // - For each selection, slide up, and save value
-  $selectedFilters.each(function(){
-    var $this = $(this);
-
-    // - Store text value
-    var filterValue = $this.text();
-    filters.push(filterValue);
-  });
-}
 
 function hideFilteredScalees() {
   // - reset null state
@@ -12254,13 +12785,17 @@ function hideFilteredScalees() {
 }
 
 function resetFilters() {
-  // Remove '.seleccted' tag
+  // Remove '.seleccted' tag and reset array
   $wheelSelectors.find('.selected').removeClass('selected');
+
+  filters = [];
 
   // Re-sort scalees
   sort();
 }
 
+// Set pointer position on wheel
+//--------------------------------
 function setPointer($el, showing) {
   var $parentWheel = $el.closest('.wheel-selector');
   var $wheelPointer = $el.siblings('.pointer');
@@ -12301,146 +12836,18 @@ function showLogo($el) {
 }
 
 
-//--------------------------
-// Enter 'Leaderboard Mode'
-//--------------------------
-function showLeaderboard() {
 
-  // - trigger click on first btn
-  var $btn = $leaderBtnCont.children('.leader');
-  $btn.eq(0).trigger('click');
+//-------------------
+// Bind events
+//------------
+function eventsOn() {
 
-  // - trigger most changes through CSS
-  $slide1.addClass('leader-mode');
+  // Open/close filter panel -----
+  $openFilter.click(handlePanelOpen);
 
-  // - wait 0.5s, then show new buttons
-  window.setTimeout(function(){
-    $leaderboardControls.addClass('show');
-  }, 500);
+  // Select filter items -----
+  $filterItems.click(handleFilterClick);
 
-  // - reset filters and close sorting panel
-  resetFilters();
-  closePanel();
-
-  // - lock scroll
-  $body.addClass('fixed');
-}
-
-// Exit 'Leaderboard Mode'
-//----------------------------
-function hideLeaderboard() {
-  // Undo everything above
-  $slide1.removeClass('leader-mode');
-  $leaderboardControls.removeClass('show');
-  $body.removeClass('fixed');
-}
-
-// Initialize leaderboard: Make buttons, bind events
-//-----------------------------
-function initLeaderboard() {
-  var $buttonTemplate = $('<button class="leader"></button>');
-
-  // Create buttons for leaderboard switching
-  for (var event in LeaderData) {
-    var eventObj = LeaderData[event];
-    var $newBtn = $buttonTemplate.clone().text( eventObj.name ).attr('data-leader-id', event);
-
-    // Insert new btn
-    $leaderBtnCont.append( $newBtn );
-
-    // Closure for eventId
-    function bindClick() {
-      var eventId = event;
-
-      // Bind click event to show leaderboard
-      $newBtn.click(function(){
-        switchLeaderboard( eventId, $(this) );
-      });
-    };
-
-    bindClick();
-  } // end for loop
-}
-
-
-// Switch between rankings
-//----------------------------
-function switchLeaderboard(eventName, $btn) {
-  // Switch src attribute to those of the top 5 poeple's scalee
-
-  var eventObj = LeaderData[eventName];
-  var leaders = eventObj.leaders;
-
-  // - loop through data, get img src attribute, then apply to 'leader-boxes'
-  for (var position in leaders) {
-    var personId = leaders[position];
-
-    // - closure for setTimeout
-    function animateChange() {
-      var personImgSrc = getScaleeSrc(personId);
-      var $targetImg = $leaderBoxes.eq( position-1 ).children('img');
-      
-      // - hide img, wait for transition, then switch img and show
-      $targetImg.addClass('hide');
-
-      window.setTimeout(function(){
-        $targetImg.attr('src', personImgSrc).removeClass('hide');
-      }, 300);
-    }
-
-    animateChange();
-  } // end for loop
-
-  function getScaleeSrc(scaleeId) {
-    var $scalee = $scalees.filter('#'+scaleeId);
-    return $scalee.attr('src');
-  }
-
-  // Finally, switch title
-  switchLeaderTitle(eventObj.name);
-
-  // Show active state on btn
-  $btn.addClass('active').siblings('.active').removeClass('active');
-}
-
-function switchLeaderTitle(newTitle) {
-  // Animate title out of view
-  $leaderTitle.addClass('fade');
-
-  // Wait for animation, then change title and animate back in
-  window.setTimeout(function(){
-    $leaderTitle.text(newTitle).removeClass('fade');
-  }, 600);
-}
-
-
-// Scalee lateral scrolling
-//-----------------------------
-var scaleeOffset;
-
-function centerScalees() {
-  // Just reset the translateX CSS property to 50%;
-  scaleeOffset = 0.5;
-  setTranslate();
-}
-
-function scrollScalees(dist) {
-
-  if ( (scaleeOffset >= 0.95 && dist > 0) || 
-        (scaleeOffset <= 0.05 && dist < 0) ) {
-    return;
-  }
-
-  scaleeOffset += dist;
-  setTranslate()
-}
-
-function setTranslate() {
-  var offsetString = (100 * scaleeOffset) + '%';
-
-  $scaleeCont.css({
-    transform: 'translateX(' + offsetString +')'
-  });
 }
 
 
@@ -12449,10 +12856,10 @@ function setTranslate() {
 // Initialize sorter
 //------------------
 function init() {
-  eventsOn();
+  buildSorterWheels();
   closePanel();
   sort();
-  initLeaderboard();
+  eventsOn();
 }
 
 
@@ -12463,16 +12870,14 @@ module.exports.init = init;
 module.exports.closePanel = closePanel;
 module.exports.sort = sort;
 module.exports.reset = resetFilters;
-module.exports.closeLeaders = hideLeaderboard;
-module.exports.center = centerScalees;
 
-},{"./leaderboard-data.js":4,"./util.js":10,"jquery":1}],8:[function(require,module,exports){
+},{"./scalee-build.js":7,"./scalee-scrolling.js":9,"./util.js":13,"jquery":1}],11:[function(require,module,exports){
 'use strict';
 
 var $ = require('jquery');
 var ScaleeSorter = require('./scalee-sorter.js');
 
-// NOTE: All GSAP and Scrollmagic dependencies do not work with Browserify, so they have their own gulp task, and are loaded on the page in their own file
+// NOTE: All GSAP and Scrollmagic dependencies do not work with Browserify, so they have their own gulp task, and are loaded on the page in their own file.
 
 
 // -------------------------------
@@ -12559,8 +12964,6 @@ function scrollAnimate() {
 		// - create measurement reference, only for placing buttons initially
 		var scrollRef = createScrollRef();
 
-		console.log('Scroll Ref:');
-		console.log(scrollRef);
 
 		function createScrollRef() {
 			// for each slide
@@ -13100,35 +13503,10 @@ function scrollAnimate() {
 
 module.exports.init = scrollAnimate;
 // module.exports.newRef = createScrollRef;
-},{"./scalee-sorter.js":7,"jquery":1}],9:[function(require,module,exports){
+},{"./scalee-sorter.js":10,"jquery":1}],12:[function(require,module,exports){
 'use strict';
 
 var $ = require('jquery');
-var ScaleeSorter = require('./scalee-sorter.js');
-
-
-// ------------------------
-// Scroll-Triggered Nav
-// ------------------------
-
-// Fake Data
-//-------------
-// var questionData = {
-// 	"person1": {
-// 		"truths": [
-// 			"I have flown acrobatic maneuvers in a small aircraft.",
-// 			"My uncle Vincent created the font Comic Sans by tracing my handwriting from a Christmas card."
-// 		],
-// 		"lie": "I ranked first in an Air Training Corps rifle competition. The same week, I topped the world leaderboard for an online F.P.S."
-// 	},
-// 	"person2": {
-// 		"truths": [
-// 			"I won a medal in the summer X-Games.",
-// 			"For my 18th birthday, my grandpa bought me a trip to see every continent."
-// 		],
-// 		"lie": "My first car was a 2007 Ferrari."
-// 	}
-// }
 
 
 // Elements
@@ -13148,10 +13526,6 @@ var originalText = $gameTitle.text();
 function bindEvents() {
 	// Reveal answers
 	$facts.click(checkQuestion);
-}
-function setQuestions() {
-	// For prototype, pick person at random...
-	// Create three elements, bind click event, and insert in random order
 }
 function checkQuestion() {
 	var $fact = $(this);
@@ -13192,8 +13566,6 @@ function endGame() {
 
 
 function initGame() {
-	// Populate and mix-up the questions
-
 	// Bind events
 	bindEvents();
 }
@@ -13201,7 +13573,7 @@ function initGame() {
 
 module.exports.init = initGame;
 module.exports.endGame = endGame;
-},{"./scalee-sorter.js":7,"jquery":1}],10:[function(require,module,exports){
+},{"jquery":1}],13:[function(require,module,exports){
 
 // ----------------
 // Utilities 
