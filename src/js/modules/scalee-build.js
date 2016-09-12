@@ -30,6 +30,7 @@ function addToLeaders(scaleeObj){
 
 	// - Check if scalee is on a leaderboard
 	if (scaleeObj.leaderboard && scaleeObj.leaderboard.length) {
+
 		var leaderboadArray = scaleeObj.leaderboard;
 
 		// - loop through leaderboad objs within scalee's data
@@ -37,17 +38,26 @@ function addToLeaders(scaleeObj){
 
 			var gameObj = leaderObj[rankObj.gameId];
 
+			console.log('Original game obj: %o', gameObj);
+
 			// - if no object for this game in leaderObj, create new one
 			if (!gameObj) {
+				console.log('creating new game obj');
+
 				gameObj = {
 					name: rankObj.gameName,
 					leaders: {}
 				};
+
+				// - add game to leaderObj
+				leaderObj[rankObj.gameId] = gameObj;
 			}
 
 			// - add reference to scalee in leaderObj
 			gameObj.leaders[rankObj.place] = scaleeObj.id;
 		});
+
+		console.log('Leaderboard Obj: %o', leaderObj);
 	}
 }
 
@@ -119,10 +129,6 @@ function createScaless() {
 	tags.location.sort().reverse(); // Put 'Boulder' on top
 	tags.team.sort();
 	tags.quirks.sort();
-
-	console.log('Done making scalees ----');
-	console.log('tagData: %O', tags);
-	console.log('leaderData: %o', leaderObj);
 }
 
 

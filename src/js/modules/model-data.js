@@ -799,16 +799,16 @@ var scalees = [
 
 
 function getScalee(id) {
-	var src;
+	var scaleeObj;
 
-	for (var i = 0; i < Data.length; i++) {
-		if (Data[i].id === scaleeId) {
-			src = Data[i].src;
+	for (var i = 0; i < scalees.length; i++) {
+		if (scalees[i].id === id) {
+			scaleeObj = scalees[i];
 			break;
 		}
 	}
 
-	return src;
+	return scaleeObj;
 }
 
 

@@ -153,8 +153,6 @@ function updateFilters($item) {
     // Add new filter
     filters.push(newFilter);
   }
-
-  console.log('filters: %o', filters);
 }
 
 function getFilterCategory(filter) {
@@ -192,6 +190,11 @@ function hideFilteredScalees() {
   // - reset null state
   var areScalees = false;
 
+  // If jquery ran too early, before image elements were created, then run again...
+  if ($scalees.length == 1) {
+    $scalees = $scaleeCont.find('img');
+  }
+
   $scalees.each(function(){
     var $this = $(this);
     $this.removeClass('hide show'); // reset each sort
@@ -205,7 +208,7 @@ function hideFilteredScalees() {
       }
     });
 
-    // - if no 'hide' class, add 'show' class, for animation, and set null-state var
+    // - if no 'hide' class was added, add 'show' class, for animation, and set null-state var
     if ( !$this.hasClass('hide') ) {
       $this.addClass('show');
       areScalees = true; // prevent null scalee

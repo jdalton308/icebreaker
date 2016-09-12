@@ -11920,16 +11920,16 @@ var scalees = [
 
 
 function getScalee(id) {
-	var src;
+	var scaleeObj;
 
-	for (var i = 0; i < Data.length; i++) {
-		if (Data[i].id === scaleeId) {
-			src = Data[i].src;
+	for (var i = 0; i < scalees.length; i++) {
+		if (scalees[i].id === id) {
+			scaleeObj = scalees[i];
 			break;
 		}
 	}
 
-	return src;
+	return scaleeObj;
 }
 
 
@@ -12226,6 +12226,7 @@ function addToLeaders(scaleeObj){
 
 	// - Check if scalee is on a leaderboard
 	if (scaleeObj.leaderboard && scaleeObj.leaderboard.length) {
+
 		var leaderboadArray = scaleeObj.leaderboard;
 
 		// - loop through leaderboad objs within scalee's data
@@ -12233,17 +12234,26 @@ function addToLeaders(scaleeObj){
 
 			var gameObj = leaderObj[rankObj.gameId];
 
+			console.log('Original game obj: %o', gameObj);
+
 			// - if no object for this game in leaderObj, create new one
 			if (!gameObj) {
+				console.log('creating new game obj');
+
 				gameObj = {
 					name: rankObj.gameName,
 					leaders: {}
 				};
+
+				// - add game to leaderObj
+				leaderObj[rankObj.gameId] = gameObj;
 			}
 
 			// - add reference to scalee in leaderObj
 			gameObj.leaders[rankObj.place] = scaleeObj.id;
 		});
+
+		console.log('Leaderboard Obj: %o', leaderObj);
 	}
 }
 
@@ -12315,10 +12325,6 @@ function createScaless() {
 	tags.location.sort().reverse(); // Put 'Boulder' on top
 	tags.team.sort();
 	tags.quirks.sort();
-
-	console.log('Done making scalees ----');
-	console.log('tagData: %O', tags);
-	console.log('leaderData: %o', leaderObj);
 }
 
 
@@ -12337,6 +12343,7 @@ var Sorter = require('./scalee-sorter.js');
 var Builder = require('./scalee-build.js');
 
 var LeaderData = Builder.leaderData;
+var imgPath = '/img/';
 
 
 // Elements
@@ -12395,7 +12402,7 @@ function switchLeaderboard(eventName, $btn) {
 	var eventObj = LeaderData[eventName];
 	var leaders = eventObj.leaders;
 
-	function animateChange(id) {
+	function animateChange(id, position) {
 		var personImgSrc = getScaleeSrc(id);
 		var $targetImg = $leaderBoxes.eq( position-1 ).children('img');
 
@@ -12410,7 +12417,7 @@ function switchLeaderboard(eventName, $btn) {
 	function getScaleeSrc(scaleeId) {
 		var scaleeObj = Data.getScalee(scaleeId);
 
-		return scaleeObj.src;
+		return imgPath + scaleeObj.src;
 	}
 
 
@@ -12419,7 +12426,7 @@ function switchLeaderboard(eventName, $btn) {
 		var personId = leaders[position];
 
 		// - closure for setTimeout
-		animateChange(personId);
+		animateChange(personId, position);
 	} // end for loop
 
 	// Finally, switch title
@@ -12717,8 +12724,6 @@ function updateFilters($item) {
     // Add new filter
     filters.push(newFilter);
   }
-
-  console.log('filters: %o', filters);
 }
 
 function getFilterCategory(filter) {
@@ -12756,6 +12761,11 @@ function hideFilteredScalees() {
   // - reset null state
   var areScalees = false;
 
+  // If jquery ran too early, before image elements were created, then run again...
+  if ($scalees.length == 1) {
+    $scalees = $scaleeCont.find('img');
+  }
+
   $scalees.each(function(){
     var $this = $(this);
     $this.removeClass('hide show'); // reset each sort
@@ -12769,7 +12779,7 @@ function hideFilteredScalees() {
       }
     });
 
-    // - if no 'hide' class, add 'show' class, for animation, and set null-state var
+    // - if no 'hide' class was added, add 'show' class, for animation, and set null-state var
     if ( !$this.hasClass('hide') ) {
       $this.addClass('show');
       areScalees = true; // prevent null scalee

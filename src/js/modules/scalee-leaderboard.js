@@ -6,6 +6,7 @@ var Sorter = require('./scalee-sorter.js');
 var Builder = require('./scalee-build.js');
 
 var LeaderData = Builder.leaderData;
+var imgPath = '/img/';
 
 
 // Elements
@@ -64,7 +65,7 @@ function switchLeaderboard(eventName, $btn) {
 	var eventObj = LeaderData[eventName];
 	var leaders = eventObj.leaders;
 
-	function animateChange(id) {
+	function animateChange(id, position) {
 		var personImgSrc = getScaleeSrc(id);
 		var $targetImg = $leaderBoxes.eq( position-1 ).children('img');
 
@@ -79,7 +80,7 @@ function switchLeaderboard(eventName, $btn) {
 	function getScaleeSrc(scaleeId) {
 		var scaleeObj = Data.getScalee(scaleeId);
 
-		return scaleeObj.src;
+		return imgPath + scaleeObj.src;
 	}
 
 
@@ -88,7 +89,7 @@ function switchLeaderboard(eventName, $btn) {
 		var personId = leaders[position];
 
 		// - closure for setTimeout
-		animateChange(personId);
+		animateChange(personId, position);
 	} // end for loop
 
 	// Finally, switch title
