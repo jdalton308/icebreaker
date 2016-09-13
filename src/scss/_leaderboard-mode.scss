@@ -3,6 +3,29 @@
 // Leaderboard pieces
 //--------------------------
 .slide1 {
+	.leaderboard-sun {
+		display: block;
+		@include centerX();
+		top: 0;
+		z-index: -1;
+		width: 100vw;
+		height: 100vw;
+		opacity: 0;
+		pointer-events: none;
+		@include transition();
+		@include transition-delay(0s);
+
+		.sun {
+			fill: $red-soft;
+			stroke: $red-soft;
+			stroke-width: 0px;
+			stroke-dasharray: 5;
+			stroke-dashoffset: 5; // animate for spin
+			@include transition(0.8s);
+			@include transition-delay(1s);
+			@include animation(sun, 30s, linear, 0s, infinite);
+		}
+	}
 	.leader-cont {
 		visibility: hidden;
 		@include centerX();
@@ -191,6 +214,14 @@
 	&.leader-mode {
 		overflow: hidden;
 
+		.leaderboard-sun {
+			opacity: 1;
+			@include transition-delay(0.5s);
+
+			.sun {
+				stroke-width: 85px;
+			}
+		}
 		.leader-cont {
 			visibility: visible;
 			top: 0;
@@ -247,5 +278,14 @@
 			}
 		}
 
+	}
+}
+
+@include keyframes(sun) {
+	0% {
+		stroke-dashoffset: 0;
+	}
+	100% {
+		stroke-dashoffset: 20;
 	}
 }

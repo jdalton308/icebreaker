@@ -6,6 +6,8 @@
 //-------------
 $new-red:     #D0011B;
 $new-blue:    #498FE1;
+$gold:        #D1CF3C;
+$red-soft:    #FF796C;
 
 $su-gray-rgba:    rgba(54, 53, 69, 1);
 $su-gray-rgba-0:  rgba(54, 53, 69, 0);
@@ -67,6 +69,10 @@ $curve3: cubic-bezier(.21,.05,.07,.99);
 @mixin transition($time: 0.5s) {
   -webkit-transition: all $time;
   transition: all $time;
+}
+@mixin transition-delay($time) {
+  -webkit-transition-delay: $time;
+  transition-delay: $time;
 }
 @mixin linear-gradient($start, $end) {
   background: $start;
