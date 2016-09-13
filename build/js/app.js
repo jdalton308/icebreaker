@@ -11013,11 +11013,13 @@ return jQuery;
 var $ = require('jquery');
 
 var ScaleeBuilder = require('./modules/scalee-build.js');
+var JobsBuilder = require('./modules/jobs-build.js');
+
 var ScaleeSorter = require('./modules/scalee-sorter.js');
 var ScaleeBios = require('./modules/scalee-bios.js');
 var ScaleeScrolling = require('./modules/scalee-scrolling.js');
 var Leaderboard = require('./modules/scalee-leaderboard.js');
-var TwoTruths = require('./modules/two-truths.js');
+var TwoTruths = require('./modules/scalee-two-truths.js');
 
 var ScrollAnimate = require('./modules/scroll-animation.js');
 var Loading = require('./modules/loading.js');
@@ -11028,6 +11030,7 @@ var Util = require('./modules/util.js');
 // Show loading slide until pageload event
 Loading.show();
 ScaleeBuilder.build();
+JobsBuilder.build();
 
 // Wait for images to load, then run scripts and show page
 $(window).on('load', function(){
@@ -11054,7 +11057,7 @@ $(window).on('load', function(){
 	}, 1000);
 
 });
-},{"./modules/easter-eggs.js":3,"./modules/loading.js":4,"./modules/scalee-bios.js":6,"./modules/scalee-build.js":7,"./modules/scalee-leaderboard.js":8,"./modules/scalee-scrolling.js":9,"./modules/scalee-sorter.js":10,"./modules/scroll-animation.js":11,"./modules/two-truths.js":12,"./modules/util.js":13,"jquery":1}],3:[function(require,module,exports){
+},{"./modules/easter-eggs.js":3,"./modules/jobs-build.js":4,"./modules/loading.js":5,"./modules/scalee-bios.js":7,"./modules/scalee-build.js":8,"./modules/scalee-leaderboard.js":9,"./modules/scalee-scrolling.js":10,"./modules/scalee-sorter.js":11,"./modules/scalee-two-truths.js":12,"./modules/scroll-animation.js":13,"./modules/util.js":14,"jquery":1}],3:[function(require,module,exports){
 
 var $ = require('jquery');
 
@@ -11089,6 +11092,72 @@ module.exports = init;
 },{"jquery":1}],4:[function(require,module,exports){
 
 var $ = require('jquery');
+var Data = require('./model-data.js');
+var JobsData = Data.jobsData;
+
+var $postingCont = $('.job-postings');
+
+
+// Post HTML Structure
+//---------------
+// <div class="job-posting">
+// 	<div class="job-title-box">
+// 		<h4>Sign Spinner</h4>
+// 		<p>Marketing</p>
+// 	</div>
+// 	<div class="posting-content">
+// 		<div class="posting-description">
+// 			<p>Lorizzle izzle dolizzle doggy amizzle, consectetizzle adipiscing elit. Nullam sapizzle velizzle, stuff volutpat, suscipit quizzle, fo shizzle shit, arcu. Pellentesque egizzle doggy. Ass erizzle.</p> 
+// 			<p>Its fo rizzle izzle dolor dapibizzle turpis tempizzle gizzle. That's the shizzle pellentesque brizzle daahng dawg turpis. Vestibulum in tortor. Pellentesque eleifend rhoncizzle gangster. In break it down habitasse platea dictumst. Yippiyo dapibus. Curabitur gangster urna, pretizzle eu, mattis ac, gangster vitae, fo shizzle. You son of a bizzle dang. Integer sempizzle velit sizzle purus.</p>
+// 		</div>
+// 		<p class="button-row">
+// 			<a href="#" class="button blue" target="_blank">APPLY NOW</a>
+// 		</p>
+// 	</div>
+// </div>
+
+
+// HTML Template
+//--------------------
+var $postTemplate = $('<div class="job-posting"></div>');
+var $postTitleTemp = $('<div class="job-title-box"> <h4></h4> <p></p> </div>');
+var $postContentTemp = $('<div class="posting-content"> <div class="posting-description"></div> <p class="button-row"></p> </div>');
+var $postBtn = $('<a href="#" class="button blue" target="_blank">APPLY NOW</a>');
+
+
+// Build
+//-------------
+function buildPosts() {
+	JobsData.forEach(function(postObj, i){
+		// add title copy
+		var $newTitle = $postTitleTemp.clone();
+		$newTitle.find('h4').text(postObj.title);
+		$newTitle.find('p').text(postObj.team);
+
+		// add description
+		var $newContent = $postContentTemp.clone();
+		$newContent.find('.posting-description').append('<p>'+ postObj.description +'</p>');
+
+		// add button link
+		var $newBtn = $postBtn.clone();
+		$newBtn.attr('href', postObj.link);
+
+		// combine templates
+		var $newPost = $postTemplate.clone();
+		$newContent.find('.button-row').append($newBtn);
+		$newPost.append($newTitle).append($newContent);
+
+		// add newPost to page
+		$postingCont.append($newPost);
+	});
+}
+
+
+
+module.exports.build = buildPosts;
+},{"./model-data.js":6,"jquery":1}],5:[function(require,module,exports){
+
+var $ = require('jquery');
 
 var $window = $(window);
 var $body = $('body');
@@ -11118,7 +11187,7 @@ function hideLoading() {
 
 module.exports.show = showLoading;
 module.exports.hide = hideLoading;
-},{"jquery":1}],5:[function(require,module,exports){
+},{"jquery":1}],6:[function(require,module,exports){
 
 // var leaders = {
 // 	"discgolf": {
@@ -11923,6 +11992,27 @@ var scalees = [
 	}
 ];
 
+var jobs = [
+	{
+		"title": "Barista",
+		"team": "Knowledge",
+		"description": "Lorizzle izzle dolizzle doggy amizzle, consectetizzle adipiscing elit. Nullam sapizzle velizzle, stuff volutpat, suscipit quizzle, fo shizzle shit, arcu. Pellentesque egizzle doggy. Ass erizzle.",
+		"link": "//www.sketchup.com"
+	},
+	{
+		"title": "Disc Golf Coach",
+		"team": "Engineering",
+		"description": "Lorizzle izzle dolizzle doggy amizzle, consectetizzle adipiscing elit. Nullam sapizzle velizzle, stuff volutpat, suscipit quizzle, fo shizzle shit, arcu. Pellentesque egizzle doggy. Ass erizzle.",
+		"link": "//www.sketchup.com"
+	},
+	{
+		"title": "Sign Spinner",
+		"team": "Marketing",
+		"description": "Lorizzle izzle dolizzle doggy amizzle, consectetizzle adipiscing elit. Nullam sapizzle velizzle, stuff volutpat, suscipit quizzle, fo shizzle shit, arcu. Pellentesque egizzle doggy. Ass erizzle.",
+		"link": "//www.sketchup.com"
+	},
+];
+
 
 function getScalee(id) {
 	var scaleeObj;
@@ -11940,13 +12030,13 @@ function getScalee(id) {
 
 
 module.exports.data = scalees;
+module.exports.jobsData = jobs;
 module.exports.getScalee = getScalee;
-
-},{}],6:[function(require,module,exports){
+},{}],7:[function(require,module,exports){
 'use strict';
 
 var $ = require('jquery');
-var TwoTruths = require('./two-truths.js');
+var TwoTruths = require('./scalee-two-truths.js');
 var Data = require('./model-data.js');
 var Util = require('./util.js');
 
@@ -12198,7 +12288,7 @@ function init() {
 //-------------
 module.exports.init = init;
 module.exports.clickHandler = clickHandler;
-},{"./model-data.js":5,"./two-truths.js":12,"./util.js":13,"jquery":1}],7:[function(require,module,exports){
+},{"./model-data.js":6,"./scalee-two-truths.js":12,"./util.js":14,"jquery":1}],8:[function(require,module,exports){
 
 var $ = require('jquery');
 var Data = require('./model-data.js');
@@ -12239,12 +12329,8 @@ function addToLeaders(scaleeObj){
 
 			var gameObj = leaderObj[rankObj.gameId];
 
-			console.log('Original game obj: %o', gameObj);
-
 			// - if no object for this game in leaderObj, create new one
 			if (!gameObj) {
-				console.log('creating new game obj');
-
 				gameObj = {
 					name: rankObj.gameName,
 					leaders: {}
@@ -12258,8 +12344,6 @@ function addToLeaders(scaleeObj){
 			gameObj.leaders[rankObj.place] = scaleeObj.id;
 		});
 
-		console.log('New Leaderboard Obj: %o', leaderObj);
-		console.log('-----------------');
 	}
 }
 
@@ -12342,7 +12426,7 @@ function createScaless() {
 module.exports.build = createScaless;
 module.exports.leaderData = leaderObj;
 module.exports.tagData = tags;
-},{"./model-data.js":5,"./scalee-bios.js":6,"./util.js":13,"jquery":1}],8:[function(require,module,exports){
+},{"./model-data.js":6,"./scalee-bios.js":7,"./util.js":14,"jquery":1}],9:[function(require,module,exports){
 
 var $ = require('jquery');
 var Data = require('./model-data.js');
@@ -12518,7 +12602,7 @@ function init() {
 
 
 module.exports.init = init;
-},{"./model-data.js":5,"./scalee-build.js":7,"./scalee-sorter.js":10,"./util.js":13,"jquery":1}],9:[function(require,module,exports){
+},{"./model-data.js":6,"./scalee-build.js":8,"./scalee-sorter.js":11,"./util.js":14,"jquery":1}],10:[function(require,module,exports){
 
 var $ = require('jquery');
 
@@ -12576,7 +12660,7 @@ function eventsOn() {
 
 module.exports.init = eventsOn;
 module.exports.center = centerScalees;
-},{"jquery":1}],10:[function(require,module,exports){
+},{"jquery":1}],11:[function(require,module,exports){
 // 'use strict';
 
 var $ = require('jquery');
@@ -12889,7 +12973,77 @@ module.exports.closePanel = closePanel;
 module.exports.sort = sort;
 module.exports.reset = resetFilters;
 
-},{"./scalee-build.js":7,"./scalee-scrolling.js":9,"./util.js":13,"jquery":1}],11:[function(require,module,exports){
+},{"./scalee-build.js":8,"./scalee-scrolling.js":10,"./util.js":14,"jquery":1}],12:[function(require,module,exports){
+'use strict';
+
+var $ = require('jquery');
+
+
+// Elements
+//------------
+var $infoSlide = $('.info-slide');
+var $gameCont = $infoSlide.find('.game-cont');
+var $gameTitle = $gameCont.find('.game-title');
+var $facts = $gameCont.find('.fact-item');
+
+
+// State variables
+//------------------
+var answered = 0;
+var originalText = $gameTitle.text();
+
+
+function bindEvents() {
+	// Reveal answers
+	$facts.click(checkQuestion);
+}
+function checkQuestion() {
+	var $fact = $(this);
+
+	if ( $fact.hasClass('lie') ) {
+		// incorrect guess, so mark all answers
+		showAnswers($fact);
+		$gameTitle.text("Oops, that's the lie.").addClass('red');
+	} else {
+		// correct
+			// - check if first or second guess
+		if (!answered) {
+			$fact.addClass('reveal');
+			answered++;
+		} else {
+			// - if second, show all answers
+			showAnswers($fact);
+			$gameTitle.text("Nice! You got them both.").addClass('green');
+		}
+	}
+}
+function showAnswers($fact) {
+	return $facts.addClass('reveal');
+}
+function hideAnswers() {
+	return $facts.removeClass('reveal');
+}
+function endGame() {
+	// Reset state
+	answered = 0;
+
+	// - let transition occur, then reset formatting
+	window.setTimeout(function(){
+		hideAnswers();
+		$gameTitle.text(originalText).removeClass('red green');
+	}, 1000)
+}
+
+
+function initGame() {
+	// Bind events
+	bindEvents();
+}
+
+
+module.exports.init = initGame;
+module.exports.endGame = endGame;
+},{"jquery":1}],13:[function(require,module,exports){
 'use strict';
 
 var $ = require('jquery');
@@ -13012,7 +13166,6 @@ function scrollAnimate() {
 		}
 
 		function setBtnPos($btn, sectId) {
-			// var offsetPerc = (height + extra)/pageHeight;
 			var topPos = progressHeight * scrollRef[sectId].percOffset;
 			$btn.css('top', topPos);
 		}
@@ -13069,18 +13222,6 @@ function scrollAnimate() {
 				setMarkerOffset('#hello');
 				ScaleeSorter.reset();
 			});
-			// .on('start', function(e){
-
-			// 	if (e.scrollDirection == 'FORWARD') {
-			// 		// - jump down to position
-			// 		TweenMax.to(window, 0.5, {scrollTo:'#hello'});
-
-			// 		// taperScrolling();
-
-			// 		// - also reset the scalee sorter
-			// 		ScaleeSorter.reset();
-			// 	}
-			// });
 
 		new ScrollMagic.Scene({
 				triggerElement: $jobsSlide.get(0),
@@ -13094,15 +13235,6 @@ function scrollAnimate() {
 			.on('enter', function(e){
 				setMarkerOffset('#jobs');
 			});
-			// .on('start', function(e){
-
-			// 	if (e.scrollDirection == 'FORWARD') {
-			// 		// jump down to position
-			// 		TweenMax.to(window, 0.5, {scrollTo:'#jobs'});
-			// 		// taperScrolling();
-			// 	}
-
-			// });
 
 
 
@@ -13117,66 +13249,6 @@ function scrollAnimate() {
 
 		});
 	})();
-
-
-	// TODO: Taper the scrolling at section starts
-	//-----------------------------------------
-
-	// function taperScrolling() {
-	// 	console.log('tapering scrolling...')
-	// 	var totalDelta = 0;
-
-	// 	function slowWheel(event) {
-	// 		console.log('Scroll event:');
-	// 		console.log(event);
-
-	// 		var delta = 0;
-	// 		if (event.wheelDelta) {
-	// 			(delta = event.wheelDelta / 120);
-	// 		} else if (event.detail) {
-	// 			(delta = -event.detail / 3);
-	// 		}
-
-	// 		handle(delta);
-	// 		totalDelta += delta;
-	// 		if (event.preventDefault) {
-	// 			(event.preventDefault());
-	// 		}
-	// 		event.returnValue = false;
-
-	// 		totalDelta += delta;
-
-	// 		console.log('Delta: '+ delta);
-	// 		console.log('Total: '+ totalDelta);
-	// 		console.log('---------------------')
-
-	// 	 	if (totalDelta > 10 || totalDelta < -10) {
-	// 	 		console.log('---taper off---')
-	// 	 		// after scrolling enough, unbind taper
-	// 			window.removeEventListener('wheel', slowWheel);
-	// 		}
-	// 	}
-
-	// 	function handle(delta) {
-	// 		var time = 100;
-	// 		var distance = 50;
-	// 		var movement = (distance * delta);
-	// 		// totalDelta += movement;
-
-	// 		$body.stop().animate({
-	// 			scrollTop: $window.scrollTop() - movement
-	// 		}, time);
-	// 	}
-
-	// 	window.removeEventListener('wheel', slowWheel);
-	// 	window.addEventListener('wheel', slowWheel);
-	// 	// window.onmousewheel = document.onmousewheel = slowWheel;
-	// }
-
-
-	//-----------------------------------------------
-
-
 
 
 	//------------------
@@ -13521,77 +13593,7 @@ function scrollAnimate() {
 
 module.exports.init = scrollAnimate;
 // module.exports.newRef = createScrollRef;
-},{"./scalee-sorter.js":10,"jquery":1}],12:[function(require,module,exports){
-'use strict';
-
-var $ = require('jquery');
-
-
-// Elements
-//------------
-var $infoSlide = $('.info-slide');
-var $gameCont = $infoSlide.find('.game-cont');
-var $gameTitle = $gameCont.find('.game-title');
-var $facts = $gameCont.find('.fact-item');
-
-
-// State variables
-//------------------
-var answered = 0;
-var originalText = $gameTitle.text();
-
-
-function bindEvents() {
-	// Reveal answers
-	$facts.click(checkQuestion);
-}
-function checkQuestion() {
-	var $fact = $(this);
-
-	if ( $fact.hasClass('lie') ) {
-		// incorrect guess, so mark all answers
-		showAnswers($fact);
-		$gameTitle.text("Oops, that's the lie.").addClass('red');
-	} else {
-		// correct
-			// - check if first or second guess
-		if (!answered) {
-			$fact.addClass('reveal');
-			answered++;
-		} else {
-			// - if second, show all answers
-			showAnswers($fact);
-			$gameTitle.text("Nice! You got them both.").addClass('green');
-		}
-	}
-}
-function showAnswers($fact) {
-	return $facts.addClass('reveal');
-}
-function hideAnswers() {
-	return $facts.removeClass('reveal');
-}
-function endGame() {
-	// Reset state
-	answered = 0;
-
-	// - let transition occur, then reset formatting
-	window.setTimeout(function(){
-		hideAnswers();
-		$gameTitle.text(originalText).removeClass('red green');
-	}, 1000)
-}
-
-
-function initGame() {
-	// Bind events
-	bindEvents();
-}
-
-
-module.exports.init = initGame;
-module.exports.endGame = endGame;
-},{"jquery":1}],13:[function(require,module,exports){
+},{"./scalee-sorter.js":11,"jquery":1}],14:[function(require,module,exports){
 
 // ----------------
 // Utilities 

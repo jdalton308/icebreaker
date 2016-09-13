@@ -120,7 +120,6 @@ function scrollAnimate() {
 		}
 
 		function setBtnPos($btn, sectId) {
-			// var offsetPerc = (height + extra)/pageHeight;
 			var topPos = progressHeight * scrollRef[sectId].percOffset;
 			$btn.css('top', topPos);
 		}
@@ -177,18 +176,6 @@ function scrollAnimate() {
 				setMarkerOffset('#hello');
 				ScaleeSorter.reset();
 			});
-			// .on('start', function(e){
-
-			// 	if (e.scrollDirection == 'FORWARD') {
-			// 		// - jump down to position
-			// 		TweenMax.to(window, 0.5, {scrollTo:'#hello'});
-
-			// 		// taperScrolling();
-
-			// 		// - also reset the scalee sorter
-			// 		ScaleeSorter.reset();
-			// 	}
-			// });
 
 		new ScrollMagic.Scene({
 				triggerElement: $jobsSlide.get(0),
@@ -202,15 +189,6 @@ function scrollAnimate() {
 			.on('enter', function(e){
 				setMarkerOffset('#jobs');
 			});
-			// .on('start', function(e){
-
-			// 	if (e.scrollDirection == 'FORWARD') {
-			// 		// jump down to position
-			// 		TweenMax.to(window, 0.5, {scrollTo:'#jobs'});
-			// 		// taperScrolling();
-			// 	}
-
-			// });
 
 
 
@@ -225,66 +203,6 @@ function scrollAnimate() {
 
 		});
 	})();
-
-
-	// TODO: Taper the scrolling at section starts
-	//-----------------------------------------
-
-	// function taperScrolling() {
-	// 	console.log('tapering scrolling...')
-	// 	var totalDelta = 0;
-
-	// 	function slowWheel(event) {
-	// 		console.log('Scroll event:');
-	// 		console.log(event);
-
-	// 		var delta = 0;
-	// 		if (event.wheelDelta) {
-	// 			(delta = event.wheelDelta / 120);
-	// 		} else if (event.detail) {
-	// 			(delta = -event.detail / 3);
-	// 		}
-
-	// 		handle(delta);
-	// 		totalDelta += delta;
-	// 		if (event.preventDefault) {
-	// 			(event.preventDefault());
-	// 		}
-	// 		event.returnValue = false;
-
-	// 		totalDelta += delta;
-
-	// 		console.log('Delta: '+ delta);
-	// 		console.log('Total: '+ totalDelta);
-	// 		console.log('---------------------')
-
-	// 	 	if (totalDelta > 10 || totalDelta < -10) {
-	// 	 		console.log('---taper off---')
-	// 	 		// after scrolling enough, unbind taper
-	// 			window.removeEventListener('wheel', slowWheel);
-	// 		}
-	// 	}
-
-	// 	function handle(delta) {
-	// 		var time = 100;
-	// 		var distance = 50;
-	// 		var movement = (distance * delta);
-	// 		// totalDelta += movement;
-
-	// 		$body.stop().animate({
-	// 			scrollTop: $window.scrollTop() - movement
-	// 		}, time);
-	// 	}
-
-	// 	window.removeEventListener('wheel', slowWheel);
-	// 	window.addEventListener('wheel', slowWheel);
-	// 	// window.onmousewheel = document.onmousewheel = slowWheel;
-	// }
-
-
-	//-----------------------------------------------
-
-
 
 
 	//------------------

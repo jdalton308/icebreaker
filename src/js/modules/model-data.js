@@ -802,6 +802,27 @@ var scalees = [
 	}
 ];
 
+var jobs = [
+	{
+		"title": "Barista",
+		"team": "Knowledge",
+		"description": "Lorizzle izzle dolizzle doggy amizzle, consectetizzle adipiscing elit. Nullam sapizzle velizzle, stuff volutpat, suscipit quizzle, fo shizzle shit, arcu. Pellentesque egizzle doggy. Ass erizzle.",
+		"link": "//www.sketchup.com"
+	},
+	{
+		"title": "Disc Golf Coach",
+		"team": "Engineering",
+		"description": "Lorizzle izzle dolizzle doggy amizzle, consectetizzle adipiscing elit. Nullam sapizzle velizzle, stuff volutpat, suscipit quizzle, fo shizzle shit, arcu. Pellentesque egizzle doggy. Ass erizzle.",
+		"link": "//www.sketchup.com"
+	},
+	{
+		"title": "Sign Spinner",
+		"team": "Marketing",
+		"description": "Lorizzle izzle dolizzle doggy amizzle, consectetizzle adipiscing elit. Nullam sapizzle velizzle, stuff volutpat, suscipit quizzle, fo shizzle shit, arcu. Pellentesque egizzle doggy. Ass erizzle.",
+		"link": "//www.sketchup.com"
+	},
+];
+
 
 function getScalee(id) {
 	var scaleeObj;
@@ -819,4 +840,5 @@ function getScalee(id) {
 
 
 module.exports.data = scalees;
+module.exports.jobsData = jobs;
 module.exports.getScalee = getScalee;

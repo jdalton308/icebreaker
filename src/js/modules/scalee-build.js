@@ -38,12 +38,8 @@ function addToLeaders(scaleeObj){
 
 			var gameObj = leaderObj[rankObj.gameId];
 
-			console.log('Original game obj: %o', gameObj);
-
 			// - if no object for this game in leaderObj, create new one
 			if (!gameObj) {
-				console.log('creating new game obj');
-
 				gameObj = {
 					name: rankObj.gameName,
 					leaders: {}
@@ -57,8 +53,6 @@ function addToLeaders(scaleeObj){
 			gameObj.leaders[rankObj.place] = scaleeObj.id;
 		});
 
-		console.log('New Leaderboard Obj: %o', leaderObj);
-		console.log('-----------------');
 	}
 }
 

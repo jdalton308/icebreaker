@@ -1,7 +1,7 @@
 'use strict';
 
 var $ = require('jquery');
-var TwoTruths = require('./two-truths.js');
+var TwoTruths = require('./scalee-two-truths.js');
 var Data = require('./model-data.js');
 var Util = require('./util.js');
 
