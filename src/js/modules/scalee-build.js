@@ -1,3 +1,4 @@
+'use strict';
 
 var $ = require('jquery');
 var Data = require('./model-data.js');
@@ -23,19 +24,6 @@ var tags = {
 	quirks: []
 };
 
-
-// Eventual leaderObj structure
-//-------------------------
-// var leaders = {
-// 	"discgolf": {
-// 		"name": "Disc Golf",
-// 		"leaders": {
-// 			1: "person2",
-// 			2: "person5",
-// 			3: "person8",
-// 		}
-// 	},
-// };
 
 
 // Create Leaderboard Obj
@@ -69,6 +57,20 @@ function addToLeaders(scaleeObj){
 
 	}
 }
+
+// Eventual leaderObj structure
+//-------------------------
+// var leaders = {
+// 	"discgolf": {
+// 		"name": "Disc Golf",
+// 		"leaders": {
+// 			1: "person2",
+// 			2: "person5",
+// 			3: "person8",
+// 		}
+// 	},
+// };
+
 
 
 // Create Location, Team, and Quirks arrays

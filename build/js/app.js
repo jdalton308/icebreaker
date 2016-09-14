@@ -10400,6 +10400,7 @@ Loading.show();
 	});
 // });
 },{"./modules/easter-eggs.js":3,"./modules/jobs-build.js":4,"./modules/loading.js":5,"./modules/model-data.js":6,"./modules/scalee-bios.js":7,"./modules/scalee-build.js":8,"./modules/scalee-leaderboard.js":9,"./modules/scalee-scrolling.js":10,"./modules/scalee-sorter.js":11,"./modules/scalee-two-truths.js":12,"./modules/scroll-animation.js":13,"jquery":1}],3:[function(require,module,exports){
+'use strict';
 
 var $ = require('jquery');
 
@@ -10432,6 +10433,7 @@ function init() {
 
 module.exports = init;
 },{"jquery":1}],4:[function(require,module,exports){
+'use strict';
 
 var $ = require('jquery');
 var Data = require('./model-data.js');
@@ -10529,6 +10531,7 @@ function hideLoading() {
 module.exports.show = showLoading;
 module.exports.hide = hideLoading;
 },{"jquery":1}],6:[function(require,module,exports){
+'use strict';
 
 var SCALEE_URL = "http://sketchup8hkkedtq9yc.devcloud.acquia-sites.com/job-postings-endpoint";
 var JOBS_URL = "http://sketchup8hkkedtq9yc.devcloud.acquia-sites.com/job-postings-endpoint";
@@ -11424,9 +11427,7 @@ var ScaleeData = Data.scaleeData;
 
 // Elements
 //------------
-var $window = $(window);
 var $body = $('body');
-var $header = $('header');
 var $slide1 = $('.slide1');
 
 var $scaleeCont = $('.scalee-cont');
@@ -11656,6 +11657,7 @@ function init() {
 module.exports.init = init;
 module.exports.clickHandler = clickHandler;
 },{"./model-data.js":6,"./scalee-two-truths.js":12,"./util.js":14,"jquery":1}],8:[function(require,module,exports){
+'use strict';
 
 var $ = require('jquery');
 var Data = require('./model-data.js');
@@ -11681,19 +11683,6 @@ var tags = {
 	quirks: []
 };
 
-
-// Eventual leaderObj structure
-//-------------------------
-// var leaders = {
-// 	"discgolf": {
-// 		"name": "Disc Golf",
-// 		"leaders": {
-// 			1: "person2",
-// 			2: "person5",
-// 			3: "person8",
-// 		}
-// 	},
-// };
 
 
 // Create Leaderboard Obj
@@ -11727,6 +11716,20 @@ function addToLeaders(scaleeObj){
 
 	}
 }
+
+// Eventual leaderObj structure
+//-------------------------
+// var leaders = {
+// 	"discgolf": {
+// 		"name": "Disc Golf",
+// 		"leaders": {
+// 			1: "person2",
+// 			2: "person5",
+// 			3: "person8",
+// 		}
+// 	},
+// };
+
 
 
 // Create Location, Team, and Quirks arrays
@@ -11807,22 +11810,20 @@ module.exports.build = createScaless;
 module.exports.leaderData = leaderObj;
 module.exports.tagData = tags;
 },{"./model-data.js":6,"./scalee-bios.js":7,"./util.js":14,"jquery":1}],9:[function(require,module,exports){
+'use strict';
 
 var $ = require('jquery');
 var Data = require('./model-data.js');
-var Util = require('./util.js');
 var Sorter = require('./scalee-sorter.js');
 var Builder = require('./scalee-build.js');
 
 var LeaderData = Builder.leaderData;
-var imgPath = '/img/';
+var IMG_PATH = '/img/';
 
 
 // Elements
 //------------
-var $window = $(window);
 var $body = $('body');
-var $header = $('header');
 var $slide1 = $('.slide1');
 
 var $leaderTrigger = $('#leader-trigger');
@@ -11851,7 +11852,7 @@ function initLeaderboard() {
     $leaderBtnCont.append( $newBtn );
 
     // Closure for eventId
-    function bindClick() {
+    var bindClick = function() {
       var eventId = event;
 
       // Bind click event to show leaderboard
@@ -11883,7 +11884,7 @@ function switchLeaderboard(eventName, $btn) {
 
 		window.setTimeout(function(){
 			$targetImg.attr({
-        'src': imgPath + scaleeObj.src,
+        'src': IMG_PATH + scaleeObj.src,
         'title': scaleeObj.name
       }).removeClass('hide');
 		}, 400);
@@ -11979,10 +11980,10 @@ function init() {
 
 
 module.exports.init = init;
-},{"./model-data.js":6,"./scalee-build.js":8,"./scalee-sorter.js":11,"./util.js":14,"jquery":1}],10:[function(require,module,exports){
+},{"./model-data.js":6,"./scalee-build.js":8,"./scalee-sorter.js":11,"jquery":1}],10:[function(require,module,exports){
+'use strict';
 
 var $ = require('jquery');
-
 
 var $scaleeCont = $('.scalee-cont');
 var $scaleeLeftBtn = $('.scalee-scroll.prev');
@@ -12038,16 +12039,14 @@ function eventsOn() {
 module.exports.init = eventsOn;
 module.exports.center = centerScalees;
 },{"jquery":1}],11:[function(require,module,exports){
-// 'use strict';
+'use strict';
 
 var $ = require('jquery');
 var ScaleeBuilder = require('./scalee-build.js');
 var Util = require('./util.js');
 var ScaleeScrolling = require('./scalee-scrolling.js');
 
-// var ScaleeData = Data.rawData;
 var TagData = ScaleeBuilder.tagData;
-// var LeaderData = Data.leaderData;
 
 
 // ------------------------
@@ -12056,9 +12055,7 @@ var TagData = ScaleeBuilder.tagData;
 
 // Elements
 //------------
-var $window = $(window);
 var $body = $('body');
-var $header = $('header');
 var $slide1 = $('.slide1');
 
 var $suLogo = $slide1.find('.su-logo');
@@ -12074,9 +12071,6 @@ var $scaleeCont = $('.scalee-cont');
 var $scalees = $scaleeCont.find('img');
 var $nullScalee = $scalees.filter('#null-person');
 
-var $infoSlide = $('.info-slide');
-var $infoClose = $infoSlide.find('.close-btn');
-
 
 // State Variables
 //-----------------
@@ -12089,6 +12083,7 @@ var logos = {
   trimble: $trimLogo,
   sefaira: $sefLogo
 };
+
 
 
 //-----------------------------
@@ -12115,7 +12110,7 @@ function buildSorterWheels(){
 
 
 //-------------------
-// Open/Close the Sorting Wheels Bar
+// Open/Close the Sorting Panel
 //------------
 function openPanel() {
   // - scroll to position
@@ -12144,41 +12139,38 @@ function handlePanelOpen() {
 }
 
 
-//-----------------
-// Sort Scalees
-//---------------
+
+//---------------------------
+// Filter Click Handler
+//------------------
 function handleFilterClick() {
   var $this = $(this);
 
-  // - Show selected state
   showSelectedState($this);
-
-  // - Update filters array
   updateFilters($this);
-
-  // Trigger sorting
   sort();
 }
 
+// Toggle "selected" class
 function showSelectedState($item) {
   $item.toggleClass('selected').siblings('.selected').removeClass('selected');
   setPointer($item);
 }
 
+// Maintain the filters
 function updateFilters($item) {
   var newFilter = $item.text();
   var filterIndex = filters.indexOf(newFilter);
 
   // - If in array, remove, else...
-    // check what category this is,
-    // if another item from that category is preset, remove it
-
   if (filterIndex != -1) {
     filters.splice(filterIndex, 1);
   } else {
-    // - Check if another filter is in same category. If yes, remove
-      // - but only if anything else is even present
+
+    // - if already filters present...
     if (filters.length) {
+
+      // - Check if another filter is in same category. If yes, remove
       var thisCategory = getFilterCategory(newFilter);
       for (var i = 0; i < filters.length; i++) {
         var otherCategory = getFilterCategory(filters[i]);
@@ -12213,9 +12205,13 @@ function getFilterCategory(filter) {
 }
 
 
+
+//---------------------
+// Sort Scalees
+//---------------
 function sort() {
 
-  // - Hide all logos, then show correct ones after scalees are sorted
+  // - Hide all logos, then show correct ones in hideFilterdScalees()
   hideLogos();
 
   // - Loop through all scalees and see if 'data-tag' attributes match all filters
@@ -12225,7 +12221,8 @@ function sort() {
   ScaleeScrolling.center();
 }
 
-
+// Respond to filters
+//----------------------
 function hideFilteredScalees() {
   // - reset null state
   var areScalees = false;
@@ -12273,6 +12270,7 @@ function resetFilters() {
   sort();
 }
 
+
 // Set pointer position on wheel
 //--------------------------------
 function setPointer($el, showing) {
@@ -12280,23 +12278,18 @@ function setPointer($el, showing) {
   var $wheelPointer = $el.siblings('.pointer');
   var elOffset = $el.position();
 
-  // if (isMobile) {
-  //   var elWidth = $el.innerWidth();
-  //   var wheelScroll = $parentWheel.scrollLeft();
+  // - calculate top position
+  var elHeight = $el.innerHeight();
+  var wheelScroll = $parentWheel.scrollTop();
+  var newTop = elOffset.top + (elHeight/2) + wheelScroll;
 
-  //   var newLeft = elOffset.left + (elWidth/2) + wheelScroll;
-  //   $wheelPointer.css('left', newLeft);
+  // - set position, let transition animate
+  $wheelPointer.css('top', newTop);
 
-  // } else {
-    var elHeight = $el.innerHeight();
-    var wheelScroll = $parentWheel.scrollTop();
-
-    var newTop = elOffset.top + (elHeight/2) + wheelScroll;
-    $wheelPointer.css('top', newTop);
-  // }
-
+  // - hide/show pointer based on if element was deselected/selected
   $wheelPointer.toggleClass('show', $el.hasClass('selected') );
 }
+
 
 // Toggle logos in Background
 //----------------------------
@@ -12336,8 +12329,6 @@ function eventsOn() {
 //------------------
 function init() {
   buildSorterWheels();
-  closePanel();
-  sort();
   eventsOn();
 }
 

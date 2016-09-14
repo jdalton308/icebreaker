@@ -1,19 +1,17 @@
+'use strict';
 
 var $ = require('jquery');
 var Data = require('./model-data.js');
-var Util = require('./util.js');
 var Sorter = require('./scalee-sorter.js');
 var Builder = require('./scalee-build.js');
 
 var LeaderData = Builder.leaderData;
-var imgPath = '/img/';
+var IMG_PATH = '/img/';
 
 
 // Elements
 //------------
-var $window = $(window);
 var $body = $('body');
-var $header = $('header');
 var $slide1 = $('.slide1');
 
 var $leaderTrigger = $('#leader-trigger');
@@ -42,7 +40,7 @@ function initLeaderboard() {
     $leaderBtnCont.append( $newBtn );
 
     // Closure for eventId
-    function bindClick() {
+    var bindClick = function() {
       var eventId = event;
 
       // Bind click event to show leaderboard
@@ -74,7 +72,7 @@ function switchLeaderboard(eventName, $btn) {
 
 		window.setTimeout(function(){
 			$targetImg.attr({
-        'src': imgPath + scaleeObj.src,
+        'src': IMG_PATH + scaleeObj.src,
         'title': scaleeObj.name
       }).removeClass('hide');
 		}, 400);

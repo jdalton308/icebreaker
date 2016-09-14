@@ -22,9 +22,7 @@ var ScaleeData = Data.scaleeData;
 
 // Elements
 //------------
-var $window = $(window);
 var $body = $('body');
-var $header = $('header');
 var $slide1 = $('.slide1');
 
 var $scaleeCont = $('.scalee-cont');

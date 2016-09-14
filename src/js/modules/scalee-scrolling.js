@@ -1,6 +1,6 @@
+'use strict';
 
 var $ = require('jquery');
-
 
 var $scaleeCont = $('.scalee-cont');
 var $scaleeLeftBtn = $('.scalee-scroll.prev');

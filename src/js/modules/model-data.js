@@ -1,3 +1,4 @@
+'use strict';
 
 var SCALEE_URL = "http://sketchup8hkkedtq9yc.devcloud.acquia-sites.com/job-postings-endpoint";
 var JOBS_URL = "http://sketchup8hkkedtq9yc.devcloud.acquia-sites.com/job-postings-endpoint";
