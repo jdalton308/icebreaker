@@ -103,6 +103,7 @@
 				text-align: left;
 
 				// animate in from blur
+				text-rendering: optimizeSpeed;
 				color: rgba(255,255,255, 0); // -> white
 				text-shadow: 0 0 15px rgba(255,255,255, 1); // -> opacity:0
 				box-shadow: 0 0 20px 10px $new-blue-rgba;
@@ -119,10 +120,12 @@
 					padding: 10px 0 0;
 
 					// animate in from blur
+					// text-rendering: optimizeSpeed;
 					color: transparent;
 					text-shadow: 0 0 15px $su-gray-rgba; // $sketchup-gray
 
 					p {
+						text-rendering: optimizeSpeed;
 						padding-left: 20px;
 					}
 				}

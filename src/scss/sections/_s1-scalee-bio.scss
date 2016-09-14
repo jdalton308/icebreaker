@@ -332,36 +332,33 @@
 
 	// Showing the bio...
 	//--------------------------------
-	// &.active {
+	.info-slide {
+		&.show {
+			left: 0;
 
-		.info-slide {
-			&.show {
-				left: 0;
-
-				@media (min-width: $mobile) {
-					left: 50%;
-				}
-			}
-		}
-		.scalee-bio-background {
 			@media (min-width: $mobile) {
-				&.show {
-					bottom: 0;
-					z-index: 6;
-					opacity: 0.9;
-				}
+				left: 50%;
 			}
 		}
-		img.bio-scalee {
-			position: absolute;
-			z-index: 7;
-			@include transition();
-			@include transform( scale(1.05) );
+	}
+	.scalee-bio-background {
+		@media (min-width: $mobile) {
+			&.show {
+				bottom: 0;
+				z-index: 6;
+				opacity: 0.9;
+			}
+		}
+	}
+	img.bio-scalee {
+		position: absolute;
+		z-index: 7;
+		@include transition();
+		@include transform( scale(1.05) );
 
-			&.fly-away {
-				@include transform( scale(1) );
-			}
+		&.fly-away {
+			@include transform( scale(1.05) );
 		}
-	// }
+	}
 
 }

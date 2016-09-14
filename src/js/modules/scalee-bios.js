@@ -120,7 +120,7 @@ function copyScalee($el) {
 
   // Tweaks...
   elPos.top += 7; // not sure why the extra px are necessary
-  elPos.left += 5;
+  elPos.left += 15;
   initialHeight = $el.height();
 
   $newEl.css({
@@ -143,6 +143,7 @@ function mobileScaleeCopy() {
   var prevImg = $infoSlide.children('img');
   if ( prevImg.length ) {
     prevImg.attr('src', imgSrc);
+
   } else {
     var $newImg = $('<img src="'+ imgSrc +'" class="new-img">');
     $infoSlide.prepend( $newImg );
@@ -162,8 +163,8 @@ function closeBio(){
 
   } else {
     // - move newScalee to original position
-    TweenMax.to($newScalee, 0.4, {
-        left:initialPos.left,
+    TweenMax.to($newScalee, 0.5, {
+        left:initialPos.left + 100, // not sure why this is needed
         top:initialPos.top,
         height:initialHeight
       } );
@@ -174,7 +175,7 @@ function closeBio(){
       $scaleeInFocus.removeClass('invisible');
       $newScalee.remove();
       $scaleeCont.removeClass('focus-mode');
-    }, 800);
+    }, 900);
 
     // - and hide info slide
     $infoSlide.removeClass('show');

@@ -117,6 +117,7 @@
 			.copy-cont {
 				h5,
 				p {
+					text-rendering: optimizeSpeed;
 					// animation starts
 					color: rgba(255,255,255, 0);
 					text-shadow: 0 0 15px rgba(255,255,255, 1);

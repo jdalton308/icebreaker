@@ -196,20 +196,16 @@ p {
       -webkit-transform: translateY(30px);
       transform: translateY(30px);
       box-shadow: 4px 30px 14px -1px #363545; }
-    .title-box h1 {
+    .title-box h1,
+    .title-box h2 {
+      text-rendering: optimizeSpeed;
       -ms-transform: translateY(-50px);
       -webkit-transform: translateY(-50px);
       transform: translateY(-50px);
       color: rgba(54, 53, 69, 0);
       text-shadow: 0 0 15px #363545; }
     .title-box .underline {
-      box-shadow: 4px 15px 9px #363545; }
-    .title-box h2 {
-      -ms-transform: translateY(-50px);
-      -webkit-transform: translateY(-50px);
-      transform: translateY(-50px);
-      color: rgba(54, 53, 69, 0);
-      text-shadow: 0 0 15px #363545; } }
+      box-shadow: 4px 15px 9px #363545; } }
 
 button,
 .button {
@@ -1260,9 +1256,9 @@ footer {
   -webkit-transform: scale(1.05);
   transform: scale(1.05); }
   .slide1 img.bio-scalee.fly-away {
-    -ms-transform: scale(1);
-    -webkit-transform: scale(1);
-    transform: scale(1); }
+    -ms-transform: scale(1.05);
+    -webkit-transform: scale(1.05);
+    transform: scale(1.05); }
 
 .slide1 .leaderboard-sun {
   display: block;
@@ -1592,6 +1588,7 @@ footer {
           right: -15px; }
       .slide.slide2 a.nav-box .copy-cont h5,
       .slide.slide2 a.nav-box .copy-cont p {
+        text-rendering: optimizeSpeed;
         color: rgba(255, 255, 255, 0);
         text-shadow: 0 0 15px white; }
       .slide.slide2 a.nav-box .icon {
@@ -1690,6 +1687,7 @@ footer {
           height: 200px;
           padding: 30px 20px;
           text-align: left;
+          text-rendering: optimizeSpeed;
           color: rgba(255, 255, 255, 0);
           text-shadow: 0 0 15px white;
           box-shadow: 0 0 20px 10px #498fe1; }
@@ -1705,6 +1703,7 @@ footer {
             color: transparent;
             text-shadow: 0 0 15px #363545; }
             .slide.slide3 .job-posting .posting-content .posting-description p {
+              text-rendering: optimizeSpeed;
               padding-left: 20px; }
           .slide.slide3 .job-posting .posting-content .button-row {
             text-align: right;

@@ -18,9 +18,7 @@ var styleFiles = [
 // 		'./src/js/**/*.js'
 // 	];
 var gsapFiles = [
-		// './node_modules/gsap/src/uncompressed/TweenLite.js',
 		'./node_modules/gsap/src/uncompressed/TweenMax.js',
-		// './node_modules/gsap/src/uncompressed/TimelineLite.js',
 		'./node_modules/gsap/src/uncompressed/TimelineMax.js',
 		'./node_modules/gsap/src/uncompressed/plugins/AttrPlugin.js',
 		'./node_modules/gsap/src/uncompressed/plugins/ScrollToPlugin.js',
@@ -42,7 +40,7 @@ gulp.task('styles', function() {
 gulp.task('gsapScripts', function(){
 	gulp.src(gsapFiles)
 		.pipe(concat('gsap.js'))
-		// .pipe(uglify())
+		.pipe(uglify())
 		.pipe(gulp.dest('./build/js/'))
 		.on('error', gutil.log);
 });
@@ -50,7 +48,7 @@ gulp.task('gsapScripts', function(){
 gulp.task('scripts', function(){
 	browserify('./src/js/main.js').bundle()
 		.pipe(source('app.js'))
-		// .pipe(streamify(uglify()))
+		.pipe(streamify(uglify()))
 		.pipe(gulp.dest('./build/js/'))
 		.on('error', gutil.log);
 });
