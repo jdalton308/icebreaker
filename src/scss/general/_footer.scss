@@ -1,0 +1,110 @@
+
+// Footer
+//--------------
+footer {
+	position: relative;
+	width: 100%;
+	padding: 20px 0 15px;
+	background-color: $sketchup-gray;
+	text-align: center;
+
+	.to-top-btn {
+		@include centerX();
+		top: -80px;
+		display: inline-block;
+		padding: 15px 15px 10px;
+		text-align: center;
+		background-color: $sketchup-gray;
+		color: $white;
+		cursor: pointer;
+		box-shadow: $box-shadow;
+		@include transition(0.3s);
+
+		&:active {
+			box-shadow: $box-shadow-active;
+		}
+
+		.arrow-icon {
+			margin-bottom: 5px;
+
+			&:before {
+				border-color: $white;
+				@include transform( rotate(-45deg) );
+			}
+		}
+		p {
+			margin: 0;
+			line-height: 1em;
+		}
+	}
+
+	.logo {
+		display: inline-block;
+		width: 200px;
+		margin: 0 auto 20px;
+
+		img {
+			height: 25px;
+			width: auto;
+		}
+	}
+	.bottom-bar {
+		width: center;
+		text-align: center;
+
+		.trimble-logo-link {
+			display: inline-block;
+			height: 15px;
+			margin: 0 0 20px;
+
+			img {
+				height: 100%;
+			}
+		}
+		.center-links {
+			width: 100%;
+			text-align: center;
+
+			a {
+				display: inline-block;
+				padding: 3px 5px;
+				margin-left: 5px;
+				color: $white;
+				font-size: 1.3rem;
+				@include transition(0.3s);
+			}
+		}
+	}
+
+	@media (min-width: $mobile) {
+		padding-bottom: 10px;
+
+		.logo {
+			margin-bottom: 15px;
+		}
+		.bottom-bar {
+			text-align: left;
+
+			.trimble-logo-link {
+				display: inline-block;
+				height: 17px;
+				width: 20%;
+				margin: 0;
+			}
+			.center-links {
+				display: inline-block;
+				vertical-align: top;
+				width: 60%;
+
+				a {
+					border-bottom: 1px solid transparent;
+
+					&:hover {
+						border-color: $white;
+					}
+				}
+			}
+		}
+			
+	} // end media()
+}

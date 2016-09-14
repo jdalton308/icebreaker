@@ -79,16 +79,6 @@ $curve3: cubic-bezier(.21,.05,.07,.99);
   background: -webkit-linear-gradient($start, $end);
   background: linear-gradient($start, $end);
 }
-// @mixin correctAnswer() {
-//   .fact-radio {
-//     border-color: $trimble-green;
-//     background-color: $trimble-green;
-//     box-shadow: 0 0 5px $trimble-green;
-//   }
-//   p {
-//     text-shadow: 0 0 3px $sketchup-gray;
-//   }
-// }
 @mixin filter($props) {
   -webkit-filter: $props;
   filter: $props;
@@ -108,5 +98,9 @@ $curve3: cubic-bezier(.21,.05,.07,.99);
 
   -webkit-animation: $name $duration $timing $delay $iterations $direction $fill-mode;
   animation: $name $duration $timing $delay $iterations $direction $fill-mode;
+}
 
+@mixin animation-delay($time) {
+  -webkit-animation-delay: $time;
+  animation-delay: $time;
 }

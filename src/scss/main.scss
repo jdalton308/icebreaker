@@ -1,13 +1,14 @@
 
-@import "icon-font";
-@import "su-variables";
-@import "variables";
+@import "general/icon-font";
+@import "general/su-variables";
+@import "general/variables";
+@import "general/general";
+@import "general/footer";
+@import "general/progress-bar";
 
-@import "general";
-// @import "header";
-@import "landing";
-@import "scalee-sorter";
-@import "scalee-bio";
-@import "leaderboard-mode";
-@import "say-hello";
-@import "job-postings";
+@import "sections/s0-landing";
+@import "sections/s1-scalee-sorter";
+@import "sections/s1-scalee-bio";
+@import "sections/s1-leaderboard-mode";
+@import "sections/s2-say-hello";
+@import "sections/s3-job-postings";

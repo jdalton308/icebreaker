@@ -294,6 +294,130 @@ button,
     -webkit-transition: all 0.5s;
     transition: all 0.5s; }
 
+@-webkit-keyframes hideScalee {
+  0% {
+    opacity: 1; }
+  50% {
+    opacity: 0;
+    height: 100%; }
+  100% {
+    opacity: 0;
+    height: 0%; } }
+
+@keyframes hideScalee {
+  0% {
+    opacity: 1; }
+  50% {
+    opacity: 0;
+    height: 100%; }
+  100% {
+    opacity: 0;
+    height: 0%; } }
+
+@-webkit-keyframes showScalee {
+  0% {
+    opacity: 0;
+    height: 0%; }
+  50% {
+    opacity: 0;
+    height: 100%; }
+  100% {
+    opacity: 1;
+    height: 100%; } }
+
+@keyframes showScalee {
+  0% {
+    opacity: 0;
+    height: 0%; }
+  50% {
+    opacity: 0;
+    height: 100%; }
+  100% {
+    opacity: 1;
+    height: 100%; } }
+
+footer {
+  position: relative;
+  width: 100%;
+  padding: 20px 0 15px;
+  background-color: #363545;
+  text-align: center; }
+  footer .to-top-btn {
+    position: absolute;
+    right: 50%;
+    -ms-transform: translateX(50%);
+    -webkit-transform: translateX(50%);
+    transform: translateX(50%);
+    top: -80px;
+    display: inline-block;
+    padding: 15px 15px 10px;
+    text-align: center;
+    background-color: #363545;
+    color: #ffffff;
+    cursor: pointer;
+    box-shadow: 2px 2px 15px -2px #000;
+    -webkit-transition: all 0.3s;
+    transition: all 0.3s; }
+    footer .to-top-btn:active {
+      box-shadow: 2px 2px 15px -6px #000; }
+    footer .to-top-btn .arrow-icon {
+      margin-bottom: 5px; }
+      footer .to-top-btn .arrow-icon:before {
+        border-color: #ffffff;
+        -ms-transform: rotate(-45deg);
+        -webkit-transform: rotate(-45deg);
+        transform: rotate(-45deg); }
+    footer .to-top-btn p {
+      margin: 0;
+      line-height: 1em; }
+  footer .logo {
+    display: inline-block;
+    width: 200px;
+    margin: 0 auto 20px; }
+    footer .logo img {
+      height: 25px;
+      width: auto; }
+  footer .bottom-bar {
+    width: center;
+    text-align: center; }
+    footer .bottom-bar .trimble-logo-link {
+      display: inline-block;
+      height: 15px;
+      margin: 0 0 20px; }
+      footer .bottom-bar .trimble-logo-link img {
+        height: 100%; }
+    footer .bottom-bar .center-links {
+      width: 100%;
+      text-align: center; }
+      footer .bottom-bar .center-links a {
+        display: inline-block;
+        padding: 3px 5px;
+        margin-left: 5px;
+        color: #ffffff;
+        font-size: 1.3rem;
+        -webkit-transition: all 0.3s;
+        transition: all 0.3s; }
+  @media (min-width: 768px) {
+    footer {
+      padding-bottom: 10px; }
+      footer .logo {
+        margin-bottom: 15px; }
+      footer .bottom-bar {
+        text-align: left; }
+        footer .bottom-bar .trimble-logo-link {
+          display: inline-block;
+          height: 17px;
+          width: 20%;
+          margin: 0; }
+        footer .bottom-bar .center-links {
+          display: inline-block;
+          vertical-align: top;
+          width: 60%; }
+          footer .bottom-bar .center-links a {
+            border-bottom: 1px solid transparent; }
+            footer .bottom-bar .center-links a:hover {
+              border-color: #ffffff; } }
+
 .progress-bar {
   display: none; }
   @media (min-width: 768px) {
@@ -396,130 +520,6 @@ button,
           .progress-bar:hover .sections .progress-nav-item.active {
             right: 20px; } }
 
-footer {
-  position: relative;
-  width: 100%;
-  padding: 20px 0 15px;
-  background-color: #363545;
-  text-align: center; }
-  footer .to-top-btn {
-    position: absolute;
-    right: 50%;
-    -ms-transform: translateX(50%);
-    -webkit-transform: translateX(50%);
-    transform: translateX(50%);
-    top: -80px;
-    display: inline-block;
-    padding: 15px 15px 10px;
-    text-align: center;
-    background-color: #363545;
-    color: #ffffff;
-    cursor: pointer;
-    box-shadow: 2px 2px 15px -2px #000;
-    -webkit-transition: all 0.3s;
-    transition: all 0.3s; }
-    footer .to-top-btn:active {
-      box-shadow: 2px 2px 15px -6px #000; }
-    footer .to-top-btn .arrow-icon {
-      margin-bottom: 5px; }
-      footer .to-top-btn .arrow-icon:before {
-        border-color: #ffffff;
-        -ms-transform: rotate(-45deg);
-        -webkit-transform: rotate(-45deg);
-        transform: rotate(-45deg); }
-    footer .to-top-btn p {
-      margin: 0;
-      line-height: 1em; }
-  footer .logo {
-    display: inline-block;
-    width: 200px;
-    margin: 0 auto 20px; }
-    footer .logo img {
-      height: 25px;
-      width: auto; }
-  footer .bottom-bar {
-    width: center;
-    text-align: center; }
-    footer .bottom-bar .trimble-logo-link {
-      display: inline-block;
-      height: 15px;
-      margin: 0 0 20px; }
-      footer .bottom-bar .trimble-logo-link img {
-        height: 100%; }
-    footer .bottom-bar .center-links {
-      width: 100%;
-      text-align: center; }
-      footer .bottom-bar .center-links a {
-        display: inline-block;
-        padding: 3px 5px;
-        margin-left: 5px;
-        color: #ffffff;
-        font-size: 1.3rem;
-        -webkit-transition: all 0.3s;
-        transition: all 0.3s; }
-  @media (min-width: 768px) {
-    footer {
-      padding-bottom: 10px; }
-      footer .logo {
-        margin-bottom: 15px; }
-      footer .bottom-bar {
-        text-align: left; }
-        footer .bottom-bar .trimble-logo-link {
-          display: inline-block;
-          height: 17px;
-          width: 20%;
-          margin: 0; }
-        footer .bottom-bar .center-links {
-          display: inline-block;
-          vertical-align: top;
-          width: 60%; }
-          footer .bottom-bar .center-links a {
-            border-bottom: 1px solid transparent; }
-            footer .bottom-bar .center-links a:hover {
-              border-color: #ffffff; } }
-
-@-webkit-keyframes hideScalee {
-  0% {
-    opacity: 1; }
-  50% {
-    opacity: 0;
-    height: 100%; }
-  100% {
-    opacity: 0;
-    height: 0%; } }
-
-@keyframes hideScalee {
-  0% {
-    opacity: 1; }
-  50% {
-    opacity: 0;
-    height: 100%; }
-  100% {
-    opacity: 0;
-    height: 0%; } }
-
-@-webkit-keyframes showScalee {
-  0% {
-    opacity: 0;
-    height: 0%; }
-  50% {
-    opacity: 0;
-    height: 100%; }
-  100% {
-    opacity: 1;
-    height: 100%; } }
-
-@keyframes showScalee {
-  0% {
-    opacity: 0;
-    height: 0%; }
-  50% {
-    opacity: 0;
-    height: 100%; }
-  100% {
-    opacity: 1;
-    height: 100%; } }
-
 .loading-screen {
   display: none;
   position: fixed;
@@ -576,11 +576,11 @@ footer {
     .slide0 .arrows path {
       stroke: #ffffff;
       fill: transparent;
-      stroke-width: 2px;
+      stroke-width: 4px;
       stroke-dasharray: 200;
       stroke-dashoffset: 300;
-      -webkit-animation: draw 2s linear alternate infinite;
-      animation: draw 2s linear alternate infinite; }
+      -webkit-animation: draw 2s cubic-bezier(0.22, 0.07, 0.23, 0.99) 0s infinite alternate forwards;
+      animation: draw 2s cubic-bezier(0.22, 0.07, 0.23, 0.99) 0s infinite alternate forwards; }
       .slide0 .arrows path.a1 {
         -webkit-animation-delay: 1s;
         animation-delay: 1s; }
@@ -1378,11 +1378,11 @@ footer {
   @media (min-width: 768px) {
     .slide1 .leader-cont {
       background-color: transparent;
-      padding-top: 0; }
+      padding-top: 8vh 0 0; }
       .slide1 .leader-cont .leaderboard-title {
         padding: 0; }
         .slide1 .leader-cont .leaderboard-title h1 {
-          margin-bottom: 50px; }
+          margin-bottom: 5vh; }
       .slide1 .leader-cont .position-boxes {
         padding: 0 0 10px; }
       .slide1 .leader-cont .position-box {
