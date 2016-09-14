@@ -16,8 +16,8 @@
 		@include transition-delay(0s);
 
 		.sun {
-			fill: $red-soft;
-			stroke: $red-soft;
+			fill: $new-blue;
+			stroke: $new-blue;
 			stroke-width: 0px;
 			stroke-dasharray: 5;
 			stroke-dashoffset: 5; // animate for spin

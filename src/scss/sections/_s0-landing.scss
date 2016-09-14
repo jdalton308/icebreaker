@@ -59,7 +59,7 @@
 			stroke-width: 4px;	
 			stroke-dasharray: 200;
 			stroke-dashoffset: 300;
-			@include animation(draw, 2s, $curve1, 0s, infinite, alternate);
+			@include animation(draw, 2s, linear, 0s, infinite, alternate);
 
 			&.a1 {
 				@include animation-delay(1s);

@@ -13145,7 +13145,7 @@ function scrollAnimate() {
 			// - page offset, in %
 
 			var ref = {};
-			ref.pageHeight = pageHeight - (window.innerHeight * 1.5);
+			ref.pageHeight = pageHeight - (window.innerHeight);
 
 			function measureSection($slide) {
 				var slideRef = {};

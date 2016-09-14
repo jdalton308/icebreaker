@@ -579,8 +579,8 @@ footer {
       stroke-width: 4px;
       stroke-dasharray: 200;
       stroke-dashoffset: 300;
-      -webkit-animation: draw 2s cubic-bezier(0.22, 0.07, 0.23, 0.99) 0s infinite alternate forwards;
-      animation: draw 2s cubic-bezier(0.22, 0.07, 0.23, 0.99) 0s infinite alternate forwards; }
+      -webkit-animation: draw 2s linear 0s infinite alternate forwards;
+      animation: draw 2s linear 0s infinite alternate forwards; }
       .slide0 .arrows path.a1 {
         -webkit-animation-delay: 1s;
         animation-delay: 1s; }
@@ -1279,8 +1279,8 @@ footer {
   -webkit-transition-delay: 0s;
   transition-delay: 0s; }
   .slide1 .leaderboard-sun .sun {
-    fill: #FF796C;
-    stroke: #FF796C;
+    fill: #498FE1;
+    stroke: #498FE1;
     stroke-width: 0px;
     stroke-dasharray: 5;
     stroke-dashoffset: 5;
