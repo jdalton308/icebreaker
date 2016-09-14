@@ -2,6 +2,7 @@
 
 var $ = require('jquery');
 var ScaleeSorter = require('./scalee-sorter.js');
+var Util = require('./util.js');
 
 // NOTE: All GSAP and Scrollmagic dependencies do not work with Browserify, so they have their own gulp task, and are loaded on the page in their own file.
 
@@ -15,6 +16,18 @@ var $window = $(window);
 var $body = $('body');
 var pageHeight = Math.max($(document).height(), $window.height());
 
+var $toTopBtn = $('.to-top-btn');
+
+
+
+// Scroll-to-top button
+//-----------------------------
+function bindToTopBtn() {
+
+	$toTopBtn.click(function(){
+		TweenMax.to(window, 1, {scrollTo: 0});
+	});
+}
 
 
 function scrollAnimate() {
@@ -32,7 +45,8 @@ function scrollAnimate() {
 	var jobsBtn = $jobsBtn.get(0);
 
 	// Landing slide
-	var landingSlide = $('.slide0').get(0);
+	var $landingSlide = $('.slide0');
+	var landingSlide = $landingSlide.get(0);
 
 	// Scalee slide
 	var $sorterSlide = $('#meet');
@@ -54,9 +68,6 @@ function scrollAnimate() {
 	var $jobsSlide = $('#jobs');
 	var jobsHeight = $jobsSlide.innerHeight();
 	var jobsSlide = $jobsSlide.get(0);
-
-	// Other elements
-	var $toTopBtn = $('.to-top-btn');
 
 
 
@@ -205,30 +216,11 @@ function scrollAnimate() {
 	})();
 
 
-	//------------------
-	// Scalee Sorter
-	//-----------------------
-
-	// Adjust background height and show buttons with 'active' class
-	//---------------------------------------
-	var sorter_tl = new TimelineMax();
-		sorter_tl.to(scalee_bgel, 1, {y:'60%', ease:Power0.easeNone}, 0);
-		sorter_tl.to($suLogo, 1, {opacity:1, ease:Power0.easeNone}, 0);
-		sorter_tl.to($trimLogo, 1, {opacity:1, ease:Power0.easeNone}, 0);
-		sorter_tl.to($sefLogo, 1, {opacity:1, ease:Power0.easeNone}, 0);
-
-	var scaleeScene = new ScrollMagic.Scene({
-			triggerElement: sorterSlide,
-			triggerHook: '0.7',
-			duration: '90%'
-		})
-		.setClassToggle(sorterSlide, 'active')
-		.setTween(sorter_tl)
-		.addTo(controller);
-
 
 	//-----------------------
-	// Small airplane-like polygon in forefront
+	// Landing ------
+	// - Airplane polygon on landing
+	// - Jump down to sorter on first scroll
 	//--------------------------
 
 	(function(){
@@ -255,7 +247,7 @@ function scrollAnimate() {
 				if (e.scrollDirection == 'FORWARD') {
 
 					$body.addClass('fixed');
-					// var newOffset = scrollRef['#meet'].pxOffset;
+					$landingSlide.addClass('go'); // hide arrows
 
 					// - jump down to position
 					TweenMax.to(window, 1.5, {scrollTo:'#meet', ease:Power2.easeInOut});
@@ -268,10 +260,34 @@ function scrollAnimate() {
 	})();
 
 
+
+	//------------------
+	// Scalee Sorter ----
+	// - Adjust background height and show buttons with 'active' class
+	//---------------------------------------
+	(function(){
+		var sorter_tl = new TimelineMax();
+			sorter_tl.to(scalee_bgel, 1, {y:'60%', ease:Power0.easeNone}, 0);
+			sorter_tl.to($suLogo, 1, {opacity:1, ease:Power0.easeNone}, 0);
+			sorter_tl.to($trimLogo, 1, {opacity:1, ease:Power0.easeNone}, 0);
+			sorter_tl.to($sefLogo, 1, {opacity:1, ease:Power0.easeNone}, 0);
+
+		var scaleeScene = new ScrollMagic.Scene({
+				triggerElement: sorterSlide,
+				triggerHook: '0.7',
+				duration: '90%'
+			})
+			.setClassToggle(sorterSlide, 'active')
+			.setTween(sorter_tl)
+			.addTo(controller);
+	})();
+
+
+
 	//------------------
 	// Polygons in background of Say Hello and Jobs
-	//-----------------------
 	// - Fix to window and rotate during scroll
+	//-----------------------
 
 	(function() {
 
@@ -339,7 +355,7 @@ function scrollAnimate() {
 	//------------------
 	// Title-boxes
 	//-----------------------
-	// - title number: position and box-shadow
+
 	var titleNumMid = {
 		y: 0,
 		boxShadow: '4px 4px 14px -1px #363545'
@@ -367,7 +383,7 @@ function scrollAnimate() {
 		boxShadow: '4px -5px 9px #363545'
 	};
 
-	// Constructor function
+	// Constructor-ish function
 	function newTitleBoxScene($titleBox) {
 		// Summartop:
 		// - Blur in the text
@@ -482,9 +498,9 @@ function scrollAnimate() {
 
 	//------------------
 	// Job Postings
-	//-----------------------
 	// - blur in and out text: title and p
 	// - move button in and out of position
+	//-----------------------
 
 	// Constructor
 	function newJobPostingScene($postEl) {
@@ -532,18 +548,18 @@ function scrollAnimate() {
 		newJobPostingScene( $(this) );
 	});
 
-
-
-	// Scroll-to-top button
-	//-----------------------------
-	$toTopBtn.click(function(){
-		TweenMax.to(window, 1, {scrollTo: 0});
-	});
-
-
-
+	bindToTopBtn();
 }
 
 
-module.exports.init = scrollAnimate;
-// module.exports.newRef = createScrollRef;
+
+function init() {
+	if (Util.isMobile()) {
+		bindToTopBtn();
+	} else {
+		scrollAnimate();
+	}
+}
+
+
+module.exports.init = init;

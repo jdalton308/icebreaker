@@ -66,21 +66,18 @@ function switchLeaderboard(eventName, $btn) {
 	var leaders = eventObj.leaders;
 
 	function animateChange(id, position) {
-		var personImgSrc = getScaleeSrc(id);
+    var scaleeObj = Data.getScalee(id);
 		var $targetImg = $leaderBoxes.filter('.box-'+ position).children('img');
 
 		// - hide img, wait for transition, then switch img and show
 		$targetImg.addClass('hide');
 
 		window.setTimeout(function(){
-			$targetImg.attr('src', personImgSrc).removeClass('hide');
+			$targetImg.attr({
+        'src': imgPath + scaleeObj.src,
+        'title': scaleeObj.name
+      }).removeClass('hide');
 		}, 400);
-	}
-
-	function getScaleeSrc(scaleeId) {
-		var scaleeObj = Data.getScalee(scaleeId);
-
-		return imgPath + scaleeObj.src;
 	}
 
 

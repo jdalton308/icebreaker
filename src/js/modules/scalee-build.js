@@ -4,8 +4,8 @@ var Data = require('./model-data.js');
 var Util = require('./util.js');
 var ScaleeBios = require('./scalee-bios.js');
 
-var ScaleeData = Data.data;
-var imgPath = '/img/';
+var ScaleeData = Data.scaleeData;
+var IMG_PATH = '/img/';
 
 
 // Elements
@@ -22,6 +22,20 @@ var tags = {
 	team: [],
 	quirks: []
 };
+
+
+// Eventual leaderObj structure
+//-------------------------
+// var leaders = {
+// 	"discgolf": {
+// 		"name": "Disc Golf",
+// 		"leaders": {
+// 			1: "person2",
+// 			2: "person5",
+// 			3: "person8",
+// 		}
+// 	},
+// };
 
 
 // Create Leaderboard Obj
@@ -88,7 +102,8 @@ function buildScalee(scaleeObj) {
 
 	// - add src, id, and data tags
 	$scalee.attr({
-		src: imgPath + scaleeObj.src,
+		src: IMG_PATH + scaleeObj.src,
+		title: scaleeObj.name,
 		id: scaleeObj.id,
 		'data-tags': tags,
 		'data-logo': scaleeObj.logo
@@ -121,11 +136,9 @@ function createScaless() {
 
 
 	// Alphabetize tag arrays
-	tags.location.sort().reverse(); // Put 'Boulder' on top
+	tags.location.sort().reverse(); // Put 'Boulder' on top, so put it last
 	tags.team.sort();
 	tags.quirks.sort();
-
-	console.log('Scalees created');
 }
 
 

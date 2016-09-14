@@ -1,22 +1,21 @@
 
 var $ = require('jquery');
 var Data = require('./model-data.js');
-var JobsData = Data.jobsData;
 
+var JobsData = Data.jobsData;
 var $postingCont = $('.job-postings');
 
 
-// Post HTML Structure
-//---------------
+// Desired HTML structure for each post
+//----------------------------------------------
 // <div class="job-posting">
 // 	<div class="job-title-box">
-// 		<h4>Sign Spinner</h4>
-// 		<p>Marketing</p>
+// 		<h4>Job Title</h4>
+// 		<p>Team</p>
 // 	</div>
 // 	<div class="posting-content">
 // 		<div class="posting-description">
-// 			<p>Lorizzle izzle dolizzle doggy amizzle, consectetizzle adipiscing elit. Nullam sapizzle velizzle, stuff volutpat, suscipit quizzle, fo shizzle shit, arcu. Pellentesque egizzle doggy. Ass erizzle.</p> 
-// 			<p>Its fo rizzle izzle dolor dapibizzle turpis tempizzle gizzle. That's the shizzle pellentesque brizzle daahng dawg turpis. Vestibulum in tortor. Pellentesque eleifend rhoncizzle gangster. In break it down habitasse platea dictumst. Yippiyo dapibus. Curabitur gangster urna, pretizzle eu, mattis ac, gangster vitae, fo shizzle. You son of a bizzle dang. Integer sempizzle velit sizzle purus.</p>
+// 			<p>Post description</p>
 // 		</div>
 // 		<p class="button-row">
 // 			<a href="#" class="button blue" target="_blank">APPLY NOW</a>

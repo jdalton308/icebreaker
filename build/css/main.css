@@ -546,11 +546,12 @@ footer {
 .slide0 {
   z-index: 5;
   min-height: 100vh;
-  min-height: 0;
   padding: 20vh 0;
   background-color: #498FE1;
   overflow: hidden;
   box-shadow: none; }
+  .slide0.go .arrows {
+    opacity: 0; }
   .slide0 #landing-poly {
     position: absolute;
     z-index: 2;
@@ -572,7 +573,9 @@ footer {
     transform: translateX(50%);
     bottom: 20px;
     width: 40px;
-    height: 50px; }
+    height: 50px;
+    -webkit-transition: all 0.5s;
+    transition: all 0.5s; }
     .slide0 .arrows path {
       stroke: #ffffff;
       fill: transparent;

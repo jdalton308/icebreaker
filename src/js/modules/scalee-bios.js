@@ -5,7 +5,7 @@ var TwoTruths = require('./scalee-two-truths.js');
 var Data = require('./model-data.js');
 var Util = require('./util.js');
 
-var ScaleeData = Data.data;
+var ScaleeData = Data.scaleeData;
 
 
 // ------------------------

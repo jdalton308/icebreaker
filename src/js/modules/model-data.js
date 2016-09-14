@@ -1,41 +1,75 @@
 
-// var leaders = {
-// 	"discgolf": {
-// 		"name": "Disc Golf",
-// 		"leaders": {
-// 			1: "person2",
-// 			2: "person5",
-// 			3: "person8",
-// 		}
-// 	},
-// 	"life": {
-// 		"name": "LIFE",
-// 		"leaders": {
-// 			1: "person6",
-// 			2: "person10",
-// 			3: "person9",
-// 		}
-// 	},
-// 	"socks": {
-// 		"name": "Best Socks",
-// 		"leaders": {
-// 			1: "person8",
-// 			2: "person14",
-// 			3: "person13",
-// 		}
-// 	},
-// 	"coffee": {
-// 		"name": "Most Cups of Coffee",
-// 		"leaders": {
-// 			1: "person9",
-// 			2: "person1",
-// 			3: "person3",
-// 		}
-// 	},
-// };
+var SCALEE_URL = "http://sketchup8hkkedtq9yc.devcloud.acquia-sites.com/job-postings-endpoint";
+var JOBS_URL = "http://sketchup8hkkedtq9yc.devcloud.acquia-sites.com/job-postings-endpoint";
+var USE_MOCK_DATA = true;
 
 
-var scalees = [
+// Data holders
+//------------------
+var scaleeData;
+var jobsData;
+
+
+// AJAX Calls
+//---------------------
+function getScaleeData(){
+	return $.get(SCALEE_URL, function(data){
+		scaleeData = data;
+	});
+}
+
+function getJobsData() {
+	return $.get(JOBS_URL, function(data){
+		jobsData = data;
+	});
+}
+
+
+function getAllData() {
+	var haveOtherData = false;
+	var defer = $.Deferred();
+
+	getScaleeData().done(function(){
+		if (haveOtherData) {
+			defer.resolve();
+		} else {
+			haveOtherData = true;
+		}
+	});
+	getJobsData().done(function(){
+		if (haveOtherData) {
+			defer.resolve();
+		} else {
+			haveOtherData = true;
+		}
+	});
+
+	return defer;
+}
+
+
+// Working with the data
+//------------------------------
+function getScalee(id) {
+	var scaleeObj;
+	var scaleeData = (USE_MOCK_DATA) ? mockScalees : scaleeData;
+
+	if (scaleeData) {
+		for (var i = 0; i < scaleeData.length; i++) {
+			if (scaleeData[i].id === id) {
+				scaleeObj = scaleeData[i];
+				break;
+			}
+		}
+	}
+
+	return scaleeObj;
+}
+
+
+// Mock Data
+//-----------------
+var mockScalees = [
 	{
 		"name": "Aaron Dietzen",
 		"id": "person1",
@@ -802,7 +836,7 @@ var scalees = [
 	}
 ];
 
-var jobs = [
+var mockJobs = [
 	{
 		"title": "Barista",
 		"team": "Knowledge",
@@ -824,21 +858,13 @@ var jobs = [
 ];
 
 
-function getScalee(id) {
-	var scaleeObj;
 
-	for (var i = 0; i < scalees.length; i++) {
-		if (scalees[i].id === id) {
-			scaleeObj = scalees[i];
-			break;
-		}
-	}
-
-	return scaleeObj;
-}
-
-
-
-module.exports.data = scalees;
-module.exports.jobsData = jobs;
+// Exports
+//----------------
+module.exports.scaleeData = (USE_MOCK_DATA) ? mockScalees : scaleeData;
+module.exports.jobsData = (USE_MOCK_DATA) ? mockJobs : jobsData;
 module.exports.getScalee = getScalee;
+
+module.exports.getData = getAllData;
+module.exports.getScaleeData = getScaleeData;
+module.exports.getJobsData = getJobsData;
