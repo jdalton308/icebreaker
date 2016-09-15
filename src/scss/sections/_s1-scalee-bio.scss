@@ -248,7 +248,6 @@
 
 						.fact-radio {
 							border-color: $white;
-							// background-color: $trimble-green;
 							box-shadow: 0 0 10px $sketchup-gray;
 							background-color: $white;
 
@@ -258,26 +257,11 @@
 						}
 
 						&.truth {
-							// .fact-radio {
-							// 	border-color: $sketchup-medgray;
-							// 	// background-color: $trimble-green;
-							// 	box-shadow: 0 0 10px $sketchup-gray;
-							// }
 							p {
 								color: rgba(0,0,0, 0.8);
 								text-shadow: 0 0 2px $sketchup-gray;
 							}
 						}
-						// &.lie {
-						// 	.fact-radio {
-						// 		// border-color: $new-red;
-						// 		// background-color: $new-red;
-
-						// 		.radio-icon {
-						// 			opacity: 1;
-						// 		}
-						// 	}
-						// }
 
 						&:hover {
 							.fact-radio {
@@ -286,30 +270,6 @@
 						}
 					}
 				}
-				// Show all answers
-				// &.reveal {
-				// 	.fact-item {
-				// 		&.truth {
-				// 			// @include transform( scale(0.95) );
-
-				// 			.fact-radio {
-				// 				border-color: $trimble-green;
-				// 				background-color: $trimble-green;
-				// 				box-shadow: 0 0 5px $trimble-green;
-				// 			}
-				// 			p {
-				// 				color: rgba(0,0,0, 0.5);
-				// 				text-shadow: 0 0 3px $sketchup-gray;
-				// 			}
-				// 		}
-				// 		&.lie {
-				// 			.fact-radio {
-				// 				border-color: $new-red;
-				// 				background-color: $new-red;
-				// 			}
-				// 		}
-				// 	}
-				// }
 
 				@media (min-width: $mobile) {
 					.fact-item {
@@ -317,9 +277,6 @@
 							.fact-radio {
 								background-color: $new-blue;
 							}
-							// p {
-							// 	font-weight: 700;
-							// }
 						}
 					}
 				}
