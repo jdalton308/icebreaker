@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "joe-dalton"
+  },
+  "targets": {
+    "joe-dalton": {
+      "hosting": {
+        "icebreaker": [
+          "icebreaker-1"
+        ]
+      }
+    }
+  }
+}
