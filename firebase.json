@@ -1,6 +1,5 @@
 {
   "hosting": {
-    "target": "icebreaker",
     "public": "build",
     "ignore": [
       "firebase.json",

@@ -1,14 +1,5 @@
 {
   "projects": {
-    "default": "joe-dalton"
-  },
-  "targets": {
-    "joe-dalton": {
-      "hosting": {
-        "icebreaker": [
-          "icebreaker-1"
-        ]
-      }
-    }
+    "default": "portfolio-c3814"
   }
 }
